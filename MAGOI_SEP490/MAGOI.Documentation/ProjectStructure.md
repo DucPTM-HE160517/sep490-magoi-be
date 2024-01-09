@@ -6,7 +6,6 @@
 		* Là nơi chứa Models tương ứng với các thực thể trong cơ sở dữ liệu.
 	2. Common
 		* Ultilities: là folder chứa các tiện ích, hàm,... được tổng hợp lại trong dự án. (VD như những method validate định dạng của số điện thoại hoặc email)
-		* DTOs
 	3. DataAccess
 		* DAO
 		* Repository
