@@ -1,14 +1,18 @@
+using MAGOI.API.GraphQL.Queries;
+using MAGOI.API.GraphQL.Types;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var app = builder.Build();
 
-builder.Services.AddGraphQLServer();
-    //.AddQueryType<FoodQueries>()
-    //.AddType<FoodType>()
-    //.AddType<FoodCategoryType>()
-    //.AddType<RestaurantType>();
+builder.Services.AddGraphQLServer()
+    .AddQueryType<FoodQueries>()
+    .AddType<FoodType>()
+    .AddType<FoodCategoryType>()
+    .AddType<RestaurantType>();
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 

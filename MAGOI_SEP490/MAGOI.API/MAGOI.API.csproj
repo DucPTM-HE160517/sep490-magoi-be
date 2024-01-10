@@ -11,4 +11,14 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.8.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GraphQL\Mutations\" />
+    <Folder Include="GraphQL\Subscriptions\" />
+    <Folder Include="GraphQL\Types\InputTypes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MAGOI.BusinessObjects\MAGOI.BusinessObjects.csproj" />
+  </ItemGroup>
+
 </Project>
