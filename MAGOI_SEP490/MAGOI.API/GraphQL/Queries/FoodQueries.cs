@@ -13,5 +13,7 @@ namespace MAGOI.API.GraphQL.Queries
 
         public Food GetFoodByID(int id) =>
             dbContext.Foods.SingleOrDefault(f => f.Id == id);
+
+
     }
 }

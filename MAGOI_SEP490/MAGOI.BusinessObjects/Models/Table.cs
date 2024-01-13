@@ -6,19 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MAGOI.BusinessObjects.Models
+namespace demo.Models
 {
-    public partial class Restaurant
+    public partial class Table
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RestaurantId { get; set; }
+        public int TableID { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string Hotline { get; set; }
-        public string Email { get; set; }
         public DateTime CreatedAt { get; set; }
-        [ForeignKey("RestaurantCategory")]
-        public int RestaurantCategoryId { get; set; }
+        [ForeignKey("Restaurant")]
+        public int RestaurantId { get; set; }
         public bool IsAvailable { get; set; }
     }
 }
