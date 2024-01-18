@@ -12,17 +12,16 @@ namespace demo.Models
     public partial class Order
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public int Id { get; set; }
         [ForeignKey("Table")]
-        public int TableID { get; set; }
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        [ForeignKey("Restaurant")]
-        public int RestaurantId { get; set; }
-        [ForeignKey("OrderStatus")]
-        public int OrderStatusId { get; set; }
+        public int TableId { get; set; }
         [ForeignKey("Bill")]
         public int BillId { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        [ForeignKey("Feedback")]
+        public int FeedbackId { get; set; }
+        [ForeignKey("OrderStatus")]
+        public int OrderStatusId { get; set; }
     }
 }

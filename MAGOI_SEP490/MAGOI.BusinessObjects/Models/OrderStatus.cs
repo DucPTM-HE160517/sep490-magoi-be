@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects.Models
+namespace MAGOI.BusinessObjects.Models
 {
     public partial class OrderStatus
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderStatusId { get; set; }
+        public int Id { get; set; }
         public string Status { get; set; }
     }
 }

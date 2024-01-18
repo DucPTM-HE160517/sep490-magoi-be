@@ -11,11 +11,9 @@ namespace demo.Models
     public partial class Table
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TableID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime CreatedAt { get; set; }
-        [ForeignKey("Restaurant")]
-        public int RestaurantId { get; set; }
-        public bool IsAvailable { get; set; }
+        [ForeignKey("TableStatus")]
+        public int StatusId { get; set; }
     }
 }

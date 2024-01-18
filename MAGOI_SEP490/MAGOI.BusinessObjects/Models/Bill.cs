@@ -11,10 +11,8 @@ namespace BusinessObjects.Models
     public partial class Bill
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int BillId { get; set; }
+        public int Id { get; set; }
         public float TotalAmount { get; set; }
         public DateTime CreatedAt { get; set; }
-        [ForeignKey("BillStatus")]
-        public int BillStatusId { get; set; }
     }
 }

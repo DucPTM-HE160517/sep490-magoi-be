@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects.Models
+namespace MAGOI.BusinessObjects.Models
 {
-    public partial class Resource
+    public partial class Feedback
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ResourceId { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public int ServingScore { get; set; }
+        public int FoodScore { get; set; }
+        public string Comment { get; set; }
     }
 }

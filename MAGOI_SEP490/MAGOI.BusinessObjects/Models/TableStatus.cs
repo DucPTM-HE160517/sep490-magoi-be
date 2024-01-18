@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects.Models
+namespace MAGOI.BusinessObjects.Models
 {
-    public partial class Permission
+    public partial class TableStatus
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PermissionId { get; set; }
-        public string Type { get; set; }
+        public int Id { get; set; }
+        public string Status { get; set; }
     }
 }

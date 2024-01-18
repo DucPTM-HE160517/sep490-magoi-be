@@ -28,40 +28,23 @@ namespace MAGOI.BusinessObjects.DataContext
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<Resource> Resources { get; set; }
-        public virtual DbSet<RolePermission> RolePermission { get; set; }
-        public virtual DbSet<PermissionResource> PermissionResource { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Food> Foods { get; set; }
+        public virtual DbSet<FoodCharacteristics> FoodCharacteristics { get; set; }
+        public virtual DbSet<Characteristics> Characteristics { get; set; }
         public virtual DbSet<FoodCategory> FoodCategories { get; set; }
-        public virtual DbSet<Restaurant> Restaurants { get; set; }
-        public virtual DbSet<RestaurantCategory> RestaurantCategories { get; set; }
-        public virtual DbSet<UserRestaurant> UserRestaurant { get; set; }
-        public virtual DbSet<UserFoodWishlist> UserFoodWishlist { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<Bill> Bills { get; set; }
-        public virtual DbSet<BillStatus> BillStatus { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
+        public virtual DbSet<TableStatus> TableStatus { get; set; }
         public virtual DbSet<FoodOrder> FoodOrder { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
-            //config models - Role, Permission, Resource - RolePermission, PermissionResource
-            //Food, FoodCategory - Restaurant, RestaurantCategory - User, UserFoodWishList, UserRestaurant - Table
-            //Order, OrderStatus - FoodOrder - Bill, BillStatus
-            // Join-table: RolePermission, PermissionResource, UserFoodWishList, UserRestaurant, FoodOrder
-            optionsBuilder.Entity<RolePermission>()
-                .HasKey(t => new {t.RoleId, t.PermissionId});
-            optionsBuilder.Entity<PermissionResource>()
-                .HasKey(t => new {t.PermissionId, t.ResourceId});
-            optionsBuilder.Entity<UserFoodWishlist>()
-                .HasKey(t => new {t.UserId, t.FoodId});
-            optionsBuilder.Entity<UserRestaurant>()
-                .HasKey(t => new {t.UserId, t.RestaurantId});
             optionsBuilder.Entity<FoodOrder>()
                 .HasKey(t => new {t.OrderId, t.FoodId});
+            optionsBuilder.Entity<FoodCharacteristics>()
+                .HasKey(t => new { t.FoodId, t.CharacteristicId });
 
             //seed data
             optionsBuilder.SeedData();

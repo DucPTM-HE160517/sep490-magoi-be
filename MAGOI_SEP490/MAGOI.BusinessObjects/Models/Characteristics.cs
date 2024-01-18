@@ -6,14 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects.Models
+namespace MAGOI.BusinessObjects.Models
 {
-    public partial class Role
+    public partial class Characteristics
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RoleId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-
+        public int Id { get; set; }
+        public string Characteristic { get; set; }
     }
 }

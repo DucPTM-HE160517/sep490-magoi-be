@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects.Models
+namespace MAGOI.BusinessObjects.Models
 {
-    public partial class UserFoodWishlist
+    public partial class FoodCharacteristics
     {
-        [ForeignKey("User")]
-        public int UserId { get; set; }
         [ForeignKey("Food")]
         public int FoodId { get; set; }
+        [ForeignKey("Characteristics")]
+        public int CharacteristicId { get; set; }
     }
 }
