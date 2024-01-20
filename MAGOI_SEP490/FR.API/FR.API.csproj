@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MAGOI.BusinessObjects\MAGOI.BusinessObjects.csproj" />
+    <ProjectReference Include="..\MAGOI.BusinessObjects\FR.BusinessObjects.csproj" />
   </ItemGroup>
 
 </Project>
