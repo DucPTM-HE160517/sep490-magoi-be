@@ -8,8 +8,6 @@
 		* Ultilities: là folder chứa các tiện ích, hàm,... được tổng hợp lại trong dự án. (VD như những method validate định dạng của số điện thoại hoặc email)
 	3. DataAccess
 		* DAO
-		* Repository
-		* IRepository
 	4. Infrastructure
 		* Configurations
 		* Exception handlers
