@@ -8,5 +8,6 @@ namespace FR.Services.IService
 {
     public interface IFoodService
     {
+        List<Food> GetFoods();
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MAGOI.BusinessObjects.Models
+namespace BusinessObjects.Models
 {
     public partial class Characteristics
     {

@@ -1,9 +1,7 @@
-﻿using BusinessObjects.Models;
-using demo.Models;
-using MAGOI.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAGOI.BusinessObjects.DataContext
+namespace FR.BusinessObjects.DataContext
 {
     public static class DBInit
     {
