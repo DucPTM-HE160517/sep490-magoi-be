@@ -6,17 +6,20 @@ using System.Reflection.Emit;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessObjects.Models;
-using demo.Models;
-using MAGOI.BusinessObjects.Models;
+using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace MAGOI.BusinessObjects.DataContext
+namespace FR.BusinessObjects.DataContext
 {
     public partial class DBContext : DbContext
     {
-        public DBContext(){}
+        //public DBContext(DbContextOptions<DBContext> options)
+        //: base(options)
+        //{
+        //}
+
+        public DBContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

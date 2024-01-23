@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace demo.Models
+namespace FR.BusinessObjects.Models
 {
     public partial class Order
     {

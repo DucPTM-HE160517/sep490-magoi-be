@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace demo.Models
+namespace FR.BusinessObjects.Models
 {
     public partial class Table
     {
