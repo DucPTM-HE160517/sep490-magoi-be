@@ -1,7 +1,7 @@
-﻿using MAGOI.BusinessObjects.DataContext;
-using MAGOI.BusinessObjects.Models;
+﻿using FR.BusinessObjects.DataContext;
+using FR.BusinessObjects.Models;
 
-namespace MAGOI.API.GraphQL.Queries
+namespace FR.API.GraphQL.Queries
 {
     public class FoodQueries
     {
@@ -9,9 +9,6 @@ namespace MAGOI.API.GraphQL.Queries
 
         public IQueryable<Food> GetFoods() =>
             dbContext.Foods;
-
-        public Food GetFoodByID(int id) =>
-            dbContext.Foods.SingleOrDefault(f => f.Id == id);
 
 
     }

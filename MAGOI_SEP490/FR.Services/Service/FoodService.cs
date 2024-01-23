@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FR.Services.IService;
-using MAGOI.BusinessObjects.Models;
+using FR.BusinessObjects.Models;
 
 namespace FR.Services.Service
 {

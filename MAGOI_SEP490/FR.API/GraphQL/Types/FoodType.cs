@@ -1,6 +1,6 @@
-﻿using MAGOI.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 
-namespace MAGOI.API.GraphQL.Types
+namespace FR.API.GraphQL.Types
 {
     public class FoodType : ObjectType<Food>
     {
@@ -27,10 +27,6 @@ namespace MAGOI.API.GraphQL.Types
                 .Type<StringType>()
                 .Name("FoodCategoryId")
                 .Description("The categoryId of the food");
-            descriptor.Field(f => f.RestaurantId)
-                .Type<StringType>()
-                .Name("RestaurantId")
-                .Description("The restaurantId of the food");
         }
     }
 }

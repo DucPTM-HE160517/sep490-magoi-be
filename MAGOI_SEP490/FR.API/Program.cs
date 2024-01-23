@@ -1,5 +1,5 @@
-using MAGOI.API.GraphQL.Queries;
-using MAGOI.API.GraphQL.Types;
+using FR.API.GraphQL.Queries;
+using FR.API.GraphQL.Types;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGraphQLServer()
     .AddQueryType<FoodQueries>()
     .AddType<FoodType>()
-    .AddType<FoodCategoryType>()
-    .AddType<RestaurantType>();
+    .AddType<FoodCategoryType>();
 
 var app = builder.Build();
 

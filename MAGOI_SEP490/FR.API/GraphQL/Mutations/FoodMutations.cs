@@ -1,4 +1,4 @@
-﻿namespace MAGOI.API.GraphQL.Mutations
+﻿namespace FR.API.GraphQL.Mutations
 {
     public class FoodMutations
     {
