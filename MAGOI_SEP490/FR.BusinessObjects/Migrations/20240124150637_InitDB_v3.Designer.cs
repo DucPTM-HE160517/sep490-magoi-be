@@ -3,6 +3,7 @@ using System;
 using FR.BusinessObjects.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FR.BusinessObjects.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240124150637_InitDB_v3")]
+    partial class InitDB_v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,11 +232,6 @@ namespace FR.BusinessObjects.Migrations
                         {
                             Id = 28,
                             Characteristic = "Thịt vịt"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Characteristic = "Trái cây"
                         });
                 });
 
@@ -978,6 +976,50 @@ namespace FR.BusinessObjects.Migrations
                             Name = "ICE CREAM HAAGEN DAZS",
                             Price = 88000f,
                             Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 63,
+                            CreatedAt = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Mỳ hải sản với sốt cà chua hoặc sốt kem cùng tỏi và pho mai bào",
+                            FoodCategoryId = 9,
+                            ImageUrl = "seafood-spaghetti.jpg",
+                            Name = "SEAFOOD SPAGHETTI",
+                            Price = 126000f,
+                            Quantity = 40
+                        },
+                        new
+                        {
+                            Id = 64,
+                            CreatedAt = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Mỳ Ý sợi sốt bò băm cùng phô mai bào và rau thơm",
+                            FoodCategoryId = 9,
+                            ImageUrl = "spaghetti-bolognese.jpg",
+                            Name = "SPAGHETTI BOLOGNESE",
+                            Price = 80000f,
+                            Quantity = 40
+                        },
+                        new
+                        {
+                            Id = 65,
+                            CreatedAt = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Mỳ Ý sợi thịt nguội, sốt kem trứng và phô mai bào",
+                            FoodCategoryId = 9,
+                            ImageUrl = "spaghetti-alla-carbonara.jpg",
+                            Name = "SPAGHETTI ALLA CARBONARA",
+                            Price = 116000f,
+                            Quantity = 40
+                        },
+                        new
+                        {
+                            Id = 66,
+                            CreatedAt = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Mỳ Ý đút lò nhiều lớp cùng sốt bò bằm, phô mai và sốt cà chua",
+                            FoodCategoryId = 9,
+                            ImageUrl = "beef-lasagne.jpg",
+                            Name = "BEEF LASAGNE",
+                            Price = 116000f,
+                            Quantity = 40
                         });
                 });
 
@@ -1037,6 +1079,11 @@ namespace FR.BusinessObjects.Migrations
                         {
                             Id = 8,
                             Category = "Món tráng miệng"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Category = "Pasta"
                         });
                 });
 
@@ -1121,407 +1168,12 @@ namespace FR.BusinessObjects.Migrations
                         new
                         {
                             FoodId = 5,
-                            CharacteristicId = 27
+                            CharacteristicId = 26
                         },
                         new
                         {
                             FoodId = 6,
                             CharacteristicId = 2
-                        },
-                        new
-                        {
-                            FoodId = 6,
-                            CharacteristicId = 6
-                        },
-                        new
-                        {
-                            FoodId = 6,
-                            CharacteristicId = 20
-                        },
-                        new
-                        {
-                            FoodId = 7,
-                            CharacteristicId = 2
-                        },
-                        new
-                        {
-                            FoodId = 8,
-                            CharacteristicId = 7
-                        },
-                        new
-                        {
-                            FoodId = 8,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 8,
-                            CharacteristicId = 29
-                        },
-                        new
-                        {
-                            FoodId = 9,
-                            CharacteristicId = 2
-                        },
-                        new
-                        {
-                            FoodId = 9,
-                            CharacteristicId = 7
-                        },
-                        new
-                        {
-                            FoodId = 10,
-                            CharacteristicId = 3
-                        },
-                        new
-                        {
-                            FoodId = 10,
-                            CharacteristicId = 21
-                        },
-                        new
-                        {
-                            FoodId = 11,
-                            CharacteristicId = 26
-                        },
-                        new
-                        {
-                            FoodId = 12,
-                            CharacteristicId = 3
-                        },
-                        new
-                        {
-                            FoodId = 13,
-                            CharacteristicId = 3
-                        },
-                        new
-                        {
-                            FoodId = 13,
-                            CharacteristicId = 24
-                        },
-                        new
-                        {
-                            FoodId = 14,
-                            CharacteristicId = 23
-                        },
-                        new
-                        {
-                            FoodId = 15,
-                            CharacteristicId = 23
-                        },
-                        new
-                        {
-                            FoodId = 16,
-                            CharacteristicId = 23
-                        },
-                        new
-                        {
-                            FoodId = 17,
-                            CharacteristicId = 23
-                        },
-                        new
-                        {
-                            FoodId = 18,
-                            CharacteristicId = 23
-                        },
-                        new
-                        {
-                            FoodId = 19,
-                            CharacteristicId = 22
-                        },
-                        new
-                        {
-                            FoodId = 20,
-                            CharacteristicId = 22
-                        },
-                        new
-                        {
-                            FoodId = 21,
-                            CharacteristicId = 21
-                        },
-                        new
-                        {
-                            FoodId = 22,
-                            CharacteristicId = 21
-                        },
-                        new
-                        {
-                            FoodId = 23,
-                            CharacteristicId = 21
-                        },
-                        new
-                        {
-                            FoodId = 24,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 24,
-                            CharacteristicId = 2
-                        },
-                        new
-                        {
-                            FoodId = 24,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 25,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 25,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 26,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 26,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 27,
-                            CharacteristicId = 5
-                        },
-                        new
-                        {
-                            FoodId = 27,
-                            CharacteristicId = 25
-                        },
-                        new
-                        {
-                            FoodId = 28,
-                            CharacteristicId = 5
-                        },
-                        new
-                        {
-                            FoodId = 28,
-                            CharacteristicId = 25
-                        },
-                        new
-                        {
-                            FoodId = 29,
-                            CharacteristicId = 28
-                        },
-                        new
-                        {
-                            FoodId = 30,
-                            CharacteristicId = 5
-                        },
-                        new
-                        {
-                            FoodId = 30,
-                            CharacteristicId = 26
-                        },
-                        new
-                        {
-                            FoodId = 31,
-                            CharacteristicId = 5
-                        },
-                        new
-                        {
-                            FoodId = 31,
-                            CharacteristicId = 24
-                        },
-                        new
-                        {
-                            FoodId = 32,
-                            CharacteristicId = 5
-                        },
-                        new
-                        {
-                            FoodId = 32,
-                            CharacteristicId = 24
-                        },
-                        new
-                        {
-                            FoodId = 33,
-                            CharacteristicId = 24
-                        },
-                        new
-                        {
-                            FoodId = 34,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 34,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 35,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 35,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 36,
-                            CharacteristicId = 28
-                        },
-                        new
-                        {
-                            FoodId = 37,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 37,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 38,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 38,
-                            CharacteristicId = 26
-                        },
-                        new
-                        {
-                            FoodId = 39,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 40,
-                            CharacteristicId = 4
-                        },
-                        new
-                        {
-                            FoodId = 41,
-                            CharacteristicId = 4
-                        },
-                        new
-                        {
-                            FoodId = 42,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 43,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 44,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 45,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 46,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 47,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 48,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 49,
-                            CharacteristicId = 19
-                        },
-                        new
-                        {
-                            FoodId = 50,
-                            CharacteristicId = 15
-                        },
-                        new
-                        {
-                            FoodId = 51,
-                            CharacteristicId = 15
-                        },
-                        new
-                        {
-                            FoodId = 52,
-                            CharacteristicId = 14
-                        },
-                        new
-                        {
-                            FoodId = 53,
-                            CharacteristicId = 15
-                        },
-                        new
-                        {
-                            FoodId = 54,
-                            CharacteristicId = 15
-                        },
-                        new
-                        {
-                            FoodId = 55,
-                            CharacteristicId = 18
-                        },
-                        new
-                        {
-                            FoodId = 56,
-                            CharacteristicId = 18
-                        },
-                        new
-                        {
-                            FoodId = 57,
-                            CharacteristicId = 18
-                        },
-                        new
-                        {
-                            FoodId = 58,
-                            CharacteristicId = 3
-                        },
-                        new
-                        {
-                            FoodId = 58,
-                            CharacteristicId = 12
-                        },
-                        new
-                        {
-                            FoodId = 59,
-                            CharacteristicId = 11
-                        },
-                        new
-                        {
-                            FoodId = 60,
-                            CharacteristicId = 1
-                        },
-                        new
-                        {
-                            FoodId = 60,
-                            CharacteristicId = 8
-                        },
-                        new
-                        {
-                            FoodId = 60,
-                            CharacteristicId = 29
-                        },
-                        new
-                        {
-                            FoodId = 61,
-                            CharacteristicId = 11
-                        },
-                        new
-                        {
-                            FoodId = 62,
-                            CharacteristicId = 12
                         });
                 });
 
