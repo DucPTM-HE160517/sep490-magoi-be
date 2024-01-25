@@ -19,12 +19,24 @@ namespace FR.API.GraphQL.Types
                 .Type<StringType>()
                 .Name("Description")
                 .Description("The description of the food");
-            descriptor.Field(f => f.Price)
+            descriptor.Field(f => f.ImageUrl)
                 .Type<StringType>()
+                .Name("ImageUrl")
+                .Description("The image of the food");
+            descriptor.Field(f => f.Price)
+                .Type<FloatType>()
                 .Name("Price")
                 .Description("The price of the food");
+            descriptor.Field(f => f.Quantity)
+                .Type<IntType>()
+                .Name("Quantity")
+                .Description("The quantity of the food");
+            descriptor.Field(f => f.CreatedAt)
+                .Type<DateType>()
+                .Name("CreatedDate")
+                .Description("The created date of the food");
             descriptor.Field(f => f.FoodCategoryId)
-                .Type<StringType>()
+                .Type<IntType>()
                 .Name("FoodCategoryId")
                 .Description("The categoryId of the food");
         }
