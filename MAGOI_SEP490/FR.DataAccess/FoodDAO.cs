@@ -21,5 +21,9 @@ namespace FR.DataAccess
         {
             return _context.Foods.Where(x => x.FoodCategoryId == categoryId).ToList();
         }
+        public Food GetFoodByFoodId(int foodId)
+        {
+            return _context.Foods.FirstOrDefault(x => x.Id == foodId);
+        }
     }
 }

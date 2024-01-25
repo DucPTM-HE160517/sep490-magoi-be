@@ -6,5 +6,6 @@ namespace FR.Services.IService
     {
         List<Food> GetFoods();
         List<Food> GetFoodsByCategory(int categoryId);
+        Food GetFoodByFoodId(int id);
     }
 }
