@@ -14,12 +14,10 @@ namespace FR.BusinessObjects.DataContext
 {
     public partial class DBContext : DbContext
     {
-        //public DBContext(DbContextOptions<DBContext> options)
-        //: base(options)
-        //{
-        //}
-
-        public DBContext() { }
+        public DBContext(DbContextOptions<DBContext> options)
+        : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
