@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.Services.IService;
+﻿using FR.Services.IService;
 using FR.BusinessObjects.Models;
-using FR.BusinessObjects.DataContext;
 using FR.DataAccess;
 
 namespace FR.Services.Service
@@ -21,6 +15,11 @@ namespace FR.Services.Service
         public List<Food> GetFoods()
         {
             return _foodDAO.GetFoods();
+        }
+
+        public List<Food> GetFoodsByCategory(int categoryId)
+        {
+            return _foodDAO.GetFoodsByCategory(categoryId);
         }
     }
 }
