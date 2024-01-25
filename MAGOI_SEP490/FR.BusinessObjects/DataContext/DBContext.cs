@@ -14,21 +14,21 @@ namespace FR.BusinessObjects.DataContext
 {
     public partial class DBContext : DbContext
     {
-        //public DBContext(DbContextOptions<DBContext> options)
-        //: base(options)
-        //{
-        //}
+        public DBContext(DbContextOptions<DBContext> options)
+        : base(options)
+        {
+        }
 
         public DBContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            //var builder = new ConfigurationBuilder()
+            //                  .SetBasePath(Directory.GetCurrentDirectory())
+            //                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            //IConfigurationRoot configuration = builder.Build();
+            //optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
+            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public virtual DbSet<Food> Foods { get; set; }

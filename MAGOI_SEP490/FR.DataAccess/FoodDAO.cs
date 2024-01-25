@@ -13,16 +13,23 @@ namespace FR.DataAccess
     public class FoodDAO
     {
         private readonly DBContext _context;
-        List<Food> _foodList;
         public FoodDAO(DBContext context)
         {
             _context = context;
-            _foodList = context.Foods.ToList();
         }
 
         public List<Food> GetFoods()
         {
             return _context.Foods.ToList();
+        }
+        public Food GetFood(int id)
+        {
+            return _context.Foods.FirstOrDefault(f=> f.Id == id);
+        }
+
+        public List<FoodCategory> GetFoods1()
+        {
+            return _context.FoodCategories.ToList();
         }
     }
 }

@@ -8,14 +8,24 @@ namespace FR.API.GraphQL.Queries
 {
     public class FoodQueries
     {
-        private readonly DBContext dbContext = new DBContext();
         //private readonly IFoodService _foodService;
-        //private readonly FoodDAO fd;
-        //public FoodQueries(FoodDAO foodDAO)
+        //public FoodQueries(IFoodService foodService)
         //{
-        //    fd = foodDAO;
+        //    _foodService = foodService;
         //}
 
-        public List<Food> GetFoods() => dbContext.Foods.ToList();
+        public List<Food> GetFoods(IFoodService service)
+        {
+            return service.GetFoods();
+        }
+        public List<FoodCategory> GetFoodCategorys(IFoodService service)
+        {
+            return service.GetFoods1();
+        }
+
+        public Food GetFood(IFoodService service, int id)
+        {
+            return service.GetFood(id);
+        }
     }
 }

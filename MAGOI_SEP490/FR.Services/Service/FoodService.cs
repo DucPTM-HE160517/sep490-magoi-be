@@ -12,15 +12,25 @@ namespace FR.Services.Service
 {
     public class FoodService : IFoodService
     {
-        private readonly FoodDAO _foodDAO;
-        //public FoodService(FoodDAO foodDAO)
-        //{
-        //    _foodDAO = foodDAO;
-        //}
+        private readonly FoodDAO _dao;
+        public FoodService(FoodDAO dao)
+        {
+            _dao = dao;
+        }
+
+        public Food GetFood(int id)
+        {
+            return _dao.GetFood(id);
+        }
 
         public List<Food> GetFoods()
         {
-            return new List<Food>();
+            return _dao.GetFoods();
+        }
+
+        public List<FoodCategory> GetFoods1()
+        {
+            return _dao.GetFoods1();
         }
     }
 }
