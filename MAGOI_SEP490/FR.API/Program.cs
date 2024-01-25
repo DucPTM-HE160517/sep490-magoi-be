@@ -21,12 +21,16 @@ builder.Services.AddDbContext<DBContext>(options =>
 });
 
 builder.Services.AddScoped<FoodDAO>();
+builder.Services.AddScoped<FoodCategoryDAO>();
 builder.Services.AddScoped<IFoodService, FoodService>();
+builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 
 builder.Services.AddGraphQLServer()
     .RegisterDbContext<DBContext>(DbContextKind.Synchronized)
     .RegisterService<FoodDAO>(ServiceKind.Synchronized)
+    .RegisterService<FoodCategoryDAO>(ServiceKind.Synchronized)
     .RegisterService<IFoodService>(ServiceKind.Synchronized)
+    .RegisterService<IFoodCategoryService>(ServiceKind.Synchronized)
     .AddQueryType<FoodQueries>()
     .AddType<FoodType>()
     .AddType<FoodCategoryType>();

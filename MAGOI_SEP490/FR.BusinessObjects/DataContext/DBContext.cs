@@ -19,6 +19,8 @@ namespace FR.BusinessObjects.DataContext
         {
         }
 
+        public DBContext() { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()

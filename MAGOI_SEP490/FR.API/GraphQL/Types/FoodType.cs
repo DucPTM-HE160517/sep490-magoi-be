@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Services.IService;
 
 namespace FR.API.GraphQL.Types
 {
@@ -35,10 +36,30 @@ namespace FR.API.GraphQL.Types
                 .Type<DateType>()
                 .Name("CreatedDate")
                 .Description("The created date of the food");
-            descriptor.Field(f => f.FoodCategoryId)
-                .Type<IntType>()
-                .Name("FoodCategoryId")
-                .Description("The categoryId of the food");
+            descriptor.Field("Category")
+                .Type<FoodCategoryType>()
+                .Name("Category")
+                .Resolve(context =>
+                {
+                    var food = context.Parent<Food>();
+                    return context.Service<IFoodCategoryService>().GetFoodCategoryById(food.FoodCategoryId);
+                })
+                .Description("The category of the food");
+            //descriptor.Field(f => f.FoodCategoryId)
+            //    .Type<IntType>()
+            //    .Name("FoodCategoryId")
+            //    .Description("The categoryId of the food");
+            //descriptor.Field("Category")
+            //    .Type<StringType>()
+            //    .Name("CategoryName")
+            //    .Resolve(context =>
+            //    {
+            //        var food = context.Parent<Food>();
+            //        var category = context.Service<IFoodCategoryService>()
+            //        .GetFoodCategoryById(food.FoodCategoryId);
+            //        return category?.Category;
+            //    })
+            //    .Description("The category of the food");
         }
     }
 }
