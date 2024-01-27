@@ -7,18 +7,18 @@ namespace FR.API.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<FoodCategory> descriptor)
         {
-            descriptor.Description("The categoriy of the food");
+            descriptor.Description("The category of the food");
             descriptor.Field(f => f.Id)
                 .Type<IntType>()
-                .Name("ID")
+                .Name("id")
                 .Description("The ID of the category");
             descriptor.Field(f => f.Category)
                 .Type<StringType>()
-                .Name("CategoryName")
+                .Name("name")
                 .Description("Name of the category");
             descriptor.Field("FoodList")
                 .Type<ListType<FoodType>>()
-                .Name("FoodList")
+                .Name("foods")
                 .Resolve(context =>
                 {
                     var category = context.Parent<FoodCategory>();

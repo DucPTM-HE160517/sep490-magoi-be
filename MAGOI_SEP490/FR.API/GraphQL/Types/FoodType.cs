@@ -10,35 +10,35 @@ namespace FR.API.GraphQL.Types
             descriptor.Description("The food");
             descriptor.Field(f => f.Id)
                 .Type<IntType>()
-                .Name("ID")
+                .Name("id")
                 .Description("The ID of the food");
             descriptor.Field(f => f.Name)
                 .Type<StringType>()
-                .Name("Name")
+                .Name("name")
                 .Description("Name of the food");
             descriptor.Field(f => f.Description)
                 .Type<StringType>()
-                .Name("Description")
+                .Name("description")
                 .Description("The description of the food");
             descriptor.Field(f => f.ImageUrl)
                 .Type<StringType>()
-                .Name("ImageUrl")
+                .Name("imageUrl")
                 .Description("The image of the food");
             descriptor.Field(f => f.Price)
                 .Type<FloatType>()
-                .Name("Price")
+                .Name("price")
                 .Description("The price of the food");
             descriptor.Field(f => f.Quantity)
                 .Type<IntType>()
-                .Name("Quantity")
+                .Name("quantity")
                 .Description("The quantity of the food");
             descriptor.Field(f => f.CreatedAt)
                 .Type<DateType>()
-                .Name("CreatedDate")
+                .Name("createdDate")
                 .Description("The created date of the food");
             descriptor.Field("Category")
                 .Type<FoodCategoryType>()
-                .Name("Category")
+                .Name("category")
                 .Resolve(context =>
                 {
                     var food = context.Parent<Food>();
