@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var allowAllOrigins = "_allowAllOrigins";
 // Add services to the container.
 var configBuilder = new ConfigurationBuilder()
                               .SetBasePath(Directory.GetCurrentDirectory())
@@ -19,6 +19,20 @@ builder.Services.AddDbContext<DBContext>(options =>
 {
     options.UseNpgsql(configuration.GetConnectionString("FRdb"));
 });
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(allowAllOrigins,
+                 builder =>
+                 {
+                     builder
+                     .AllowAnyOrigin()
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+                 });
+});
+
 
 builder.Services.AddScoped<FoodDAO>();
 builder.Services.AddScoped<FoodCategoryDAO>();
@@ -38,12 +52,13 @@ builder.Services.AddGraphQLServer()
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseGraphQLGraphiQL();
 
 app.UseRouting();
+
+app.UseCors(allowAllOrigins);
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGraphQL();
