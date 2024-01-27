@@ -12,7 +12,7 @@ namespace FR.Services.Service
             _foodDAO = foodDAO;
         }
 
-        public Food GetFoodByFoodId(int id)
+        public Food GetFoodById(int id)
         {
             return _foodDAO.GetFoodByFoodId(id);
         }

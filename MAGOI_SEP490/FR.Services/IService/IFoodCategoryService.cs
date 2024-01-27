@@ -9,6 +9,7 @@ namespace FR.Services.IService
 {
     public interface IFoodCategoryService
     {
-         FoodCategory GetFoodCategoryById(int id);
+        List<FoodCategory> GetFoodCategories();
+        FoodCategory GetFoodCategoryById(int id);
     }
 }

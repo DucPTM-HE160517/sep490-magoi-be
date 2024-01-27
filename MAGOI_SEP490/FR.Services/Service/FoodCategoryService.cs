@@ -17,6 +17,11 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
+        public List<FoodCategory> GetFoodCategories()
+        {
+            return _dao.GetFoodCategories();
+        }
+
         public FoodCategory GetFoodCategoryById(int id)
         {
             return _dao.GetFoodCategoryById(id);
