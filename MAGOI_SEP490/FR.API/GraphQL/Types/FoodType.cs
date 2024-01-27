@@ -36,6 +36,10 @@ namespace FR.API.GraphQL.Types
                 .Type<DateType>()
                 .Name("createdDate")
                 .Description("The created date of the food");
+            descriptor.Field(f => f.FoodCategoryId)
+                .Type<IntType>()
+                .Name("foodCategoryId")
+                .Description("The category's id of the food");
             descriptor.Field("Category")
                 .Type<FoodCategoryType>()
                 .Name("category")

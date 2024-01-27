@@ -35,18 +35,28 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<FoodDAO>();
 builder.Services.AddScoped<FoodCategoryDAO>();
+builder.Services.AddScoped<TableDAO>();
+builder.Services.AddScoped<TableStatusDAO>();
 builder.Services.AddScoped<IFoodService, FoodService>();
 builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
+builder.Services.AddScoped<ITableService, TableService>();
+builder.Services.AddScoped<ITableStatusService, TableStatusService>();
 
 builder.Services.AddGraphQLServer()
     .RegisterDbContext<DBContext>(DbContextKind.Synchronized)
     .RegisterService<FoodDAO>(ServiceKind.Synchronized)
     .RegisterService<FoodCategoryDAO>(ServiceKind.Synchronized)
+    .RegisterService<TableDAO>(ServiceKind.Synchronized)
+    .RegisterService<TableStatusDAO>(ServiceKind.Synchronized)
     .RegisterService<IFoodService>(ServiceKind.Synchronized)
     .RegisterService<IFoodCategoryService>(ServiceKind.Synchronized)
+    .RegisterService<ITableService>(ServiceKind.Synchronized)
+    .RegisterService<ITableStatusService>(ServiceKind.Synchronized)
     .AddQueryType<Queries>()
     .AddType<FoodType>()
-    .AddType<FoodCategoryType>();
+    .AddType<FoodCategoryType>()
+    .AddType<TableType>()
+    .AddType<TableStatusType>();
 
 var app = builder.Build();
 
