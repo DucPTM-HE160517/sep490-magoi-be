@@ -5,7 +5,6 @@ using FR.DataAccess;
 using FR.Services.IService;
 using FR.Services.Service;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowAllOrigins = "_allowAllOrigins";
@@ -45,7 +44,7 @@ builder.Services.AddGraphQLServer()
     .RegisterService<FoodCategoryDAO>(ServiceKind.Synchronized)
     .RegisterService<IFoodService>(ServiceKind.Synchronized)
     .RegisterService<IFoodCategoryService>(ServiceKind.Synchronized)
-    .AddQueryType<FoodQueries>()
+    .AddQueryType<Queries>()
     .AddType<FoodType>()
     .AddType<FoodCategoryType>();
 

@@ -10,6 +10,10 @@ namespace FR.DataAccess
         {
             _context = context;
         }
+        public List<FoodCategory> GetFoodCategories()
+        {
+            return _context.FoodCategories.ToList();
+        }
 
         public FoodCategory GetFoodCategoryById(int id)
         {
