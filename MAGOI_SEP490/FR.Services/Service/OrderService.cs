@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
+using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
 
 namespace FR.Services.Service
@@ -12,16 +13,20 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
-        public void AddOrder(Order order)
+        public Order AddOrder(OrderInput orderInput)
         {
-            try
+            var order = new Order
             {
-                _dao.AddOrder(order);
-            }
-            catch(Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+                TableId = orderInput.tableId,
+                CreatedAt = orderInput.createdAt
+            };
+            _dao.AddOrder(order);
+            return order;
+        }
+
+        public void DeleteOrder(Order order)
+        {
+            _dao.DeleteOrder(order);
         }
 
         public Order GetOrderById(int Id)

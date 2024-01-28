@@ -18,20 +18,8 @@ namespace FR.DataAccess
         }
         public void AddFoodOrders(List<FoodOrder> foodOrders)
         {
-            try
-            {
-                //for(int i = 0; i < foodOrders.Count; i++)
-                //{
-                //    _context.FoodOrder.Add(foodOrders[i]);
-                //    _context.SaveChanges();
-                //}
-                _context.FoodOrder.AddRange(foodOrders);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            _context.FoodOrder.AddRange(foodOrders);
+            _context.SaveChanges();
         }
 
         public List<FoodOrder> GetFoodOrdersByOrderId(int orderId)

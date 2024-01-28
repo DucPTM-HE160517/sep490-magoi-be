@@ -32,5 +32,17 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
+        public void DeleteOrder(Order order)
+        {
+            try
+            {
+                _context.Orders.Remove(order);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
