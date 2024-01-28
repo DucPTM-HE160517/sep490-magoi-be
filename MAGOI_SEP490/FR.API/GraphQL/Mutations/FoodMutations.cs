@@ -1,6 +1,6 @@
 ﻿namespace FR.API.GraphQL.Mutations
 {
-    public class FoodMutations
+    public partial class Mutations
     {
     }
 }

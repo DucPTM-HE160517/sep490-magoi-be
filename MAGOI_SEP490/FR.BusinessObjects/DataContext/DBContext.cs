@@ -28,6 +28,7 @@ namespace FR.BusinessObjects.DataContext
                               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             IConfigurationRoot configuration = builder.Build();
             optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
+            optionsBuilder.EnableSensitiveDataLogging();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
