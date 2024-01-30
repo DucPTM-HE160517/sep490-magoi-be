@@ -31,18 +31,7 @@ namespace FR.API.GraphQL.Mutations
             }
             catch(Exception ex)
             {
-                //delete order
-                //try
-                //{
-                //    orderService.DeleteOrder(order);
-                //}
-                //catch (Exception e)
-                //{
-                //    return new AddOrderPayload(new UserError("ERROR: " + e.Message + 
-                //        "\nINNER EXCEPTION: " + e.InnerException +
-                //        "\nSTACK TRACE: " + e.StackTrace + 
-                //        "\nSOURCE: " + e.HelpLink));
-                //}
+                //delete order -> not done
                 return new AddOrderPayload(new UserError("ERROR: " + ex.Message));
             }
         }
