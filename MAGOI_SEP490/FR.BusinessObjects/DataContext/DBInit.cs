@@ -1562,7 +1562,18 @@ namespace FR.BusinessObjects.DataContext
                     TotalAmount = 6000000,
                 }
             );
-
+            modelBuilder.Entity<OrderStatus>().HasData(
+                new OrderStatus
+                {
+                    Id = 1,
+                    Status = "Đang phục vụ"
+                },
+                new OrderStatus
+                {
+                    Id = 2,
+                    Status = "Đã hoàn thành"
+                }
+            );
 
         }
     }
