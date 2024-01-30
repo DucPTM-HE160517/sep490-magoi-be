@@ -16,5 +16,13 @@ namespace FR.Services.Service
         {
             return _dao.GetTables();
         }
+
+        public Table GetTable(int id) {
+            return _dao.GetTable(id);
+	    }
+
+        public void UpdateTableStatus(int tableId, TableStatusId statusId) {
+            _dao.UpdateTableStatus(tableId, statusId);
+	    }
     }
 }
