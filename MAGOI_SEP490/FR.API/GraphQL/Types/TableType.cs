@@ -9,7 +9,7 @@ namespace FR.API.GraphQL.Types
         {
             descriptor.Description("The table in the restaurant");
             descriptor.Field(f => f.Id)
-                .Type<IntType>()
+                .Type<UuidType>()
                 .Name("id")
                 .Description("The ID of the table");
             descriptor.Field(f => f.Name)

@@ -20,7 +20,7 @@ namespace FR.API.GraphQL.Mutations
             }
             catch (Exception ex)
             {
-                return new AddOrderPayload(new UserError("ERROR: " + ex.Message));
+                return new AddOrderPayload(new UserError("ERROR: " + ex.Message, "ERROR_CODE"));
             }
 
             //add food order
@@ -32,7 +32,7 @@ namespace FR.API.GraphQL.Mutations
             catch(Exception ex)
             {
                 //delete order -> not done
-                return new AddOrderPayload(new UserError("ERROR: " + ex.Message));
+                return new AddOrderPayload(new UserError("ERROR: " + ex.Message, "ERROR_CODE"));
             }
         }
     }
