@@ -29,7 +29,6 @@ namespace FR.Services.Service
                     FoodId = foodListInput[i].foodId,
                     Quantity = foodListInput[i].quantity,
                     FoodNote = foodListInput[i].foodNote,
-                    OrderAt = foodListInput[i].orderedAt
                 };
                 foodOrders.Add(food);
             }
