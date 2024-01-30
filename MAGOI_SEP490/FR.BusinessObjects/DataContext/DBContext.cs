@@ -33,8 +33,8 @@ namespace FR.BusinessObjects.DataContext
         }
 
         public virtual DbSet<Food> Foods { get; set; }
-        public virtual DbSet<FoodCharacteristics> FoodCharacteristics { get; set; }
-        public virtual DbSet<Characteristics> Characteristics { get; set; }
+        public virtual DbSet<FoodLabels> FoodLabels { get; set; }
+        public virtual DbSet<Labels> Labels { get; set; }
         public virtual DbSet<FoodCategory> FoodCategories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
@@ -47,8 +47,8 @@ namespace FR.BusinessObjects.DataContext
         {
             optionsBuilder.Entity<FoodOrder>()
                 .HasKey(t => new {t.OrderId, t.FoodId});
-            optionsBuilder.Entity<FoodCharacteristics>()
-                .HasKey(t => new { t.FoodId, t.CharacteristicId });
+            optionsBuilder.Entity<FoodLabels>()
+                .HasKey(t => new { t.FoodId, t.LabelId });
 
             //seed data
             optionsBuilder.SeedData();

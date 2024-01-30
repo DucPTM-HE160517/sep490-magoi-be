@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FR.BusinessObjects.Models
 {
-    public partial class FoodCategory
+    public partial class Labels
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Category { get; set; }
+        public string Label { get; set; }
     }
 }

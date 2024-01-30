@@ -5,7 +5,7 @@ namespace FR.BusinessObjects.Models
     public partial class FoodOrder
     {
         [ForeignKey("Order")]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         [ForeignKey("Food")]
         public int FoodId { get; set; }
         public int Quantity { get; set; }
