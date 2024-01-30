@@ -21,27 +21,22 @@ namespace FR.API.GraphQL.Mutations
             }
             catch (Exception ex)
             {
-                return new AddOrderPayload(new UserError("ERROR: " + ex.Message));
+                return new AddOrderPayload(new UserError("ERROR: " + ex.Message, "ERROR_CODE"));
             }
 
             //add food order
             try
             {
                 List<FoodOrder> foodOrders = foodOrderService.AddFoodOrders(order.Id, foodListInput);
-
                 //update table status to serving
-                Table table = tableService.GetTable(orderInput.tableId);
-                if (table.StatusId == (int)TableStatusId.Available)
-                {
-                    tableService.UpdateTableStatus(orderInput.tableId, TableStatusId.Serving);
-                }
+                tableService.UpdateTableStatusWhenCreateOrder(orderInput.tableId);
 
                 return new AddOrderPayload(order, foodOrders);
             }
             catch (Exception ex)
             {
                 //delete order -> not done
-                return new AddOrderPayload(new UserError("ERROR: " + ex.Message));
+                return new AddOrderPayload(new UserError("ERROR: " + ex.Message, "ERROR_CODE"));
             }
 
 

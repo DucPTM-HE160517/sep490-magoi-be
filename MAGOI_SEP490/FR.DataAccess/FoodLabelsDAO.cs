@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FR.DataAccess
 {
-    public class CharacteristicsDAO
+    public class FoodLabelsDAO
     {
     }
 }

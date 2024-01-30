@@ -22,7 +22,7 @@ namespace FR.DataAccess
             _context.SaveChanges();
         }
 
-        public List<FoodOrder> GetFoodOrdersByOrderId(int orderId)
+        public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
             return _context.FoodOrder.Where(f => f.OrderId == orderId).ToList();
         }

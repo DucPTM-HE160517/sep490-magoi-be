@@ -9,5 +9,5 @@
         }
     }
 
-    public record UserError(string message);
+    public record UserError(string message, string error_code);
 }

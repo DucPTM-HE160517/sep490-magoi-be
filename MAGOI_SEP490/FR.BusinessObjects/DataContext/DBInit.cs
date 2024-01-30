@@ -51,151 +51,151 @@ namespace FR.BusinessObjects.DataContext
                 }
             );
 
-            modelBuilder.Entity<Characteristics>().HasData(
-                new Characteristics
+            modelBuilder.Entity<Labels>().HasData(
+                new Labels
                 {
                     Id = 1,
-                    Characteristic = "Món chay"
+                    Label = "Món chay"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 2,
-                    Characteristic = "Món nóng"
+                    Label = "Món nóng"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 3,
-                    Characteristic = "Món lạnh"
+                    Label = "Món lạnh"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 4,
-                    Characteristic = "Món nước"
+                    Label = "Món nước"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 5,
-                    Characteristic = "Món nướng"
+                    Label = "Món nướng"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 6,
-                    Characteristic = "Thức ăn nhanh"
+                    Label = "Thức ăn nhanh"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 7,
-                    Characteristic = "Món cay"
+                    Label = "Món cay"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 8,
-                    Characteristic = "Dành cho người ăn kiêng"
+                    Label = "Dành cho người ăn kiêng"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 9,
-                    Characteristic = "Dành cho người tập gym"
+                    Label = "Dành cho người tập gym"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 10,
-                    Characteristic = "Dành cho dịp lễ"
+                    Label = "Dành cho dịp lễ"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 11,
-                    Characteristic = "Bánh"
+                    Label = "Bánh"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 12,
-                    Characteristic = "Kem"
+                    Label = "Kem"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 13,
-                    Characteristic = "Nước ép"
+                    Label = "Nước ép"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 14,
-                    Characteristic = "Sinh tố"
+                    Label = "Sinh tố"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 15,
-                    Characteristic = "Nước ngọt"
+                    Label = "Nước ngọt"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 16,
-                    Characteristic = "Trà"
+                    Label = "Trà"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 17,
-                    Characteristic = "Bia"
+                    Label = "Bia"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 18,
-                    Characteristic = "Rượu vang"
+                    Label = "Rượu vang"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 19,
-                    Characteristic = "Nước chấm"
+                    Label = "Nước chấm"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 20,
-                    Characteristic = "Món chiên rán"
+                    Label = "Món chiên rán"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 21,
-                    Characteristic = "Bò tiêu chuẩn"
+                    Label = "Bò tiêu chuẩn"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 22,
-                    Characteristic = "Bò cao cấp"
+                    Label = "Bò cao cấp"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 23,
-                    Characteristic = "Bò thượng hạng"
+                    Label = "Bò thượng hạng"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 24,
-                    Characteristic = "Hải sản"
+                    Label = "Hải sản"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 25,
-                    Characteristic = "Thịt cừu"
+                    Label = "Thịt cừu"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 26,
-                    Characteristic = "Thịt lợn"
+                    Label = "Thịt lợn"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 27,
-                    Characteristic = "Thịt gà"
+                    Label = "Thịt gà"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 28,
-                    Characteristic = "Thịt vịt"
+                    Label = "Thịt vịt"
                 },
-                new Characteristics
+                new Labels
                 {
                     Id = 29,
-                    Characteristic = "Trái cây"
+                    Label = "Trái cây"
                 }
             );
 
@@ -903,537 +903,537 @@ namespace FR.BusinessObjects.DataContext
                 }
             );
 
-            modelBuilder.Entity<FoodCharacteristics>().HasData(
-                new FoodCharacteristics
+            modelBuilder.Entity<FoodLabels>().HasData(
+                new FoodLabels
                 {
                     FoodId = 1,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 1,
-                    CharacteristicId = 6
+                    LabelId = 6
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 1,
-                    CharacteristicId = 20
+                    LabelId = 20
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 2,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 2,
-                    CharacteristicId = 6
+                    LabelId = 6
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 2,
-                    CharacteristicId = 20
+                    LabelId = 20
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 3,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 4,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 4,
-                    CharacteristicId = 6
+                    LabelId = 6
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 4,
-                    CharacteristicId = 20
+                    LabelId = 20
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 5,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 5,
-                    CharacteristicId = 5
+                    LabelId = 5
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 5,
-                    CharacteristicId = 6
+                    LabelId = 6
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 5,
-                    CharacteristicId = 27
+                    LabelId = 27
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 6,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 6,
-                    CharacteristicId = 6
+                    LabelId = 6
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 6,
-                    CharacteristicId = 20
+                    LabelId = 20
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 7,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 8,
-                    CharacteristicId = 7
+                    LabelId = 7
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 8,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 8,
-                    CharacteristicId = 29
+                    LabelId = 29
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 9,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 9,
-                    CharacteristicId = 7
+                    LabelId = 7
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 10,
-                    CharacteristicId = 3
+                    LabelId = 3
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 10,
-                    CharacteristicId = 21
+                    LabelId = 21
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 11,
-                    CharacteristicId = 26
+                    LabelId = 26
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 12,
-                    CharacteristicId = 3
+                    LabelId = 3
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 13,
-                    CharacteristicId = 3
+                    LabelId = 3
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 13,
-                    CharacteristicId = 24
+                    LabelId = 24
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 14,
-                    CharacteristicId = 23
+                    LabelId = 23
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 15,
-                    CharacteristicId = 23
+                    LabelId = 23
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 16,
-                    CharacteristicId = 23
+                    LabelId = 23
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 17,
-                    CharacteristicId = 23
+                    LabelId = 23
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 18,
-                    CharacteristicId = 23
+                    LabelId = 23
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 19,
-                    CharacteristicId = 22
+                    LabelId = 22
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 20,
-                    CharacteristicId = 22
+                    LabelId = 22
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 21,
-                    CharacteristicId = 21
+                    LabelId = 21
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 22,
-                    CharacteristicId = 21
+                    LabelId = 21
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 23,
-                    CharacteristicId = 21
+                    LabelId = 21
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 24,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 24,
-                    CharacteristicId = 2
+                    LabelId = 2
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 24,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 25,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 25,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 26,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 26,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 27,
-                    CharacteristicId = 5
+                    LabelId = 5
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 27,
-                    CharacteristicId = 25
+                    LabelId = 25
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 28,
-                    CharacteristicId = 5
+                    LabelId = 5
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 28,
-                    CharacteristicId = 25
+                    LabelId = 25
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 29,
-                    CharacteristicId = 28
+                    LabelId = 28
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 30,
-                    CharacteristicId = 5
+                    LabelId = 5
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 30,
-                    CharacteristicId = 26
+                    LabelId = 26
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 31,
-                    CharacteristicId = 5
+                    LabelId = 5
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 31,
-                    CharacteristicId = 24
+                    LabelId = 24
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 32,
-                    CharacteristicId = 5
+                    LabelId = 5
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 32,
-                    CharacteristicId = 24
+                    LabelId = 24
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 33,
-                    CharacteristicId = 24
+                    LabelId = 24
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 34,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 34,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 35,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 35,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 36,
-                    CharacteristicId = 28
+                    LabelId = 28
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 37,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 37,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 38,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 38,
-                    CharacteristicId = 26
+                    LabelId = 26
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 39,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 40,
-                    CharacteristicId = 4
+                    LabelId = 4
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 41,
-                    CharacteristicId = 4
+                    LabelId = 4
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 42,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 43,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 44,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 45,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 46,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 47,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 48,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 49,
-                    CharacteristicId = 19
+                    LabelId = 19
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 50,
-                    CharacteristicId = 15
+                    LabelId = 15
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 51,
-                    CharacteristicId = 15
+                    LabelId = 15
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 52,
-                    CharacteristicId = 14
+                    LabelId = 14
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 53,
-                    CharacteristicId = 15
+                    LabelId = 15
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 54,
-                    CharacteristicId = 15
+                    LabelId = 15
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 55,
-                    CharacteristicId = 18
+                    LabelId = 18
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 56,
-                    CharacteristicId = 18
+                    LabelId = 18
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 57,
-                    CharacteristicId = 18
+                    LabelId = 18
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 58,
-                    CharacteristicId = 3
+                    LabelId = 3
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 58,
-                    CharacteristicId = 12
+                    LabelId = 12
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 59,
-                    CharacteristicId = 11
+                    LabelId = 11
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 60,
-                    CharacteristicId = 1
+                    LabelId = 1
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 60,
-                    CharacteristicId = 8
+                    LabelId = 8
                 },
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 60,
-                    CharacteristicId = 29
+                    LabelId = 29
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 61,
-                    CharacteristicId = 11
+                    LabelId = 11
                 },
 
-                new FoodCharacteristics
+                new FoodLabels
                 {
                     FoodId = 62,
-                    CharacteristicId = 12
+                    LabelId = 12
                 }
             );
 
@@ -1441,90 +1441,90 @@ namespace FR.BusinessObjects.DataContext
                 new TableStatus
                 {
                     Id = 1,
-                    Status = "Trống"
+                    Status = "Available"
                 },
                 new TableStatus
                 {
                     Id = 2,
-                    Status = "Đang phục vụ"
+                    Status = "Serving"
                 },
                 new TableStatus
                 {
                     Id = 3,
-                    Status = "Đã đặt trước"
+                    Status = "Booked"
                 }
             );
 
             modelBuilder.Entity<Table>().HasData(
                 new Table
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 1",
                     StatusId = 2
                 },
                 new Table
                 {
-                    Id = 2,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 2",
                     StatusId = 2
                 },
                 new Table
                 {
-                    Id = 3,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 3",
                     StatusId = 2
                 },
                 new Table
                 {
-                    Id = 4,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 4",
                     StatusId = 2
                 },
                 new Table
                 {
-                    Id = 5,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 5",
                     StatusId = 2
                 },
                 new Table
                 {
-                    Id = 6,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 6",
                     StatusId = 1
                 },
                 new Table
                 {
-                    Id = 7,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 7",
                     StatusId = 1
                 },
                 new Table
                 {
-                    Id = 8,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 8",
                     StatusId = 1
                 },
                 new Table
                 {
-                    Id = 9,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 9",
                     StatusId = 1
                 },
                 new Table
                 {
-                    Id = 10,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 10",
                     StatusId = 3
                 },
                 new Table
                 {
-                    Id = 11,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 11",
                     StatusId = 3
                 },
                 new Table
                 {
-                    Id = 12,
+                    Id = Guid.NewGuid(),
                     Name = "Bàn 12",
                     StatusId = 3
                 }
@@ -1533,31 +1533,31 @@ namespace FR.BusinessObjects.DataContext
             modelBuilder.Entity<Bill>().HasData(
                 new Bill
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     CreatedAt = new DateTime(2023, 10, 10),
                     TotalAmount = 4000000,
                 },
                 new Bill
                 {
-                    Id = 2,
+                    Id = Guid.NewGuid(),
                     CreatedAt = new DateTime(2023, 10, 12),
                     TotalAmount = 563000,
                 },
                 new Bill
                 {
-                    Id = 3,
+                    Id = Guid.NewGuid(),
                     CreatedAt = new DateTime(2023, 10, 19),
                     TotalAmount = 7020000,
                 },
                 new Bill
                 {
-                    Id = 4,
+                    Id = Guid.NewGuid(),
                     CreatedAt = new DateTime(2023, 11, 5),
                     TotalAmount = 9270000,
                 },
                 new Bill
                 {
-                    Id = 5,
+                    Id = Guid.NewGuid(),
                     CreatedAt = new DateTime(2023, 11, 15),
                     TotalAmount = 6000000,
                 }
@@ -1566,12 +1566,12 @@ namespace FR.BusinessObjects.DataContext
                 new OrderStatus
                 {
                     Id = 1,
-                    Status = "Đang phục vụ"
+                    Status = "In progress"
                 },
                 new OrderStatus
                 {
                     Id = 2,
-                    Status = "Đã hoàn thành"
+                    Status = "Finished"
                 }
             );
 

@@ -1,4 +1,4 @@
 ﻿namespace FR.Services.GraphQL.InputTypes
 {
-    public record OrderInput(int tableId, DateTime createdAt);
+    public record OrderInput(Guid tableId, DateTime createdAt);
 }

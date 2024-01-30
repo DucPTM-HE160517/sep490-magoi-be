@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
@@ -18,7 +13,7 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
-        public List<FoodOrder> AddFoodOrders(int orderId, List<FoodOrderInput> foodListInput)
+        public List<FoodOrder> AddFoodOrders(Guid orderId, List<FoodOrderInput> foodListInput)
         {
             List<FoodOrder> foodOrders = new List<FoodOrder>();
             for (int i = 0; i < foodListInput.Count; i++)
@@ -36,7 +31,7 @@ namespace FR.Services.Service
             return foodOrders;
         }
 
-        public List<FoodOrder> GetFoodOrdersByOrderId(int orderId)
+        public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
             return _dao.GetFoodOrdersByOrderId(orderId);
         }

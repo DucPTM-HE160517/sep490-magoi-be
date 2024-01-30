@@ -29,7 +29,7 @@ namespace FR.Services.Service
             _dao.DeleteOrder(order);
         }
 
-        public Order GetOrderById(int Id)
+        public Order GetOrderById(Guid Id)
         {
             return _dao.GetOrderById(Id);
         }
