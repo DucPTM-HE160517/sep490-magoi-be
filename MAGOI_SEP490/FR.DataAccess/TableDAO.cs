@@ -21,11 +21,11 @@ namespace FR.DataAccess
             return _context.Tables.ToList();
         }
 
-        public Table GetTable(int id) {
+        public Table GetTable(Guid id) {
             return _context.Tables.FirstOrDefault(table => table.Id.Equals(id));
 	    }
 
-        public void UpdateTableStatus(int tableId, TableStatusId statusId) {
+        public void UpdateTableStatus(Guid tableId, TableStatusId statusId) {
             Table table = GetTable(tableId);
             table.StatusId = (int)statusId;
             _context.SaveChanges();

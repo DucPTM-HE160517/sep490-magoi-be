@@ -28,13 +28,8 @@ namespace FR.API.GraphQL.Mutations
             try
             {
                 List<FoodOrder> foodOrders = foodOrderService.AddFoodOrders(order.Id, foodListInput);
-
                 //update table status to serving
-                Table table = tableService.GetTable(orderInput.tableId);
-                if (table.StatusId == (int)TableStatusId.Available)
-                {
-                    tableService.UpdateTableStatus(orderInput.tableId, TableStatusId.Serving);
-                }
+                tableService.UpdateTableStatusWhenCreateOrder(orderInput.tableId);
 
                 return new AddOrderPayload(order, foodOrders);
             }
