@@ -8,5 +8,6 @@ namespace FR.Services.IService
         Order AddOrder(OrderInput order);
         Order GetOrderById(Guid Id);
         void DeleteOrder(Order order);
+        List<Order> GetOrdersByOrderStatusId(int orderStatusId);
     }
 }

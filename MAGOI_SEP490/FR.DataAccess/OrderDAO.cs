@@ -44,5 +44,17 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
+        public List<Order> GetOrdersByStatusId(int statusId)
+        {
+            try
+            {
+                return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
