@@ -33,5 +33,9 @@ namespace FR.Services.Service
         {
             return _dao.GetOrderById(Id);
         }
+        public List<Order> GetOrdersByOrderStatusId(int orderStatusId)
+        {
+            return _dao.GetOrdersByStatusId(orderStatusId);
+        }
     }
 }
