@@ -44,11 +44,18 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
-        public List<Order> GetOrdersByStatusId(int statusId)
+        public List<Order> GetOrdersByStatusId(int? statusId)
         {
             try
             {
-                return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
+                if (statusId != null)
+                {
+                    return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
+                }
+                else
+                {
+                    return _context.Orders.ToList();
+                }
             }
             catch (Exception ex)
             {

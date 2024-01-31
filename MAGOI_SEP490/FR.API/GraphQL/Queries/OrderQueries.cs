@@ -5,6 +5,6 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public List<Order> GetOrdersByStatusID(IOrderService service,int statusID) => service.GetOrdersByOrderStatusId(statusID);
+        public List<Order> GetOrdersByStatusID(IOrderService service,int? statusID) => service.GetOrdersByOrderStatusId(statusID);
     }
 }
