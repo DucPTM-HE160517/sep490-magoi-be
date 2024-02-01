@@ -9,10 +9,16 @@ namespace FR.API.GraphQL.Mutations
     {
         public async Task<AddOrderPayload> AddOrderAsync(
             IOrderService orderService, IFoodOrderService foodOrderService,
-            ITableService tableService,
+            ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
             List<FoodOrderInput> foodListInput)
         {
+            //check order: foods amount exceed food quantity
+            if (!foodService.CheckFoodOrdersQuantity(foodListInput))
+            {
+                return new AddOrderPayload(new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
+            }
+
             //add order
             Order order;
             try
@@ -28,6 +34,8 @@ namespace FR.API.GraphQL.Mutations
             try
             {
                 List<FoodOrder> foodOrders = foodOrderService.AddFoodOrders(order.Id, foodListInput);
+                //update the quantity of the food
+                foodService.UpdateFoodQuantityWhenCreateOrder(foodListInput);
                 //update table status to serving
                 tableService.UpdateTableStatusWhenCreateOrder(orderInput.tableId);
 
@@ -38,8 +46,6 @@ namespace FR.API.GraphQL.Mutations
                 //delete order -> not done
                 return new AddOrderPayload(new UserError("ERROR: " + ex.Message, "ERROR_CODE"));
             }
-
-
         }
     }
 }
