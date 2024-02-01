@@ -12,31 +12,31 @@ namespace FR.API.GraphQL.Types
             descriptor.Description("Order");
             descriptor.Field(f => f.Id)
                 .Type<UuidType>()
-                .Name("ID")
+                .Name("id")
                 .Description("The ID of the order");
             descriptor.Field(f => f.TableId)
                 .Type<UuidType>()
-                .Name("TableId")
+                .Name("tableId")
                 .Description("Id of table");
             descriptor.Field(f => f.BillId)
                 .Type<UuidType>()
-                .Name("BillId")
+                .Name("billId")
                 .Description("Id of bill");
             descriptor.Field(f => f.CreatedAt)
                 .Type<DateTimeType>()
-                .Name("CreatedAt")
+                .Name("createdAt")
                 .Description("The time that order was created");
             descriptor.Field(f => f.FeedbackId)
                 .Type<UuidType>()
-                .Name("FeedbackId")
+                .Name("feedbackId")
                 .Description("Id of order's feedback");
             descriptor.Field(f => f.OrderStatusId)
                 .Type<IntType>()
-                .Name("OrderStatusId")
+                .Name("orderStatusId")
                 .Description("Id of order's status");
             descriptor.Field("FoodList")
                 .Type<ListType<FoodOrderType>>()
-                .Name("FoodList")
+                .Name("foodList")
                 .Resolve(context =>
                 {
                     var order = context.Parent<Order>();

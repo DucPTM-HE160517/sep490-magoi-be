@@ -1,35 +1,42 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Services.IService;
 
 namespace FR.API.GraphQL.Types
 {
     public class FoodOrderType : ObjectType<FoodOrder>
     {
-
-        //Featured by ThuongTTHE16355 31/01/2024
-        //Define GraphQL Types of Order
         protected override void Configure(IObjectTypeDescriptor<FoodOrder> descriptor)
         {
             descriptor.Description("FoodOrder");
             descriptor.Field(f => f.OrderId)
                 .Type<UuidType>()
-                .Name("OrderId")
+                .Name("id")
                 .Description("The ID of the order");
             descriptor.Field(f => f.FoodId)
                 .Type<IntType>()
-                .Name("FoodId")
+                .Name("foodId")
                 .Description("The ID of the Food"); 
             descriptor.Field(f => f.Quantity)
                 .Type<IntType>()
-                .Name("Quantity")
-                .Description("Quantity of the order"); 
+                .Name("quantity")
+                .Description("Quantity of the food in the order"); 
             descriptor.Field(f => f.FoodNote)
                 .Type<StringType>()
-                .Name("FoodNote")
+                .Name("note")
                 .Description("Note the food in this order"); 
             descriptor.Field(f => f.OrderAt)
                 .Type<DateTimeType>()
-                .Name("OrderAt")
-                .Description("Time of the the food when added to order");
+                .Name("orderAt")
+                .Description("Time of the food when being added to order");
+            descriptor.Field("Price")
+                .Type<FloatType>()
+                .Name("price")
+                .Resolve(context =>
+                {
+                    var foodOrder = context.Parent<FoodOrder>();
+                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).Price;
+                })
+                .Description("Price of the food in the order");
         }
     }
 }

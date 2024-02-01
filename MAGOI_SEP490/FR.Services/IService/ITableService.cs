@@ -6,6 +6,7 @@ namespace FR.Services.IService
     {
         List<Table> GetTables();
         Table GetTable(Guid id);
+        Table GetTableByName(string name);
         void UpdateTableStatus(Guid tableId, TableStatusId statusId);
         void UpdateTableStatusWhenCreateOrder(Guid tableId);
     }

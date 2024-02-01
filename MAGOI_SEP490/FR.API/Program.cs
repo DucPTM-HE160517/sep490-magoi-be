@@ -63,11 +63,8 @@ builder.Services.AddGraphQLServer()
     .RegisterService<IFoodOrderService>(ServiceKind.Synchronized)
     .AddQueryType<Queries>()
     .AddMutationType<Mutations>()
-    .AddTypes(new[] { typeof(FoodType), typeof(FoodCategoryType), typeof(TableType), typeof(TableStatusType), typeof(FoodOrderType), typeof(OrderType) });
-//.AddType<FoodType>()
-//.AddType<FoodCategoryType>()
-//.AddType<TableType>()
-//.AddType<TableStatusType>();
+    .AddTypes(new[] { typeof(FoodType), typeof(FoodCategoryType), typeof(TableType), typeof(TableStatusType), 
+        typeof(FoodOrderType), typeof(OrderType) });
 
 var app = builder.Build();
 
