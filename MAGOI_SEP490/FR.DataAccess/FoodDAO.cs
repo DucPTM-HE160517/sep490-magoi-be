@@ -1,6 +1,7 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 using HotChocolate;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -24,6 +25,10 @@ namespace FR.DataAccess
         public Food GetFoodByFoodId(int foodId)
         {
             return _context.Foods.FirstOrDefault(x => x.Id == foodId);
+        }
+        public void UpdateFoodQuantity(int foodId, int new_quantity)
+        {
+            _context.Foods.Where(f => f.Id == foodId).ExecuteUpdate(s => s.SetProperty(f => f.Quantity, new_quantity));
         }
     }
 }
