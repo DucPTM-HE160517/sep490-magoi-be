@@ -34,5 +34,10 @@ namespace FR.Services.Service
                 UpdateTableStatus(tableId, TableStatusId.Serving);
             }
         }
+
+        public Table GetTableByName(string name)
+        {
+            return _dao.GetTableByName(name);
+        }
     }
 }

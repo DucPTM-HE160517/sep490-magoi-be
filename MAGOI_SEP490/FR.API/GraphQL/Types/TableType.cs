@@ -30,6 +30,16 @@ namespace FR.API.GraphQL.Types
 
                 })
                 .Description("The status of the table");
+            descriptor.Field("Orders")
+                .Type<ListType<OrderType>>()
+                .Name("orders")
+                .Resolve(context =>
+                {
+                    var table = context.Parent<Table>();
+                    return context.Service<IOrderService>().GetOrdersByTableId(table.Id);
+
+                })
+                .Description("Order list of the table");
         }
     }
 }
