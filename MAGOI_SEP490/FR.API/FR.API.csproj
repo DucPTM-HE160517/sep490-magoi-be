@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GraphQL\Subscriptions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FR.BusinessObjects\FR.BusinessObjects.csproj" />
     <ProjectReference Include="..\FR.Services\FR.Services.csproj" />
   </ItemGroup>

@@ -2,12 +2,14 @@
 using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
+using HotChocolate.Subscriptions;
 
 namespace FR.API.GraphQL.Mutations
 {
-    public partial class Mutations
+    public partial class Mutation
     {
-        public async Task<AddOrderPayload> AddOrderAsync(
+        public async Task<AddOrderPayload> AddOrder(
+            [Service] ITopicEventSender eventSender, CancellationToken cancellationToken,
             IOrderService orderService, IFoodOrderService foodOrderService,
             ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
@@ -38,6 +40,8 @@ namespace FR.API.GraphQL.Mutations
                 foodService.UpdateFoodQuantityWhenCreateOrder(foodListInput);
                 //update table status to serving
                 tableService.UpdateTableStatusWhenCreateOrder(orderInput.tableId);
+
+                await eventSender.SendAsync(nameof(AddOrder), order, cancellationToken);
 
                 return new AddOrderPayload(order, foodOrders);
             }
