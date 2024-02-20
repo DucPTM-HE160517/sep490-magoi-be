@@ -43,6 +43,8 @@ namespace FR.BusinessObjects.DataContext
         public virtual DbSet<TableStatus> TableStatus { get; set; }
         public virtual DbSet<FoodOrder> FoodOrder { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
             optionsBuilder.Entity<FoodOrder>()
