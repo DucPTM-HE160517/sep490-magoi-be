@@ -20,10 +20,9 @@ namespace FR.DataAccess
         {
             return _context.Tables.ToList();
         }
-
-        public List<Table> GetInProgressTables()
+        public List<Table> GetTablesByStatusId(int tableStatusId)
         {
-            return _context.Tables.Where(t=> t.StatusId == (int)TableStatusId.Serving).ToList();
+            return _context.Tables.Where(t=>t.StatusId == tableStatusId).ToList();
         }
 
         public Table GetTable(Guid id) {
