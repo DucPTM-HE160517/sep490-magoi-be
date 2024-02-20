@@ -40,6 +40,26 @@ namespace FR.API.GraphQL.Types
 
                 })
                 .Description("Order list of the table");
+            descriptor.Field("InProgressOrders")
+                .Type<ListType<OrderType>>()
+                .Name("inProgressOrders")
+                .Resolve(context =>
+                {
+                    var table = context.Parent<Table>();
+                    return context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.InProgress);
+
+                })
+                .Description("Serving order list of the table");
+            descriptor.Field("FinishedOrders")
+                .Type<ListType<OrderType>>()
+                .Name("finishedOrders")
+                .Resolve(context =>
+                {
+                    var table = context.Parent<Table>();
+                    return context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Finished);
+
+                })
+                .Description("Finished order list of the table");
         }
     }
 }

@@ -72,7 +72,19 @@ namespace FR.DataAccess
             }
             catch (Exception ex)
             {
+                throw new Exception(ex.Message);
+            }
+        }
 
+        public List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
+        {
+            try
+            {
+                return _context.Orders.Where(o => o.TableId == tableId 
+                && o.OrderStatusId == orderStatusId).ToList();
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }

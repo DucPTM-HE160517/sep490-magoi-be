@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FR.BusinessObjects.Models
 {
+    public enum OrderStatusId : int
+    {
+        InProgress = 1,
+        Finished = 2
+    }
     public partial class OrderStatus
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
