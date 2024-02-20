@@ -5,8 +5,6 @@ namespace FR.API.GraphQL.Types
 {
     public class OrderType : ObjectType<Order>
     {
-        //Featured by ThuongTTHE16355 31/01/2024
-        //Define GraphQL Types of Order
         protected override void Configure(IObjectTypeDescriptor<Order> descriptor)
         {
             descriptor.Description("Order");
@@ -34,9 +32,9 @@ namespace FR.API.GraphQL.Types
                 .Type<IntType>()
                 .Name("orderStatusId")
                 .Description("Id of order's status");
-            descriptor.Field("FoodList")
+            descriptor.Field("Foods")
                 .Type<ListType<FoodOrderType>>()
-                .Name("foodList")
+                .Name("foods")
                 .Resolve(context =>
                 {
                     var order = context.Parent<Order>();
