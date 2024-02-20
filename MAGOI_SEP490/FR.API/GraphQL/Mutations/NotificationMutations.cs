@@ -4,7 +4,7 @@ using FR.Services.Service;
 
 namespace FR.API.GraphQL.Mutations
 {
-    public partial class Mutations
+    public partial class Mutation
     {
         public async Task<string> RegisterSession(ISessionService sessionService, string expoToken, string roleId)
         {
