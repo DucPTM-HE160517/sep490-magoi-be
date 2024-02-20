@@ -15,7 +15,16 @@ namespace FR.API.GraphQL.Types
             descriptor.Field(f => f.FoodId)
                 .Type<IntType>()
                 .Name("foodId")
-                .Description("The ID of the Food"); 
+                .Description("The ID of the Food");
+            descriptor.Field("Name")
+                .Type<StringType>()
+                .Name("name")
+                .Resolve(context =>
+                {
+                    var foodOrder = context.Parent<FoodOrder>();
+                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).Name;
+                })
+                .Description("Name of the Food");
             descriptor.Field(f => f.Quantity)
                 .Type<IntType>()
                 .Name("quantity")
