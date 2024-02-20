@@ -4,12 +4,14 @@ using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
 using FR.Services.Service;
+using HotChocolate.Subscriptions;
 
 namespace FR.API.GraphQL.Mutations
 {
-    public partial class Mutations
+    public partial class Mutation
     {
-        public async Task<AddOrderPayload> AddOrderAsync(
+        public async Task<AddOrderPayload> AddOrder(
+            [Service] ITopicEventSender eventSender, CancellationToken cancellationToken,
             IOrderService orderService, IFoodOrderService foodOrderService,
             ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
@@ -18,8 +20,7 @@ namespace FR.API.GraphQL.Mutations
             //check order: foods amount exceed food quantity
             if (!foodService.CheckFoodOrdersQuantity(foodListInput))
             {
-                return new AddOrderPayload(
-                    new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
+                return new AddOrderPayload(new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
             }
 
             //add order
@@ -41,6 +42,8 @@ namespace FR.API.GraphQL.Mutations
                 foodService.UpdateFoodQuantityWhenCreateOrder(foodListInput);
                 //update table status to serving
                 tableService.UpdateTableStatusWhenCreateOrder(orderInput.tableId);
+
+                await eventSender.SendAsync(nameof(AddOrder), order, cancellationToken);
 
                 return new AddOrderPayload(order, foodOrders);
             }

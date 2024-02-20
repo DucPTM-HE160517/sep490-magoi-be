@@ -21,6 +21,11 @@ namespace FR.DataAccess
             return _context.Tables.ToList();
         }
 
+        public List<Table> GetInProgressTables()
+        {
+            return _context.Tables.Where(t=> t.StatusId == (int)TableStatusId.Serving).ToList();
+        }
+
         public Table GetTable(Guid id) {
             return _context.Tables.SingleOrDefault(table => table.Id.Equals(id));
 	    }
