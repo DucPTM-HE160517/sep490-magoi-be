@@ -1,5 +1,6 @@
 using FR.API.GraphQL.Mutations;
 using FR.API.GraphQL.Queries;
+using FR.API.GraphQL.Subscriptions;
 using FR.API.GraphQL.Types;
 using FR.BusinessObjects.DataContext;
 using FR.DataAccess;
@@ -47,7 +48,7 @@ builder.Services.AddScoped<FoodDAO>()
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<IFoodOrderService, FoodOrderService>();
 
-builder.Services.AddGraphQLServer()
+builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterDbContext<DBContext>(DbContextKind.Synchronized)
     .RegisterService<FoodDAO>(ServiceKind.Synchronized)
     .RegisterService<FoodCategoryDAO>(ServiceKind.Synchronized)
@@ -62,7 +63,8 @@ builder.Services.AddGraphQLServer()
     .RegisterService<IOrderService>(ServiceKind.Synchronized)
     .RegisterService<IFoodOrderService>(ServiceKind.Synchronized)
     .AddQueryType<Queries>()
-    .AddMutationType<Mutations>()
+    .AddMutationType<Mutation>()
+    .AddSubscriptionType<Subscriptions>()
     .AddTypes(new[] { typeof(FoodType), typeof(FoodCategoryType), typeof(TableType), typeof(TableStatusType), 
         typeof(FoodOrderType), typeof(OrderType) });
 
@@ -74,6 +76,8 @@ var app = builder.Build();
 app.UseGraphQLGraphiQL();
 
 app.UseRouting();
+
+app.UseWebSockets();
 
 app.UseCors(allowAllOrigins);
 app.UseEndpoints(endpoints =>

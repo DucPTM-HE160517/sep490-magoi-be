@@ -39,5 +39,10 @@ namespace FR.Services.Service
         {
             return _dao.GetTableByName(name);
         }
+
+        public List<Table> GetInProgressTables()
+        {
+            return _dao.GetInProgressTables();
+        }
     }
 }

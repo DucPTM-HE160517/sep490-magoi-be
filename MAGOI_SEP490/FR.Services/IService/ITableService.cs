@@ -5,6 +5,7 @@ namespace FR.Services.IService
     public interface ITableService
     {
         List<Table> GetTables();
+        List<Table> GetInProgressTables();
         Table GetTable(Guid id);
         Table GetTableByName(string name);
         void UpdateTableStatus(Guid tableId, TableStatusId statusId);
