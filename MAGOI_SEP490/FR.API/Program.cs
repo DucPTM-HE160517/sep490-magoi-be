@@ -7,18 +7,31 @@ using FR.DataAccess;
 using FR.Services.IService;
 using FR.Services.Service;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowAllOrigins = "_allowAllOrigins";
+var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
 // Add services to the container.
 var configBuilder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 IConfigurationRoot configuration = configBuilder.Build();
 
 builder.Services.AddDbContext<DBContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString("FRdb"));
+    var conStrBuilder = new NpgsqlConnectionStringBuilder(
+        configuration.GetConnectionString("FRdb"));
+
+    //Set connection string password from environment variable
+    //As Azure Key Vault is not free, so I will hard code the password here
+    conStrBuilder.Password = "pEUE3bGrZdHfl5xY";
+    Console.WriteLine(conStrBuilder.ConnectionString);
+
+    options.UseNpgsql(conStrBuilder.ConnectionString);
 });
 
 
