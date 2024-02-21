@@ -65,6 +65,29 @@ namespace FR.Services.Service
             var ticketResponse = await PostAsync<PushTicketRequest, PushTicketResponse>(pushTicketRequest, PushSendPath);
             return ticketResponse;
         }
+
+        public async Task SendNotification(List<String> pushToDeviceTokens ,String title, String body)
+        {
+            //create notification
+            var pushTicketReq = new PushTicketRequest()
+            {
+                PushTo = pushToDeviceTokens,
+                PushTitle = title,
+                PushBody = body,
+            };
+
+            //send notification to expo server
+            var result = await PushSendAsync(pushTicketReq);
+
+            //handle error
+            if (result?.PushTicketErrors?.Count() > 0)
+            {
+                foreach (var error in result.PushTicketErrors)
+                {
+                    Console.WriteLine($"Error: {error.ErrorCode} - {error.ErrorMessage}");
+                }
+            }
+        }
     }
 }
 

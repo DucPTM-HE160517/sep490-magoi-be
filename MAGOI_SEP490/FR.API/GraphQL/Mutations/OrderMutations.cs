@@ -11,11 +11,11 @@ namespace FR.API.GraphQL.Mutations
     public partial class Mutation
     {
         public async Task<AddOrderPayload> AddOrder(
-            [Service] ITopicEventSender eventSender, CancellationToken cancellationToken,
+            [Service] ITopicEventSender eventSender, 
             IOrderService orderService, IFoodOrderService foodOrderService,
             ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
-            List<FoodOrderInput> foodListInput)
+            List<FoodOrderInput> foodListInput, CancellationToken cancellationToken)
         {
             //check order: foods amount exceed food quantity
             if (!foodService.CheckFoodOrdersQuantity(foodListInput))
@@ -66,28 +66,10 @@ namespace FR.API.GraphQL.Mutations
             //get list of waiter devices
             List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
 
-            //create notification
-            var pushTicketReq = new PushTicketRequest()
-            {
-                PushTo = waiterTokens,
-
-                //TODO: change table name and order number to appropriate value
-                PushTitle = $"Table {1} - Order {"FR1234"}",
-                PushBody = "There is a done food! Please serve the food to the customer!",
-            };
-
-            //send notification to expo server
-            var result = await expoSdkClient.PushSendAsync(pushTicketReq);
-
-            //handle error
-            if (result?.PushTicketErrors?.Count() > 0)
-            {
-                foreach (var error in result.PushTicketErrors)
-                {
-                    Console.WriteLine($"Error: {error.ErrorCode} - {error.ErrorMessage}");
-                }
-            }
-
+            await expoSdkClient.SendNotification(waiterTokens, 
+                $"Table {1} - Order {"FR1234"}", 
+                "There is a done food! Please serve the food to the customer!");
+           
             return "Notification sent!";
         }
     }
