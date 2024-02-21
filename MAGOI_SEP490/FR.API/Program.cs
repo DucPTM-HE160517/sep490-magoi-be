@@ -26,9 +26,13 @@ builder.Services.AddDbContext<DBContext>(options =>
     var conStrBuilder = new NpgsqlConnectionStringBuilder(
         configuration.GetConnectionString("FRdb"));
 
-    //Set connection string password from environment variable
-    //As Azure Key Vault is not free, so I will hard code the password here
-    conStrBuilder.Password = "pEUE3bGrZdHfl5xY";
+    //check if the environment is development, then use the password from the environment variable
+    if (environmentName == "Production")
+    {
+        //Set connection string password from environment variable
+        //As Azure Key Vault is not free, so I will hard code the password here
+        conStrBuilder.Password = "pEUE3bGrZdHfl5xY";
+    }
     Console.WriteLine(conStrBuilder.ConnectionString);
 
     options.UseNpgsql(conStrBuilder.ConnectionString);
