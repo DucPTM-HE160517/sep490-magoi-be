@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - develop
+    - main
 
 env:
   APP_PATH: "./MAGOI_SEP490/FR.API/FR.API.csproj"
