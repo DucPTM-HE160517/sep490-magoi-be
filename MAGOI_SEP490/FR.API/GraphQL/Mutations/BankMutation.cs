@@ -1,9 +1,11 @@
-﻿using FR.Services.IService;
+﻿using FR.BusinessObjects.Models;
+using FR.BusinessObjects.Models.VietQR;
+using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
-        public async Task<string> GetBankQR(IBankService bankService) => await bankService.GetQRAsync();
+        public async Task<BankingResponse> GetBankQR(IBankService bankService, string billId) => await bankService.GetQRAsync(billId);
     }
 }
