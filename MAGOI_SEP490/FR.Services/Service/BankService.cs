@@ -44,11 +44,10 @@ namespace FR.Services.Service
             }
         }
 
-        public async Task<BankingResponse> GetQRAsync(string billId)
+        public async Task<BankingResponse> GetQRAsync(string tableName, float totalAmount)
         {
             try
             {
-                Bill bill = _dao.GetBillById(billId);
                 var requestData = new
                 {
                     accountNo = config.GetSection("QrInformation")["accountNo"],
@@ -57,8 +56,8 @@ namespace FR.Services.Service
                     format = config.GetSection("QrInformation")["format"],
                     template = config.GetSection("QrInformation")["template"],
                     //TODO: Change billId to new format FR-XXXX
-                    addInfo = config.GetSection("QrInformation")["addInfo"].Replace("{billId}", billId.Substring(0, 5)),
-                    amount = bill.TotalAmount,
+                    addInfo = config.GetSection("QrInformation")["addInfo"].Replace("{tableName}", tableName),
+                    amount = totalAmount,
                 };
 
                 string jsonBody = JsonConvert.SerializeObject(requestData);

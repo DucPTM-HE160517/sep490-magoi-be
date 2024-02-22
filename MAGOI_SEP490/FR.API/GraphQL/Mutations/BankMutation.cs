@@ -6,6 +6,6 @@ namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
-        public async Task<BankingResponse> GetBankQR(IBankService bankService, string billId) => await bankService.GetQRAsync(billId);
+        public async Task<BankingResponse> GetBankQR(IBankService bankService, string tableName, float totalAmount) => await bankService.GetQRAsync(tableName, totalAmount);
     }
 }

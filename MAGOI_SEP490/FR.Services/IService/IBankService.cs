@@ -10,6 +10,6 @@ namespace FR.Services.IService
 {
     public interface IBankService
     {
-        Task<BankingResponse> GetQRAsync(string billId);
+        Task<BankingResponse> GetQRAsync(string tableName, float totalAmount);
     }
 }
