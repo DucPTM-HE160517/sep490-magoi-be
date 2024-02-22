@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace FR.BusinessObjects.DataContext
 {
@@ -23,11 +24,12 @@ namespace FR.BusinessObjects.DataContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
+            // var builder = new ConfigurationBuilder()
+            //     .SetBasePath(Directory.GetCurrentDirectory())
+            //     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            // IConfigurationRoot configuration = builder.Build();
+            //
+            // optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
             optionsBuilder.EnableSensitiveDataLogging();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
