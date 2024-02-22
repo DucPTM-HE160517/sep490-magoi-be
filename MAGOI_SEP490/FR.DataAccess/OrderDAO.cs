@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.DataContext;
+﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -27,7 +23,7 @@ namespace FR.DataAccess
                 _context.Orders.Add(order);
                 _context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -63,7 +59,6 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
-
         public List<Order> GetOrdersByTableId(Guid tableId)
         {
             try
@@ -75,17 +70,59 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
-
         public List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
         {
             try
             {
-                return _context.Orders.Where(o => o.TableId == tableId 
+                return _context.Orders.Where(o => o.TableId == tableId
                 && o.OrderStatusId == orderStatusId).ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateFinishedOrderStatus(Guid orderId)
+        {
+            try
+            {
+                var order = _context.Orders.SingleOrDefault(o => o.Id == orderId);
+                order.OrderStatusId = (int)OrderStatusId.Finished;
+                _context.Entry(order).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public float GetTotalPriceOfOrder(Guid orderId)
+        {
+            try
+            {
+                var foodOrders = _context.FoodOrder.Where(od => od.OrderId == orderId).ToList();
+                float totalPrice = 0;
+                foreach (var foodOrder in foodOrders)
+                {
+                    totalPrice += _context.Foods.SingleOrDefault(f => f.Id == foodOrder.FoodId).Price * foodOrder.Quantity;
+                }
+                return totalPrice;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateOrder(Order order)
+        {
+            try
+            {
+                _context.Entry(order).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }
