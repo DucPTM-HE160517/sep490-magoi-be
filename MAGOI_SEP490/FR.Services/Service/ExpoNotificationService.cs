@@ -66,12 +66,12 @@ namespace FR.Services.Service
             return ticketResponse;
         }
 
-        public async Task SendNotification(List<String> pushToDeviceTokens ,String title, String body)
+        public async Task SendNotification(List<String> receivingDeviceTokens ,String title, String body)
         {
             //create notification
             var pushTicketReq = new PushTicketRequest()
             {
-                PushTo = pushToDeviceTokens,
+                PushTo = receivingDeviceTokens,
                 PushTitle = title,
                 PushBody = body,
             };

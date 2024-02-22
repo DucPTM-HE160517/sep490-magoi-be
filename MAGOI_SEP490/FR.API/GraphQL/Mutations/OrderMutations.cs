@@ -54,7 +54,10 @@ namespace FR.API.GraphQL.Mutations
             }
         }
 
-        public async Task<string> UpdateOrderStatusAsync(
+        public async Task<UpdateOrderStatusPayload> UpdateOrderStatusAsync(
+            Guid orderId,
+            IOrderService orderService,
+            ITableService tableService,
             ISessionService sessionService,
             IExpoNotificationService expoSdkClient)
         {
@@ -62,15 +65,27 @@ namespace FR.API.GraphQL.Mutations
              * 1. Chef will update the order status to "done" or update the food status to "done" (❌)
              * 2. Send notification to waiter (✅)
              */
+            //Get order and table
+            Order order = orderService.GetOrderById(orderId);
+            Table table = tableService.GetTable(order.TableId);
+            
+            try
+            {
+                //Update order status - FR-188 - Bi lam
 
-            //get list of waiter devices
-            List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
+                //get list of waiter devices
+                List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
 
-            await expoSdkClient.SendNotification(waiterTokens, 
-                $"Table {1} - Order {"FR1234"}", 
-                "There is a done food! Please serve the food to the customer!");
-           
-            return "Notification sent!";
+                await expoSdkClient.SendNotification(waiterTokens,
+                    $"{table.Name} - Order {orderId}",
+                    "There is a done order! Please serve the food to the customer!");
+
+                return new UpdateOrderStatusPayload(order);
+            }
+            catch (Exception e)
+            {
+                return new UpdateOrderStatusPayload(new UserError("ERROR: " + e.Message, "ERROR_CODE"));
+            }
         }
     }
 }
