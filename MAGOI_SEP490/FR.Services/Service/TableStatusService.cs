@@ -19,7 +19,7 @@ namespace FR.Services.Service
 
         public List<TableStatus> GetAllTableStatus()
         {
-            throw _dao.GetAllTableStatus();
+            return _dao.GetAllTableStatus();
         }
     }
 }

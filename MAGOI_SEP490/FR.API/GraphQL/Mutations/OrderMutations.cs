@@ -3,7 +3,6 @@ using FR.BusinessObjects.Models;
 using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
-using FR.Services.Service;
 using HotChocolate.Subscriptions;
 
 namespace FR.API.GraphQL.Mutations

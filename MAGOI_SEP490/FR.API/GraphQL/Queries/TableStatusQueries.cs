@@ -3,7 +3,7 @@ using FR.Services.IService;
 
 namespace FR.API.GraphQL.Queries
 {
-    public partial class TableStatusQueries
+    public partial class Queries
     {
         public List<TableStatus> GetAllTableStatus(ITableStatusService service) => service.GetAllTableStatus();
     }
