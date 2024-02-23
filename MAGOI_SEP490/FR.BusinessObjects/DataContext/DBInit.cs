@@ -1530,38 +1530,6 @@ namespace FR.BusinessObjects.DataContext
                 }
             );
 
-            //modelBuilder.Entity<Bill>().HasData(
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 10, 10),
-            //        TotalAmount = 4000000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 10, 12),
-            //        TotalAmount = 563000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 10, 19),
-            //        TotalAmount = 7020000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 11, 5),
-            //        TotalAmount = 9270000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 11, 15),
-            //        TotalAmount = 6000000,
-            //    }
-            //);
             modelBuilder.Entity<OrderStatus>().HasData(
                 new OrderStatus
                 {
@@ -1574,7 +1542,18 @@ namespace FR.BusinessObjects.DataContext
                     Status = "Finished"
                 }
             );
-
+            modelBuilder.Entity<PaymentStatus>().HasData(
+                new OrderStatus
+                {
+                    Id = 1,
+                    Status = "Unpaid"
+                },
+                new OrderStatus
+                {
+                    Id = 2,
+                    Status = "Paid"
+                }
+            );
         }
     }
 }

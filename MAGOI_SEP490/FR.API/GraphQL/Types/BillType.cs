@@ -20,6 +20,10 @@ namespace FR.API.GraphQL.Types
                 .Type<NonNullType<FloatType>>()
                 .Name("totalAmount")
                 .Description("The total amount of the bill");
+            descriptor.Field(f => f.FeedbackId)
+                .Type<UuidType>()
+                .Name("feedbackId")
+                .Description("Id of order's feedback");
             descriptor.Field("Orders")
                 .Type<ListType<OrderType>>()
                 .Name("orders")
