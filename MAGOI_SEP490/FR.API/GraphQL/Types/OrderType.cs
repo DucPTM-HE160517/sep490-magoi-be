@@ -24,10 +24,6 @@ namespace FR.API.GraphQL.Types
                 .Type<DateTimeType>()
                 .Name("createdAt")
                 .Description("The time that order was created");
-            descriptor.Field(f => f.FeedbackId)
-                .Type<UuidType>()
-                .Name("feedbackId")
-                .Description("Id of order's feedback");
             descriptor.Field(f => f.OrderStatusId)
                 .Type<IntType>()
                 .Name("orderStatusId")

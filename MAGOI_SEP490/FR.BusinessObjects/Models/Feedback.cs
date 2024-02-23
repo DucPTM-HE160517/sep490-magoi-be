@@ -10,5 +10,7 @@ namespace FR.BusinessObjects.Models
         public int ServingScore { get; set; }
         public int FoodScore { get; set; }
         public string Comment { get; set; }
+        [ForeignKey("Bill")]
+        public Guid BillId { get; set; }
     }
 }
