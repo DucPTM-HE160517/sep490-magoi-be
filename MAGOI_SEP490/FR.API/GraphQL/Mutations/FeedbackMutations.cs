@@ -1,11 +1,12 @@
-﻿using FR.BusinessObjects.Models;
+﻿using FR.API.GraphQL.Payload;
+using FR.BusinessObjects.Models;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
-        public async Task<String> SendFeedback(
+        public async Task<SendFeedbackPayload> SendFeedback(
             IFeedbackService feedbackService,
             IBillService billService,
             string billId, int servingStar, int foodStar, string? comment)
@@ -16,11 +17,11 @@ namespace FR.API.GraphQL.Mutations
                 Feedback feedback = feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
                 //update feedbackid of bill
                 billService.UpdateBillFeedback(Guid.Parse(billId), feedback.Id);
-                return "Feedback sent!";
+                return new SendFeedbackPayload(feedback);
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
-                return "Error!" + e.Message;
+                return new SendFeedbackPayload((new UserError("ERROR: " + ex.Message, "ERROR_CODE")));
             }
         }
     }

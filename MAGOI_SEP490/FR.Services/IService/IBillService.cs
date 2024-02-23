@@ -6,6 +6,7 @@ namespace FR.Services.IService
     {
         Bill CreateBill(float totalAmount);
         List<Bill> GetBillsByDate(DateTime date);
+        Bill GetBillById(Guid billId);
         void UpdateBillFeedback(Guid billId, Guid feedbackId);
     }
 }
