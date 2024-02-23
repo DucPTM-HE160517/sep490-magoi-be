@@ -1,6 +1,7 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FR.DataAccess
 {
@@ -124,6 +125,11 @@ namespace FR.DataAccess
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        public List<Order> GetOrdersByBillId(Guid billId)
+        {
+            return _context.Orders.Where(o => o.BillId == billId).ToList();
         }
     }
 }
