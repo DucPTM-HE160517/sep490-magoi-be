@@ -68,7 +68,9 @@ builder.Services.AddScoped<FoodDAO>()
                 .AddScoped<IExpoNotificationService, ExpoNotificationService>()
                 .AddScoped<IFoodOrderService, FoodOrderService>()
                 .AddScoped<IBankService, BankService>()
-                .AddScoped<ISessionService, SessionService>();
+                .AddScoped<ISessionService, SessionService>()
+                .AddScoped<IBillService, BillService>();
+
 
 builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterDbContext<DBContext>(DbContextKind.Synchronized)
@@ -78,6 +80,7 @@ builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterService<TableStatusDAO>(ServiceKind.Synchronized)
     .RegisterService<OrderDAO>(ServiceKind.Synchronized)
     .RegisterService<FoodOrderDAO>(ServiceKind.Synchronized)
+    .RegisterService<BillDAO>(ServiceKind.Synchronized)
     .RegisterService<IFoodService>(ServiceKind.Synchronized)
     .RegisterService<IFoodCategoryService>(ServiceKind.Synchronized)
     .RegisterService<ITableService>(ServiceKind.Synchronized)
@@ -87,11 +90,12 @@ builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterService<IExpoNotificationService>(ServiceKind.Synchronized)
     .RegisterService<ISessionService>(ServiceKind.Synchronized)
     .RegisterService<IBankService>(ServiceKind.Synchronized)
+    .RegisterService<IBillService>(ServiceKind.Synchronized)
     .AddQueryType<Queries>()
     .AddMutationType<Mutation>()
     .AddSubscriptionType<Subscriptions>()
     .AddTypes(new[] { typeof(FoodType), typeof(FoodCategoryType), typeof(TableType), typeof(TableStatusType), 
-        typeof(FoodOrderType), typeof(OrderType) });
+        typeof(FoodOrderType), typeof(OrderType), typeof(BillType) });
 
 var app = builder.Build();
 

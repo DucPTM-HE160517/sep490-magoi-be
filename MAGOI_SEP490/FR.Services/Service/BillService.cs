@@ -24,5 +24,9 @@ namespace FR.Services.Service
             _dao.AddBill(bill);
             return bill;
         }
+        public List<Bill> GetBillsByDate(DateTime date)
+        {
+            return _dao.GetBillsByDate(date);
+        }
     }
 }
