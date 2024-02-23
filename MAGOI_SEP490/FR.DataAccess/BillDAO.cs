@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FR.BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -20,9 +21,16 @@ namespace FR.DataAccess
             _context.Add(bill);
             _context.SaveChanges();
         }
-        public Bill GetBillById(string billId)
+
+        public void UpdateBill(Bill bill)
         {
-            return _context.Bills.SingleOrDefault(b => b.Id == Guid.Parse(billId));
+            _context.Entry(bill).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public Bill GetBillById(Guid billId)
+        {
+            return _context.Bills.SingleOrDefault(b => b.Id == billId);
         }
         public List<Bill> GetBillsByDate(DateTime date)
         {
