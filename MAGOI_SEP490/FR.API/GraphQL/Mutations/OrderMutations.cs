@@ -53,6 +53,7 @@ namespace FR.API.GraphQL.Mutations
             }
         }
 
+        //update order status from in progress to finished
         public async Task<UpdateOrderStatusPayload> UpdateOrderStatusAsync(
             Guid orderId,
             IOrderService orderService,
@@ -70,8 +71,8 @@ namespace FR.API.GraphQL.Mutations
             
             try
             {
-                //Update order status - FR-188 - Bi lam
-
+                //Update order status
+                orderService.UpdateFinishedOrderStatus(orderId);
                 //get list of waiter devices
                 List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
 
@@ -87,6 +88,7 @@ namespace FR.API.GraphQL.Mutations
             }
         }
 
+        //finish all orders of the table and return bill
         public async Task<FinishOrderPayload> FinishOrders(List<Guid> orderIds,
             IOrderService orderService,
             ITableService tableService,

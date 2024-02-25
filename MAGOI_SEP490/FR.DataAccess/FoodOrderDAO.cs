@@ -38,5 +38,9 @@ namespace FR.DataAccess
         {
             return _context.FoodOrder.Where(f => f.OrderId == orderId).ToList();
         }
+        public FoodOrder GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
+        {
+            return _context.FoodOrder.SingleOrDefault(f => f.OrderId == orderId && f.FoodId == foodId);
+        }
     }
 }

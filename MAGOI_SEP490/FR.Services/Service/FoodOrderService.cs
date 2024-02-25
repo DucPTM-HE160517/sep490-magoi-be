@@ -52,7 +52,21 @@ namespace FR.Services.Service
             {
                 throw new Exception(e.Message);
             }
-            
+        }
+
+        public FoodOrder UpdateFinishedFoodOrderStatus(Guid orderId, int foodId)
+        {
+            try
+            {
+                FoodOrder food = _dao.GetFoodOrderByOrderIdAndFoodId(orderId, foodId);
+                food.FoodOrderStatusId = (int)FoodOrderStatusId.Cooked;
+                _dao.UpdateFoodOrder(food);
+                return food;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
