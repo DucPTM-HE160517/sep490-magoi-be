@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -21,9 +22,25 @@ namespace FR.DataAccess
             _context.FoodOrder.AddRange(foodOrders);
             _context.SaveChanges();
         }
+        public void UpdateFoodOrder(FoodOrder foodOrder)
+        {
+            try
+            {
+                _context.Entry(foodOrder).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
             return _context.FoodOrder.Where(f => f.OrderId == orderId).ToList();
+        }
+        public FoodOrder GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
+        {
+            return _context.FoodOrder.SingleOrDefault(f => f.OrderId == orderId && f.FoodId == foodId);
         }
     }
 }
