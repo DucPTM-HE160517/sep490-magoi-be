@@ -1533,25 +1533,42 @@ namespace FR.BusinessObjects.DataContext
             modelBuilder.Entity<OrderStatus>().HasData(
                 new OrderStatus
                 {
-                    Id = 1,
+                    Id = (int) OrderStatusId.InProgress,
                     Status = "In progress"
                 },
                 new OrderStatus
                 {
-                    Id = 2,
+                    Id = (int)OrderStatusId.Finished,
                     Status = "Finished"
                 }
             );
             modelBuilder.Entity<PaymentStatus>().HasData(
-                new OrderStatus
+                new PaymentStatus
                 {
-                    Id = 1,
+                    Id = (int) PaymentStatusId.Unpaid,
                     Status = "Unpaid"
                 },
-                new OrderStatus
+                new PaymentStatus
                 {
-                    Id = 2,
+                    Id = (int) PaymentStatusId.Paid,
                     Status = "Paid"
+                }
+            );
+            modelBuilder.Entity<FoodOrderStatus>().HasData(
+                new FoodOrderStatus
+                {
+                    Id = (int) FoodOrderStatusId.Uncooked,
+                    Status = "Uncooked"
+                },
+                new FoodOrderStatus
+                {
+                    Id = (int) FoodOrderStatusId.Cooking,
+                    Status = "Cooking"
+                },
+                new FoodOrderStatus
+                {
+                    Id = (int) FoodOrderStatusId.Cooked,
+                    Status = "Cooked"
                 }
             );
         }
