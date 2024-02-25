@@ -24,6 +24,7 @@ namespace FR.Services.Service
                     FoodId = foodListInput[i].foodId,
                     Quantity = foodListInput[i].quantity,
                     FoodNote = foodListInput[i].foodNote,
+                    FoodOrderStatusId = (int)FoodOrderStatusId.Cooking
                 };
                 foodOrders.Add(food);
             }
@@ -34,6 +35,24 @@ namespace FR.Services.Service
         public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
             return _dao.GetFoodOrdersByOrderId(orderId);
+        }
+
+        public void UpdateFinishedFoodOrdersStatus(Guid orderId)
+        {
+            try
+            {
+                List<FoodOrder> foods = _dao.GetFoodOrdersByOrderId(orderId);
+                foreach (FoodOrder food in foods)
+                {
+                    food.FoodOrderStatusId = (int)FoodOrderStatusId.Cooked;
+                    _dao.UpdateFoodOrder(food);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
     }
 }

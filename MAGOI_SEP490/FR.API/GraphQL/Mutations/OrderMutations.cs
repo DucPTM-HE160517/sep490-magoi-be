@@ -93,6 +93,7 @@ namespace FR.API.GraphQL.Mutations
         public async Task<FinishOrderPayload> FinishOrders(List<Guid> orderIds,
             IOrderService orderService,
             ITableService tableService,
+            IFoodOrderService foodOrderService,
             IBillService billService)
         {
             try
@@ -111,7 +112,11 @@ namespace FR.API.GraphQL.Mutations
                 {
                     orderService.UpdateFinishedOrderStatus(order.Id);
                 }
-
+                //update food status in the order to "cooked"
+                foreach (var order in orders)
+                {
+                    foodOrderService.UpdateFinishedFoodOrdersStatus(order.Id);
+                }
                 // update table status to "available"
                 tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
                 Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
