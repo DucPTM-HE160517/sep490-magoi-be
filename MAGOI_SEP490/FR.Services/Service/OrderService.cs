@@ -2,6 +2,7 @@
 using FR.DataAccess;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FR.Services.Service
 {
@@ -24,12 +25,10 @@ namespace FR.Services.Service
             _dao.AddOrder(order);
             return order;
         }
-
         public void DeleteOrder(Order order)
         {
             _dao.DeleteOrder(order);
         }
-
         public Order GetOrderById(Guid Id)
         {
             return _dao.GetOrderById(Id);
@@ -38,15 +37,39 @@ namespace FR.Services.Service
         {
             return _dao.GetOrdersByStatusId(orderStatusId);
         }
-
         public List<Order> GetOrdersByTableId(Guid tableId)
         {
             return _dao.GetOrdersByTableId(tableId);
         }
-
         public List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
         {
             return _dao.GetOrdersByTableIdAndOrderStatusId(tableId, orderStatusId);
+        }
+        public void UpdateFinishedOrderStatus(Guid orderId)
+        {
+            _dao.UpdateFinishedOrderStatus(orderId);
+        }
+        public float GetTotalPriceOfOrders(List<Order> orders)
+        {
+            float totalPrice = 0;
+
+            foreach (var order in orders)
+            {
+                totalPrice += _dao.GetTotalPriceOfOrder(order.Id);
+            }
+
+            return totalPrice;
+        }
+        public void UpdateBillIdOfOrder(Guid orderId, Guid billId)
+        {
+            Order order = _dao.GetOrderById(orderId);
+            order.BillId = billId;
+            _dao.UpdateOrder(order);
+        }
+
+        public List<Order> GetOrdersByBillId(Guid billId)
+        {
+            return _dao.GetOrdersByBillId(billId);
         }
     }
 }

@@ -7,18 +7,35 @@ using FR.DataAccess;
 using FR.Services.IService;
 using FR.Services.Service;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowAllOrigins = "_allowAllOrigins";
+var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
 // Add services to the container.
 var configBuilder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 IConfigurationRoot configuration = configBuilder.Build();
 
 builder.Services.AddDbContext<DBContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString("FRdb"));
+    var conStrBuilder = new NpgsqlConnectionStringBuilder(
+        configuration.GetConnectionString("FRdb"));
+
+    //check if the environment is development, then use the password from the environment variable
+    if (environmentName == "Production")
+    {
+        //Set connection string password from environment variable
+        //As Azure Key Vault is not free, so I will hard code the password here
+        conStrBuilder.Password = "pEUE3bGrZdHfl5xY";
+    }
+    Console.WriteLine(conStrBuilder.ConnectionString);
+
+    options.UseNpgsql(conStrBuilder.ConnectionString);
 });
 
 
@@ -42,6 +59,8 @@ builder.Services.AddScoped<FoodDAO>()
                 .AddScoped<OrderDAO>()
                 .AddScoped<FoodOrderDAO>()
                 .AddScoped<SessionDAO>()
+                .AddScoped<BillDAO>()
+                .AddScoped<FeedbackDAO>()
                 .AddScoped<IFoodService, FoodService>()
                 .AddScoped<IFoodCategoryService, FoodCategoryService>()
                 .AddScoped<ITableService, TableService>()
@@ -49,7 +68,11 @@ builder.Services.AddScoped<FoodDAO>()
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<IExpoNotificationService, ExpoNotificationService>()
                 .AddScoped<IFoodOrderService, FoodOrderService>()
-                .AddScoped<ISessionService, SessionService>();
+                .AddScoped<IBankService, BankService>()
+                .AddScoped<ISessionService, SessionService>()
+                .AddScoped<IBillService, BillService>()
+                .AddScoped<IFeedbackService, FeedbackService>();
+
 
 builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterDbContext<DBContext>(DbContextKind.Synchronized)
@@ -59,6 +82,7 @@ builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterService<TableStatusDAO>(ServiceKind.Synchronized)
     .RegisterService<OrderDAO>(ServiceKind.Synchronized)
     .RegisterService<FoodOrderDAO>(ServiceKind.Synchronized)
+    .RegisterService<BillDAO>(ServiceKind.Synchronized)
     .RegisterService<IFoodService>(ServiceKind.Synchronized)
     .RegisterService<IFoodCategoryService>(ServiceKind.Synchronized)
     .RegisterService<ITableService>(ServiceKind.Synchronized)
@@ -67,11 +91,14 @@ builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterService<IFoodOrderService>(ServiceKind.Synchronized)
     .RegisterService<IExpoNotificationService>(ServiceKind.Synchronized)
     .RegisterService<ISessionService>(ServiceKind.Synchronized)
+    .RegisterService<IBankService>(ServiceKind.Synchronized)
+    .RegisterService<IBillService>(ServiceKind.Synchronized)
+    .RegisterService<IFeedbackService>(ServiceKind.Synchronized)
     .AddQueryType<Queries>()
     .AddMutationType<Mutation>()
     .AddSubscriptionType<Subscriptions>()
     .AddTypes(new[] { typeof(FoodType), typeof(FoodCategoryType), typeof(TableType), typeof(TableStatusType), 
-        typeof(FoodOrderType), typeof(OrderType) });
+        typeof(FoodOrderType), typeof(OrderType), typeof(BillType) });
 
 var app = builder.Build();
 

@@ -20,11 +20,6 @@
   <ItemGroup>
     <None Remove="Models\ExpoNotificationModels\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\ExpoNotificationModels\" />

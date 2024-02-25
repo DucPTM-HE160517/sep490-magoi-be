@@ -8,8 +8,12 @@ namespace FR.Services.IService
         Order AddOrder(OrderInput order);
         Order GetOrderById(Guid Id);
         List<Order> GetOrdersByTableId(Guid tableId);
+        List<Order> GetOrdersByBillId(Guid billId);
         List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId);
+        void UpdateFinishedOrderStatus(Guid orderId);
         void DeleteOrder(Order order);
         List<Order> GetOrdersByOrderStatusId(int? orderStatusId);
+        public float GetTotalPriceOfOrders(List<Order> orders);
+        public void UpdateBillIdOfOrder(Guid orderId, Guid billId);
     }
 }

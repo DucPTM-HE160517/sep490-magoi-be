@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FR.BusinessObjects.Models
 {
@@ -13,8 +13,6 @@ namespace FR.BusinessObjects.Models
         public DateTime CreatedAt { get; set; }
         [ForeignKey("Bill")]
         public Guid BillId { get; set; }
-        [ForeignKey("Feedback")]
-        public Guid FeedbackId { get; set; }
         [ForeignKey("OrderStatus")]
         public int OrderStatusId { get; set; }
     }

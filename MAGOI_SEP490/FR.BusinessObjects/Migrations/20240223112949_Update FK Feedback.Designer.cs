@@ -3,6 +3,7 @@ using System;
 using FR.BusinessObjects.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FR.BusinessObjects.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240223112949_Update FK Feedback")]
+    partial class UpdateFKFeedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1345,9 +1348,6 @@ namespace FR.BusinessObjects.Migrations
                     b.Property<string>("FoodNote")
                         .HasColumnType("text");
 
-                    b.Property<int>("FoodOrderStatusId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("OrderAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -1357,40 +1357,6 @@ namespace FR.BusinessObjects.Migrations
                     b.HasKey("OrderId", "FoodId");
 
                     b.ToTable("FoodOrder");
-                });
-
-            modelBuilder.Entity("FR.BusinessObjects.Models.FoodOrderStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FoodOrderStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Status = "Uncooked"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Status = "Cooking"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Status = "Cooked"
-                        });
                 });
 
             modelBuilder.Entity("FR.BusinessObjects.Models.Labels", b =>
@@ -1673,73 +1639,73 @@ namespace FR.BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0793f977-131b-4629-86d6-65af116f4363"),
+                            Id = new Guid("3d88d676-4e50-49a0-a84c-91f78fcce9b1"),
                             Name = "Bàn 1",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("30aa2568-31b5-4e17-819c-04d852a8b90b"),
+                            Id = new Guid("ca8b6dc9-3ee6-4174-975d-bcfd6b7bf0cd"),
                             Name = "Bàn 2",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("8cf3bbe7-8eb5-45c5-8f3c-bc4603df2d75"),
+                            Id = new Guid("15cce42a-3eec-4bb3-9b60-9805aa39f15f"),
                             Name = "Bàn 3",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("e1fb4915-008e-4c09-93e2-af1020fd48f7"),
+                            Id = new Guid("39c94dd7-ae08-4c76-acb7-d173a9555154"),
                             Name = "Bàn 4",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("d5daecf5-98e0-4f43-9a98-cc3be66fee74"),
+                            Id = new Guid("be639779-30b6-401b-bb67-f70f7b82af4e"),
                             Name = "Bàn 5",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("6d11e568-5b7c-4ce3-905b-b3361b710f8f"),
+                            Id = new Guid("d7d6fb30-c4e6-48dd-89d4-4bad38e9ded9"),
                             Name = "Bàn 6",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("c7147c36-c8eb-4ede-ac5e-ee66a9cce2a4"),
+                            Id = new Guid("9f8507b9-449b-484a-84bd-5c9d7af0fdfc"),
                             Name = "Bàn 7",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("fba25d34-89bb-4527-b0ea-112f194c2f1f"),
+                            Id = new Guid("db38db78-0f8a-45b8-9c27-1cf74439aa71"),
                             Name = "Bàn 8",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("dcf92a4a-b891-4759-a628-da32469bcb34"),
+                            Id = new Guid("dd965446-ef34-4e68-a1ae-aee84c60f6c8"),
                             Name = "Bàn 9",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("b77a3f60-9eb6-49b5-a621-73c63d3784a4"),
+                            Id = new Guid("33f0c41c-daf6-400c-96c4-b69b67007c82"),
                             Name = "Bàn 10",
                             StatusId = 3
                         },
                         new
                         {
-                            Id = new Guid("8010a4d7-f975-4bb3-bd4d-a64779da239b"),
+                            Id = new Guid("12e270df-af72-4fd5-ac0f-37e13ac1f0f0"),
                             Name = "Bàn 11",
                             StatusId = 3
                         },
                         new
                         {
-                            Id = new Guid("13b13f0a-1bd1-465c-82ca-10a72fdf0383"),
+                            Id = new Guid("d09397ae-ba85-4b0c-9a17-a0a632930517"),
                             Name = "Bàn 12",
                             StatusId = 3
                         });

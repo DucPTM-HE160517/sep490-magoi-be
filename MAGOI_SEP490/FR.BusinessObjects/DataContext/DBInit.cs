@@ -1530,51 +1530,47 @@ namespace FR.BusinessObjects.DataContext
                 }
             );
 
-            //modelBuilder.Entity<Bill>().HasData(
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 10, 10),
-            //        TotalAmount = 4000000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 10, 12),
-            //        TotalAmount = 563000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 10, 19),
-            //        TotalAmount = 7020000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 11, 5),
-            //        TotalAmount = 9270000,
-            //    },
-            //    new Bill
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        CreatedAt = new DateTime(2023, 11, 15),
-            //        TotalAmount = 6000000,
-            //    }
-            //);
             modelBuilder.Entity<OrderStatus>().HasData(
                 new OrderStatus
                 {
-                    Id = 1,
+                    Id = (int) OrderStatusId.InProgress,
                     Status = "In progress"
                 },
                 new OrderStatus
                 {
-                    Id = 2,
+                    Id = (int)OrderStatusId.Finished,
                     Status = "Finished"
                 }
             );
-
+            modelBuilder.Entity<PaymentStatus>().HasData(
+                new PaymentStatus
+                {
+                    Id = (int) PaymentStatusId.Unpaid,
+                    Status = "Unpaid"
+                },
+                new PaymentStatus
+                {
+                    Id = (int) PaymentStatusId.Paid,
+                    Status = "Paid"
+                }
+            );
+            modelBuilder.Entity<FoodOrderStatus>().HasData(
+                new FoodOrderStatus
+                {
+                    Id = (int) FoodOrderStatusId.Uncooked,
+                    Status = "Uncooked"
+                },
+                new FoodOrderStatus
+                {
+                    Id = (int) FoodOrderStatusId.Cooking,
+                    Status = "Cooking"
+                },
+                new FoodOrderStatus
+                {
+                    Id = (int) FoodOrderStatusId.Cooked,
+                    Status = "Cooked"
+                }
+            );
         }
     }
 }
