@@ -10,11 +10,11 @@ namespace FR.API.GraphQL.Mutations
     public partial class Mutation
     {
         public async Task<AddOrderPayload> AddOrder(
-            [Service] ITopicEventSender eventSender, CancellationToken cancellationToken,
+            [Service] ITopicEventSender eventSender, 
             IOrderService orderService, IFoodOrderService foodOrderService,
             ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
-            List<FoodOrderInput> foodListInput)
+            List<FoodOrderInput> foodListInput, CancellationToken cancellationToken)
         {
             //check order: foods amount exceed food quantity
             if (!foodService.CheckFoodOrdersQuantity(foodListInput))
@@ -53,7 +53,10 @@ namespace FR.API.GraphQL.Mutations
             }
         }
 
-        public async Task<string> UpdateOrderStatusAsync(
+        public async Task<UpdateOrderStatusPayload> UpdateOrderStatusAsync(
+            Guid orderId,
+            IOrderService orderService,
+            ITableService tableService,
             ISessionService sessionService,
             IExpoNotificationService expoSdkClient)
         {
@@ -61,33 +64,27 @@ namespace FR.API.GraphQL.Mutations
              * 1. Chef will update the order status to "done" or update the food status to "done" (❌)
              * 2. Send notification to waiter (✅)
              */
-
-            //get list of waiter devices
-            List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
-
-            //create notification
-            var pushTicketReq = new PushTicketRequest()
+            //Get order and table
+            Order order = orderService.GetOrderById(orderId);
+            Table table = tableService.GetTable(order.TableId);
+            
+            try
             {
-                PushTo = waiterTokens,
+                //Update order status - FR-188 - Bi lam
 
-                //TODO: change table name and order number to appropriate value
-                PushTitle = $"Table {1} - Order {"FR1234"}",
-                PushBody = "There is a done food! Please serve the food to the customer!",
-            };
+                //get list of waiter devices
+                List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
 
-            //send notification to expo server
-            var result = await expoSdkClient.PushSendAsync(pushTicketReq);
+                await expoSdkClient.SendNotification(waiterTokens,
+                    $"{table.Name} - Order {orderId}",
+                    "There is a done order! Please serve the food to the customer!");
 
-            //handle error
-            if (result?.PushTicketErrors?.Count() > 0)
-            {
-                foreach (var error in result.PushTicketErrors)
-                {
-                    Console.WriteLine($"Error: {error.ErrorCode} - {error.ErrorMessage}");
-                }
+                return new UpdateOrderStatusPayload(order);
             }
-
-            return "Notification sent!";
+            catch (Exception e)
+            {
+                return new UpdateOrderStatusPayload(new UserError("ERROR: " + e.Message, "ERROR_CODE"));
+            }
         }
 
         public async Task<FinishOrderPayload> FinishOrders(List<Guid> orderIds,
