@@ -2,6 +2,7 @@
 ﻿using FR.API.GraphQL.Payload;
 using FR.BusinessObjects.Models;
 using FR.Services.IService;
+using Newtonsoft.Json;
 
 namespace FR.API.GraphQL.Mutations
 {
@@ -28,7 +29,11 @@ namespace FR.API.GraphQL.Mutations
 
                 await expoSdkClient.SendNotification(waiterTokens,
                     $"{table.Name} - Order {orderId}",
-                    "There is a done food! Please serve the food to the customer!");
+                    "There is a done food! Please serve the food to the customer!",
+                    data: JsonConvert.SerializeObject(new
+                    {
+                        type = NotificationType.FoodReady
+                    }));
                 return new UpdateFoodOrderStatusPayload(food);
             }
             catch(Exception e)

@@ -66,7 +66,7 @@ namespace FR.Services.Service
             return ticketResponse;
         }
 
-        public async Task SendNotification(List<String> receivingDeviceTokens ,String title, String body)
+        public async Task SendNotification(List<String> receivingDeviceTokens ,String title, String body, String data)
         {
             //create notification
             var pushTicketReq = new PushTicketRequest()
@@ -74,6 +74,7 @@ namespace FR.Services.Service
                 PushTo = receivingDeviceTokens,
                 PushTitle = title,
                 PushBody = body,
+                PushData = data,
             };
 
             //send notification to expo server
