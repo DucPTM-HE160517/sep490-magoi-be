@@ -1,16 +1,18 @@
-﻿using FR.API.GraphQL.Payload;
+﻿using System.Text.Json.Serialization;
+using FR.API.GraphQL.Payload;
 using FR.BusinessObjects.Models;
 using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
 using HotChocolate.Subscriptions;
+using Newtonsoft.Json;
 
 namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
         public async Task<AddOrderPayload> AddOrder(
-            [Service] ITopicEventSender eventSender, 
+            [Service] ITopicEventSender eventSender,
             IOrderService orderService, IFoodOrderService foodOrderService,
             ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
@@ -19,7 +21,8 @@ namespace FR.API.GraphQL.Mutations
             //check order: foods amount exceed food quantity
             if (!foodService.CheckFoodOrdersQuantity(foodListInput))
             {
-                return new AddOrderPayload(new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
+                return new AddOrderPayload(
+                    new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
             }
 
             //add order
@@ -68,7 +71,7 @@ namespace FR.API.GraphQL.Mutations
             //Get order and table
             Order order = orderService.GetOrderById(orderId);
             Table table = tableService.GetTable(order.TableId);
-            
+
             try
             {
                 //Update order status
@@ -78,7 +81,11 @@ namespace FR.API.GraphQL.Mutations
 
                 await expoSdkClient.SendNotification(waiterTokens,
                     $"{table.Name} - Order {orderId}",
-                    "There is a done order! Please serve the food to the customer!");
+                    "There is a done order! Please serve the food to the customer!",
+                    data: JsonConvert.SerializeObject(new
+                    {
+                        type = NotificationType.FoodReady
+                    }));
 
                 return new UpdateOrderStatusPayload(order);
             }
@@ -111,11 +118,13 @@ namespace FR.API.GraphQL.Mutations
                 {
                     orderService.UpdateFinishedOrderStatus(order.Id);
                 }
+
                 //update food status in the order to "cooked"
                 foreach (var order in orders)
                 {
                     foodOrderService.UpdateFinishedFoodOrdersStatus(order.Id);
                 }
+
                 // update table status to "available"
                 tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
                 Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
@@ -127,7 +136,7 @@ namespace FR.API.GraphQL.Mutations
 
                 return new FinishOrderPayload(orders, bill);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new FinishOrderPayload(new UserError("ERROR: " + e.Message, "ERROR_CODE"));
             }
