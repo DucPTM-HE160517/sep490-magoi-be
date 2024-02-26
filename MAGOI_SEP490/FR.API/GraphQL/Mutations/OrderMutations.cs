@@ -90,36 +90,43 @@ namespace FR.API.GraphQL.Mutations
             return "Notification sent!";
         }
 
-        public async Task<Bill> FinishOrders(List<Guid> orderIds,
+        public async Task<FinishOrderPayload> FinishOrders(List<Guid> orderIds,
             IOrderService orderService,
             ITableService tableService,
             IBillService billService)
         {
-            List<Order> orders = new List<Order>();
-
-            // get orders by orderIds
-            foreach (var orderId in orderIds)
+            try
             {
-                Order order = orderService.GetOrderById(orderId);
-                orders.Add(order);
-            }
+                List<Order> orders = new List<Order>();
 
-            // update order status to "finished"
-            foreach (var order in orders)
+                // get orders by orderIds
+                foreach (var orderId in orderIds)
+                {
+                    Order order = orderService.GetOrderById(orderId);
+                    orders.Add(order);
+                }
+
+                // update order status to "finished"
+                foreach (var order in orders)
+                {
+                    orderService.UpdateFinishedOrderStatus(order.Id);
+                }
+
+                // update table status to "available"
+                tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
+                Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
+
+                foreach (var order in orders)
+                {
+                    orderService.UpdateBillIdOfOrder(order.Id, bill.Id);
+                }
+
+                return new FinishOrderPayload(orders, bill);
+            }
+            catch(Exception e)
             {
-                orderService.UpdateFinishedOrderStatus(order.Id);
+                return new FinishOrderPayload(new UserError("ERROR: " + e.Message, "ERROR_CODE"));
             }
-
-            // update table status to "available"
-            tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
-            Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
-
-            foreach (var order in orders)
-            {
-                orderService.UpdateBillIdOfOrder(order.Id, bill.Id);
-            }
-
-            return bill;
         }
     }
 }

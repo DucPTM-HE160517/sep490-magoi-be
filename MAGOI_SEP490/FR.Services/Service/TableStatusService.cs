@@ -16,5 +16,10 @@ namespace FR.Services.Service
         {
             return _dao.GetTableStatusById(Id);
         }
+
+        public List<TableStatus> GetAllTableStatus()
+        {
+            return _dao.GetAllTableStatus();
+        }
     }
 }

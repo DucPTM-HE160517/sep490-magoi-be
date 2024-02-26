@@ -9,7 +9,7 @@ namespace FR.API.GraphQL.Types
         {
             descriptor.Description("The bill of the order");
             descriptor.Field(f => f.Id)
-                .Type<NonNullType<UuidType>>()
+                .Type<UuidType>()
                 .Name("id")
                 .Description("The ID of the bill");
             descriptor.Field(f => f.CreatedAt)
@@ -32,6 +32,16 @@ namespace FR.API.GraphQL.Types
                     var bill = context.Parent<Bill>();
                     return context.Service<ITableService>().GetTableByBillId(bill.Id);
                 });
+
+            descriptor.Field("Orders")
+                .Type<ListType<OrderType>>()
+                .Name("orders")
+                .Resolve(context =>
+                {
+                    var bill = context.Parent<Bill>();
+                    return context.Service<IOrderService>().GetOrdersByBillId(bill.Id);
+                })
+                .Description("Order list of the bill");
         }
     }
 }

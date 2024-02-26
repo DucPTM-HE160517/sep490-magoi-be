@@ -15,5 +15,10 @@ namespace FR.DataAccess
         {
             return _context.TableStatus.SingleOrDefault(s => s.Id == id);
         }
+
+        public List<TableStatus> GetAllTableStatus()
+        {
+            return _context.TableStatus.ToList();
+        }
     }
 }
