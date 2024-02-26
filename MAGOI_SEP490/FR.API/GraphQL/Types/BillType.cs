@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Services.IService;
 
 namespace FR.API.GraphQL.Types
 {
@@ -15,22 +16,22 @@ namespace FR.API.GraphQL.Types
                 .Type<DateTimeType>()
                 .Name("createdAt")
                 .Description("The date and time the bill was created");
+            descriptor.Field(f => f.FinishedAt)
+                .Type<DateTimeType>()
+                .Name("finishedAt")
+                .Description("The date and time the bill was finished");
             descriptor.Field(f => f.TotalAmount)
                 .Type<NonNullType<FloatType>>()
                 .Name("totalAmount")
                 .Description("The total amount of the bill");
-            /*            descriptor.Field("Orders")
-                            .Type<ListType<OrderType>>()
-                            .Name("orders")
-                            .Resolve(context =>
-                            {
-                                var bill = context.Parent<Bill>();
-                                return context.Service<IOrderService>().GetOrdersByBillId(bill.Id);
-                            })
-                            .Description("The orders of the bill");
-                        descriptor.Field("Foods")
-                            .Type<ListType<FoodType>>()
-                            .Name("foods")*/
+            descriptor.Field("Table")
+                .Type<TableType>()
+                .Name("table")
+                .Resolve(context =>
+                {
+                    var bill = context.Parent<Bill>();
+                    return context.Service<ITableService>().GetTableByBillId(bill.Id);
+                });
         }
     }
 }

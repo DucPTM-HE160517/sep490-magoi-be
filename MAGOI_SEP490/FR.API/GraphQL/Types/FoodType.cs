@@ -24,10 +24,10 @@ namespace FR.API.GraphQL.Types
                 .Type<StringType>()
                 .Name("imageUrl")
                 .Description("The image of the food");
-            descriptor.Field(f => f.Price)
+            descriptor.Field(f => f.UnitPrice)
                 .Type<FloatType>()
-                .Name("price")
-                .Description("The price of the food");
+                .Name("unitPrice")
+                .Description("The unit price of the food");
             descriptor.Field(f => f.Quantity)
                 .Type<IntType>()
                 .Name("quantity")

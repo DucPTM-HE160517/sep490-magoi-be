@@ -53,7 +53,7 @@ namespace FR.Services.Service
 
             foreach (var order in orders)
             {
-                totalPrice += _dao.GetTotalPriceOfOrder(order.Id);
+                totalPrice += _dao.GetTotalAmmountOfOrder(order.Id);
             }
 
             return totalPrice;

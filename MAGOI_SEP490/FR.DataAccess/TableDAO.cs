@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.DataContext;
+﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 
 namespace FR.DataAccess
@@ -11,6 +6,7 @@ namespace FR.DataAccess
     public class TableDAO
     {
         private readonly DBContext _context;
+        private readonly OrderDAO _orderDAO;
         public TableDAO(DBContext context)
         {
             _context = context;
@@ -22,22 +18,30 @@ namespace FR.DataAccess
         }
         public List<Table> GetTablesByStatusId(int tableStatusId)
         {
-            return _context.Tables.Where(t=>t.StatusId == tableStatusId).ToList();
+            return _context.Tables.Where(t => t.StatusId == tableStatusId).ToList();
         }
 
-        public Table GetTable(Guid id) {
+        public Table GetTable(Guid id)
+        {
             return _context.Tables.SingleOrDefault(table => table.Id.Equals(id));
-	    }
+        }
 
         public Table GetTableByName(string name)
         {
             return _context.Tables.FirstOrDefault(table => table.Name.Equals(name));
         }
 
-        public void UpdateTableStatus(Guid tableId, TableStatusId statusId) {
+        public void UpdateTableStatus(Guid tableId, TableStatusId statusId)
+        {
             Table table = GetTable(tableId);
             table.StatusId = (int)statusId;
             _context.SaveChanges();
-	    }
+        }
+        public Table GetTableByBillId(Guid billId)
+        {
+            Order order = _context.Orders.FirstOrDefault(o => o.BillId == billId);
+            Table table = _context.Tables.SingleOrDefault(t => t.Id == order.TableId);
+            return table;
+        }
     }
 }

@@ -96,17 +96,17 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
-        public float GetTotalPriceOfOrder(Guid orderId)
+        public float GetTotalAmmountOfOrder(Guid orderId)
         {
             try
             {
                 var foodOrders = _context.FoodOrder.Where(od => od.OrderId == orderId).ToList();
-                float totalPrice = 0;
+                float totalAmount = 0;
                 foreach (var foodOrder in foodOrders)
                 {
-                    totalPrice += _context.Foods.SingleOrDefault(f => f.Id == foodOrder.FoodId).Price * foodOrder.Quantity;
+                    totalAmount += foodOrder.UnitPrice * foodOrder.Quantity;
                 }
-                return totalPrice;
+                return totalAmount;
             }
             catch (Exception ex)
             {

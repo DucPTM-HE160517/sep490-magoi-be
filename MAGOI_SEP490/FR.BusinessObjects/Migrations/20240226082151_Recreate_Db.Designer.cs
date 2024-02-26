@@ -3,6 +3,7 @@ using System;
 using FR.BusinessObjects.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FR.BusinessObjects.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240226082151_Recreate_Db")]
+    partial class Recreate_Db
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace FR.BusinessObjects.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("FinishedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<float>("TotalAmount")
@@ -92,8 +92,8 @@ namespace FR.BusinessObjects.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<float>("UnitPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
@@ -109,7 +109,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "big-beerfest-bausages.jpg",
                             Name = "BIG BEERFEST SAUSAGES",
                             Quantity = 100,
-                            UnitPrice = 199000f
+                            UnitPrice = 199000m
                         },
                         new
                         {
@@ -120,7 +120,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "grilled-german-gausages.jpg",
                             Name = "GRILLED GERMAN SAUSAGES",
                             Quantity = 100,
-                            UnitPrice = 136000f
+                            UnitPrice = 136000m
                         },
                         new
                         {
@@ -131,7 +131,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "garlic-bread.jpg",
                             Name = "GARLIC BREAD",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -142,7 +142,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "french-fried.jpg",
                             Name = "FRENCH FRIED",
                             Quantity = 100,
-                            UnitPrice = 50000f
+                            UnitPrice = 50000m
                         },
                         new
                         {
@@ -153,7 +153,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "chicken-wings.jpg",
                             Name = "CHICKEN WINGS",
                             Quantity = 100,
-                            UnitPrice = 86000f
+                            UnitPrice = 86000m
                         },
                         new
                         {
@@ -164,7 +164,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "beer-batter-fries.jpg",
                             Name = "BEER BATTER FRIES",
                             Quantity = 100,
-                            UnitPrice = 99000f
+                            UnitPrice = 99000m
                         },
                         new
                         {
@@ -175,7 +175,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "pan-seared-foie-gras.jpg",
                             Name = "PAN SEARED FOIE-GRAS",
                             Quantity = 100,
-                            UnitPrice = 196000f
+                            UnitPrice = 196000m
                         },
                         new
                         {
@@ -186,7 +186,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "marinated-spicy-olives.jpg",
                             Name = "MARINATED SPICY OLIVES",
                             Quantity = 100,
-                            UnitPrice = 86000f
+                            UnitPrice = 86000m
                         },
                         new
                         {
@@ -197,7 +197,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "smoked-duck.jpg",
                             Name = "SMOKED DUCK",
                             Quantity = 100,
-                            UnitPrice = 155000f
+                            UnitPrice = 155000m
                         },
                         new
                         {
@@ -208,7 +208,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "beef-carpaccio.jpg",
                             Name = "BEEF CARPACCIO",
                             Quantity = 100,
-                            UnitPrice = 180000f
+                            UnitPrice = 180000m
                         },
                         new
                         {
@@ -219,7 +219,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "iberico-de-cebo.jpg",
                             Name = "IBERICO DE CEBO",
                             Quantity = 100,
-                            UnitPrice = 436000f
+                            UnitPrice = 436000m
                         },
                         new
                         {
@@ -230,7 +230,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "french-duck-rillette.jpg",
                             Name = "FRENCH DUCK RILLETTE",
                             Quantity = 100,
-                            UnitPrice = 136000f
+                            UnitPrice = 136000m
                         },
                         new
                         {
@@ -241,7 +241,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "housemade-smoked-salmon.jpg",
                             Name = "HOUSEMADE SMOKED SALMON",
                             Quantity = 100,
-                            UnitPrice = 166000f
+                            UnitPrice = 166000m
                         },
                         new
                         {
@@ -252,7 +252,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "aus-rib-eye-mb4-5.jpg",
                             Name = "AUS RIB EYE MB4/5",
                             Quantity = 100,
-                            UnitPrice = 1280000f
+                            UnitPrice = 1280000m
                         },
                         new
                         {
@@ -263,7 +263,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "aus-rib-eye-mb7-8.jpg",
                             Name = "AUS RIB EYE MB7/8",
                             Quantity = 100,
-                            UnitPrice = 660000f
+                            UnitPrice = 660000m
                         },
                         new
                         {
@@ -274,7 +274,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "aus-hanging-tender-mb3.jpg",
                             Name = "AUS HANGING TENDER MB3",
                             Quantity = 100,
-                            UnitPrice = 600000f
+                            UnitPrice = 600000m
                         },
                         new
                         {
@@ -285,7 +285,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "us-prime-rib-eye.jpg",
                             Name = "US PRIME RIB EYE",
                             Quantity = 100,
-                            UnitPrice = 960000f
+                            UnitPrice = 960000m
                         },
                         new
                         {
@@ -296,7 +296,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "aus-black-angus-t-bone.jpg",
                             Name = "AUS BLACK ANGUS T-BONE",
                             Quantity = 100,
-                            UnitPrice = 1160000f
+                            UnitPrice = 1160000m
                         },
                         new
                         {
@@ -307,7 +307,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "us-tenderloin.jpg",
                             Name = "US TENDERLOIN",
                             Quantity = 100,
-                            UnitPrice = 560000f
+                            UnitPrice = 560000m
                         },
                         new
                         {
@@ -318,7 +318,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "us-rib-eye.jpg",
                             Name = "US RIB EYE",
                             Quantity = 100,
-                            UnitPrice = 596000f
+                            UnitPrice = 596000m
                         },
                         new
                         {
@@ -329,7 +329,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "us-striploin.jpg",
                             Name = "US STRIPLOIN",
                             Quantity = 100,
-                            UnitPrice = 386000f
+                            UnitPrice = 386000m
                         },
                         new
                         {
@@ -340,7 +340,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "canada-tenderloin.jpg",
                             Name = "CANADA TENDERLOIN",
                             Quantity = 100,
-                            UnitPrice = 386000f
+                            UnitPrice = 386000m
                         },
                         new
                         {
@@ -351,7 +351,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "aus-rib-eye.jpg",
                             Name = "AUS RIB EYE",
                             Quantity = 100,
-                            UnitPrice = 246000f
+                            UnitPrice = 246000m
                         },
                         new
                         {
@@ -362,7 +362,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "mashed-potato.jpg",
                             Name = "MASHED POTATO",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -373,7 +373,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "saute-mushroom.jpg",
                             Name = "SAUTÉ MUSHROOM",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -384,7 +384,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "roasted-baby-potato.jpg",
                             Name = "ROASTED BABY POTATO",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -395,7 +395,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "roasted-lamb-leg-2kg.jpg",
                             Name = "ROASTED LAMB LEG 2KG",
                             Quantity = 50,
-                            UnitPrice = 2600000f
+                            UnitPrice = 2600000m
                         },
                         new
                         {
@@ -406,7 +406,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "herbs-crusted-aus-lamb-rack.jpg",
                             Name = "HERBS CRUSTED AUS LAMB RACK",
                             Quantity = 50,
-                            UnitPrice = 580000f
+                            UnitPrice = 580000m
                         },
                         new
                         {
@@ -417,7 +417,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "duck-confit.jpg",
                             Name = "DUCK CONFIT",
                             Quantity = 100,
-                            UnitPrice = 246000f
+                            UnitPrice = 246000m
                         },
                         new
                         {
@@ -428,7 +428,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "grilled-pork-rib-bbq.jpg",
                             Name = "GRILLED PORK RIB BBQ",
                             Quantity = 100,
-                            UnitPrice = 660000f
+                            UnitPrice = 660000m
                         },
                         new
                         {
@@ -439,7 +439,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "tuna-steak.jpg",
                             Name = "TUNA STEAK",
                             Quantity = 50,
-                            UnitPrice = 166000f
+                            UnitPrice = 166000m
                         },
                         new
                         {
@@ -450,7 +450,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "seared-salmon-fillet.jpg",
                             Name = "SEARED SALMON FILLET",
                             Quantity = 50,
-                            UnitPrice = 226000f
+                            UnitPrice = 226000m
                         },
                         new
                         {
@@ -461,7 +461,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "smoked-salmon-salad.jpg",
                             Name = "SMOKED SALMON SALAD",
                             Quantity = 100,
-                            UnitPrice = 166000f
+                            UnitPrice = 166000m
                         },
                         new
                         {
@@ -472,7 +472,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "mix-green-salad.jpg",
                             Name = "MIX GREEN SALAD",
                             Quantity = 100,
-                            UnitPrice = 66000f
+                            UnitPrice = 66000m
                         },
                         new
                         {
@@ -483,7 +483,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "tropical-fruit-salad.jpg",
                             Name = "TROPICAL FRUIT SALAD",
                             Quantity = 100,
-                            UnitPrice = 80000f
+                            UnitPrice = 80000m
                         },
                         new
                         {
@@ -494,7 +494,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "orange-salad-with-smoke-duck.jpg",
                             Name = "ORANGE SALAD WITH SMOKE DUCK",
                             Quantity = 100,
-                            UnitPrice = 106000f
+                            UnitPrice = 106000m
                         },
                         new
                         {
@@ -505,7 +505,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "ocean-seaweed-salad.jpg",
                             Name = "OCEAN SEAWEED SALAD",
                             Quantity = 100,
-                            UnitPrice = 98000f
+                            UnitPrice = 98000m
                         },
                         new
                         {
@@ -516,7 +516,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "caesar-salad.jpg",
                             Name = "CAESAR SALAD",
                             Quantity = 100,
-                            UnitPrice = 86000f
+                            UnitPrice = 86000m
                         },
                         new
                         {
@@ -527,7 +527,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "nicoise-salad.jpg",
                             Name = "NICOISE SALAD",
                             Quantity = 100,
-                            UnitPrice = 126000f
+                            UnitPrice = 126000m
                         },
                         new
                         {
@@ -538,7 +538,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "creamy-mushroom-soup.jpg",
                             Name = "CREAMY MUSHROOM SOUP",
                             Quantity = 100,
-                            UnitPrice = 80000f
+                            UnitPrice = 80000m
                         },
                         new
                         {
@@ -549,7 +549,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "creamy-pumpkin-soup.jpg",
                             Name = "CREAMY PUMPKIN SOUP",
                             Quantity = 100,
-                            UnitPrice = 60000f
+                            UnitPrice = 60000m
                         },
                         new
                         {
@@ -560,7 +560,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "red-wine-sauce.jpg",
                             Name = "RED WINE SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -571,7 +571,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "pepper-sauce.jpg",
                             Name = "PEPPER SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -582,7 +582,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "mushroom-sauce.jpg",
                             Name = "MUSHROOM SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -593,7 +593,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "garlic-butter-sauce.jpg",
                             Name = "GARLIC BUTTER SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -604,7 +604,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "mustard-sauce.jpg",
                             Name = "MUSTARD SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -615,7 +615,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "bbq-sauce.jpg",
                             Name = "BBQ SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -626,7 +626,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "creamy-blue-cheese-sauce.jpg",
                             Name = "CREAMY BLUE CHEESE SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -637,7 +637,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "teriyaki-sauce.jpg",
                             Name = "TERIYAKI SAUCE",
                             Quantity = 100,
-                            UnitPrice = 25000f
+                            UnitPrice = 25000m
                         },
                         new
                         {
@@ -648,7 +648,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "coca-cola.jpg",
                             Name = "COCA COLA",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -659,7 +659,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "tapid-water.jpg",
                             Name = "TAPID WATER",
                             Quantity = 100,
-                            UnitPrice = 20000f
+                            UnitPrice = 20000m
                         },
                         new
                         {
@@ -670,7 +670,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "sinh-to-dua-hau.jpg",
                             Name = "SINH TỐ DƯA HẤU",
                             Quantity = 100,
-                            UnitPrice = 50000f
+                            UnitPrice = 50000m
                         },
                         new
                         {
@@ -681,7 +681,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "fanta.jpg",
                             Name = "FANTA",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -692,7 +692,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "sprite.jpg",
                             Name = "SPRITE",
                             Quantity = 100,
-                            UnitPrice = 30000f
+                            UnitPrice = 30000m
                         },
                         new
                         {
@@ -703,7 +703,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "barola.jpg",
                             Name = "BAROLA",
                             Quantity = 20,
-                            UnitPrice = 1200000f
+                            UnitPrice = 1200000m
                         },
                         new
                         {
@@ -714,7 +714,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "chateau-leoville-poyferre.jpg",
                             Name = "CHATEAU LEOVILLE POYFERRE",
                             Quantity = 20,
-                            UnitPrice = 1400000f
+                            UnitPrice = 1400000m
                         },
                         new
                         {
@@ -725,7 +725,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "malbec.jpg",
                             Name = "MALBEC",
                             Quantity = 20,
-                            UnitPrice = 1700000f
+                            UnitPrice = 1700000m
                         },
                         new
                         {
@@ -736,7 +736,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "ginger-cream-brulee.jpg",
                             Name = "GINGER CREAM BRULEE",
                             Quantity = 100,
-                            UnitPrice = 46000f
+                            UnitPrice = 46000m
                         },
                         new
                         {
@@ -747,7 +747,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "warm-chocolate-lava-cake.jpg",
                             Name = "WARM CHOCOLATE LAVA CAKE",
                             Quantity = 100,
-                            UnitPrice = 50000f
+                            UnitPrice = 50000m
                         },
                         new
                         {
@@ -758,7 +758,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "seasonal-fresh-fruit-plater.jpg",
                             Name = "SEASONAL FRESH FRUIT PLATER",
                             Quantity = 100,
-                            UnitPrice = 135000f
+                            UnitPrice = 135000m
                         },
                         new
                         {
@@ -769,7 +769,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "pandan-panna-cotta.jpg",
                             Name = "PANDAN PANNA-COTTA",
                             Quantity = 100,
-                            UnitPrice = 35000f
+                            UnitPrice = 35000m
                         },
                         new
                         {
@@ -780,7 +780,7 @@ namespace FR.BusinessObjects.Migrations
                             ImageUrl = "ice-cream-haagen-dazs.jpg",
                             Name = "ICE CREAM HAAGEN DAZS",
                             Quantity = 100,
-                            UnitPrice = 88000f
+                            UnitPrice = 88000m
                         });
                 });
 
@@ -1345,8 +1345,8 @@ namespace FR.BusinessObjects.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<float>("UnitPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric");
 
                     b.HasKey("OrderId", "FoodId");
 
@@ -1617,73 +1617,73 @@ namespace FR.BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e1512685-252a-434c-a278-3a273ef3e6ff"),
+                            Id = new Guid("dc1f9c91-c02e-49ca-b981-66f47e56a9c0"),
                             Name = "Bàn 1",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("2812da51-8439-46ee-b2a8-28bf1e52d490"),
+                            Id = new Guid("9df75cff-bfd0-45df-b28b-78de1f827eef"),
                             Name = "Bàn 2",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("bf0afa94-6029-4cf9-bab4-f8a80e00fc8a"),
+                            Id = new Guid("def84d11-da7c-412b-b8f6-4dfe132a12a2"),
                             Name = "Bàn 3",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("52560ff3-0b3f-4949-9650-031a7f4f6385"),
+                            Id = new Guid("a9e3e989-a36e-44c5-8e40-e9d24345ec66"),
                             Name = "Bàn 4",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("f903b44f-a032-4286-b116-836ff797d284"),
+                            Id = new Guid("4beee0ac-18b6-4eec-b521-e2433044046b"),
                             Name = "Bàn 5",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("6edbc5b6-0f43-45f2-acc1-a25d87d591f3"),
+                            Id = new Guid("afaaeee4-5d7c-4a37-8187-647af02d248b"),
                             Name = "Bàn 6",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("f922cb57-df11-4a71-a08c-a7d2e9db2190"),
+                            Id = new Guid("363e7ff3-7126-4772-8756-afa4a9a4bd01"),
                             Name = "Bàn 7",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("fbf5921d-17d5-49e5-8c43-feef75c5a981"),
+                            Id = new Guid("f5aa4b91-331c-4610-a963-094fe2bcc7f5"),
                             Name = "Bàn 8",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("139cdcde-74fe-404d-bbbd-8b3ae469c253"),
+                            Id = new Guid("2fb2cc6f-4a2f-46f1-9701-585d4fe081d3"),
                             Name = "Bàn 9",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("203f2da9-6e50-459e-b4b9-7b691cd1dfbb"),
+                            Id = new Guid("62cd3110-4c23-4805-a873-ca31e19165a8"),
                             Name = "Bàn 10",
                             StatusId = 3
                         },
                         new
                         {
-                            Id = new Guid("8ba82885-56c2-46a9-a3fc-7e3acd084b4f"),
+                            Id = new Guid("b0844d6d-0b62-4289-839b-4e0d03ef33b2"),
                             Name = "Bàn 11",
                             StatusId = 3
                         },
                         new
                         {
-                            Id = new Guid("55804cff-98a7-464b-abf3-524cb189cb3c"),
+                            Id = new Guid("560c8bd9-8359-4cd4-a785-a775681c422c"),
                             Name = "Bàn 12",
                             StatusId = 3
                         });

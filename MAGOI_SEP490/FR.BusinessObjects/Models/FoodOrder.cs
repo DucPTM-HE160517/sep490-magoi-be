@@ -9,6 +9,7 @@ namespace FR.BusinessObjects.Models
         [ForeignKey("Food")]
         public int FoodId { get; set; }
         public int Quantity { get; set; }
+        public float UnitPrice { get; set; }
         public string? FoodNote { get; set; }
         public DateTime OrderAt { get; set; }
     }

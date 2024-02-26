@@ -1,6 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
-using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
 
 namespace FR.Services.Service
@@ -18,13 +17,15 @@ namespace FR.Services.Service
             return _dao.GetTables();
         }
 
-        public Table GetTable(Guid id) {
+        public Table GetTable(Guid id)
+        {
             return _dao.GetTable(id);
-	    }
+        }
 
-        public void UpdateTableStatus(Guid tableId, TableStatusId statusId) {
+        public void UpdateTableStatus(Guid tableId, TableStatusId statusId)
+        {
             _dao.UpdateTableStatus(tableId, statusId);
-	    }
+        }
 
         public void UpdateTableStatusWhenCreateOrder(Guid tableId)
         {
@@ -43,6 +44,11 @@ namespace FR.Services.Service
         public List<Table> GetTablesByStatusId(int tableStatusId)
         {
             return _dao.GetTablesByStatusId(tableStatusId);
+        }
+
+        public Table GetTableByBillId(Guid billId)
+        {
+            return _dao.GetTableByBillId(billId);
         }
     }
 }

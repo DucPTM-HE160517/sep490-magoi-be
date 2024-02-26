@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Npgsql;
 
 namespace FR.BusinessObjects.DataContext
 {
@@ -24,12 +14,12 @@ namespace FR.BusinessObjects.DataContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // var builder = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            // IConfigurationRoot configuration = builder.Build();
-            //
-            // optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            //IConfigurationRoot configuration = builder.Build();
+
+            //optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
             optionsBuilder.EnableSensitiveDataLogging();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
@@ -50,7 +40,7 @@ namespace FR.BusinessObjects.DataContext
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
             optionsBuilder.Entity<FoodOrder>()
-                .HasKey(t => new {t.OrderId, t.FoodId});
+                .HasKey(t => new { t.OrderId, t.FoodId });
             optionsBuilder.Entity<FoodLabels>()
                 .HasKey(t => new { t.FoodId, t.LabelId });
 
