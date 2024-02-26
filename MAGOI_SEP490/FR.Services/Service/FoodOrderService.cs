@@ -48,7 +48,7 @@ namespace FR.Services.Service
                     _dao.UpdateFoodOrder(food);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

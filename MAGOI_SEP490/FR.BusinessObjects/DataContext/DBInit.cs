@@ -1553,18 +1553,6 @@ namespace FR.BusinessObjects.DataContext
                 }
             );
 
-            modelBuilder.Entity<PaymentStatus>().HasData(
-                new PaymentStatus
-                {
-                    Id = (int)PaymentStatusId.Unpaid,
-                    Status = "Unpaid"
-                },
-                new PaymentStatus
-                {
-                    Id = (int)PaymentStatusId.Paid,
-                    Status = "Paid"
-                }
-            );
             modelBuilder.Entity<FoodOrderStatus>().HasData(
                 new FoodOrderStatus
                 {

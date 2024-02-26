@@ -2,7 +2,6 @@
 using FR.DataAccess;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FR.Services.Service
 {
@@ -70,6 +69,11 @@ namespace FR.Services.Service
         public List<Order> GetOrdersByBillId(Guid billId)
         {
             return _dao.GetOrdersByBillId(billId);
+        }
+
+        public List<Order> GetServedOrdersByTableId(Guid tableId)
+        {
+            return _dao.GetServedOrdersByTableId(tableId);
         }
     }
 }

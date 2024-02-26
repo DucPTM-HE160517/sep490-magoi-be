@@ -43,7 +43,20 @@ namespace FR.Services.Service
                 bill.FeedbackId = feedbackId;
                 _dao.UpdateBill(bill);
             }
-            catch(Exception e)
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void UpdateBillFinishedTime(Bill bill, DateTime finishedAt)
+        {
+            try
+            {
+                bill.FinishedAt = DateTime.Now;
+                _dao.UpdateBill(bill);
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

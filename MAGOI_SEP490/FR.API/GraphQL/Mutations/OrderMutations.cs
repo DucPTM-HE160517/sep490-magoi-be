@@ -1,7 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using FR.API.GraphQL.Payload;
+﻿using FR.API.GraphQL.Payload;
 using FR.BusinessObjects.Models;
-using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
 using HotChocolate.Subscriptions;
@@ -96,7 +94,7 @@ namespace FR.API.GraphQL.Mutations
         }
 
         //finish all orders of the table and return bill
-        public async Task<FinishOrderPayload> FinishOrders(List<Guid> orderIds,
+        public async Task<FinishOrderPayload> FinishOrders(Guid tableId, DateTime finishedAt,
             IOrderService orderService,
             ITableService tableService,
             IFoodOrderService foodOrderService,
@@ -106,12 +104,8 @@ namespace FR.API.GraphQL.Mutations
             {
                 List<Order> orders = new List<Order>();
 
-                // get orders by orderIds
-                foreach (var orderId in orderIds)
-                {
-                    Order order = orderService.GetOrderById(orderId);
-                    orders.Add(order);
-                }
+                // get served orders by tableId 
+                orders = orderService.GetServedOrdersByTableId(tableId);
 
                 // update order status to "finished"
                 foreach (var order in orders)
@@ -129,10 +123,14 @@ namespace FR.API.GraphQL.Mutations
                 tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
                 Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
 
+
                 foreach (var order in orders)
                 {
                     orderService.UpdateBillIdOfOrder(order.Id, bill.Id);
                 }
+
+                // update finished time of the bill
+                billService.UpdateBillFinishedTime(bill, finishedAt);
 
                 return new FinishOrderPayload(orders, bill);
             }
