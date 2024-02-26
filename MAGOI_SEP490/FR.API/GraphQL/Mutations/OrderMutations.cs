@@ -1,25 +1,28 @@
-﻿using FR.API.GraphQL.Payload;
+﻿using System.Text.Json.Serialization;
+using FR.API.GraphQL.Payload;
 using FR.BusinessObjects.Models;
 using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.GraphQL.InputTypes;
 using FR.Services.IService;
 using HotChocolate.Subscriptions;
+using Newtonsoft.Json;
 
 namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
         public async Task<AddOrderPayload> AddOrder(
-            [Service] ITopicEventSender eventSender, CancellationToken cancellationToken,
+            [Service] ITopicEventSender eventSender,
             IOrderService orderService, IFoodOrderService foodOrderService,
             ITableService tableService, IFoodService foodService,
             OrderInput orderInput,
-            List<FoodOrderInput> foodListInput)
+            List<FoodOrderInput> foodListInput, CancellationToken cancellationToken)
         {
             //check order: foods amount exceed food quantity
             if (!foodService.CheckFoodOrdersQuantity(foodListInput))
             {
-                return new AddOrderPayload(new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
+                return new AddOrderPayload(
+                    new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));
             }
 
             //add order
@@ -53,7 +56,11 @@ namespace FR.API.GraphQL.Mutations
             }
         }
 
-        public async Task<string> UpdateOrderStatusAsync(
+        //update order status from in progress to finished
+        public async Task<UpdateOrderStatusPayload> UpdateOrderStatusAsync(
+            Guid orderId,
+            IOrderService orderService,
+            ITableService tableService,
             ISessionService sessionService,
             IExpoNotificationService expoSdkClient)
         {
@@ -61,38 +68,38 @@ namespace FR.API.GraphQL.Mutations
              * 1. Chef will update the order status to "done" or update the food status to "done" (❌)
              * 2. Send notification to waiter (✅)
              */
+            //Get order and table
+            Order order = orderService.GetOrderById(orderId);
+            Table table = tableService.GetTable(order.TableId);
 
-            //get list of waiter devices
-            List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
-
-            //create notification
-            var pushTicketReq = new PushTicketRequest()
+            try
             {
-                PushTo = waiterTokens,
+                //Update order status
+                orderService.UpdateFinishedOrderStatus(orderId);
+                //get list of waiter devices
+                List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
 
-                //TODO: change table name and order number to appropriate value
-                PushTitle = $"Table {1} - Order {"FR1234"}",
-                PushBody = "There is a done food! Please serve the food to the customer!",
-            };
+                await expoSdkClient.SendNotification(waiterTokens,
+                    $"{table.Name} - Order {orderId}",
+                    "There is a done order! Please serve the food to the customer!",
+                    data: JsonConvert.SerializeObject(new
+                    {
+                        type = NotificationType.FoodReady
+                    }));
 
-            //send notification to expo server
-            var result = await expoSdkClient.PushSendAsync(pushTicketReq);
-
-            //handle error
-            if (result?.PushTicketErrors?.Count() > 0)
-            {
-                foreach (var error in result.PushTicketErrors)
-                {
-                    Console.WriteLine($"Error: {error.ErrorCode} - {error.ErrorMessage}");
-                }
+                return new UpdateOrderStatusPayload(order);
             }
-
-            return "Notification sent!";
+            catch (Exception e)
+            {
+                return new UpdateOrderStatusPayload(new UserError("ERROR: " + e.Message, "ERROR_CODE"));
+            }
         }
 
+        //finish all orders of the table and return bill
         public async Task<FinishOrderPayload> FinishOrders(List<Guid> orderIds,
             IOrderService orderService,
             ITableService tableService,
+            IFoodOrderService foodOrderService,
             IBillService billService)
         {
             try
@@ -112,6 +119,12 @@ namespace FR.API.GraphQL.Mutations
                     orderService.UpdateFinishedOrderStatus(order.Id);
                 }
 
+                //update food status in the order to "cooked"
+                foreach (var order in orders)
+                {
+                    foodOrderService.UpdateFinishedFoodOrdersStatus(order.Id);
+                }
+
                 // update table status to "available"
                 tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
                 Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
@@ -123,7 +136,7 @@ namespace FR.API.GraphQL.Mutations
 
                 return new FinishOrderPayload(orders, bill);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new FinishOrderPayload(new UserError("ERROR: " + e.Message, "ERROR_CODE"));
             }

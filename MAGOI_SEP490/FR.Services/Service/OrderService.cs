@@ -19,7 +19,8 @@ namespace FR.Services.Service
             var order = new Order
             {
                 TableId = orderInput.tableId,
-                CreatedAt = orderInput.createdAt
+                CreatedAt = orderInput.createdAt,
+                OrderStatusId = (int)OrderStatusId.InProgress
             };
             _dao.AddOrder(order);
             return order;

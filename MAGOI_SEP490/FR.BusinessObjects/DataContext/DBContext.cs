@@ -31,9 +31,11 @@ namespace FR.BusinessObjects.DataContext
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<PaymentStatus> PaymentStatuses { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<TableStatus> TableStatus { get; set; }
         public virtual DbSet<FoodOrder> FoodOrder { get; set; }
+        public virtual DbSet<FoodOrderStatus> FoodOrderStatus { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
 

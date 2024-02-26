@@ -7,8 +7,12 @@ namespace FR.BusinessObjects.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column(TypeName = "uuid")]
         public Guid Id { get; set; }
+        [ForeignKey("PaymentStatus")]
+        public int PaymentStatusId { get; set; }
         public float TotalAmount { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? FinishedAt { get; set; }
+        [ForeignKey("Feedback")]
+        public Guid FeedbackId { get; set; }
     }
 }

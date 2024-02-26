@@ -33,6 +33,10 @@ namespace FR.API.GraphQL.Types
                     return context.Service<ITableService>().GetTableByBillId(bill.Id);
                 });
 
+            descriptor.Field(f => f.FeedbackId)
+                .Type<UuidType>()
+                .Name("feedbackId")
+                .Description("Id of order's feedback");
             descriptor.Field("Orders")
                 .Type<ListType<OrderType>>()
                 .Name("orders")

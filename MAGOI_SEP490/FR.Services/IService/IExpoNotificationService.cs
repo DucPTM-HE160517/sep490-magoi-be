@@ -9,6 +9,7 @@ namespace FR.Services.IService
         public Task<PushTicketResponse> PushSendAsync(PushTicketRequest pushTicketRequest);
         public Task<PushReceiptResponse> PushGetReceiptsAsync(PushReceiptRequest pushReceiptRequest);
         public Task<U> PostAsync<T, U>(T requestObj, string path) where T : new();
+        public Task SendNotification(List<String> receivingDeviceTokens, String title, String body, String data);
     }
 }
 
