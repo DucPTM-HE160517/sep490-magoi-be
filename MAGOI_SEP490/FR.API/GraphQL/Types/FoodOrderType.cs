@@ -37,7 +37,7 @@ namespace FR.API.GraphQL.Types
                 .Type<DateTimeType>()
                 .Name("orderAt")
                 .Description("Time of the food when being added to order");
-            descriptor.Field("Unit Price")
+            descriptor.Field("UnitPrice")
                 .Type<FloatType>()
                 .Name("unitPrice")
                 .Resolve(context =>
