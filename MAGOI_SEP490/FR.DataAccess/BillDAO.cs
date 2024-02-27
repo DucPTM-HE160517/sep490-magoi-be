@@ -1,9 +1,4 @@
 ﻿using FR.BusinessObjects.DataContext;
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +27,7 @@ namespace FR.DataAccess
         {
             return _context.Bills.SingleOrDefault(b => b.Id == billId);
         }
+
         public List<Bill> GetBillsByDate(DateTime date)
         {
             List<Bill> list = new List<Bill>();

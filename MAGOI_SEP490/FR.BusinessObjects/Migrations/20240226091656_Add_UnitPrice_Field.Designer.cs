@@ -3,6 +3,7 @@ using System;
 using FR.BusinessObjects.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FR.BusinessObjects.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240226091656_Add_UnitPrice_Field")]
+    partial class Add_UnitPrice_Field
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +34,6 @@ namespace FR.BusinessObjects.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("FeedbackId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime?>("FinishedAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -49,9 +49,6 @@ namespace FR.BusinessObjects.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("BillId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Comment")
@@ -1345,9 +1342,6 @@ namespace FR.BusinessObjects.Migrations
                     b.Property<string>("FoodNote")
                         .HasColumnType("text");
 
-                    b.Property<int>("FoodOrderStatusId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("OrderAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -1360,40 +1354,6 @@ namespace FR.BusinessObjects.Migrations
                     b.HasKey("OrderId", "FoodId");
 
                     b.ToTable("FoodOrder");
-                });
-
-            modelBuilder.Entity("FR.BusinessObjects.Models.FoodOrderStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FoodOrderStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Status = "Uncooked"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Status = "Cooking"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Status = "Cooked"
-                        });
                 });
 
             modelBuilder.Entity("FR.BusinessObjects.Models.Labels", b =>
@@ -1572,6 +1532,9 @@ namespace FR.BusinessObjects.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("FeedbackId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("OrderStatusId")
                         .HasColumnType("integer");
 
@@ -1657,73 +1620,73 @@ namespace FR.BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9f28c3c9-4bab-4584-9697-b51ef066106b"),
+                            Id = new Guid("e1512685-252a-434c-a278-3a273ef3e6ff"),
                             Name = "Bàn 1",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("6b42018b-54ef-4e1f-84df-ab3fb0f78521"),
+                            Id = new Guid("2812da51-8439-46ee-b2a8-28bf1e52d490"),
                             Name = "Bàn 2",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("4ccdaa01-decd-41fe-a798-1126d7f01c7f"),
+                            Id = new Guid("bf0afa94-6029-4cf9-bab4-f8a80e00fc8a"),
                             Name = "Bàn 3",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("a1d2a590-5236-459c-8904-a824342b4fca"),
+                            Id = new Guid("52560ff3-0b3f-4949-9650-031a7f4f6385"),
                             Name = "Bàn 4",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("1c5f6393-419e-4fc1-a20d-2c7d6f0bb067"),
+                            Id = new Guid("f903b44f-a032-4286-b116-836ff797d284"),
                             Name = "Bàn 5",
                             StatusId = 2
                         },
                         new
                         {
-                            Id = new Guid("1021df0d-627e-494b-8c70-b109b15fb375"),
+                            Id = new Guid("6edbc5b6-0f43-45f2-acc1-a25d87d591f3"),
                             Name = "Bàn 6",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("eb4b56a5-dff1-46ba-8961-cdb1b47e3fc3"),
+                            Id = new Guid("f922cb57-df11-4a71-a08c-a7d2e9db2190"),
                             Name = "Bàn 7",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("fea7e273-e765-4db5-bed3-c796ce8c3c2e"),
+                            Id = new Guid("fbf5921d-17d5-49e5-8c43-feef75c5a981"),
                             Name = "Bàn 8",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("fa38f24f-ad19-4b3e-89bc-3eccce09f52e"),
+                            Id = new Guid("139cdcde-74fe-404d-bbbd-8b3ae469c253"),
                             Name = "Bàn 9",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("4fd6ffaa-d2de-42b5-95fb-a4fc382e5eba"),
+                            Id = new Guid("203f2da9-6e50-459e-b4b9-7b691cd1dfbb"),
                             Name = "Bàn 10",
                             StatusId = 3
                         },
                         new
                         {
-                            Id = new Guid("36d17cbf-87d0-4c3c-a38e-69773f2b2e6a"),
+                            Id = new Guid("8ba82885-56c2-46a9-a3fc-7e3acd084b4f"),
                             Name = "Bàn 11",
                             StatusId = 3
                         },
                         new
                         {
-                            Id = new Guid("1bc47b16-6f65-4d4d-a4e1-5df20b899ea7"),
+                            Id = new Guid("55804cff-98a7-464b-abf3-524cb189cb3c"),
                             Name = "Bàn 12",
                             StatusId = 3
                         });

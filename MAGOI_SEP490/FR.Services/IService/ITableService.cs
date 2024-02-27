@@ -8,6 +8,7 @@ namespace FR.Services.IService
         List<Table> GetTablesByStatusId(int tableStatusId);
         Table GetTable(Guid id);
         Table GetTableByName(string name);
+        Table GetTableByBillId(Guid billId);
         void UpdateTableStatus(Guid tableId, TableStatusId statusId);
         void UpdateTableStatusWhenCreateOrder(Guid tableId);
     }

@@ -10,7 +10,7 @@ namespace FR.BusinessObjects.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public float Price { get; set; }
+        public float UnitPrice { get; set; }
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; }
         [ForeignKey("FoodCategory")]

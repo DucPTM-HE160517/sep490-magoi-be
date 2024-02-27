@@ -16,10 +16,23 @@ namespace FR.API.GraphQL.Types
                 .Type<DateTimeType>()
                 .Name("createdAt")
                 .Description("The date and time the bill was created");
+            descriptor.Field(f => f.FinishedAt)
+                .Type<DateTimeType>()
+                .Name("finishedAt")
+                .Description("The date and time the bill was finished");
             descriptor.Field(f => f.TotalAmount)
                 .Type<NonNullType<FloatType>>()
                 .Name("totalAmount")
                 .Description("The total amount of the bill");
+            descriptor.Field("Table")
+                .Type<TableType>()
+                .Name("table")
+                .Resolve(context =>
+                {
+                    var bill = context.Parent<Bill>();
+                    return context.Service<ITableService>().GetTableByBillId(bill.Id);
+                });
+
             descriptor.Field(f => f.FeedbackId)
                 .Type<UuidType>()
                 .Name("feedbackId")

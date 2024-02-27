@@ -28,24 +28,24 @@ namespace FR.API.GraphQL.Types
             descriptor.Field(f => f.Quantity)
                 .Type<IntType>()
                 .Name("quantity")
-                .Description("Quantity of the food in the order"); 
+                .Description("Quantity of the food in the order");
             descriptor.Field(f => f.FoodNote)
                 .Type<StringType>()
                 .Name("note")
-                .Description("Note the food in this order"); 
+                .Description("Note the food in this order");
             descriptor.Field(f => f.OrderAt)
                 .Type<DateTimeType>()
                 .Name("orderAt")
                 .Description("Time of the food when being added to order");
-            descriptor.Field("Price")
+            descriptor.Field("Unit Price")
                 .Type<FloatType>()
-                .Name("price")
+                .Name("unitPrice")
                 .Resolve(context =>
                 {
                     var foodOrder = context.Parent<FoodOrder>();
-                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).Price;
+                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).UnitPrice;
                 })
-                .Description("Price of the food in the order");
+                .Description("Unit price of the food in the order");
         }
     }
 }
