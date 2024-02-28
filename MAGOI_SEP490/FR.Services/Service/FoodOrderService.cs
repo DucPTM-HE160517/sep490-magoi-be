@@ -37,14 +37,14 @@ namespace FR.Services.Service
             return _dao.GetFoodOrdersByOrderId(orderId);
         }
 
-        public void UpdateFinishedFoodOrdersStatus(Guid orderId)
+        public void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId)
         {
             try
             {
                 List<FoodOrder> foods = _dao.GetFoodOrdersByOrderId(orderId);
                 foreach (FoodOrder food in foods)
                 {
-                    food.FoodOrderStatusId = (int)FoodOrderStatusId.Cooked;
+                    food.FoodOrderStatusId = foodOrderStatusId;
                     _dao.UpdateFoodOrder(food);
                 }
             }
@@ -54,12 +54,12 @@ namespace FR.Services.Service
             }
         }
 
-        public FoodOrder UpdateFinishedFoodOrderStatus(Guid orderId, int foodId)
+        public FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId)
         {
             try
             {
                 FoodOrder food = _dao.GetFoodOrderByOrderIdAndFoodId(orderId, foodId);
-                food.FoodOrderStatusId = (int)FoodOrderStatusId.Cooked;
+                food.FoodOrderStatusId = foodOrderStatusId;
                 _dao.UpdateFoodOrder(food);
                 return food;
             }

@@ -21,15 +21,11 @@ namespace FR.API.GraphQL.Queries
                     return new List<Table>();
             }
         }
-        public Table GetTable(ITableService service, Guid? id = null, string? name = null)
+        public Table GetTable(ITableService service, Guid? id = null)
         {
             if(id.HasValue)
             {
                 return service.GetTable(id.Value);
-            }
-            else if (!String.IsNullOrEmpty(name))
-            {
-                return service.GetTableByName(name);
             }
             else
             {

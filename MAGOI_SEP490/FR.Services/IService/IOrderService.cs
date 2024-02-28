@@ -11,7 +11,7 @@ namespace FR.Services.IService
         List<Order> GetOrdersByTableId(Guid tableId);
         List<Order> GetOrdersByBillId(Guid billId);
         List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId);
-        void UpdateFinishedOrderStatus(Guid orderId);
+        void UpdateOrderStatus(Guid orderId, int orderStatusId);
         void DeleteOrder(Order order);
         List<Order> GetOrdersByOrderStatusId(int? orderStatusId);
         public float GetTotalPriceOfOrders(List<Order> orders);

@@ -16,6 +16,15 @@ namespace FR.API.GraphQL.Types
                 .Type<UuidType>()
                 .Name("tableId")
                 .Description("Id of table");
+            descriptor.Field("Table")
+                .Type<ListType<FoodOrderType>>()
+                .Name("table")
+                .Resolve(context =>
+                {
+                    var order = context.Parent<Order>();
+                    return context.Service<ITableService>().GetTable(order.TableId);
+                })
+                .Description("The table of the order");
             descriptor.Field(f => f.BillId)
                 .Type<UuidType>()
                 .Name("billId")
