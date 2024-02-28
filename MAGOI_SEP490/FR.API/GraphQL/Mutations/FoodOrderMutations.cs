@@ -10,7 +10,7 @@ namespace FR.API.GraphQL.Mutations
     {
         //update food in the order: cooking to cooked
         public async Task<UpdateFoodOrderStatusPayload> UpdateFoodOrderStatusAsync(
-            Guid orderId, int foodId,
+            Guid orderId, int foodId, int statusId,
             IFoodOrderService foodOrderService,
             IOrderService orderService,
             ITableService tableService,
@@ -25,7 +25,7 @@ namespace FR.API.GraphQL.Mutations
                 //get list of waiter devices
                 List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
                 //update food status in the order
-                FoodOrder food = foodOrderService.UpdateFinishedFoodOrderStatus(orderId, foodId);
+                FoodOrder food = foodOrderService.UpdateFoodOrderStatus(orderId, foodId, statusId);
 
                 await expoSdkClient.SendNotification(waiterTokens,
                     $"{table.Name} - Order {orderId}",

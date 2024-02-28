@@ -44,9 +44,18 @@ namespace FR.Services.Service
         {
             return _dao.GetOrdersByTableIdAndOrderStatusId(tableId, orderStatusId);
         }
-        public void UpdateFinishedOrderStatus(Guid orderId)
+        public void UpdateOrderStatus(Guid orderId, int orderStatusId)
         {
-            _dao.UpdateFinishedOrderStatus(orderId);
+            try
+            {
+                Order o = _dao.GetOrderById(orderId);
+                o.OrderStatusId = orderStatusId;
+                _dao.UpdateOrder(o);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public float GetTotalPriceOfOrders(List<Order> orders)
         {

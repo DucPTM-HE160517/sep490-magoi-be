@@ -7,7 +7,7 @@ namespace FR.Services.IService
     {
         List<FoodOrder> AddFoodOrders(Guid orderId, List<FoodOrderInput> foodOrders);
         List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId);
-        void UpdateFinishedFoodOrdersStatus(Guid orderId);
-        FoodOrder UpdateFinishedFoodOrderStatus(Guid orderId, int foodId);
+        void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
+        FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
     }
 }

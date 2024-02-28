@@ -54,9 +54,9 @@ namespace FR.API.GraphQL.Mutations
             }
         }
 
-        //update order status from in progress to finished
-        public async Task<UpdateOrderStatusPayload> UpdateOrderStatusAsync(
-            Guid orderId,
+        //update order status
+        public async Task<UpdateOrderStatusPayload> UpdateOrderStatus(
+            Guid orderId, int orderStatusId, bool? sendNotification,
             IOrderService orderService,
             ITableService tableService,
             ISessionService sessionService,
@@ -66,25 +66,29 @@ namespace FR.API.GraphQL.Mutations
              * 1. Chef will update the order status to "done" or update the food status to "done" (❌)
              * 2. Send notification to waiter (✅)
              */
-            //Get order and table
-            Order order = orderService.GetOrderById(orderId);
-            Table table = tableService.GetTable(order.TableId);
-
             try
             {
+                //Get order and table
+                Order order = orderService.GetOrderById(orderId);
+                Table table = tableService.GetTable(order.TableId);
                 //Update order status
-                orderService.UpdateFinishedOrderStatus(orderId);
-                //get list of waiter devices
-                List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
+                orderService.UpdateOrderStatus(orderId, orderStatusId);
+                if (sendNotification.HasValue && (bool)sendNotification)
+                {
+                    //get list of waiter devices
+                    List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
+                    //send notification
+                    string msg = order.OrderStatusId == (int)OrderStatusId.Served?
+                        "There is a done order! Please serve the food to the customer!" 
+                        : "The order status has been updated to " + Enum.GetName(typeof(OrderStatusId), (OrderStatusId)order.OrderStatusId) + "!";
 
-                await expoSdkClient.SendNotification(waiterTokens,
-                    $"{table.Name} - Order {orderId}",
-                    "There is a done order! Please serve the food to the customer!",
-                    data: JsonConvert.SerializeObject(new
-                    {
-                        type = NotificationType.FoodReady
-                    }));
-
+                    await expoSdkClient.SendNotification(waiterTokens,
+                        $"{table.Name} - Order {orderId}", msg,
+                        data: JsonConvert.SerializeObject(new
+                        {
+                            type = NotificationType.FoodReady
+                        }));
+                }
                 return new UpdateOrderStatusPayload(order);
             }
             catch (Exception e)
@@ -94,7 +98,7 @@ namespace FR.API.GraphQL.Mutations
         }
 
         //finish all orders of the table and return bill
-        public async Task<FinishOrderPayload> FinishOrders(Guid tableId, DateTime finishedAt,
+        public async Task<FinishOrderPayload> FinishOrdersOfTable(Guid tableId, DateTime finishedAt,
             IOrderService orderService,
             ITableService tableService,
             IFoodOrderService foodOrderService,
@@ -110,13 +114,13 @@ namespace FR.API.GraphQL.Mutations
                 // update order status to "finished"
                 foreach (var order in orders)
                 {
-                    orderService.UpdateFinishedOrderStatus(order.Id);
+                    orderService.UpdateOrderStatus(order.Id, (int)OrderStatusId.Finished);
                 }
 
                 //update food status in the order to "cooked"
                 foreach (var order in orders)
                 {
-                    foodOrderService.UpdateFinishedFoodOrdersStatus(order.Id);
+                    foodOrderService.UpdateFoodOrdersStatus(order.Id, (int)FoodOrderStatusId.Cooked);
                 }
 
                 // update table status to "available"

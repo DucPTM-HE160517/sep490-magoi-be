@@ -82,20 +82,6 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
-        public void UpdateFinishedOrderStatus(Guid orderId)
-        {
-            try
-            {
-                var order = _context.Orders.SingleOrDefault(o => o.Id == orderId);
-                order.OrderStatusId = (int)OrderStatusId.Finished;
-                _context.Entry(order).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
         public float GetTotalAmmountOfOrder(Guid orderId)
         {
             try
