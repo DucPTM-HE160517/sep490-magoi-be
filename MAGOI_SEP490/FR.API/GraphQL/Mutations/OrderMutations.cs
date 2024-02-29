@@ -125,7 +125,7 @@ namespace FR.API.GraphQL.Mutations
                 }
 
                 // update table status to "available"
-                tableService.UpdateTableStatus(orders[0].TableId, TableStatusId.Available);
+                tableService.UpdateTableStatus(tableId, TableStatusId.Available);
                 Bill bill = billService.CreateBill(orderService.GetTotalPriceOfOrders(orders));
 
 

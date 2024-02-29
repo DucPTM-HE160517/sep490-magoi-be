@@ -30,14 +30,7 @@ namespace FR.DataAccess
 
         public List<Bill> GetBillsByDate(DateTime date)
         {
-            List<Bill> list = new List<Bill>();
-            string formattedDate = date.ToString("yyyy/MM/dd");
-            foreach (Bill bill in _context.Bills.ToList())
-            {
-                string createdDate = bill.CreatedAt.ToString("yyyy/MM/dd");
-                list.Add(bill);
-            }
-            return list;
+            return _context.Bills.Where(b => b.CreatedAt.Date == date.Date).ToList();
         }
     }
 }
