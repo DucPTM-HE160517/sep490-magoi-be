@@ -12,5 +12,7 @@ namespace FR.BusinessObjects.Models
         public DateTime? FinishedAt { get; set; }
         [ForeignKey("Feedback")]
         public Guid FeedbackId { get; set; }
+        [ForeignKey("PaymentMethod")]
+        public int PaymentMethodId { get; set; }
     }
 }

@@ -1570,6 +1570,24 @@ namespace FR.BusinessObjects.DataContext
                     Status = "Cooked"
                 }
             );
+
+            modelBuilder.Entity<PaymentMethod>().HasData(
+                new PaymentMethod
+                {
+                    Id = (int)PaymentMethodId.Cash,
+                    Method = "Cash"
+                },
+                new PaymentMethod
+                {
+                    Id = (int)PaymentMethodId.Banking,
+                    Method = "Banking"
+                },
+                new PaymentMethod
+                {
+                    Id = (int)PaymentMethodId.CreditCard,
+                    Method = "CreditCard"
+                }
+            );
         }
     }
 }

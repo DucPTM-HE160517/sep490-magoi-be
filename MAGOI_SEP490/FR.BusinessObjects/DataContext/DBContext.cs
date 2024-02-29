@@ -15,12 +15,12 @@ namespace FR.BusinessObjects.DataContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            IConfigurationRoot configuration = builder.Build();
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            //IConfigurationRoot configuration = builder.Build();
 
-            optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
+            //optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
             optionsBuilder.EnableSensitiveDataLogging();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
@@ -32,6 +32,7 @@ namespace FR.BusinessObjects.DataContext
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<TableStatus> TableStatus { get; set; }
         public virtual DbSet<FoodOrder> FoodOrder { get; set; }
