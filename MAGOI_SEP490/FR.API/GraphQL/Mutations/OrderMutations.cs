@@ -98,7 +98,8 @@ namespace FR.API.GraphQL.Mutations
         }
 
         //finish all orders of the table and return bill
-        public async Task<FinishOrderPayload> FinishOrdersOfTable(Guid tableId, DateTime finishedAt,
+        public async Task<FinishOrderPayload> FinishOrdersOfTable(
+            Guid tableId, DateTime finishedAt, int paymentMethodId,
             IOrderService orderService,
             ITableService tableService,
             IFoodOrderService foodOrderService,
@@ -133,8 +134,10 @@ namespace FR.API.GraphQL.Mutations
                     orderService.UpdateBillIdOfOrder(order.Id, bill.Id);
                 }
 
-                // update finished time of the bill
-                billService.UpdateBillFinishedTime(bill, finishedAt);
+                // update finished time and paymentMethod of the bill
+                bill.FinishedAt = DateTime.Now;
+                bill.PaymentMethodId = paymentMethodId;
+                billService.UpdateBill(bill);
 
                 return new FinishOrderPayload(orders, bill);
             }
