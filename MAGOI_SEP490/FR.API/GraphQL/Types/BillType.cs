@@ -37,6 +37,19 @@ namespace FR.API.GraphQL.Types
                 .Type<UuidType>()
                 .Name("feedbackId")
                 .Description("Id of order's feedback");
+            descriptor.Field(f => f.PaymentMethodId)
+                .Type<IntType>()
+                .Name("paymentMethodId")
+                .Description("Id of payment method");
+            descriptor.Field("PaymentMethod")
+                .Type<PaymentMethodType>()
+                .Name("paymentMethod")
+                .Resolve(context =>
+                {
+                    var bill = context.Parent<Bill>();
+                    return context.Service<IPaymentMethodService>().GetPaymentMethodById(bill.PaymentMethodId);
+                })
+                .Description("Order list of the bill");
             descriptor.Field("Orders")
                 .Type<ListType<OrderType>>()
                 .Name("orders")

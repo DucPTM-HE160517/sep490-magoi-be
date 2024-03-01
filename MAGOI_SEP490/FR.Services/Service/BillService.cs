@@ -49,11 +49,10 @@ namespace FR.Services.Service
             }
         }
 
-        public void UpdateBillFinishedTime(Bill bill, DateTime finishedAt)
+        public void UpdateBill(Bill bill)
         {
             try
             {
-                bill.FinishedAt = DateTime.Now;
                 _dao.UpdateBill(bill);
             }
             catch (Exception e)
