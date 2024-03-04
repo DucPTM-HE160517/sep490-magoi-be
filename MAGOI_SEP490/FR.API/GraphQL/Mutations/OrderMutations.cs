@@ -111,7 +111,10 @@ namespace FR.API.GraphQL.Mutations
 
                 // get served orders by tableId 
                 orders = orderService.GetServedOrdersByTableId(tableId);
-
+                if(orders ==null || orders.Count == 0)
+                {
+                    throw new Exception("This table has no served orders!");
+                }
                 // update order status to "finished"
                 foreach (var order in orders)
                 {
