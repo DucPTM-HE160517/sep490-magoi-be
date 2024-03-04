@@ -1458,75 +1458,75 @@ namespace FR.BusinessObjects.DataContext
             modelBuilder.Entity<Table>().HasData(
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     Name = "Bàn 1",
-                    StatusId = 2
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777"),
                     Name = "Bàn 2",
-                    StatusId = 2
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("72d44212-da44-4735-9846-af8e859c2086"),
                     Name = "Bàn 3",
-                    StatusId = 2
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("a6c5a1d6-1942-48fc-9eca-1b5e9499ba6d"),
                     Name = "Bàn 4",
-                    StatusId = 2
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("b9da28be-79af-4258-8cd7-c608c5fa2d8c"),
                     Name = "Bàn 5",
-                    StatusId = 2
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("464d6381-2f42-4d17-9402-b4fb1728623e"),
                     Name = "Bàn 6",
-                    StatusId = 1
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("79709257-f504-4186-aea9-d87a316ff42e"),
                     Name = "Bàn 7",
-                    StatusId = 1
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("00d6469a-ec3c-4e59-ad00-b2ddb9e34021"),
                     Name = "Bàn 8",
-                    StatusId = 1
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("42faf975-c839-4282-a42c-4df9963c3d4c"),
                     Name = "Bàn 9",
-                    StatusId = 1
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("f63c6d7a-7d37-4a06-a80c-a311424eac59"),
                     Name = "Bàn 10",
-                    StatusId = 3
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("cca0bf6c-af6e-4c37-8636-db7a562bb57e"),
                     Name = "Bàn 11",
-                    StatusId = 3
+                    StatusId = (int)TableStatusId.Available
                 },
                 new Table
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("9e4241f8-ad17-48c4-8f49-9bb8607285c4"),
                     Name = "Bàn 12",
-                    StatusId = 3
+                    StatusId = (int)TableStatusId.Available
                 }
             );
 
