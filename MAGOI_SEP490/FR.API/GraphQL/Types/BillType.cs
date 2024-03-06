@@ -21,7 +21,7 @@ namespace FR.API.GraphQL.Types
                 .Name("finishedAt")
                 .Description("The date and time the bill was finished");
             descriptor.Field(f => f.TotalAmount)
-                .Type<NonNullType<FloatType>>()
+                .Type<FloatType>()
                 .Name("totalAmount")
                 .Description("The total amount of the bill");
             descriptor.Field("Table")

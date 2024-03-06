@@ -24,6 +24,7 @@ namespace FR.Services.Service
                     FoodId = foodListInput[i].foodId,
                     Quantity = foodListInput[i].quantity,
                     FoodNote = foodListInput[i].foodNote,
+                    UnitPrice = _dao.GetFoodPrice(foodListInput[i].foodId),
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooking
                 };
                 foodOrders.Add(food);

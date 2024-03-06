@@ -37,8 +37,7 @@ namespace FR.DataAccess
         public Table GetTableByBillId(Guid billId)
         {
             Order order = _context.Orders.FirstOrDefault(o => o.BillId == billId);
-            Table table = _context.Tables.SingleOrDefault(t => t.Id == order.TableId);
-            return table;
+            return _context.Tables.SingleOrDefault(t => t.Id == order.TableId);
         }
     }
 }
