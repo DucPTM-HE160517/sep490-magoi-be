@@ -29,7 +29,7 @@ namespace FR.API.GraphQL.Types
                 .Name("id")
                 .Description("The bill Id of the feedback");
             descriptor.Field("Bill")
-                .Type<UuidType>()
+                .Type<BillType>()
                 .Name("bill")
                 .Resolve(context =>
                 {

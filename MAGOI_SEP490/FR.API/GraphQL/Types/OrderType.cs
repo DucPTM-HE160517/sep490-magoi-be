@@ -17,7 +17,7 @@ namespace FR.API.GraphQL.Types
                 .Name("tableId")
                 .Description("Id of table");
             descriptor.Field("Table")
-                .Type<ListType<FoodOrderType>>()
+                .Type<TableType>()
                 .Name("table")
                 .Resolve(context =>
                 {
