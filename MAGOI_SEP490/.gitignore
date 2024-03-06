@@ -454,3 +454,6 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 BusinessObjects/appsettings.json
 MAGOI_API/appsettings.json
+
+# Env
+.env
