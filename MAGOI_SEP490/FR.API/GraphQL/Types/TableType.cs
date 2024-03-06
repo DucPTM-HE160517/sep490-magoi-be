@@ -40,6 +40,16 @@ namespace FR.API.GraphQL.Types
 
                 })
                 .Description("Order list of the table");
+            descriptor.Field("WaitingOrders")
+                .Type<ListType<OrderType>>()
+                .Name("waitingOrders")
+                .Resolve(context =>
+                {
+                    var table = context.Parent<Table>();
+                    return context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Waiting);
+
+                })
+                .Description("Waiting order list of the table");
             descriptor.Field("InProgressOrders")
                 .Type<ListType<OrderType>>()
                 .Name("inProgressOrders")
@@ -50,6 +60,16 @@ namespace FR.API.GraphQL.Types
 
                 })
                 .Description("Serving order list of the table");
+            descriptor.Field("ServedOrders")
+                .Type<ListType<OrderType>>()
+                .Name("servedOrders")
+                .Resolve(context =>
+                {
+                    var table = context.Parent<Table>();
+                    return context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Served);
+
+                })
+                .Description("Served order list of the table");
             descriptor.Field("FinishedOrders")
                 .Type<ListType<OrderType>>()
                 .Name("finishedOrders")
