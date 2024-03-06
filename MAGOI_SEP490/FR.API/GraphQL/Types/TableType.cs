@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.IService;
+using FR.Services.Service;
 
 namespace FR.API.GraphQL.Types
 {
@@ -37,17 +38,25 @@ namespace FR.API.GraphQL.Types
                 {
                     var table = context.Parent<Table>();
                     return context.Service<IOrderService>().GetOrdersByTableId(table.Id);
-
                 })
                 .Description("Order list of the table");
+            //descriptor.Field("Orders")
+            //    .Type<ListType<OrderType>>()
+            //    .Argument("orderStatusId", o => o.Type<IntType>())
+            //    .Name("orders")
+            //    .ResolveWith<OrderResolvers>(r => r.GetOrdersById(default, default))
+            //    .Description("Order list of the table by OrderStatusId");
             descriptor.Field("InProgressOrders")
                 .Type<ListType<OrderType>>()
                 .Name("inProgressOrders")
                 .Resolve(context =>
                 {
                     var table = context.Parent<Table>();
-                    return context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.InProgress);
-
+                    List<Order> inProgressOrders = context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Waiting);
+                    inProgressOrders.
+                        Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.InProgress)).
+                        Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Served));
+                    return inProgressOrders;
                 })
                 .Description("Serving order list of the table");
             descriptor.Field("FinishedOrders")
@@ -62,4 +71,12 @@ namespace FR.API.GraphQL.Types
                 .Description("Finished order list of the table");
         }
     }
+
+    //public class OrderResolvers
+    //{
+    //    public List<Order> GetOrdersById(int orderStatusId, [Service] IOrderService service)
+    //    {
+    //        return service.GetOrdersByOrderStatusId(orderStatusId);
+    //    }
+    //}
 }
