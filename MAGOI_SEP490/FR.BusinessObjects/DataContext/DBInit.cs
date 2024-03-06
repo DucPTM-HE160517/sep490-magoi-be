@@ -209,7 +209,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "big-beerfest-bausages.jpg",
                     UnitPrice = 199000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1
                 },
                 new Food
@@ -220,7 +220,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "grilled-german-gausages.jpg",
                     UnitPrice = 136000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1
                 },
                 new Food
@@ -231,7 +231,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "garlic-bread.jpg",
                     UnitPrice = 30000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1
                 },
                 new Food
@@ -242,7 +242,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "french-fried.jpg",
                     UnitPrice = 50000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1
                 },
                 new Food
@@ -253,7 +253,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "chicken-wings.jpg",
                     UnitPrice = 86000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1
                 },
                 new Food
@@ -262,7 +262,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "BEER BATTER FRIES",
                     ImageUrl = "beer-batter-fries.jpg",
                     Description = "Đĩa tổng hợp các loại khoai chiên",
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1,
                     UnitPrice = 99000,
                     Quantity = 100
@@ -273,7 +273,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "PAN SEARED FOIE-GRAS",
                     Description = "Gan Ngỗng áp chảo cùng Mứt, sốt xoài và bánh mỳ Pháp nướng",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1,
                     ImageUrl = "pan-seared-foie-gras.jpg",
                     UnitPrice = 196000
@@ -284,7 +284,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "MARINATED SPICY OLIVES",
                     Description = "Quả ô-liu trộn cay 100gr",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1,
                     ImageUrl = "marinated-spicy-olives.jpg",
                     UnitPrice = 86000
@@ -295,7 +295,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "SMOKED DUCK",
                     Description = "Lườn vịt xông khói với Mayonnaise mutat Dijon",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1,
                     ImageUrl = "smoked-duck.jpg",
                     UnitPrice = 155000
@@ -306,7 +306,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "BEEF CARPACCIO",
                     Description = "Bò tái kiểu Ý cùng rau rocket, phô mai bào",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1,
                     ImageUrl = "beef-carpaccio.jpg",
                     UnitPrice = 180000
@@ -317,7 +317,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "IBERICO DE CEBO",
                     Description = "Đùi lợn Tây Ban Nha Cebo cắt lát với dưa lưới và rau arugula",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 1,
                     ImageUrl = "iberico-de-cebo.jpg",
                     UnitPrice = 436000
@@ -328,7 +328,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "FRENCH DUCK RILLETTE",
                     ImageUrl = "french-duck-rillette.jpg",
                     Description = "Patê thịt Vịt phục vụ cùng mứt hoa quả và bánh mỳ Pháp",
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     FoodCategoryId = 1,
                     UnitPrice = 136000
@@ -342,7 +342,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 166000,
                     FoodCategoryId = 1,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
 
                 // Món chính
@@ -354,7 +354,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "aus-rib-eye-mb4-5.jpg",
                     UnitPrice = 1280000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2
                 },
                 new Food
@@ -363,7 +363,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "AUS RIB EYE MB7/8",
                     ImageUrl = "aus-rib-eye-mb7-8.jpg",
                     Description = "Thăn Flank Wagyu MB7/8 250g",
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     FoodCategoryId = 2,
                     UnitPrice = 660000
@@ -376,7 +376,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Thǎn \"Mắc Áo\" Wagyu MB3 250g",
                     UnitPrice = 600000,
                     FoodCategoryId = 2,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
                 new Food
@@ -384,7 +384,7 @@ namespace FR.BusinessObjects.DataContext
                     Id = 17,
                     Name = "US PRIME RIB EYE",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2,
                     UnitPrice = 960000,
                     Description = "Thăn lưng bò Mỹ Prime 500g",
@@ -398,7 +398,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Thăn Bò Angus chữ T Úc 700g",
                     UnitPrice = 1160000,
                     FoodCategoryId = 2,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
                 new Food
@@ -408,7 +408,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "us-tenderloin.jpg",
                     Description = "Thăn nội bò Mỹ 250g",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2,
                     UnitPrice = 560000
                 },
@@ -420,7 +420,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Thăn lưng bò Mỹ 350g",
                     UnitPrice = 596000,
                     FoodCategoryId = 2,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
                 new Food
@@ -431,7 +431,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Thăn ngoại bò Mỹ 350g",
                     UnitPrice = 386000,
                     FoodCategoryId = 2,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
                 new Food
@@ -440,7 +440,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "CANADA TENDERLOIN",
                     ImageUrl = "canada-tenderloin.jpg",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2,
                     UnitPrice = 386000,
                     Description = "Thăn nội bò Canada 200g",
@@ -454,7 +454,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 246000,
                     FoodCategoryId = 2,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
 
                 // Đồ ăn kèm
@@ -464,7 +464,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "MASHED POTATO",
                     ImageUrl = "mashed-potato.jpg",
                     FoodCategoryId = 3,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 30000,
                     Description = "Khoai tây nghiền"
@@ -475,7 +475,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "SAUTÉ MUSHROOM",
                     ImageUrl = "saute-mushroom.jpg",
                     FoodCategoryId = 3,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 30000,
                     Description = "Nấm xào"
@@ -489,7 +489,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Khoai tây bi đút lò",
                     UnitPrice = 30000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
 
                 // Món chính (thịt khác)
@@ -500,7 +500,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "roasted-lamb-leg-2kg.jpg",
                     Description = "Đùi cừu nướng 2kg với thảo mộc",
                     UnitPrice = 2600000,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2,
                     Quantity = 50
                 },
@@ -511,7 +511,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "herbs-crusted-aus-lamb-rack.jpg",
                     Description = "Sườn cừu Úc thượng hạng nướng với thảo mộc",
                     Quantity = 50,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2,
                     UnitPrice = 580000
                 },
@@ -524,7 +524,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Đùi vịt nấu chậm ăn kèm với khoai Roti, rau củ đút lò và sốt Gravy",
                     FoodCategoryId = 2,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -535,7 +535,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 660000,
                     FoodCategoryId = 2,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
 
                 // Món chính (cá)
@@ -547,7 +547,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "tuna-steak.jpg",
                     UnitPrice = 166000,
                     FoodCategoryId = 2,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 50
                 },
                 new Food
@@ -556,7 +556,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "SEARED SALMON FILLET",
                     ImageUrl = "seared-salmon-fillet.jpg",
                     Quantity = 50,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2,
                     UnitPrice = 226000,
                     Description = "Cá hồi áp chảo cùng cà rốt bào, cà rốt nghiền ăn với các lựa chọn sốt Cam Cà rốt, Kem Mù tạt"
@@ -569,7 +569,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "SMOKED SALMON SALAD",
                     ImageUrl = "smoked-salmon-salad.jpg",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 4,
                     UnitPrice = 166000,
                     Description = "Salad cá hồi xông khói, xà lách, cải mầm, rau rocket, bánh mỳ giòn, sốt dầu dấm"
@@ -583,7 +583,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 66000,
                     FoodCategoryId = 4,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -593,7 +593,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Salad trái cây với hạt Chia và các lựa chọn sốt sữa chua chanh leo, sốt Thousand Island",
                     UnitPrice = 80000,
                     FoodCategoryId = 4,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
                 new Food
@@ -602,7 +602,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "ORANGE SALAD WITH SMOKE DUCK",
                     ImageUrl = "orange-salad-with-smoke-duck.jpg",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 4,
                     UnitPrice = 106000,
                     Description = "Lườn vịt xông khói xà lách, rau rocket, hoa quả, cam và sốt dầm Ý"
@@ -615,7 +615,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Salad Wakame với dưa chuột bào, rong nho biển, trứng cua sốt mè",
                     UnitPrice = 98000,
                     FoodCategoryId = 4,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
                 new Food
@@ -625,7 +625,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "caesar-salad.jpg",
                     Description = "Salad ăn kèm trứng cút, ba rọi xông khói, phô mai bào, bánh mỳ giòn và sốt Caesar",
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 4,
                     UnitPrice = 86000
                 },
@@ -637,7 +637,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Salad cá ngừ tươi cùng với khoai tây bi, trứng cút, đậu Pháp, củ cải đỏ, cà chua sấy và sốt dầu dấm",
                     UnitPrice = 126000,
                     FoodCategoryId = 4,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
                 },
 
@@ -650,7 +650,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Súp nấm kem",
                     UnitPrice = 80000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 5
                 },
                 new Food
@@ -659,7 +659,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "CREAMY PUMPKIN SOUP",
                     ImageUrl = "creamy-pumpkin-soup.jpg",
                     FoodCategoryId = 5,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 60000,
                     Description = "Súp kem bí đỏ kèm hạt bí nướng giòn, kem chua"
@@ -675,13 +675,13 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "red-wine-sauce.jpg",
                     UnitPrice = 25000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
                     Id = 43,
                     Name = "PEPPER SAUCE",
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     Description = "Sốt tiêu",
                     UnitPrice = 25000,
@@ -697,7 +697,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 25000,
                     FoodCategoryId = 6,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -708,7 +708,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 25000,
                     FoodCategoryId = 6,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -719,7 +719,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 25000,
                     FoodCategoryId = 6,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -730,7 +730,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 25000,
                     Quantity = 100,
                     Description = "Sốt BBQ",
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -741,7 +741,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 25000,
                     FoodCategoryId = 6,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -752,7 +752,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 25000,
                     FoodCategoryId = 6,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
 
                 // Đồ uống
@@ -765,7 +765,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 30000,
                     FoodCategoryId = 7,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -776,7 +776,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 20000,
                     FoodCategoryId = 7,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -787,7 +787,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 50000,
                     FoodCategoryId = 7,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -798,7 +798,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 30000,
                     FoodCategoryId = 7,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -809,7 +809,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 30000,
                     FoodCategoryId = 7,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -820,7 +820,7 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 1200000,
                     FoodCategoryId = 7,
                     Quantity = 20,
-                    CreatedAt = new DateTime(2020, 10, 10)
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
                 },
                 new Food
                 {
@@ -828,7 +828,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "CHATEAU LEOVILLE POYFERRE",
                     ImageUrl = "chateau-leoville-poyferre.jpg",
                     FoodCategoryId = 7,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Description = "Vang đỏ Chateau Leoville Poyferre",
                     UnitPrice = 1400000,
                     Quantity = 20
@@ -840,7 +840,7 @@ namespace FR.BusinessObjects.DataContext
                     Quantity = 20,
                     UnitPrice = 1700000,
                     Description = "Vang đỏ Malbec",
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 7,
                     ImageUrl = "malbec.jpg"
                 },
@@ -853,7 +853,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Kem cháy gừng cùng với bánh quy giòn",
                     ImageUrl = "ginger-cream-brulee.jpg",
                     FoodCategoryId = 8,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 46000
                 },
@@ -864,7 +864,7 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Bánh chocolate nướng chảy, kem vanilla và dừa sấy",
                     UnitPrice = 50000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 8,
                     ImageUrl = "warm-chocolate-lava-cake.jpg"
                 },
@@ -875,7 +875,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "seasonal-fresh-fruit-plater.jpg",
                     FoodCategoryId = 8,
                     Description = "Đĩa trái cây theo mùa",
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 135000,
                 },
@@ -886,7 +886,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "pandan-panna-cotta.jpg",
                     UnitPrice = 35000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 8,
                     Description = "Bánh kem Ý hương lá nếp cùng chocolate nướng giòn và kem đánh bông",
                 },
@@ -897,7 +897,7 @@ namespace FR.BusinessObjects.DataContext
                     ImageUrl = "ice-cream-haagen-dazs.jpg",
                     Description = "Kem Haagen Dazs, chocolate, vanilla, red berries, macha, Maccadmia nut",
                     FoodCategoryId = 8,
-                    CreatedAt = new DateTime(2020, 10, 10),
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 88000,
                 }
