@@ -20,17 +20,14 @@ namespace FR.DataAccess
         {
             return _context.Tables.Where(t => t.StatusId == tableStatusId).ToList();
         }
-
         public Table GetTable(Guid id)
         {
             return _context.Tables.SingleOrDefault(table => table.Id.Equals(id));
         }
-
         public Table GetTableByName(string name)
         {
             return _context.Tables.FirstOrDefault(table => table.Name.Equals(name));
         }
-
         public void UpdateTableStatus(Guid tableId, TableStatusId statusId)
         {
             Table table = GetTable(tableId);

@@ -1,6 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace FR.BusinessObjects.DataContext
 {
