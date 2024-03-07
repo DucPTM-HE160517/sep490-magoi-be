@@ -35,20 +35,6 @@ namespace FR.Services.Service
             return _dao.GetBillsByDate(date);
         }
 
-        public void UpdateBillFeedback(Guid billId, Guid feedbackId)
-        {
-            try
-            {
-                Bill bill = _dao.GetBillById(billId);
-                bill.FeedbackId = feedbackId;
-                _dao.UpdateBill(bill);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
         public void UpdateBill(Bill bill)
         {
             try
