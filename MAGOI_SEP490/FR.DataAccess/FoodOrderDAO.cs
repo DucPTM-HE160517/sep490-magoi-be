@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.DataContext;
+﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +23,7 @@ namespace FR.DataAccess
                 _context.Entry(foodOrder).State = EntityState.Modified;
                 _context.SaveChanges();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

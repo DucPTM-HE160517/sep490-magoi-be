@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.DataContext;
+﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 
 namespace FR.DataAccess
@@ -15,7 +10,6 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
         public void AddFeedback(Feedback feedback)
         {
             try
@@ -23,7 +17,7 @@ namespace FR.DataAccess
                 _context.Feedbacks.Add(feedback);
                 _context.SaveChanges();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

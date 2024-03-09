@@ -16,18 +16,15 @@ namespace FR.DataAccess
             _context.Add(bill);
             _context.SaveChanges();
         }
-
         public void UpdateBill(Bill bill)
         {
             _context.Entry(bill).State = EntityState.Modified;
             _context.SaveChanges();
         }
-
         public Bill GetBillById(Guid billId)
         {
             return _context.Bills.SingleOrDefault(b => b.Id == billId);
         }
-
         public List<Bill> GetBillsByDate(DateTime date)
         {
             return _context.Bills.Where(b => b.CreatedAt.Date == date.Date).ToList();

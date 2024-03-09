@@ -11,7 +11,6 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
         public Order GetOrderById(Guid Id)
         {
             return _context.Orders.SingleOrDefault(o => o.Id == Id);
@@ -119,6 +118,5 @@ namespace FR.DataAccess
         {
             return _context.Orders.Where(o => o.TableId == tableId && o.OrderStatusId == (int)OrderStatusId.Served).ToList();
         }
-
     }
 }

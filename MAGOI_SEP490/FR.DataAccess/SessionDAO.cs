@@ -11,7 +11,6 @@ public class SessionDAO
     {
         _context = context;
     }
-
     public void RegisterSession(string expoToken, string roleId)
     {
         _context.Sessions.Add(new Session()
@@ -21,7 +20,6 @@ public class SessionDAO
         });
         _context.SaveChanges();
     }
-
     public List<string> GetExpoTokensByRoleId(string roleId)
     {
         return _context.Sessions.Where(s => s.Role == roleId).Select(s => s.ExpoToken).ToList();

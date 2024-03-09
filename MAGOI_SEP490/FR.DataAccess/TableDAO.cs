@@ -11,7 +11,6 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
         public List<Table> GetTables()
         {
             return _context.Tables.ToList();

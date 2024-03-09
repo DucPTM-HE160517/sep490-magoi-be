@@ -1,6 +1,5 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
-using HotChocolate;
 using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
@@ -17,7 +16,6 @@ namespace FR.DataAccess
         {
             return _context.Foods.ToList();
         }
-
         public List<Food> GetFoodsByCategory(int categoryId)
         {
             return _context.Foods.Where(x => x.FoodCategoryId == categoryId).ToList();
