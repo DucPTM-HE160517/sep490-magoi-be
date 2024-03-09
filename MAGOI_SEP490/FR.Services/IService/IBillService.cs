@@ -8,6 +8,5 @@ namespace FR.Services.IService
         List<Bill> GetBillsByDate(DateTime date);
         Bill GetBillById(Guid billId);
         void UpdateBill(Bill bill);
-        void UpdateBillFeedback(Guid billId, Guid feedbackId);
     }
 }

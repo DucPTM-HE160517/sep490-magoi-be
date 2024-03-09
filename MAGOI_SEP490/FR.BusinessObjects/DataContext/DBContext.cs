@@ -21,7 +21,6 @@ namespace FR.BusinessObjects.DataContext
 
             //optionsBuilder.UseNpgsql(configuration.GetConnectionString("FRdb"));
             optionsBuilder.EnableSensitiveDataLogging();
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public virtual DbSet<Food> Foods { get; set; }

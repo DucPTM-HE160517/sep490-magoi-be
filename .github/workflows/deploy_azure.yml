@@ -23,6 +23,12 @@ jobs:
         with:
           dotnet-version: '6.0.x'
           
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo ${{ secrets.ENV_FILE }} >> .env
+          cat .env
+          
       - name: Restore
         run: dotnet restore ${{ env.APP_PATH }}
         

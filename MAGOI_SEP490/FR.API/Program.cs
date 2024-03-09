@@ -1,3 +1,5 @@
+using CloudinaryDotNet;
+using dotenv.net;
 using FR.API.GraphQL.Mutations;
 using FR.API.GraphQL.Queries;
 using FR.API.GraphQL.Subscriptions;
@@ -11,6 +13,8 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowAllOrigins = "_allowAllOrigins";
+DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
+
 var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 // Add services to the container.

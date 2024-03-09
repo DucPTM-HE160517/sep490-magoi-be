@@ -32,11 +32,6 @@ namespace FR.API.GraphQL.Types
                     var bill = context.Parent<Bill>();
                     return context.Service<ITableService>().GetTableByBillId(bill.Id);
                 });
-
-            descriptor.Field(f => f.FeedbackId)
-                .Type<UuidType>()
-                .Name("feedbackId")
-                .Description("Id of order's feedback");
             descriptor.Field(f => f.PaymentMethodId)
                 .Type<IntType>()
                 .Name("paymentMethodId")

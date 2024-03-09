@@ -10,8 +10,6 @@ namespace FR.BusinessObjects.Models
         public float TotalAmount { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? FinishedAt { get; set; }
-        [ForeignKey("Feedback")]
-        public Guid FeedbackId { get; set; }
         [ForeignKey("PaymentMethod")]
         public int PaymentMethodId { get; set; }
     }

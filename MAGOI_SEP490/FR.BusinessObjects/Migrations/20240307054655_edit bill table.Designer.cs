@@ -3,6 +3,7 @@ using System;
 using FR.BusinessObjects.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FR.BusinessObjects.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240307054655_edit bill table")]
+    partial class editbilltable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1691,73 +1694,73 @@ namespace FR.BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7c1036c5-987d-4ca4-babf-dc82e83c6aef"),
+                            Id = new Guid("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                             Name = "Bàn 1",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("a8a834f9-d83d-4699-9299-aabb8c917ac8"),
+                            Id = new Guid("24421c43-7ce9-49f9-b279-545130db8777"),
                             Name = "Bàn 2",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("95960ac6-daf3-4aa3-a057-f267b1e10f91"),
+                            Id = new Guid("72d44212-da44-4735-9846-af8e859c2086"),
                             Name = "Bàn 3",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("8cb5c01d-f74a-4619-a050-5b685254b577"),
+                            Id = new Guid("a6c5a1d6-1942-48fc-9eca-1b5e9499ba6d"),
                             Name = "Bàn 4",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("4933aae6-6760-4067-a3d3-a7a7ee6935fb"),
+                            Id = new Guid("b9da28be-79af-4258-8cd7-c608c5fa2d8c"),
                             Name = "Bàn 5",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("5efee732-5169-49b6-9620-f8d68a101244"),
+                            Id = new Guid("464d6381-2f42-4d17-9402-b4fb1728623e"),
                             Name = "Bàn 6",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("a8385264-955b-4da4-b8de-5b3d98bf3cb0"),
+                            Id = new Guid("79709257-f504-4186-aea9-d87a316ff42e"),
                             Name = "Bàn 7",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("55deeb3d-7a1c-478c-a98f-91693b1e8afa"),
+                            Id = new Guid("00d6469a-ec3c-4e59-ad00-b2ddb9e34021"),
                             Name = "Bàn 8",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("f1bd64ec-b280-40d5-8ee6-87ad8b00dfc8"),
+                            Id = new Guid("42faf975-c839-4282-a42c-4df9963c3d4c"),
                             Name = "Bàn 9",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("981fbf2c-1d72-4ffc-a0e8-1a0a18fc5d85"),
+                            Id = new Guid("f63c6d7a-7d37-4a06-a80c-a311424eac59"),
                             Name = "Bàn 10",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("5def688b-ca02-4081-86a1-1d792d6ab7d2"),
+                            Id = new Guid("cca0bf6c-af6e-4c37-8636-db7a562bb57e"),
                             Name = "Bàn 11",
                             StatusId = 1
                         },
                         new
                         {
-                            Id = new Guid("2b24a2a6-bf9b-4210-915a-e1ad6f100134"),
+                            Id = new Guid("9e4241f8-ad17-48c4-8f49-9bb8607285c4"),
                             Name = "Bàn 12",
                             StatusId = 1
                         });
