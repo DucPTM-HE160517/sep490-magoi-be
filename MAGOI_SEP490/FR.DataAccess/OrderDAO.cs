@@ -119,7 +119,7 @@ namespace FR.DataAccess
 
         public List<Order> GetServedOrdersByTableId(Guid tableId)
         {
-            return _context.Orders.Where(o => o.TableId == tableId && o.OrderStatusId == (int)OrderStatusId.Served).ToList();
+            return _context.Orders.Where(o => o.TableId == tableId && o.OrderStatusId == (int)OrderStatusId.Serving).ToList();
         }
 
     }
