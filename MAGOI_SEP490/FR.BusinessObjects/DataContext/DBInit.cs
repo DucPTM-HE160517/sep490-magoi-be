@@ -1533,22 +1533,22 @@ namespace FR.BusinessObjects.DataContext
             modelBuilder.Entity<OrderStatus>().HasData(
                 new OrderStatus
                 {
-                    Id = 1,
-                    Status = "Waiting"
+                    Id = (int)OrderStatusId.Pending,
+                    Status = "Pending"
                 },
                 new OrderStatus
                 {
-                    Id = 2,
-                    Status = "In progress"
+                    Id = (int)OrderStatusId.Cooking,
+                    Status = "Cooking"
                 },
                 new OrderStatus
                 {
-                    Id = 3,
-                    Status = "Served"
+                    Id = (int)OrderStatusId.Serving,
+                    Status = "Serving"
                 },
                 new OrderStatus
                 {
-                    Id = 4,
+                    Id = (int)OrderStatusId.Finished,
                     Status = "Finished"
                 }
             );

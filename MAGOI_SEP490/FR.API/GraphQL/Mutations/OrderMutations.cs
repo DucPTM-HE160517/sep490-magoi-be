@@ -78,7 +78,7 @@ namespace FR.API.GraphQL.Mutations
                     //get list of waiter devices
                     List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
                     //send notification
-                    string msg = order.OrderStatusId == (int)OrderStatusId.Served?
+                    string msg = order.OrderStatusId == (int)OrderStatusId.Serving?
                         "There is a done order! Please serve the food to the customer!" 
                         : "The order status has been updated to " + Enum.GetName(typeof(OrderStatusId), (OrderStatusId)order.OrderStatusId) + "!";
 

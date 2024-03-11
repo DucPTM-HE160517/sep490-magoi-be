@@ -19,7 +19,7 @@ namespace FR.Services.Service
             {
                 TableId = orderInput.tableId,
                 CreatedAt = orderInput.createdAt,
-                OrderStatusId = (int)OrderStatusId.Waiting,
+                OrderStatusId = (int)OrderStatusId.Pending,
             };
             _dao.AddOrder(order);
             return order;
