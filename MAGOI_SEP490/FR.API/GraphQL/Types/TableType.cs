@@ -53,9 +53,9 @@ namespace FR.API.GraphQL.Types
                 {
                     var table = context.Parent<Table>();
                     List<Order> inProgressOrders = context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Waiting);
-                    inProgressOrders.
+                    inProgressOrders = inProgressOrders.
                         Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.InProgress)).
-                        Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Served));
+                        Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Served)).ToList();
                     return inProgressOrders;
                 })
                 .Description("Serving order list of the table");
