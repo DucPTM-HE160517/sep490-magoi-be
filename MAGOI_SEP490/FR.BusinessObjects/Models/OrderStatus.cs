@@ -5,9 +5,9 @@ namespace FR.BusinessObjects.Models
 {
     public enum OrderStatusId : int
     {
-        Waiting = 1,
-        InProgress = 2,
-        Served = 3,
+        Pending = 1,
+        Cooking = 2,
+        Serving = 3,
         Finished = 4
     }
     public partial class OrderStatus
