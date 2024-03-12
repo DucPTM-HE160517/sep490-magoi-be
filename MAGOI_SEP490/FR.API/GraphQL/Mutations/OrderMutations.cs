@@ -138,7 +138,7 @@ namespace FR.API.GraphQL.Mutations
                 }
 
                 // update finished time and paymentMethod of the bill
-                bill.FinishedAt = DateTime.Now;
+                bill.FinishedAt = DateTime.Now.ToUniversalTime();
                 bill.PaymentMethodId = paymentMethodId;
                 billService.UpdateBill(bill);
 
