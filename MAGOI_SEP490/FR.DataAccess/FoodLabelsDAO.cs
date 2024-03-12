@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FR.BusinessObjects.DataContext;
 
 namespace FR.DataAccess
 {
     public class FoodLabelsDAO
     {
+        private readonly DBContext _context;
+
+        public FoodLabelsDAO(DBContext context)
+        {
+            _context = context;
+        }
     }
 }

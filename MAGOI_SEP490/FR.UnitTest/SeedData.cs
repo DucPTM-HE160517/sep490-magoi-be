@@ -186,13 +186,13 @@ namespace FR.UnitTest
                 {
                     Id = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     Name = "Bàn 1",
-                    StatusId = (int)TableStatusId.Available
+                    StatusId = (int)TableStatusId.Serving
                 },
                 new Table
                 {
                     Id = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777"),
                     Name = "Bàn 2",
-                    StatusId = (int)TableStatusId.Available
+                    StatusId = (int)TableStatusId.Booked
                 },
                 new Table
                 {
@@ -307,7 +307,6 @@ namespace FR.UnitTest
                     TotalAmount = 3000000,
                     CreatedAt = new DateTime(2024, 02, 10, 07, 19, 23),
                     FinishedAt = new DateTime(2024, 02, 10, 08, 49, 50),
-                    FeedbackId = Guid.Parse("f8151278-a0d5-4dac-bb63-4ffdfa62affb"),
                     PaymentMethodId = (int)PaymentMethodId.Cash
                 },
                 new Bill
@@ -316,7 +315,6 @@ namespace FR.UnitTest
                     TotalAmount = 2000000,
                     CreatedAt = new DateTime(2024, 12, 02, 21, 08, 50),
                     FinishedAt = new DateTime(2024, 12, 02, 21, 47, 12),
-                    FeedbackId = Guid.Parse("085e681b-72c8-4f9f-9335-2537553f9b9d"),
                     PaymentMethodId = (int)PaymentMethodId.Banking
                 },
                 new Bill
@@ -325,7 +323,6 @@ namespace FR.UnitTest
                     TotalAmount = 1200000,
                     CreatedAt = new DateTime(2024, 12, 02, 17, 10, 20),
                     FinishedAt = new DateTime(2024, 12, 02, 17, 44, 09),
-                    FeedbackId = Guid.Parse("c88323aa-90f0-495b-adf4-c0fac4fc9524"),
                     PaymentMethodId = (int)PaymentMethodId.CreditCard
                 }
             };
@@ -340,7 +337,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
                     CreatedAt = new DateTime(2024, 02, 10, 07, 19, 23),
-                    OrderStatusId = (int)OrderStatusId.Finished
+                    OrderStatusId = (int)OrderStatusId.Served
                 },
                 new Order
                 {
@@ -348,7 +345,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
                     CreatedAt = new DateTime(2024, 02, 10, 07, 30, 11),
-                    OrderStatusId = (int)OrderStatusId.Finished
+                    OrderStatusId = (int)OrderStatusId.Served
                 },
                 new Order
                 {
@@ -356,7 +353,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
                     CreatedAt = new DateTime(2024, 02, 10, 07, 45, 33),
-                    OrderStatusId = (int)OrderStatusId.Finished
+                    OrderStatusId = (int)OrderStatusId.Waiting
                 },
 
                 new Order
@@ -365,7 +362,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777"),
                     BillId = Guid.Parse("022a14ef-f5a5-416d-a8b3-68b20133d897"),
                     CreatedAt = new DateTime(2024, 12, 02, 21, 08, 50),
-                    OrderStatusId = (int)OrderStatusId.Finished
+                    OrderStatusId = (int)OrderStatusId.Served
                 },
                 new Order
                 {
@@ -373,7 +370,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777"),
                     BillId = Guid.Parse("022a14ef-f5a5-416d-a8b3-68b20133d897"),
                     CreatedAt = new DateTime(2024, 12, 02, 21, 20, 50),
-                    OrderStatusId = (int)OrderStatusId.Finished
+                    OrderStatusId = (int)OrderStatusId.Waiting
                 },
 
                 new Order
@@ -382,7 +379,7 @@ namespace FR.UnitTest
                     BillId = Guid.Parse("77a97fef-50bb-4fff-bd5c-0ac6164e85fb"),
                     TableId = Guid.Parse("72d44212-da44-4735-9846-af8e859c2086"),
                     CreatedAt = new DateTime(2024, 12, 02, 17, 10, 20),
-                    OrderStatusId = (int)OrderStatusId.Finished
+                    OrderStatusId = (int)OrderStatusId.InProgress
                 }
             };
         }
@@ -392,7 +389,7 @@ namespace FR.UnitTest
             {
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("4b38e7f0-af73-4599-ab75-2cf200bb56a0"),
+                    OrderId = Guid.Parse("11238123-7115-4294-af3a-149a0cd21dba"),
                     FoodId = 1,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 2,
@@ -412,7 +409,7 @@ namespace FR.UnitTest
                 },
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("89bd027f-4fa1-461c-b287-8b47c5e594bb"),
+                    OrderId = Guid.Parse("adf29b77-d3fe-4825-b5ba-8e92ff9127a7"),
                     FoodId = 3,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 4,
@@ -421,7 +418,7 @@ namespace FR.UnitTest
                 },
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("adf29b77-d3fe-4825-b5ba-8e92ff9127a7"),
+                    OrderId = Guid.Parse("6b871f13-be3a-4635-a8dc-0e6b9124eea9"),
                     FoodId = 4,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 1,
@@ -431,7 +428,7 @@ namespace FR.UnitTest
 
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("5533069b-a685-480c-9992-02a04691bdeb"),
+                    OrderId = Guid.Parse("d8479b5a-b721-4730-8a8d-359b9ff3268e"),
                     FoodId = 2,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 1,
@@ -440,7 +437,7 @@ namespace FR.UnitTest
                 },
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("29479686-f86b-49f0-b48e-cf24eb7e7631"),
+                    OrderId = Guid.Parse("f79fef7f-2dbf-416b-8816-103b98a8c130"),
                     FoodId = 3,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 1,
@@ -469,7 +466,7 @@ namespace FR.UnitTest
                 },
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("2826fe74-b804-4b55-8983-3cced2c85caf"),
+                    OrderId = Guid.Parse("67074714-1dd9-4f57-806e-0e561a8940a2"),
                     FoodId = 3,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 1,
@@ -479,7 +476,7 @@ namespace FR.UnitTest
                 },
                 new FoodOrder
                 {
-                    OrderId = Guid.Parse("7485724e-3c9e-4579-b2ae-a337bdf282a9"),
+                    OrderId = Guid.Parse("67074714-1dd9-4f57-806e-0e561a8940a2"),
                     FoodId = 4,
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooked,
                     Quantity = 1,
