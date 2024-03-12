@@ -17,7 +17,7 @@ namespace FR.Services.Service
             Bill bill = new Bill
             {
                 Id = new Guid(),
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.Now.ToUniversalTime(),
                 TotalAmount = totalAmount
             };
 
