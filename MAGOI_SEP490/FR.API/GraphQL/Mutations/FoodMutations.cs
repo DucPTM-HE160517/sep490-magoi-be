@@ -45,9 +45,13 @@ namespace FR.API.GraphQL.Mutations
             return signedUrl;
         }
 
-        public async Task<Food> AddFood(FoodInput food, IFoodService foodService)
+        public async Task<Food> AddFood(AddFoodInput food, IFoodService foodService)
         {
             return foodService.AddFood(food);
+        }
+        public async Task<Food> EditFood(UpdateFoodInput food, IFoodService foodService)
+        {
+            return foodService.UpdateFood(food);
         }
     }
 }

@@ -9,7 +9,8 @@ namespace FR.Services.IService
         List<Food> GetFoodsByCategory(int categoryId);
         Food GetFoodById(int id);
         void UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput);
-        Food AddFood(FoodInput food);
+        Food AddFood(AddFoodInput food);
+        Food UpdateFood(UpdateFoodInput food);
         bool CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput);
     }
 }
