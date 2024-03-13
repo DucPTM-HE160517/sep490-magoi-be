@@ -10,7 +10,7 @@ namespace FR.Services.Service
 	public class ExpoNotificationService : IExpoNotificationService
 	{
         private const string ExpoBackendHost = "https://exp.host";
-        private const string PushSendPath = "/--/api/v2/push/send";
+        private const string PushSendPath = "/--/api/v2/push/send?useFcmV1=true";
         private const string PushGetReceiptsPath = "/--/api/v2/push/getReceipts";
 
         private static readonly HttpClientHandler HttpHandler = new HttpClientHandler() { MaxConnectionsPerServer = 6, UseProxy = false};
