@@ -35,5 +35,10 @@ namespace FR.DataAccess
             _context.Foods.Add(food);
             _context.SaveChanges();
         }
+        public void UpdateFood(Food food)
+        {
+            _context.Entry(food).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

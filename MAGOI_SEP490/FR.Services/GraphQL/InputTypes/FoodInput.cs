@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FR.Services.GraphQL.InputTypes
+﻿namespace FR.Services.GraphQL.InputTypes
 {
-    public record FoodInput(string name, string description, string imgUrl, float unitPrice, 
+    public record AddFoodInput(string name, string description, string imgUrl, float unitPrice, 
         int quantity, DateTime createdAt, int foodCategoryId);
+    public record UpdateFoodInput(int id, string? name, string? description, string? imgUrl, float? unitPrice,
+        int? quantity, DateTime? createdAt, int? foodCategoryId);
 }
