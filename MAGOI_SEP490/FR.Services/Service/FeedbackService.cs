@@ -16,6 +16,11 @@ namespace FR.Services.Service
         {
             _dao = dao;
         }
+
+        public float AverageFoodScore() => _dao.AverageFoodScore();
+
+        public float AverageServingScore() => _dao.AverageServingScore();
+
         public Feedback CreateFeedback(string billId, int servingStar, int foodStar, string? comment)
         {
             try
@@ -37,5 +42,7 @@ namespace FR.Services.Service
                 throw new Exception(e.Message);
             }
         }
+
+        public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
     }
 }
