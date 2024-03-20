@@ -12,10 +12,16 @@ namespace FR.Services.Service
     public class FeedbackService : IFeedbackService
     {
         private readonly FeedbackDAO _dao;
+
+        public FeedbackService()
+        {
+        }
+
         public FeedbackService(FeedbackDAO dao)
         {
             _dao = dao;
         }
+
         public Feedback CreateFeedback(string billId, int servingStar, int foodStar, string? comment)
         {
             try
@@ -37,5 +43,10 @@ namespace FR.Services.Service
                 throw new Exception(e.Message);
             }
         }
+
+        public FeedbacksWithAverage GetFeedbacksWithAverage() => _dao.GetFeedbacksWithAverage();
+
+        public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
+
     }
 }
