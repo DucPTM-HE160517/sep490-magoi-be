@@ -40,5 +40,21 @@ namespace FR.DataAccess
         {
             return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.FoodScore).Average();
         }
+        public FeedbacksWithAverage GetFeedbacksWithAverage()
+        {
+            FeedbacksWithAverage feedbacks = new FeedbacksWithAverage() {
+                AverageServingScore = AverageFoodScore(),
+                AverageFoodScore = AverageServingScore(),
+                Feedbacks = GetFeedbacks()
+            };
+
+            return feedbacks;
+        }
+    }
+    public class FeedbacksWithAverage
+    {
+        public float AverageServingScore { get; set; }
+        public float AverageFoodScore { get; set; }
+        public List<Feedback> Feedbacks { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FR.BusinessObjects.Models;
+using FR.DataAccess;
 
 namespace FR.Services.IService
 {
@@ -11,7 +12,6 @@ namespace FR.Services.IService
     {
         List<Feedback> GetFeedbacks();
         Feedback CreateFeedback(string billId, int servingStar, int foodStar, string? comment);
-        float AverageServingScore();
-        float AverageFoodScore();
+        FeedbacksWithAverage GetFeedbacksWithAverage();
     }
 }
