@@ -1,5 +1,8 @@
 ﻿using System.Text;
 using CloudinaryDotNet;
+using FR.BusinessObjects.Models;
+using FR.Services.GraphQL.InputTypes;
+using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations
 {
@@ -40,6 +43,15 @@ namespace FR.API.GraphQL.Mutations
             }
 
             return signedUrl;
+        }
+
+        public async Task<Food> AddFood(AddFoodInput food, IFoodService foodService)
+        {
+            return foodService.AddFood(food);
+        }
+        public async Task<Food> EditFood(UpdateFoodInput food, IFoodService foodService)
+        {
+            return foodService.UpdateFood(food);
         }
     }
 }

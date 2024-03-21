@@ -13,6 +13,37 @@ namespace FR.Services.Service
             _foodDAO = foodDAO;
         }
 
+        public Food AddFood(AddFoodInput food)
+        {
+            Food f = new Food()
+            {
+                Name = food.name,
+                Description = food.description,
+                ImageUrl = food.imgUrl,
+                UnitPrice = food.unitPrice,
+                Quantity = food.quantity,
+                CreatedAt = food.createdAt,
+                FoodCategoryId = food.foodCategoryId
+            };
+            _foodDAO.AddFood(f);
+            return f;
+        }
+        public Food UpdateFood(UpdateFoodInput food)
+        {
+            Food f = GetFoodById(food.id);
+
+            f.Name = food.name ?? f.Name;
+            f.Description = food.description ?? f.Description;
+            f.ImageUrl = food.imgUrl ?? f.ImageUrl;
+            f.UnitPrice = food.unitPrice ?? f.UnitPrice;
+            f.Quantity = food.quantity ?? f.Quantity;
+            f.CreatedAt = food.createdAt ?? f.CreatedAt;
+            f.FoodCategoryId = food.foodCategoryId ?? f.FoodCategoryId;
+
+            _foodDAO.UpdateFood(f);
+            return f;
+        }
+
         public bool CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput)
         {
             for (int i = 0; i < foodListInput.Count; i++)

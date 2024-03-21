@@ -106,7 +106,7 @@ builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .AddMutationType<Mutation>()
     .AddSubscriptionType<Subscriptions>()
     .AddTypes(new[] { typeof(FoodType), typeof(FoodCategoryType), typeof(TableType), typeof(TableStatusType), 
-        typeof(FoodOrderType), typeof(OrderType), typeof(BillType) });
+        typeof(FoodOrderType), typeof(OrderType), typeof(BillType), typeof(FeedbackType), typeof(AverageFeedbackType) } );
 
 var app = builder.Build();
 

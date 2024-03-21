@@ -13,7 +13,7 @@ namespace FR.DataAccess
         }
         public void AddBill(Bill bill)
         {
-            _context.Add(bill);
+            _context.Bills.Add(bill);
             _context.SaveChanges();
         }
         public void UpdateBill(Bill bill)
