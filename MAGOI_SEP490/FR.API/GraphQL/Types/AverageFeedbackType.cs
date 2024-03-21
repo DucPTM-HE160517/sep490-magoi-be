@@ -6,7 +6,7 @@ using FR.Services.Service;
 namespace FR.API.GraphQL.Types
 {
 
-    public class FeedbacksWithAverageType : ObjectType<FeedbacksWithAverage>
+    public class AverageFeedbackType : ObjectType<FeedbacksWithAverage>
     {
         protected override void Configure(IObjectTypeDescriptor<FeedbacksWithAverage> descriptor)
         {
