@@ -1,6 +1,6 @@
-﻿using FR.API.GraphQL.Payload;
-using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.InputTypes;
+﻿using FR.BusinessObjects.Models;
+using FR.Services.GraphQL.Payload;
+using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 using HotChocolate.Subscriptions;
 using Newtonsoft.Json;

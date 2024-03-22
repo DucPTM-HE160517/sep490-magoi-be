@@ -1,5 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.InputTypes;
+using FR.Services.GraphQL.Types.InputTypes;
 
 namespace FR.Services.IService
 {

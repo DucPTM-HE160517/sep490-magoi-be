@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.Models;
 using FR.BusinessObjects.Models.VietQR;
 using FR.DataAccess;
 using FR.Services.IService;
-using HotChocolate;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace FR.Services.Service

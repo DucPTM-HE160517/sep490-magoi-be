@@ -1,4 +1,4 @@
-﻿namespace FR.Services.GraphQL.InputTypes
+﻿namespace FR.Services.GraphQL.Types.InputTypes
 {
     public record AddFoodInput(string name, string description, string imgUrl, float unitPrice, 
         int quantity, DateTime createdAt, int foodCategoryId);

@@ -1,6 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
-using FR.Services.GraphQL.InputTypes;
+using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 
 namespace FR.Services.Service

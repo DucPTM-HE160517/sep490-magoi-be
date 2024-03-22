@@ -1,8 +1,7 @@
-﻿using FR.BusinessObjects.Models.ExpoNotification;
-﻿using FR.API.GraphQL.Payload;
-using FR.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using FR.Services.IService;
 using Newtonsoft.Json;
+using FR.Services.GraphQL.Payload;
 
 namespace FR.API.GraphQL.Mutations
 {
