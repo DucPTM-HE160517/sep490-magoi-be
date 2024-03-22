@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.DataContext;
+﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 
 namespace FR.DataAccess
@@ -25,7 +20,7 @@ namespace FR.DataAccess
                 _context.Feedbacks.Add(feedback);
                 _context.SaveChanges();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -33,7 +28,7 @@ namespace FR.DataAccess
 
         public float AverageServingScore()
         {
-            return _context.Feedbacks.Count() == 0? 0 : (float)_context.Feedbacks.Select(f => f.ServingScore).Average();
+            return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.ServingScore).Average();
         }
 
         public float AverageFoodScore()
@@ -42,7 +37,8 @@ namespace FR.DataAccess
         }
         public FeedbacksWithAverage GetFeedbacksWithAverage()
         {
-            FeedbacksWithAverage feedbacks = new FeedbacksWithAverage() {
+            FeedbacksWithAverage feedbacks = new FeedbacksWithAverage()
+            {
                 AverageServingScore = AverageFoodScore(),
                 AverageFoodScore = AverageServingScore(),
                 Feedbacks = GetFeedbacks()

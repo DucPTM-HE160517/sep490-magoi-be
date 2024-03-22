@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FR.BusinessObjects.Models
 {
@@ -9,7 +9,7 @@ namespace FR.BusinessObjects.Models
         Serving = 2,
         Booked = 3
     }
-    
+
     public partial class TableStatus
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

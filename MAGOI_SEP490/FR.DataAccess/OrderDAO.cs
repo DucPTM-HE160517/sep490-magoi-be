@@ -11,7 +11,6 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
         public Order GetOrderById(Guid Id)
         {
             return _context.Orders.SingleOrDefault(o => o.Id == Id);
@@ -111,12 +110,10 @@ namespace FR.DataAccess
                 throw new Exception(e.Message);
             }
         }
-
         public List<Order> GetOrdersByBillId(Guid billId)
         {
             return _context.Orders.Where(o => o.BillId == billId).ToList();
         }
-
         public List<Order> GetServedOrdersByTableId(Guid tableId)
         {
             return _context.Orders.Where(o => o.TableId == tableId && o.OrderStatusId == (int)OrderStatusId.Serving).ToList();
@@ -131,6 +128,5 @@ namespace FR.DataAccess
         {
             return _context.Orders.Where(c => c.OrderStatusId == 4 && c.CreatedAt >= startDate && c.CreatedAt <= endDate).ToList();
         }
-
     }
 }

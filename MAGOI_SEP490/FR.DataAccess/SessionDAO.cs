@@ -11,7 +11,6 @@ public class SessionDAO
     {
         _context = context;
     }
-
     public void RegisterSession(string expoToken, string roleId)
     {
         //Check if session already exists
@@ -28,7 +27,6 @@ public class SessionDAO
         });
         _context.SaveChanges();
     }
-
     public List<string> GetExpoTokensByRoleId(string roleId)
     {
         return _context.Sessions.Where(s => s.Role == roleId).Select(s => s.ExpoToken).ToList();
