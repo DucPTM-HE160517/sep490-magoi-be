@@ -46,5 +46,14 @@ namespace FR.Services.Service
                 throw new Exception(e.Message);
             }
         }
+        public float GetTotalAmountOfBills(List<Bill> Bills)
+        {
+            float totalAmount = 0;
+            foreach (Bill bill in Bills)
+            {
+                totalAmount += bill.TotalAmount;
+            }
+            return totalAmount;
+        }
     }
 }
