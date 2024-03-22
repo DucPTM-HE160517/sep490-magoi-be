@@ -125,7 +125,12 @@ namespace FR.DataAccess
         public List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
             return _context.Orders.Where(c => c.OrderStatusId==3 && c.CreatedAt >= startDate && c.CreatedAt <= endDate ).ToList();
-        } 
+        }
+
+        public List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.OrderStatusId == 4 && c.CreatedAt >= startDate && c.CreatedAt <= endDate).ToList();
+        }
 
     }
 }
