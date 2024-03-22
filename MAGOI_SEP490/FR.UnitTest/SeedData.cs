@@ -209,17 +209,17 @@ namespace FR.UnitTest
                 new OrderStatus
                 {
                     Id = 1,
-                    Status = "Waiting"
+                    Status = "Pending"
                 },
                 new OrderStatus
                 {
                     Id = 2,
-                    Status = "In progress"
+                    Status = "Cooking"
                 },
                 new OrderStatus
                 {
                     Id = 3,
-                    Status = "Served"
+                    Status = "Serving"
                 },
                 new OrderStatus
                 {
@@ -337,7 +337,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
                     CreatedAt = new DateTime(2024, 02, 10, 07, 19, 23),
-                    OrderStatusId = (int)OrderStatusId.Served
+                    OrderStatusId = (int)OrderStatusId.Serving
                 },
                 new Order
                 {
@@ -345,7 +345,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
                     CreatedAt = new DateTime(2024, 02, 10, 07, 30, 11),
-                    OrderStatusId = (int)OrderStatusId.Served
+                    OrderStatusId = (int)OrderStatusId.Serving
                 },
                 new Order
                 {
@@ -353,7 +353,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                     BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
                     CreatedAt = new DateTime(2024, 02, 10, 07, 45, 33),
-                    OrderStatusId = (int)OrderStatusId.Waiting
+                    OrderStatusId = (int)OrderStatusId.Pending
                 },
 
                 new Order
@@ -362,7 +362,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777"),
                     BillId = Guid.Parse("022a14ef-f5a5-416d-a8b3-68b20133d897"),
                     CreatedAt = new DateTime(2024, 12, 02, 21, 08, 50),
-                    OrderStatusId = (int)OrderStatusId.Served
+                    OrderStatusId = (int)OrderStatusId.Serving
                 },
                 new Order
                 {
@@ -370,7 +370,7 @@ namespace FR.UnitTest
                     TableId = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777"),
                     BillId = Guid.Parse("022a14ef-f5a5-416d-a8b3-68b20133d897"),
                     CreatedAt = new DateTime(2024, 12, 02, 21, 20, 50),
-                    OrderStatusId = (int)OrderStatusId.Waiting
+                    OrderStatusId = (int)OrderStatusId.Pending
                 },
 
                 new Order
@@ -379,7 +379,7 @@ namespace FR.UnitTest
                     BillId = Guid.Parse("77a97fef-50bb-4fff-bd5c-0ac6164e85fb"),
                     TableId = Guid.Parse("72d44212-da44-4735-9846-af8e859c2086"),
                     CreatedAt = new DateTime(2024, 12, 02, 17, 10, 20),
-                    OrderStatusId = (int)OrderStatusId.InProgress
+                    OrderStatusId = (int)OrderStatusId.Cooking
                 }
             };
         }

@@ -34,7 +34,7 @@ namespace FR.UnitTests.DAOTests
                 TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                 CreatedAt = new DateTime(2024, 01, 01, 00, 00, 00),
                 BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
-                OrderStatusId = (int)OrderStatusId.Waiting
+                OrderStatusId = (int)OrderStatusId.Pending
             };
 
             orderDAO.AddOrder(order);
@@ -51,7 +51,7 @@ namespace FR.UnitTests.DAOTests
             Guid TABLE_ID = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777");
             DateTime CREATE_AT = new DateTime(2024, 01, 01, 00, 00, 01);
             Guid BILL_ID = Guid.Parse("022a14ef-f5a5-416d-a8b3-68b20133d897");
-            const int ORDER_STATUS_ID = (int)OrderStatusId.InProgress;
+            const int ORDER_STATUS_ID = (int)OrderStatusId.Cooking;
 
             orderToUpdate.TableId = TABLE_ID;
             orderToUpdate.CreatedAt = CREATE_AT;
@@ -75,7 +75,7 @@ namespace FR.UnitTests.DAOTests
                 TableId = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb"),
                 CreatedAt = new DateTime(2024, 01, 01, 00, 00, 00),
                 BillId = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03"),
-                OrderStatusId = (int)OrderStatusId.Waiting
+                OrderStatusId = (int)OrderStatusId.Finished
             };
 
             orderDAO.AddOrder(order);
@@ -91,7 +91,7 @@ namespace FR.UnitTests.DAOTests
         [Test]
         public void GetOrdersByStatusId_WhenCalled_ReturnsOrders()
         {
-            int ORDER_STATUS_ID = (int)OrderStatusId.Waiting;
+            int ORDER_STATUS_ID = (int)OrderStatusId.Serving;
 
             var orders = orderDAO.GetOrdersByStatusId(ORDER_STATUS_ID);
             Assert.That(orders, Has.Count.EqualTo(3));
@@ -110,7 +110,7 @@ namespace FR.UnitTests.DAOTests
         public void GetOrdersByTableIdAndOrderStatusId_WhenCalled_ReturnsOrders()
         {
             Guid TABLE_ID = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb");
-            const int ORDER_STATUS_ID = (int)OrderStatusId.Waiting;
+            const int ORDER_STATUS_ID = (int)OrderStatusId.Serving;
 
             var orders = orderDAO.GetOrdersByTableIdAndOrderStatusId(TABLE_ID, ORDER_STATUS_ID);
             Assert.That(orders, Has.Count.EqualTo(2));
