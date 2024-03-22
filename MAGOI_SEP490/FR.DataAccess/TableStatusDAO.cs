@@ -10,12 +10,10 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
         public TableStatus GetTableStatusById(int id)
         {
             return _context.TableStatus.SingleOrDefault(s => s.Id == id);
         }
-
         public List<TableStatus> GetAllTableStatus()
         {
             return _context.TableStatus.ToList();
