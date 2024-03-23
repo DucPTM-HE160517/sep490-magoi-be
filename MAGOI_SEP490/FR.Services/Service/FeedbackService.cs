@@ -43,9 +43,11 @@ namespace FR.Services.Service
         public AverageFeedback GetAverageFeedback()
         {
             return new AverageFeedback() 
-            {AverageFoodScore = _dao.AverageFoodScore(),
-            AverageServingScore = _dao.AverageServingScore(),
-            Feedbacks = GetFeedbacks()};
+            {
+                AverageFoodScore = _dao.AverageFoodScore(),
+                AverageServingScore = _dao.AverageServingScore(),
+                Feedbacks = GetFeedbacks()
+            };
         }
 
         public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
