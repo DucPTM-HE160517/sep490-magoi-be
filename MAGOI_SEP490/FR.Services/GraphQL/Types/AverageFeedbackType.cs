@@ -1,14 +1,17 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.DataAccess;
-using FR.Services.IService;
-using FR.Services.Service;
+using HotChocolate.Types;
 
-namespace FR.API.GraphQL.Types
+namespace FR.Services.GraphQL.Types
 {
-
-    public class AverageFeedbackType : ObjectType<FeedbacksWithAverage>
+    public class AverageFeedback
     {
-        protected override void Configure(IObjectTypeDescriptor<FeedbacksWithAverage> descriptor)
+        public float AverageServingScore { get; set; }
+        public float AverageFoodScore { get; set; }
+        public List<Feedback> Feedbacks { get; set; }
+    }
+    public class AverageFeedbackType : ObjectType<AverageFeedback>
+    {
+        protected override void Configure(IObjectTypeDescriptor<AverageFeedback> descriptor)
         {
             descriptor.Field(f => f.AverageServingScore)
                 .Type<FloatType>()

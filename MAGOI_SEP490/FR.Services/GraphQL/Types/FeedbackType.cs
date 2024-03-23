@@ -1,7 +1,8 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.IService;
+using HotChocolate.Types;
 
-namespace FR.API.GraphQL.Types
+namespace FR.Services.GraphQL.Types
 {
     public class FeedbackType : ObjectType<Feedback>
     {
@@ -26,7 +27,7 @@ namespace FR.API.GraphQL.Types
                 .Description("The comment given by customer");
             descriptor.Field(f => f.BillId)
                 .Type<UuidType>()
-                .Name("id")
+                .Name("billId")
                 .Description("The bill Id of the feedback");
             descriptor.Field("Bill")
                 .Type<BillType>()

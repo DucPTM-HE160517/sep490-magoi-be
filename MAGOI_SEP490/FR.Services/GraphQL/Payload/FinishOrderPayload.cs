@@ -1,6 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 
-namespace FR.API.GraphQL.Payload
+namespace FR.Services.GraphQL.Payload
 {
     public class FinishOrderPayload : Payload
     {

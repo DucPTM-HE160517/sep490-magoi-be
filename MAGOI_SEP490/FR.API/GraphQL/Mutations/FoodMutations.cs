@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using CloudinaryDotNet;
 using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.InputTypes;
+using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations

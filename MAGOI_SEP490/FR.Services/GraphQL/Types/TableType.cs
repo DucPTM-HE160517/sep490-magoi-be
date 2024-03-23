@@ -1,8 +1,9 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.IService;
 using FR.Services.Service;
+using HotChocolate.Types;
 
-namespace FR.API.GraphQL.Types
+namespace FR.Services.GraphQL.Types
 {
     public class TableType : ObjectType<Table>
     {

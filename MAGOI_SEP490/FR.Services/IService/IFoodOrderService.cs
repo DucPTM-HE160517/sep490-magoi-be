@@ -1,5 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.InputTypes;
+using FR.Services.GraphQL.Types.InputTypes;
 
 namespace FR.Services.IService
 {
@@ -9,5 +9,6 @@ namespace FR.Services.IService
         List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId);
         void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
         FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
+        Food[] GetTop5FoodOfOrders(List<Order> orders);
     }
 }

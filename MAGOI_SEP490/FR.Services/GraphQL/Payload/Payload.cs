@@ -1,4 +1,4 @@
-﻿namespace FR.API.GraphQL.Payload
+﻿namespace FR.Services.GraphQL.Payload
 {
     public abstract class Payload
     {

@@ -37,5 +37,6 @@ namespace FR.DataAccess
             return _context.FoodOrder.SingleOrDefault(f => f.OrderId == orderId && f.FoodId == foodId);
         }
         public float GetFoodPrice(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId).UnitPrice;
+        public Food GetFood(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId);
     }
 }

@@ -118,5 +118,20 @@ namespace FR.DataAccess
         {
             return _context.Orders.Where(o => o.TableId == tableId && o.OrderStatusId == (int)OrderStatusId.Serving).ToList();
         }
+
+        public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.OrderStatusId==3 && c.CreatedAt >= startDate && c.CreatedAt <= endDate );
+        }
+
+        public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.OrderStatusId == 4 && c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+        }
+
+        public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+        }
     }
 }

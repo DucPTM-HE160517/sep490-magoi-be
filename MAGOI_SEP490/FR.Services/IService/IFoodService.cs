@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.InputTypes;
+using FR.Services.GraphQL.Types.InputTypes;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace FR.Services.IService
 {

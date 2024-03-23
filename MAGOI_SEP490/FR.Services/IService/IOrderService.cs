@@ -1,5 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.InputTypes;
+using FR.Services.GraphQL.Types.InputTypes;
 
 namespace FR.Services.IService
 {
@@ -14,6 +14,9 @@ namespace FR.Services.IService
         void UpdateOrderStatus(Guid orderId, int orderStatusId);
         void DeleteOrder(Order order);
         List<Order> GetOrdersByOrderStatusId(int? orderStatusId);
+        List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate);
+        List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate);
+        List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
         public float GetTotalPriceOfOrders(List<Order> orders);
         public void UpdateBillIdOfOrder(Guid orderId, Guid billId);
     }

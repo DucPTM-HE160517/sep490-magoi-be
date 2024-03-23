@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
+using FR.Services.GraphQL.Types;
 using FR.Services.IService;
 
 namespace FR.Services.Service
@@ -44,7 +40,13 @@ namespace FR.Services.Service
             }
         }
 
-        public FeedbacksWithAverage GetFeedbacksWithAverage() => _dao.GetFeedbacksWithAverage();
+        public AverageFeedback GetAverageFeedback()
+        {
+            return new AverageFeedback() 
+            {AverageFoodScore = _dao.AverageFoodScore(),
+            AverageServingScore = _dao.AverageServingScore(),
+            Feedbacks = GetFeedbacks()};
+        }
 
         public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
 

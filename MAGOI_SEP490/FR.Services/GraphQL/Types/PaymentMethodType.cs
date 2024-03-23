@@ -1,6 +1,7 @@
 ﻿using FR.BusinessObjects.Models;
+using HotChocolate.Types;
 
-namespace FR.API.GraphQL.Types
+namespace FR.Services.GraphQL.Types
 {
     public class PaymentMethodType : ObjectType<PaymentMethod>
     {

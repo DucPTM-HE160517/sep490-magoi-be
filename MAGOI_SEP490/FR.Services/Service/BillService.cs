@@ -46,5 +46,32 @@ namespace FR.Services.Service
                 throw new Exception(e.Message);
             }
         }
+        public float GetTotalAmountOfBills(List<Bill> Bills)
+        {
+            float totalAmount = 0;
+            foreach (Bill bill in Bills)
+            {
+                totalAmount += bill.TotalAmount;
+            }
+            return totalAmount;
+        }
+
+        public int[] GetBillsPerHour(List<Bill> bills)
+        {
+            int[] billsPerHour = new int[24];
+            foreach (var bill in bills)
+            {
+                int hour = bill.FinishedAt.Value.Hour;
+
+                billsPerHour[hour]++;
+            }
+
+            return billsPerHour;
+        }
+
+        public List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _dao.GetBillsByTimeRange(startDate, endDate);
+        }
     }
 }
