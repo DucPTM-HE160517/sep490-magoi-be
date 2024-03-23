@@ -1,5 +1,6 @@
 ﻿using FR.API.GraphQL.Mutations;
 using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Subscriptions

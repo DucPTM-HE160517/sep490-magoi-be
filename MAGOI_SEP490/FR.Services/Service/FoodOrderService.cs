@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
+using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 

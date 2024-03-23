@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 
 namespace FR.DataAccess
 {

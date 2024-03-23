@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 
 namespace FR.Services.IService
 {
