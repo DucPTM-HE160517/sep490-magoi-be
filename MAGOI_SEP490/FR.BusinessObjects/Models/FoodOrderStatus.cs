@@ -3,13 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FR.BusinessObjects.Models
 {
-
-    public enum FoodOrderStatusId : int
-    {
-        Uncooked = 1,
-        Cooking = 2,
-        Cooked = 3
-    }
     public partial class FoodOrderStatus
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

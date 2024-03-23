@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using FR.Services.IService;
 using FR.Services.Service;
 using HotChocolate.Types;
