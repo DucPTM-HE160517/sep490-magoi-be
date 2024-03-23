@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using FR.BusinessObjects.Models;
 using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.IService;
@@ -7,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace FR.Services.Service
 {
-	public class ExpoNotificationService : IExpoNotificationService
+    public class ExpoNotificationService : IExpoNotificationService
 	{
         private const string ExpoBackendHost = "https://exp.host";
         private const string PushSendPath = "/--/api/v2/push/send?useFcmV1=true";
