@@ -25,6 +25,7 @@ namespace FR.Services.Service
                     Quantity = foodListInput[i].quantity,
                     FoodNote = foodListInput[i].foodNote,
                     UnitPrice = _dao.GetFoodPrice(foodListInput[i].foodId),
+                    OrderAt = DateTime.Now.ToUniversalTime(),
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooking
                 };
                 foodOrders.Add(food);
@@ -68,6 +69,45 @@ namespace FR.Services.Service
             {
                 throw new Exception(e.Message);
             }
+        }
+        public Food[] GetTop5FoodOfOrders(List<Order> orders)
+        {
+            Dictionary<int, int> foodCounts = new Dictionary<int, int>();
+
+            foreach (var order in orders)
+            {
+                List<FoodOrder> foodOrders = _dao.GetFoodOrdersByOrderId(order.Id);
+                foreach (var foodOrder in foodOrders)
+                {
+                    if (foodCounts.ContainsKey(foodOrder.FoodId))
+                    {
+                        foodCounts[foodOrder.FoodId]++;
+                    }
+                    else
+                    {
+                        foodCounts[foodOrder.FoodId] = 1;
+                    }
+                }
+            }
+            //sort
+            var sortedFoods = foodCounts.OrderByDescending(x => x.Value);
+            //get top 5
+            var top5Foods = sortedFoods.Take(5);
+            Food[] foods = new Food[top5Foods.Count()];
+            Food food;
+            for (int i =0;i<foods.Length;i++)
+            {
+                food = _dao.GetFood(top5Foods.ElementAt(i).Key);
+                foods[i] = new Food()
+                {
+                    Id = top5Foods.ElementAt(i).Key,
+                    Name = food.Name,
+                    ImageUrl = food.ImageUrl,
+                    Quantity = top5Foods.ElementAt(i).Value
+                };
+            }
+
+            return foods;
         }
     }
 }

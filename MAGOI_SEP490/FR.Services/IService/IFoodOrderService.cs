@@ -9,5 +9,6 @@ namespace FR.Services.IService
         List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId);
         void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
         FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
+        Food[] GetTop5FoodOfOrders(List<Order> orders);
     }
 }

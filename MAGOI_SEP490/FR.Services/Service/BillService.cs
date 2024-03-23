@@ -55,5 +55,23 @@ namespace FR.Services.Service
             }
             return totalAmount;
         }
+
+        public int[] GetBillsPerHour(List<Bill> bills)
+        {
+            int[] billsPerHour = new int[24];
+            foreach (var bill in bills)
+            {
+                int hour = bill.FinishedAt.Value.Hour;
+
+                billsPerHour[hour]++;
+            }
+
+            return billsPerHour;
+        }
+
+        public List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _dao.GetBillsByTimeRange(startDate, endDate);
+        }
     }
 }

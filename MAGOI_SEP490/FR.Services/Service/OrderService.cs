@@ -84,5 +84,10 @@ namespace FR.Services.Service
         {
             return _dao.GetServedOrdersByTableId(tableId);
         }
+
+        public List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
+
+        public List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
+        public List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
     }
 }

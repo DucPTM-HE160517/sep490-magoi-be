@@ -1,7 +1,4 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.DataAccess;
-using FR.Services.IService;
-using FR.Services.Service;
 using HotChocolate.Types;
 
 namespace FR.Services.GraphQL.Types

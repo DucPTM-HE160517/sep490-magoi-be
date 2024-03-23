@@ -8,5 +8,7 @@ namespace FR.Services.IService
         List<Bill> GetBillsByDate(DateTime date);
         Bill GetBillById(Guid billId);
         void UpdateBill(Bill bill);
+        int[] GetBillsPerHour(List<Bill> bills);
+        List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate);
     }
 }
