@@ -2,6 +2,7 @@
 using FR.Services.IService;
 using Newtonsoft.Json;
 using FR.Services.GraphQL.Payload;
+using FR.Infrastructure.Enums;
 
 namespace FR.API.GraphQL.Mutations
 {

@@ -24,4 +24,8 @@
   <ItemGroup>
     <Folder Include="Models\ExpoNotificationModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FR.Infrastructure\FR.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
