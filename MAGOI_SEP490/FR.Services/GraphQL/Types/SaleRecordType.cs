@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using HotChocolate.Types;
 
 namespace FR.Services.GraphQL.Types
@@ -12,6 +7,7 @@ namespace FR.Services.GraphQL.Types
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public float Revenue { get; set; }
         public List<Order> ServingOrders { get; set; }
         public List<Order> ServedOrders { get; set; }
         public int[] BillsPerHour { get; set; }
@@ -29,6 +25,10 @@ namespace FR.Services.GraphQL.Types
                 .Type<DateTimeType>()
                 .Name("endDate")
                 .Description("End date of the sale record");
+            descriptor.Field(sr => sr.Revenue)
+                .Type<DateTimeType>()
+                .Name("revenue")
+                .Description("Total income in the time range");
             descriptor.Field(sr => sr.ServingOrders)
                 .Type<ListType<OrderType>>()
                 .Name("servingOrders")

@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
+using FR.Infrastructure.Enums;
 using FR.Services.IService;
 
 namespace FR.Services.Service

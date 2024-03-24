@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
@@ -121,12 +122,12 @@ namespace FR.DataAccess
 
         public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId==3 && c.CreatedAt >= startDate && c.CreatedAt <= endDate );
+            return _context.Orders.Where(c => c.OrderStatusId== (int)OrderStatusId.Serving && c.CreatedAt >= startDate && c.CreatedAt <= endDate );
         }
 
         public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == 4 && c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished && c.CreatedAt >= startDate && c.CreatedAt <= endDate);
         }
 
         public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)

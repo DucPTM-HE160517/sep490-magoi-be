@@ -19,6 +19,7 @@ namespace FR.API.GraphQL.Queries
             record.StartDate = startDate;
             record.EndDate = endDate;
 
+            record.Revenue = billService.GetTotalAmountOfBills(bills);
             record.ServingOrders = orderService.GetServingOrdersByTimeRange(startDate, endDate);
             record.ServedOrders = orderService.GetServedOrdersByTimeRange(startDate, endDate);
             record.BillsPerHour = billService.GetBillsPerHour(bills);
