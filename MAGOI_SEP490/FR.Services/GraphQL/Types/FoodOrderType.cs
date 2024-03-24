@@ -30,6 +30,10 @@ namespace FR.Services.GraphQL.Types
                 .Type<IntType>()
                 .Name("quantity")
                 .Description("Quantity of the food in the order");
+            descriptor.Field(f => f.UnitPrice)
+                .Type<FloatType>()
+                .Name("unitPrice")
+                .Description("Unit price of the food in the order");
             descriptor.Field(f => f.FoodNote)
                 .Type<StringType>()
                 .Name("note")
@@ -38,15 +42,10 @@ namespace FR.Services.GraphQL.Types
                 .Type<DateTimeType>()
                 .Name("orderAt")
                 .Description("Time of the food when being added to order");
-            descriptor.Field("UnitPrice")
+            descriptor.Field(f => f.UnitPrice * f.Quantity)
                 .Type<FloatType>()
-                .Name("unitPrice")
-                .Resolve(context =>
-                {
-                    var foodOrder = context.Parent<FoodOrder>();
-                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).UnitPrice;
-                })
-                .Description("Unit price of the food in the order");
+                .Name("totalAmount")
+                .Description("Total amount of the foods in the order");
         }
     }
 }
