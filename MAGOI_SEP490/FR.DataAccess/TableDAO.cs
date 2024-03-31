@@ -7,7 +7,6 @@ namespace FR.DataAccess
     public class TableDAO
     {
         private readonly DBContext _context;
-        private readonly OrderDAO _orderDAO;
         public TableDAO(DBContext context)
         {
             _context = context;
