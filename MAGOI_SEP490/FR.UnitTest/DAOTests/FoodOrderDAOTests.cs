@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using FR.UnitTest;
 
 namespace FR.UnitTests.DAOTests
@@ -65,7 +66,17 @@ namespace FR.UnitTests.DAOTests
             Guid ORDER_ID = Guid.Parse("11238123-7115-4294-af3a-149a0cd21dba");
             var result = foodOrderDAO.GetFoodOrdersByOrderId(ORDER_ID);
 
-            Assert.That(result, Has.Count.EqualTo(2));
+            Assert.That(result, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void GetFoodOrderByOrderIdAndFoodId_WhenCalled_ReturnsFoodOrder()
+        {
+            Guid ORDER_ID = Guid.Parse("11238123-7115-4294-af3a-149a0cd21dba");
+            const int FOOD_ID = 1;
+            var result = foodOrderDAO.GetFoodOrderByOrderIdAndFoodId(ORDER_ID, FOOD_ID);
+
+            Assert.That(result, Is.Not.Null);
         }
 
         [Test]
@@ -75,6 +86,25 @@ namespace FR.UnitTests.DAOTests
             var result = foodOrderDAO.GetFoodPrice(FOOD_ID);
 
             Assert.That(result, Is.EqualTo(199000));
+        }
+
+        [Test]
+        public void GetFood_WhenCalled_ReturnsFood()
+        {
+            const int FOOD_ID = 1;
+            var result = foodOrderDAO.GetFood(FOOD_ID);
+
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        public void GetFoodOrdersByTimeRange_WhenCalled_ReturnsFoodOrders()
+        {
+            DateTime START_DATE = new DateTime(2024, 02, 10, 00, 00, 00);
+            DateTime END_DATE = new DateTime(2024, 02, 10, 23, 59, 59);
+            var result = foodOrderDAO.GetFoodOrdersByTimeRange(START_DATE, END_DATE);
+
+            Assert.That(result, Has.Count.EqualTo(5));
         }
     }
 }

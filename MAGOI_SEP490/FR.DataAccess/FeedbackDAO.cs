@@ -1,6 +1,5 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -44,6 +43,7 @@ namespace FR.DataAccess
 
         {
             List<Feedback> list = new List<Feedback>();
+
             try
             {
                 foreach (Feedback feedback in _context.Feedbacks.ToList())
@@ -59,6 +59,7 @@ namespace FR.DataAccess
                         }
                     }
                 }
+
                 return list;
             }
             catch (Exception e)

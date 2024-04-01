@@ -38,8 +38,7 @@ namespace FR.DataAccess
         }
         public float GetFoodPrice(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId).UnitPrice;
         public Food GetFood(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId);
-
-        public List<FoodOrder> GetFoodOrdersByTimeRange (DateTime startDate, DateTime endDate)
+        public List<FoodOrder> GetFoodOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
             return _context.FoodOrder.Where(c => c.OrderAt >= startDate && c.OrderAt <= endDate).ToList();
         }

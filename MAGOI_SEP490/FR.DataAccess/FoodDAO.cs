@@ -26,7 +26,9 @@ namespace FR.DataAccess
         }
         public void UpdateFoodQuantity(int foodId, int new_quantity)
         {
-            _context.Foods.Where(f => f.Id == foodId).ExecuteUpdate(s => s.SetProperty(f => f.Quantity, new_quantity));
+            var food = _context.Foods.FirstOrDefault(x => x.Id == foodId);
+            food.Quantity = new_quantity;
+            _context.SaveChanges();
         }
         public void AddFood(Food food)
         {

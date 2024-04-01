@@ -1,4 +1,4 @@
-﻿using FR.BusinessObjects.Models;
+﻿using FR.Infrastructure.Enums;
 using FR.UnitTest;
 
 namespace FR.UnitTests.DAOTests

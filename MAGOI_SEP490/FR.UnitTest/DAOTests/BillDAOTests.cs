@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using FR.UnitTest;
 
 namespace FR.UnitTests.DAOTests
@@ -75,6 +76,16 @@ namespace FR.UnitTests.DAOTests
             var result = billDAO.GetBillsByDate(DATE_TIME);
 
             Assert.That(result, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void GetBillsByTimeRange_WhenCalled_ReturnsBills()
+        {
+            DateTime START_DATE = new DateTime(2024, 12, 01, 0, 0, 0);
+            DateTime END_DATE = new DateTime(2024, 12, 03, 1, 0, 0);
+            var result = billDAO.GetBillsByTimeRange(START_DATE, END_DATE);
+
+            Assert.That(result, Has.Count.EqualTo(2));
         }
     }
 }
