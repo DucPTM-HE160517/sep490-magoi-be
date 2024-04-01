@@ -29,7 +29,6 @@ namespace FR.DataAccess
         {
             return _context.Bills.Where(b => b.CreatedAt.Date == date.Date).ToList();
         }
-
         public List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
         {
             return _context.Bills.Where(c => c.FinishedAt >= startDate && c.FinishedAt <= endDate).ToList();

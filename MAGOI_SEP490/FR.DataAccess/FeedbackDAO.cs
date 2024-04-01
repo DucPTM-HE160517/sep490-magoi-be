@@ -12,7 +12,6 @@ namespace FR.DataAccess
         }
 
         public List<Feedback> GetFeedbacks() => _context.Feedbacks.ToList();
-
         public void AddFeedback(Feedback feedback)
         {
             try
@@ -25,12 +24,10 @@ namespace FR.DataAccess
                 throw new Exception(e.Message);
             }
         }
-
         public float AverageServingScore()
         {
             return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.ServingScore).Average();
         }
-
         public float AverageFoodScore()
         {
             return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.FoodScore).Average();
