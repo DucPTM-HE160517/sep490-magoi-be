@@ -1,6 +1,7 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.DataAccess;
 using FR.Infrastructure.Enums;
+using FR.Services.GraphQL.Types;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 
@@ -109,6 +110,54 @@ namespace FR.Services.Service
             }
 
             return foods;
+        }
+        public List<SaleReport> GetSaleReports(DateTime startDate, DateTime endDate)
+        {
+            List<SaleReport> saleReports = new List<SaleReport>();
+            foreach (FoodOrder foodOrder in _dao.GetFoodOrdersByTimeRange(startDate, endDate))
+            {
+                if (saleReports.Count == 0)
+                {
+                    SaleReport saleReport = new SaleReport() {
+                    TotalQuantity = foodOrder.Quantity,
+                    TotalIncome = foodOrder.Quantity * foodOrder.UnitPrice,
+                    Food = _dao.GetFood(foodOrder.FoodId)                  
+                    };
+                    saleReports.Add(saleReport);
+                }
+                else
+                {
+                    int indexMatchedReport = FindSaleReportIndexByFoodId(foodOrder.FoodId, saleReports);
+                    if (indexMatchedReport == -1)
+                    {
+                        SaleReport saleReport = new SaleReport()
+                        {
+                            TotalQuantity = foodOrder.Quantity,
+                            TotalIncome = foodOrder.Quantity * foodOrder.UnitPrice,
+                            Food = _dao.GetFood(foodOrder.FoodId)
+                        };
+                        saleReports.Add(saleReport);
+                    }
+                    else
+                    {
+                        saleReports[indexMatchedReport].TotalQuantity += foodOrder.Quantity;
+                        saleReports[indexMatchedReport].TotalIncome += foodOrder.UnitPrice * foodOrder.Quantity;
+                    }                    
+                }
+            }
+            return saleReports;
+        }
+        public int FindSaleReportIndexByFoodId(int foodId, List<SaleReport> saleReports)
+        {
+            int index = -1;
+            for (int i = 0; i < saleReports.Count; i++)
+            {
+                if (saleReports[i].Food.Id == foodId)
+                {
+                    return i;
+                }
+            }
+            return index;
         }
     }
 }
