@@ -13,7 +13,6 @@ namespace FR.DataAccess
         }
 
         public List<Feedback> GetFeedbacks() => _context.Feedbacks.ToList();
-
         public void AddFeedback(Feedback feedback)
         {
             try
@@ -40,7 +39,9 @@ namespace FR.DataAccess
         {
             return _context.Feedbacks.SingleOrDefault(c => c.Id == id);
         }
+
         public List<Feedback> GetFeedbacksByDate(DateTime startDate, DateTime endDate)
+
         {
             List<Feedback> list = new List<Feedback>();
             try
