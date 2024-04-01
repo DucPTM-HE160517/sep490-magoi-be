@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Services.GraphQL.Types;
 using FR.Services.GraphQL.Types.InputTypes;
 
 namespace FR.Services.IService
@@ -10,5 +11,6 @@ namespace FR.Services.IService
         void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
         FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
         Food[] GetTop5FoodOfOrders(List<Order> orders);
+        List<SaleReport> GetSaleReports(DateTime startDate, DateTime endDate);
     }
 }

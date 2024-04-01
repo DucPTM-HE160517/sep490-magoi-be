@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -24,13 +25,46 @@ namespace FR.DataAccess
                 throw new Exception(e.Message);
             }
         }
-        public float AverageServingScore()
+
+        //public float AverageServingScore()
+        //{
+        //    return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.ServingScore).Average();
+        //}
+
+        //public float AverageFoodScore()
+        //{
+        //    return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.FoodScore).Average();
+        //}
+        public Feedback GetFeedbackById(Guid id)
         {
-            return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.ServingScore).Average();
+            return _context.Feedbacks.SingleOrDefault(c => c.Id == id);
         }
-        public float AverageFoodScore()
+
+        public List<Feedback> GetFeedbacksByDate(DateTime startDate, DateTime endDate)
+
         {
-            return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.FoodScore).Average();
+            List<Feedback> list = new List<Feedback>();
+            try
+            {
+                foreach (Feedback feedback in _context.Feedbacks.ToList())
+                {
+                    foreach (Bill bill in _context.Bills.ToList())
+                    {
+                        if (feedback.BillId == bill.Id)
+                        {
+                            if (bill.FinishedAt != null && bill.FinishedAt >= startDate && bill.FinishedAt <= endDate)
+                            {
+                                list.Add(feedback);
+                            }
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

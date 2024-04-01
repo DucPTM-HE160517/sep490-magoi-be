@@ -34,7 +34,7 @@ namespace FR.Services.Service
                 _dao.AddFeedback(feedback);
                 return feedback;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -42,15 +42,30 @@ namespace FR.Services.Service
 
         public AverageFeedback GetAverageFeedback()
         {
-            return new AverageFeedback() 
+            AverageFeedback averageFeedback = new AverageFeedback()
             {
-                AverageFoodScore = _dao.AverageFoodScore(),
-                AverageServingScore = _dao.AverageServingScore(),
                 Feedbacks = GetFeedbacks()
             };
+            averageFeedback.AverageServingScore = AverageServingScore(averageFeedback.Feedbacks);
+            averageFeedback.AverageFoodScore = AverageFoodScore(averageFeedback.Feedbacks);
+            return averageFeedback;
+        }
+
+        public AverageFeedback GetAverageFeedbackByDate(DateTime startDate, DateTime endDate)
+        {
+            AverageFeedback averageFeedbackByDate = new AverageFeedback()
+            {
+                Feedbacks = GetFeedbacksByDate(startDate, endDate)
+            };
+            averageFeedbackByDate.AverageServingScore = AverageServingScore(averageFeedbackByDate.Feedbacks);
+            averageFeedbackByDate.AverageFoodScore = AverageFoodScore(averageFeedbackByDate.Feedbacks);
+            return averageFeedbackByDate;
         }
 
         public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
+        public List<Feedback> GetFeedbacksByDate(DateTime startDate, DateTime endDate) => _dao.GetFeedbacksByDate(startDate, endDate);
+        public float AverageServingScore(List<Feedback> feedbacks) => feedbacks.Count == 0 ? 0 : (float)feedbacks.Select(f => f.ServingScore).Average();
+        public float AverageFoodScore(List<Feedback> feedbacks) => feedbacks.Count == 0 ? 0 : (float)feedbacks.Select(f => f.FoodScore).Average();
 
     }
 }
