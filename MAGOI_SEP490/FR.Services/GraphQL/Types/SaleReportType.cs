@@ -1,5 +1,4 @@
-﻿using FR.BusinessObjects.Models;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,27 +10,21 @@ namespace FR.Services.GraphQL.Types
     public class SaleReport
     {
         public SaleReport() { }
-        public int Quantity { get; set; }
-        public float Income { get; set; }
-        public Food Food { get; set; }
+        public float TotalIncome { get; set; }
+        public List<SaleRevenue> SaleRevenue { get; set; }
     }
     public class SaleReportType : ObjectType<SaleReport>
     {
         protected override void Configure(IObjectTypeDescriptor<SaleReport> descriptor)
         {
-            descriptor.Field(f => f.Food)
-                .Type<FoodType>()
-                .Name("food")
-                .Description("The food");
-            descriptor.Field(f => f.Quantity)
-                .Type<IntType>()
-                .Name("quantity")
-                .Description("The quantity of food");
-            descriptor.Field(f => f.Income)
+            descriptor.Field(f => f.TotalIncome)
                 .Type<FloatType>()
                 .Name("totalIncome")
-                .Description("The income of food");
-
+                .Description("The total income");
+            descriptor.Field(f => f.SaleRevenue)
+                .Type<ListType<SaleRevenueType>>()
+                .Name("saleRevenue")
+                .Description("The sale revenue");
         }
     }
 }

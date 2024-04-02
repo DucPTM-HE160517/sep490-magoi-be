@@ -5,7 +5,7 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public List<SaleReport> GetSaleReports(IFoodOrderService foodOrderService, DateTime startDate, DateTime endDate) 
-                                 => foodOrderService.GetSaleReports(startDate, endDate);
+        public SaleReport GetSaleReports(IFoodOrderService foodOrderService, DateTime startDate, DateTime endDate) 
+                                 => foodOrderService.GetSaleReport(startDate, endDate);
     }
 }
