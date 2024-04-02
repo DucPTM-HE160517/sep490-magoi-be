@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using FR.UnitTest;
 
 namespace FR.UnitTests.DAOTests
@@ -49,8 +50,8 @@ namespace FR.UnitTests.DAOTests
             var orderToUpdate = orderDAO.GetOrderById(ORDER_ID);
 
             Guid TABLE_ID = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777");
-            DateTime CREATE_AT = new DateTime(2024, 01, 01, 00, 00, 01);
             Guid BILL_ID = Guid.Parse("022a14ef-f5a5-416d-a8b3-68b20133d897");
+            DateTime CREATE_AT = new DateTime(2024, 01, 01, 00, 00, 01);
             const int ORDER_STATUS_ID = (int)OrderStatusId.Cooking;
 
             orderToUpdate.TableId = TABLE_ID;
@@ -94,7 +95,7 @@ namespace FR.UnitTests.DAOTests
             int ORDER_STATUS_ID = (int)OrderStatusId.Serving;
 
             var orders = orderDAO.GetOrdersByStatusId(ORDER_STATUS_ID);
-            Assert.That(orders, Has.Count.EqualTo(3));
+            Assert.That(orders, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -103,7 +104,7 @@ namespace FR.UnitTests.DAOTests
             Guid TABLE_ID = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb");
 
             var orders = orderDAO.GetOrdersByTableId(TABLE_ID);
-            Assert.That(orders, Has.Count.EqualTo(4));
+            Assert.That(orders, Has.Count.EqualTo(3));
         }
 
         [Test]
@@ -113,7 +114,7 @@ namespace FR.UnitTests.DAOTests
             const int ORDER_STATUS_ID = (int)OrderStatusId.Serving;
 
             var orders = orderDAO.GetOrdersByTableIdAndOrderStatusId(TABLE_ID, ORDER_STATUS_ID);
-            Assert.That(orders, Has.Count.EqualTo(2));
+            Assert.That(orders, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -123,7 +124,7 @@ namespace FR.UnitTests.DAOTests
 
             var totalAmount = orderDAO.GetTotalAmmountOfOrder(ORDER_ID);
 
-            Assert.That(totalAmount, Is.EqualTo(534000));
+            Assert.That(totalAmount, Is.EqualTo(199000));
         }
 
         [Test]
@@ -132,16 +133,46 @@ namespace FR.UnitTests.DAOTests
             Guid BILL_ID = Guid.Parse("ca3274c4-0018-430d-9d52-b5d66558fd03");
 
             var orders = orderDAO.GetOrdersByBillId(BILL_ID);
-            Assert.That(orders, Has.Count.EqualTo(4));
+            Assert.That(orders, Has.Count.EqualTo(3));
         }
 
         [Test]
         public void GetServedOrdersByTableId_WhenCalled_ReturnsServedOrders()
         {
-            Guid TABLE_ID = Guid.Parse("9e4761a1-22d2-4a1e-a0da-e9224d75f6bb");
+            Guid TABLE_ID = Guid.Parse("24421c43-7ce9-49f9-b279-545130db8777");
 
             var orders = orderDAO.GetServedOrdersByTableId(TABLE_ID);
-            Assert.That(orders, Has.Count.EqualTo(2));
+            Assert.That(orders, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void GetServingOrdersByTimeRange_WhenCalled_ReturnsServingOrders()
+        {
+            DateTime START_DATE = new DateTime(2024, 02, 10, 00, 00, 00);
+            DateTime END_DATE = new DateTime(2024, 02, 10, 23, 59, 59);
+
+            var orders = orderDAO.GetServingOrdersByTimeRange(START_DATE, END_DATE).ToList();
+            Assert.That(orders, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void GetServedOrdersByTimeRange_WhenCalled_ReturnsServedOrders()
+        {
+            DateTime START_DATE = new DateTime(2024, 12, 02, 00, 00, 00);
+            DateTime END_DATE = new DateTime(2024, 12, 02, 23, 59, 59);
+
+            var orders = orderDAO.GetServedOrdersByTimeRange(START_DATE, END_DATE).ToList();
+            Assert.That(orders, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public void GetOrdersByTimeRange_WhenCalled_ReturnsOrders()
+        {
+            DateTime START_DATE = new DateTime(2024, 12, 02, 00, 00, 00);
+            DateTime END_DATE = new DateTime(2024, 12, 02, 23, 59, 59);
+
+            var orders = orderDAO.GetOrdersByTimeRange(START_DATE, END_DATE).ToList();
+            Assert.That(orders, Has.Count.EqualTo(3));
         }
     }
 }

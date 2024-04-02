@@ -117,19 +117,21 @@ namespace FR.DataAccess
         }
         public List<Order> GetServedOrdersByTableId(Guid tableId)
         {
-            return _context.Orders.Where(o => o.TableId == tableId && o.OrderStatusId == (int)OrderStatusId.Serving).ToList();
+            return _context.Orders.Where(o => o.TableId == tableId
+                                    && o.OrderStatusId == (int)OrderStatusId.Finished).ToList();
         }
-
         public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId== (int)OrderStatusId.Serving && c.CreatedAt >= startDate && c.CreatedAt <= endDate );
+            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
+                                    && c.CreatedAt >= startDate
+                                    && c.CreatedAt <= endDate);
         }
-
         public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished && c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
+                                    && c.CreatedAt >= startDate
+                                    && c.CreatedAt <= endDate);
         }
-
         public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
             return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);

@@ -1,4 +1,4 @@
-﻿using FR.BusinessObjects.Models;
+﻿using FR.Infrastructure.Enums;
 using FR.UnitTest;
 
 namespace FR.UnitTests.DAOTests
@@ -21,17 +21,17 @@ namespace FR.UnitTests.DAOTests
         {
             var tables = tableDAO.GetTables();
 
-            Assert.That(tables, Has.Count.EqualTo(3));
+            Assert.That(tables, Has.Count.EqualTo(5));
         }
 
         [Test]
         public void GetTablesByStatusId_WhenCalled_ReturnsTables()
         {
-            const int TBALE_STATUS_ID = (int)TableStatusId.Available;
+            const int TABLE_STATUS_ID = (int)TableStatusId.Available;
 
-            var tables = tableDAO.GetTablesByStatusId(TBALE_STATUS_ID);
+            var tables = tableDAO.GetTablesByStatusId(TABLE_STATUS_ID);
 
-            Assert.That(tables, Has.Count.EqualTo(1));
+            Assert.That(tables, Has.Count.EqualTo(5));
         }
 
         [Test]
