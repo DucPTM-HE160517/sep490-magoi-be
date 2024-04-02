@@ -111,48 +111,62 @@ namespace FR.Services.Service
 
             return foods;
         }
-        public List<SaleReport> GetSaleReports(DateTime startDate, DateTime endDate)
+        public SaleReport GetSaleReport(DateTime startDate, DateTime endDate)
         {
-            List<SaleReport> saleReports = new List<SaleReport>();
+            //Get SaleReportElememt List
+            List<SaleRevenue> saleRevenues = new List<SaleRevenue>();
             foreach (FoodOrder foodOrder in _dao.GetFoodOrdersByTimeRange(startDate, endDate))
             {
-                if (saleReports.Count == 0)
+                if (saleRevenues.Count == 0)
                 {
-                    SaleReport saleReport = new SaleReport() {
-                    TotalQuantity = foodOrder.Quantity,
-                    TotalIncome = foodOrder.Quantity * foodOrder.UnitPrice,
+                    SaleRevenue SaleRevenue = new SaleRevenue() {
+                    Quantity = foodOrder.Quantity,
+                    Income = foodOrder.Quantity * foodOrder.UnitPrice,
                     Food = _dao.GetFood(foodOrder.FoodId)                  
                     };
-                    saleReports.Add(saleReport);
+                    saleRevenues.Add(SaleRevenue);
                 }
                 else
                 {
-                    int indexMatchedReport = FindSaleReportIndexByFoodId(foodOrder.FoodId, saleReports);
+                    int indexMatchedReport = FindSaleRevenueIndexByFoodId(foodOrder.FoodId, saleRevenues);
                     if (indexMatchedReport == -1)
                     {
-                        SaleReport saleReport = new SaleReport()
+                        SaleRevenue SaleRevenue = new SaleRevenue()
                         {
-                            TotalQuantity = foodOrder.Quantity,
-                            TotalIncome = foodOrder.Quantity * foodOrder.UnitPrice,
+                            Quantity = foodOrder.Quantity,
+                            Income = foodOrder.Quantity * foodOrder.UnitPrice,
                             Food = _dao.GetFood(foodOrder.FoodId)
                         };
-                        saleReports.Add(saleReport);
+                        saleRevenues.Add(SaleRevenue);
                     }
                     else
                     {
-                        saleReports[indexMatchedReport].TotalQuantity += foodOrder.Quantity;
-                        saleReports[indexMatchedReport].TotalIncome += foodOrder.UnitPrice * foodOrder.Quantity;
+                        saleRevenues[indexMatchedReport].Quantity += foodOrder.Quantity;
+                        saleRevenues[indexMatchedReport].Income += foodOrder.UnitPrice * foodOrder.Quantity;
                     }                    
                 }
             }
-            return saleReports;
+
+            //Get SaleReport List
+            float sumIncome = 0;
+            foreach (SaleRevenue SaleRevenue in saleRevenues)
+            {
+                sumIncome += SaleRevenue.Income;
+            }
+
+            SaleReport saleReport = new SaleReport() {
+            TotalIncome = sumIncome,
+            SaleRevenue = saleRevenues
+            };
+
+            return saleReport;
         }
-        public int FindSaleReportIndexByFoodId(int foodId, List<SaleReport> saleReports)
+        public int FindSaleRevenueIndexByFoodId(int foodId, List<SaleRevenue> SaleRevenues)
         {
             int index = -1;
-            for (int i = 0; i < saleReports.Count; i++)
+            for (int i = 0; i < SaleRevenues.Count; i++)
             {
-                if (saleReports[i].Food.Id == foodId)
+                if (SaleRevenues[i].Food.Id == foodId)
                 {
                     return i;
                 }
