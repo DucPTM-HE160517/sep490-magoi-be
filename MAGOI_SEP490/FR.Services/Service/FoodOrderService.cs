@@ -119,8 +119,8 @@ namespace FR.Services.Service
                 if (saleReports.Count == 0)
                 {
                     SaleReport saleReport = new SaleReport() {
-                    TotalQuantity = foodOrder.Quantity,
-                    TotalIncome = foodOrder.Quantity * foodOrder.UnitPrice,
+                    Quantity = foodOrder.Quantity,
+                    Income = foodOrder.Quantity * foodOrder.UnitPrice,
                     Food = _dao.GetFood(foodOrder.FoodId)                  
                     };
                     saleReports.Add(saleReport);
@@ -132,16 +132,16 @@ namespace FR.Services.Service
                     {
                         SaleReport saleReport = new SaleReport()
                         {
-                            TotalQuantity = foodOrder.Quantity,
-                            TotalIncome = foodOrder.Quantity * foodOrder.UnitPrice,
+                            Quantity = foodOrder.Quantity,
+                            Income = foodOrder.Quantity * foodOrder.UnitPrice,
                             Food = _dao.GetFood(foodOrder.FoodId)
                         };
                         saleReports.Add(saleReport);
                     }
                     else
                     {
-                        saleReports[indexMatchedReport].TotalQuantity += foodOrder.Quantity;
-                        saleReports[indexMatchedReport].TotalIncome += foodOrder.UnitPrice * foodOrder.Quantity;
+                        saleReports[indexMatchedReport].Quantity += foodOrder.Quantity;
+                        saleReports[indexMatchedReport].Income += foodOrder.UnitPrice * foodOrder.Quantity;
                     }                    
                 }
             }
