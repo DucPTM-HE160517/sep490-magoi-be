@@ -5,8 +5,8 @@ namespace FR.Services.GraphQL.Types
 {
     public class AverageFeedback
     {
-        public float AverageServingScore { get; set; }
-        public float AverageFoodScore { get; set; }
+        public Double AverageServingScore { get; set; }
+        public Double AverageFoodScore { get; set; }
         public List<Feedback> Feedbacks { get; set; }
     }
     public class AverageFeedbackType : ObjectType<AverageFeedback>
