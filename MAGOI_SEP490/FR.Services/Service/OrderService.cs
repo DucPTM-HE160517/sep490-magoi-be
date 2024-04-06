@@ -88,25 +88,25 @@ namespace FR.Services.Service
             return _dao.GetServedOrdersByTableId(tableId);
         }
 
-        public List<Order> GetServingOrdersByTimeRange(DateTime date)
+        public List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            DateTime startDate = Ultilities.AbsoluteStart(date);
-            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
 
             return _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
         }
 
-        public List<Order> GetServedOrdersByTimeRange(DateTime date)
+        public List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            DateTime startDate = Ultilities.AbsoluteStart(date);
-            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
 
             return _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
         }
-        public List<Order> GetOrdersByTimeRange(DateTime date)
+        public List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            DateTime startDate = Ultilities.AbsoluteStart(date);
-            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
             return _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
         }
     }

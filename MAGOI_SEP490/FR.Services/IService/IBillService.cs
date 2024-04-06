@@ -9,7 +9,7 @@ namespace FR.Services.IService
         Bill GetBillById(Guid billId);
         void UpdateBill(Bill bill);
         int[] GetBillsPerHour(List<Bill> bills);
-        List<Bill> GetBillsByTimeRange(DateTime date);
+        List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate);
         float GetTotalAmountOfBills(List<Bill> bills);
     }
 }
