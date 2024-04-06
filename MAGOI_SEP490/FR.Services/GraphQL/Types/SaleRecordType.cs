@@ -5,7 +5,6 @@ namespace FR.Services.GraphQL.Types
 {
     public class SaleRecord
     {
-        public DateTime Date { get; set; }
         public float Revenue { get; set; }
         public List<Order> ServingOrders { get; set; }
         public List<Order> ServedOrders { get; set; }
@@ -16,10 +15,6 @@ namespace FR.Services.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<SaleRecord> descriptor)
         {
-            descriptor.Field(sr => sr.Date)
-                .Type<DateTimeType>()
-                .Name("date")
-                .Description("The date of the sale record");
             descriptor.Field(sr => sr.Revenue)
                 .Type<DateTimeType>()
                 .Name("revenue")
