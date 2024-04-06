@@ -25,5 +25,7 @@ namespace FR.API.GraphQL.Queries
 
             return record;
         }
+        public SaleReport GetSaleReports(IFoodOrderService foodOrderService, DateTime startDate, DateTime endDate)
+                                 => foodOrderService.GetSaleReport(startDate, endDate);
     }
 }
