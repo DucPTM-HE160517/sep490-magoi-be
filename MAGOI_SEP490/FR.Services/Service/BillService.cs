@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Common.Ultilities;
 using FR.DataAccess;
 using FR.Services.IService;
 
@@ -69,8 +70,11 @@ namespace FR.Services.Service
             return billsPerHour;
         }
 
-        public List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
+        public List<Bill> GetBillsByTimeRange(DateTime date)
         {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+
             return _dao.GetBillsByTimeRange(startDate, endDate);
         }
     }
