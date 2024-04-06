@@ -120,15 +120,15 @@ namespace FR.DataAccess
             return _context.Orders.Where(o => o.TableId == tableId
                                     && o.OrderStatusId == (int)OrderStatusId.Finished).ToList();
         }
-        public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        public async Task<IQueryable<Order>> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
+            return await _context.Orders.AsQueryable(c => c.OrderStatusId == (int)OrderStatusId.Serving
                                     && c.CreatedAt >= startDate
                                     && c.CreatedAt <= endDate);
         }
-        public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        public async Task<IQueryable<Order>> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
+            return await _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
                                     && c.CreatedAt >= startDate
                                     && c.CreatedAt <= endDate);
         }

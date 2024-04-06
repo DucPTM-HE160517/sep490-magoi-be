@@ -86,9 +86,9 @@ namespace FR.Services.Service
             return _dao.GetServedOrdersByTableId(tableId);
         }
 
-        public List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
+        public Task<IQueryable<Order>> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServingOrdersByTimeRange(startDate, endDate);
 
-        public List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
-        public List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
+        public Task<IQueryable<Order>> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServedOrdersByTimeRange(startDate, endDate);
+        public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetOrdersByTimeRange(startDate, endDate);
     }
 }

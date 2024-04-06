@@ -69,7 +69,7 @@ namespace FR.Services.Service
             return billsPerHour;
         }
 
-        public List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
+        public IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
         {
             return _dao.GetBillsByTimeRange(startDate, endDate);
         }
