@@ -88,30 +88,27 @@ namespace FR.Services.Service
             return _dao.GetServedOrdersByTableId(tableId);
         }
 
-        public Task<IQueryable<Order>> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServingOrdersByTimeRange(startDate, endDate);
 
-        public Task<IQueryable<Order>> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServedOrdersByTimeRange(startDate, endDate);
-        public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetOrdersByTimeRange(startDate, endDate);
-        public List<Order> GetServingOrdersByTimeRange(DateTime date)
+        public IQueryable<Order> GetServingOrdersByTimeRange(DateTime date)
         {
             DateTime startDate = Ultilities.AbsoluteStart(date);
             DateTime endDate = Ultilities.AbsoluteEnd(date);
 
-            return _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
+            return _dao.GetServingOrdersByTimeRange(startDate, endDate);
         }
 
-        public List<Order> GetServedOrdersByTimeRange(DateTime date)
+        public IQueryable<Order> GetServedOrdersByTimeRange(DateTime date)
         {
             DateTime startDate = Ultilities.AbsoluteStart(date);
             DateTime endDate = Ultilities.AbsoluteEnd(date);
 
-            return _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
+            return _dao.GetServedOrdersByTimeRange(startDate, endDate);
         }
-        public List<Order> GetOrdersByTimeRange(DateTime date)
+        public IQueryable<Order> GetOrdersByTimeRange(DateTime date)
         {
             DateTime startDate = Ultilities.AbsoluteStart(date);
             DateTime endDate = Ultilities.AbsoluteEnd(date);
-            return _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
+            return _dao.GetOrdersByTimeRange(startDate, endDate);
         }
     }
 }
