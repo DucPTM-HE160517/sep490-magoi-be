@@ -10,6 +10,7 @@ namespace FR.Services.IService
         void UpdateBill(Bill bill);
         int[] GetBillsPerHour(List<Bill> bills);
         IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate);
+        List<Bill> GetBillsByTimeRange(DateTime date);
         float GetTotalAmountOfBills(List<Bill> bills);
     }
 }

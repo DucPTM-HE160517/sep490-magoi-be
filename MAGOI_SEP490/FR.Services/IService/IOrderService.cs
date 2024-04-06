@@ -17,6 +17,9 @@ namespace FR.Services.IService
         Task<IQueryable<Order>> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate);
         Task<IQueryable<Order>> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate);
         IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
+        List<Order> GetServingOrdersByTimeRange(DateTime date);
+        List<Order> GetServedOrdersByTimeRange(DateTime date);
+        List<Order> GetOrdersByTimeRange(DateTime date);
         public float GetTotalPriceOfOrders(List<Order> orders);
         public void UpdateBillIdOfOrder(Guid orderId, Guid billId);
     }

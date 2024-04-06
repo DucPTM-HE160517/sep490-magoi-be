@@ -1,8 +1,10 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Common.Ultilities;
 using FR.DataAccess;
 using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
+using static HotChocolate.ErrorCodes;
 
 namespace FR.Services.Service
 {
@@ -90,5 +92,26 @@ namespace FR.Services.Service
 
         public Task<IQueryable<Order>> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServedOrdersByTimeRange(startDate, endDate);
         public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetOrdersByTimeRange(startDate, endDate);
+        public List<Order> GetServingOrdersByTimeRange(DateTime date)
+        {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+
+            return _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
+        }
+
+        public List<Order> GetServedOrdersByTimeRange(DateTime date)
+        {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+
+            return _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
+        }
+        public List<Order> GetOrdersByTimeRange(DateTime date)
+        {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            return _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
+        }
     }
 }
