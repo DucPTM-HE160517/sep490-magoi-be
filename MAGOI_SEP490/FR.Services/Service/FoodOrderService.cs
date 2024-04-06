@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Common.Ultilities;
 using FR.DataAccess;
 using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types;
@@ -111,8 +112,11 @@ namespace FR.Services.Service
 
             return foods;
         }
-        public SaleReport GetSaleReport(DateTime startDate, DateTime endDate)
+        public SaleReport GetSaleReport(DateTime date)
         {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+
             //Get SaleReportElememt List
             List<SaleRevenue> saleRevenues = new List<SaleRevenue>();
             foreach (FoodOrder foodOrder in _dao.GetFoodOrdersByTimeRange(startDate, endDate))
