@@ -12,5 +12,6 @@ namespace FR.Services.IService
         FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
         Food[] GetTop5FoodOfOrders(List<Order> orders);
         SaleReport GetSaleReport(DateTime date);
+        List<FoodOrder> GetFoodOrdersByFoodCategoryId(int foodCategoryId);
     }
 }

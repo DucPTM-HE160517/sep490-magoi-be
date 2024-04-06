@@ -177,5 +177,6 @@ namespace FR.Services.Service
             }
             return index;
         }
+        public List<FoodOrder> GetFoodOrdersByFoodCategoryId(int foodCategoryId) => _dao.GetFoodOrdersByFoodCategoryId(foodCategoryId);
     }
 }

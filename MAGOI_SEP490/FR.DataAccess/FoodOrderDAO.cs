@@ -42,5 +42,28 @@ namespace FR.DataAccess
         {
             return _context.FoodOrder.Where(c => c.OrderAt >= startDate && c.OrderAt <= endDate).ToList();
         }
+        public List<FoodOrder> GetFoodOrdersByFoodCategoryId(int foodCategoryId)
+        {
+            List<FoodOrder> foodOrderList = new List<FoodOrder>();
+
+            foreach (FoodOrder foodOrder in _context.FoodOrder.ToList())
+            {
+                // check weather foodOrder has cooking status
+                if (foodOrder.FoodOrderStatusId == 2)
+                {
+                    foreach (Food food in _context.Foods.ToList())
+                    {
+                        if (food.Id == foodOrder.FoodId)
+                        {
+                            if (food.FoodCategoryId == foodCategoryId)
+                            {
+                                foodOrderList.Add(foodOrder);
+                            }
+                        }
+                    }
+                }                
+            }
+            return foodOrderList;
+        }
     }
 }
