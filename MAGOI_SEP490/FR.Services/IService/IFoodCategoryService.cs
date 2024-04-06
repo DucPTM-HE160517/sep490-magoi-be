@@ -1,4 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Services.GraphQL.Types;
 
 namespace FR.Services.IService
 {
@@ -6,5 +7,6 @@ namespace FR.Services.IService
     {
         List<FoodCategory> GetFoodCategories();
         FoodCategory GetFoodCategoryById(int id);
+        List<FoodOrderCategory>  GetFoodOrderCategories();
     }
 }

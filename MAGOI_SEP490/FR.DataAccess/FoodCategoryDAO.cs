@@ -19,5 +19,7 @@ namespace FR.DataAccess
         {
             return _context.FoodCategories.SingleOrDefault(fc => fc.Id == id);
         }
+        public List<FoodOrder> GetFoodOrder() => _context.FoodOrder.ToList();
+        public List<Food> GetFoods() => _context.Foods.ToList();
     }
 }
