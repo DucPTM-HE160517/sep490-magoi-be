@@ -5,8 +5,7 @@ namespace FR.Services.GraphQL.Types
 {
     public class SaleRecord
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime Date { get; set; }
         public float Revenue { get; set; }
         public List<Order> ServingOrders { get; set; }
         public List<Order> ServedOrders { get; set; }
@@ -17,14 +16,10 @@ namespace FR.Services.GraphQL.Types
     {
         protected override void Configure(IObjectTypeDescriptor<SaleRecord> descriptor)
         {
-            descriptor.Field(sr => sr.StartDate)
+            descriptor.Field(sr => sr.Date)
                 .Type<DateTimeType>()
-                .Name("startDate")
-                .Description("Start date of the sale record");
-            descriptor.Field(sr => sr.EndDate)
-                .Type<DateTimeType>()
-                .Name("endDate")
-                .Description("End date of the sale record");
+                .Name("date")
+                .Description("The date of the sale record");
             descriptor.Field(sr => sr.Revenue)
                 .Type<DateTimeType>()
                 .Name("revenue")

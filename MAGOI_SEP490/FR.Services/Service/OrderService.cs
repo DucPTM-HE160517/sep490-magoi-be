@@ -1,8 +1,10 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.Common.Ultilities;
 using FR.DataAccess;
 using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
+using static HotChocolate.ErrorCodes;
 
 namespace FR.Services.Service
 {
@@ -86,9 +88,26 @@ namespace FR.Services.Service
             return _dao.GetServedOrdersByTableId(tableId);
         }
 
-        public List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
+        public List<Order> GetServingOrdersByTimeRange(DateTime date)
+        {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
 
-        public List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
-        public List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate) => _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
+            return _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
+        }
+
+        public List<Order> GetServedOrdersByTimeRange(DateTime date)
+        {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+
+            return _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
+        }
+        public List<Order> GetOrdersByTimeRange(DateTime date)
+        {
+            DateTime startDate = Ultilities.AbsoluteStart(date);
+            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            return _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
+        }
     }
 }

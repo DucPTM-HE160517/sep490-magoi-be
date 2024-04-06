@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FR.BusinessObjects\FR.BusinessObjects.csproj" />
+    <ProjectReference Include="..\FR.Common\FR.Common.csproj" />
     <ProjectReference Include="..\FR.DataAccess\FR.DataAccess.csproj" />
   </ItemGroup>
 
