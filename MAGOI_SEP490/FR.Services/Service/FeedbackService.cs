@@ -46,6 +46,7 @@ namespace FR.Services.Service
             {
                 Feedbacks = GetFeedbacks()
             };
+
             averageFeedback.AverageServingScore = AverageServingScore(averageFeedback.Feedbacks);
             averageFeedback.AverageFoodScore = AverageFoodScore(averageFeedback.Feedbacks);
             return averageFeedback;
@@ -64,8 +65,8 @@ namespace FR.Services.Service
 
         public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
         public List<Feedback> GetFeedbacksByDate(DateTime startDate, DateTime endDate) => _dao.GetFeedbacksByDate(startDate, endDate);
-        public float AverageServingScore(List<Feedback> feedbacks) => feedbacks.Count == 0 ? 0 : (float)feedbacks.Select(f => f.ServingScore).Average();
-        public float AverageFoodScore(List<Feedback> feedbacks) => feedbacks.Count == 0 ? 0 : (float)feedbacks.Select(f => f.FoodScore).Average();
+        public float AverageServingScore(List<Feedback> feedbacks) => (float)(feedbacks.Count == 0 ? 0 : Math.Round(feedbacks.Select(f => f.ServingScore).Average(), 1));
+        public float AverageFoodScore(List<Feedback> feedbacks) => (float)(feedbacks.Count == 0 ? 0 : Math.Round(feedbacks.Select(f => f.FoodScore).Average(), 1));
 
     }
 }
