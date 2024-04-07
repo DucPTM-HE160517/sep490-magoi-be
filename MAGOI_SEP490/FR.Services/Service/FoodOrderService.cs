@@ -37,7 +37,7 @@ namespace FR.Services.Service
             return foodOrders;
         }
 
-        public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
+        public IQueryable<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
             return _dao.GetFoodOrdersByOrderId(orderId);
         }

@@ -1,10 +1,11 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using FR.BusinessObjects.Models;
+﻿using FR.BusinessObjects.Models;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
+
 namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public async List<FoodCategory> GetCategories(IFoodCategoryService service) => await service.GetFoodCategories().ToListAsync();
+        public async Task<List<FoodCategory>> GetCategories(IFoodCategoryService service) => await service.GetFoodCategories().ToListAsync();
     }
 }

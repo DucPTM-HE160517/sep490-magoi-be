@@ -28,9 +28,9 @@ namespace FR.DataAccess
                 throw new Exception(e.Message);
             }
         }
-        public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
+        public IQueryable<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
-            return _context.FoodOrder.Where(f => f.OrderId == orderId).ToList();
+            return _context.FoodOrder.Where(f => f.OrderId == orderId);
         }
         public FoodOrder GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
         {

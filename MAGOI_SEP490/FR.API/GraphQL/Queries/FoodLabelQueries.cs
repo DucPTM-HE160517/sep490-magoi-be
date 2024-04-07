@@ -1,6 +1,6 @@
 ﻿namespace FR.API.GraphQL.Queries
 {
-    public partial class FoodLabelQueries
+    public partial class Queries
     {
     }
 }
