@@ -14,12 +14,12 @@ namespace FR.Services.GraphQL.Types
         protected override void Configure(IObjectTypeDescriptor<AverageFeedback> descriptor)
         {
             descriptor.Field(f => f.AverageServingScore)
-                .Type<FloatType>()
+                .Type<DecimalType>()
                 .Name("averageService")
                 .Description("The average service score");
 
             descriptor.Field(f => f.AverageFoodScore)
-                .Type<FloatType>()
+                .Type<DecimalType>()
                 .Name("averageFood")
                 .Description("The average food score");
 
