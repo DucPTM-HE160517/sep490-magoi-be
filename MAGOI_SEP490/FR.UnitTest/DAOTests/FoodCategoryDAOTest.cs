@@ -18,7 +18,7 @@ namespace FR.UnitTests.DAOTests
         [Test]
         public void GetFoodCategories_WhenCalled_ReturnsAllFoodCategories()
         {
-            var foodCategories = foodCategoryDAO.GetFoodCategories();
+            var foodCategories = foodCategoryDAO.GetCategoryOfCookingFoods();
 
             Assert.That(foodCategories, Has.Count.EqualTo(3));
         }
