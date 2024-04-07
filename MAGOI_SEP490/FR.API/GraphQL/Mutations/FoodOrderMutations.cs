@@ -21,8 +21,8 @@ namespace FR.API.GraphQL.Mutations
             try
             {
                 //Get order and table
-                Order order = orderService.GetOrderById(orderId);
-                Table table = tableService.GetTable(order.TableId);
+                Order order = orderService.GetOrderById(orderId).Result;
+                Table table = tableService.GetTable(order.TableId).Result;
                 //update food status in the order
                 FoodOrder food = foodOrderService.UpdateFoodOrderStatus(orderId, foodId, statusId);
                 string foodName = foodService.GetFoodById(foodId).Result.Name;

@@ -14,9 +14,9 @@ namespace FR.DataAccess
         {
             return _context.TableStatus.SingleOrDefault(s => s.Id == id);
         }
-        public List<TableStatus> GetAllTableStatus()
+        public IQueryable<TableStatus> GetAllTableStatus()
         {
-            return _context.TableStatus.ToList();
+            return _context.TableStatus;
         }
     }
 }

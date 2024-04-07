@@ -6,7 +6,7 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public List<Table> GetTables(ITableService service, int? tableStatusId = null)
+        public IQueryable<Table> GetTables(ITableService service, int? tableStatusId = null)
         {
             switch (tableStatusId)
             {
@@ -19,20 +19,19 @@ namespace FR.API.GraphQL.Queries
                 case (int)TableStatusId.Booked:
                     return service.GetTablesByStatusId((int)TableStatusId.Booked);
                 default:
-                    return new List<Table>();
+                    return new List<Table>().AsQueryable();
             }
         }
         public Table GetTable(ITableService service, Guid? id = null)
         {
             if(id.HasValue)
             {
-                return service.GetTable(id.Value);
+                return service.GetTable(id.Value).Result;
             }
             else
             {
                 return new Table { Id = Guid.Empty, Name = "NOT FOUND!" };
             }
         }
-
     }
 }

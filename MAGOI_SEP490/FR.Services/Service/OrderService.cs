@@ -31,11 +31,11 @@ namespace FR.Services.Service
         {
             _dao.DeleteOrder(order);
         }
-        public Order GetOrderById(Guid Id)
+        public async Task<Order> GetOrderById(Guid Id)
         {
-            return _dao.GetOrderById(Id);
+            return await _dao.GetOrderById(Id);
         }
-        public List<Order> GetOrdersByOrderStatusId(int? orderStatusId)
+        public IQueryable<Order> GetOrdersByOrderStatusId(int orderStatusId)
         {
             return _dao.GetOrdersByStatusId(orderStatusId);
         }
@@ -51,7 +51,7 @@ namespace FR.Services.Service
         {
             try
             {
-                Order o = _dao.GetOrderById(orderId);
+                Order o = _dao.GetOrderById(orderId).Result;
                 o.OrderStatusId = orderStatusId;
                 _dao.UpdateOrder(o);
             }
@@ -71,9 +71,9 @@ namespace FR.Services.Service
 
             return totalPrice;
         }
-        public void UpdateBillIdOfOrder(Guid orderId, Guid billId)
+        public async void UpdateBillIdOfOrder(Guid orderId, Guid billId)
         {
-            Order order = _dao.GetOrderById(orderId);
+            Order order = await _dao.GetOrderById(orderId);
             order.BillId = billId;
             _dao.UpdateOrder(order);
         }

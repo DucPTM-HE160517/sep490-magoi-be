@@ -5,6 +5,7 @@ using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.Services.Service
 {
@@ -42,11 +43,11 @@ namespace FR.Services.Service
             return _dao.GetFoodOrdersByOrderId(orderId);
         }
 
-        public void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId)
+        public async Task UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId)
         {
             try
             {
-                List<FoodOrder> foods = _dao.GetFoodOrdersByOrderId(orderId);
+                List<FoodOrder> foods = await _dao.GetFoodOrdersByOrderId(orderId).ToListAsync();
                 foreach (FoodOrder food in foods)
                 {
                     food.FoodOrderStatusId = foodOrderStatusId;
@@ -73,13 +74,13 @@ namespace FR.Services.Service
                 throw new Exception(e.Message);
             }
         }
-        public Food[] GetTop5FoodOfOrders(List<Order> orders)
+        public async Task<Food[]> GetTop5FoodOfOrders(List<Order> orders)
         {
             Dictionary<int, int> foodCounts = new Dictionary<int, int>();
 
             foreach (var order in orders)
             {
-                List<FoodOrder> foodOrders = _dao.GetFoodOrdersByOrderId(order.Id);
+                List<FoodOrder> foodOrders = await _dao.GetFoodOrdersByOrderId(order.Id).ToListAsync();
                 foreach (var foodOrder in foodOrders)
                 {
                     if (foodCounts.ContainsKey(foodOrder.FoodId))

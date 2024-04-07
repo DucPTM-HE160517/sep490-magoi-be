@@ -5,9 +5,9 @@ namespace FR.Services.IService
 {
     public interface ITableService
     {
-        List<Table> GetTables();
-        List<Table> GetTablesByStatusId(int tableStatusId);
-        Table GetTable(Guid id);
+        IQueryable<Table> GetTables();
+        IQueryable<Table> GetTablesByStatusId(int tableStatusId);
+        Task<Table> GetTable(Guid id);
         Table GetTableByName(string name);
         Table GetTableByBillId(Guid billId);
         void UpdateTableStatus(Guid tableId, TableStatusId statusId);

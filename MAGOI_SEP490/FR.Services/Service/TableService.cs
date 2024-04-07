@@ -13,14 +13,14 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
-        public List<Table> GetTables()
+        public IQueryable<Table> GetTables()
         {
             return _dao.GetTables();
         }
 
-        public Table GetTable(Guid id)
+        public async Task<Table> GetTable(Guid id)
         {
-            return _dao.GetTable(id);
+            return await _dao.GetTable(id);
         }
 
         public void UpdateTableStatus(Guid tableId, TableStatusId statusId)
@@ -28,9 +28,9 @@ namespace FR.Services.Service
             _dao.UpdateTableStatus(tableId, statusId);
         }
 
-        public void UpdateTableStatusWhenCreateOrder(Guid tableId)
+        public async void UpdateTableStatusWhenCreateOrder(Guid tableId)
         {
-            Table table = GetTable(tableId);
+            Table table = await GetTable(tableId);
             if (table.StatusId == (int)TableStatusId.Available)
             {
                 UpdateTableStatus(tableId, TableStatusId.Serving);
@@ -42,7 +42,7 @@ namespace FR.Services.Service
             return _dao.GetTableByName(name);
         }
 
-        public List<Table> GetTablesByStatusId(int tableStatusId)
+        public IQueryable<Table> GetTablesByStatusId(int tableStatusId)
         {
             return _dao.GetTablesByStatusId(tableStatusId);
         }

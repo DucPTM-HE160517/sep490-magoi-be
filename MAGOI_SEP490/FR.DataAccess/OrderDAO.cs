@@ -12,9 +12,9 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-        public Order GetOrderById(Guid Id)
+        public async Task<Order> GetOrderById(Guid Id)
         {
-            return _context.Orders.SingleOrDefault(o => o.Id == Id);
+            return await _context.Orders.SingleOrDefaultAsync(o => o.Id == Id);
         }
         public void AddOrder(Order order)
         {
@@ -40,24 +40,9 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
-        public List<Order> GetOrdersByStatusId(int? statusId)
+        public IQueryable<Order> GetOrdersByStatusId(int statusId)
         {
-            try
-            {
-                if (statusId != null)
-                {
-                    return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
-                }
-                else
-                {
-                    return _context.Orders.ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
+            return _context.Orders.Where(x => x.OrderStatusId == statusId);
         }
         public List<Order> GetOrdersByTableId(Guid tableId)
         {

@@ -6,7 +6,7 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public List<Bill> GetBillsByDate(IBillService billService, DateTime billDate) => billService.GetBillsByDate(billDate).ToList();
-        public async Task<Bill> Bill(IBillService billService, Guid billId) =>await billService.GetBillById(billId);
+        public IQueryable<Bill> GetBillsByDate(IBillService billService, DateTime billDate) => billService.GetBillsByDate(billDate);
+        public Bill Bill(IBillService billService, Guid billId) => billService.GetBillById(billId).Result;
     }
 }

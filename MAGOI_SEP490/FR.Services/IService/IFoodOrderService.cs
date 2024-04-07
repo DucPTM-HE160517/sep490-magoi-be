@@ -8,9 +8,9 @@ namespace FR.Services.IService
     {
         List<FoodOrder> AddFoodOrders(Guid orderId, List<FoodOrderInput> foodOrders);
         IQueryable<FoodOrder> GetFoodOrdersByOrderId(Guid orderId);
-        void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
+        Task UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
         FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
-        Food[] GetTop5FoodOfOrders(List<Order> orders);
+        Task<Food[]> GetTop5FoodOfOrders(List<Order> orders);
         SaleReport GetSaleReport(DateTime startDate, DateTime endDate);
     }
 }

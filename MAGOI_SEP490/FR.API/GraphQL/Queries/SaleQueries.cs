@@ -8,25 +8,25 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public async Task<SaleRecord> GetSaleRecord(DateTime startDate, DateTime endDate,
+        public SaleRecord GetSaleRecord(DateTime startDate, DateTime endDate,
             IOrderService orderService,
             IFoodOrderService foodOrderService,
             IBillService billService)
         {
-            List<Order> orders = await orderService.GetOrdersByTimeRange(startDate, endDate).ToListAsync();
-            List<Bill> bills = await billService.GetBillsByTimeRange(startDate, endDate).ToListAsync();
+            List<Order> orders = orderService.GetOrdersByTimeRange(startDate, endDate).ToListAsync().Result;
+            List<Bill> bills = billService.GetBillsByTimeRange(startDate, endDate).ToListAsync().Result;
 
             SaleRecord record = new SaleRecord();
 
             record.Revenue = billService.GetTotalAmountOfBills(bills);
-            record.ServingOrders = await orderService.GetServingOrdersByTimeRange(startDate, endDate).ToListAsync();
-            record.ServedOrders = await orderService.GetServedOrdersByTimeRange(startDate, endDate).ToListAsync();
+            record.ServingOrders = orderService.GetServingOrdersByTimeRange(startDate, endDate).ToListAsync().Result;
+            record.ServedOrders = orderService.GetServedOrdersByTimeRange(startDate, endDate).ToListAsync().Result;
             record.BillsPerHour = billService.GetBillsPerHour(bills);
-            record.FoodRank = foodOrderService.GetTop5FoodOfOrders(orders);
+            record.FoodRank = foodOrderService.GetTop5FoodOfOrders(orders).Result;
 
             return record;
         }
-        public async Task<SaleReport> GetSaleReports(IFoodOrderService foodOrderService, DateTime startDate, DateTime endDate)
+        public SaleReport GetSaleReports(IFoodOrderService foodOrderService, DateTime startDate, DateTime endDate)
                                  => foodOrderService.GetSaleReport(startDate, endDate);
     }
 }

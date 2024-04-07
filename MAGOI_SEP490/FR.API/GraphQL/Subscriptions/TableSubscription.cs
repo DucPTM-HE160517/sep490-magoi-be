@@ -9,7 +9,7 @@ namespace FR.API.GraphQL.Subscriptions
     {
         [Subscribe]
         [Topic(nameof(Mutation.AddOrder))]
-        public List<Table> OnAddOrder([EventMessage] Order order, ITableService tableService)
+        public IQueryable<Table> OnAddOrder([EventMessage] Order order, ITableService tableService)
         {
             return tableService.GetTablesByStatusId((int)TableStatusId.Serving);
         }

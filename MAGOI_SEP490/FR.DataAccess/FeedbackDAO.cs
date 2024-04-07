@@ -24,16 +24,6 @@ namespace FR.DataAccess
                 throw new Exception(e.Message);
             }
         }
-
-        //public float AverageServingScore()
-        //{
-        //    return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.ServingScore).Average();
-        //}
-
-        //public float AverageFoodScore()
-        //{
-        //    return _context.Feedbacks.Count() == 0 ? 0 : (float)_context.Feedbacks.Select(f => f.FoodScore).Average();
-        //}
         public Feedback GetFeedbackById(Guid id)
         {
             return _context.Feedbacks.SingleOrDefault(c => c.Id == id);

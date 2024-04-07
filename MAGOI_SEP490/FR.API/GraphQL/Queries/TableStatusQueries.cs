@@ -5,6 +5,6 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public List<TableStatus> GetAllTableStatus(ITableStatusService service) => service.GetAllTableStatus();
+        public IQueryable<TableStatus> GetAllTableStatus(ITableStatusService service) => service.GetAllTableStatus();
     }
 }

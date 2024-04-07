@@ -70,8 +70,8 @@ namespace FR.API.GraphQL.Mutations
             try
             {
                 //Get order and table
-                Order order = orderService.GetOrderById(orderId);
-                Table table = tableService.GetTable(order.TableId);
+                Order order = orderService.GetOrderById(orderId).Result;
+                Table table = tableService.GetTable(order.TableId).Result;
                 //Update order status
                 orderService.UpdateOrderStatus(orderId, orderStatusId);
                 if (sendNotification.HasValue && (bool)sendNotification)
