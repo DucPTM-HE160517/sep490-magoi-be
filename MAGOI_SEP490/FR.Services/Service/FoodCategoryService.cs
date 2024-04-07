@@ -12,9 +12,14 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
+        public List<FoodCategory> GetCategoryOfCookingFoods()
+        {
+            return _dao.GetCategoryOfCookingFoods();
+        }
+
         public List<FoodCategory> GetFoodCategories()
         {
-            return _dao.GetFoodCategories();
+            return _dao.GetCategoryOfCookingFoods();
         }
 
         public FoodCategory GetFoodCategoryById(int id)
