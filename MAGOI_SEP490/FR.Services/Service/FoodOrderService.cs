@@ -123,7 +123,7 @@ namespace FR.Services.Service
             {
                 if (saleRevenues.Count == 0)
                 {
-                    SaleRevenue SaleRevenue = new SaleRevenue() {
+                    SaleRevenue SaleRevenue = new() {
                     Quantity = foodOrder.Quantity,
                     Income = foodOrder.Quantity * foodOrder.UnitPrice,
                     Food = _dao.GetFood(foodOrder.FoodId)                  
@@ -135,13 +135,14 @@ namespace FR.Services.Service
                     int indexMatchedReport = FindSaleRevenueIndexByFoodId(foodOrder.FoodId, saleRevenues);
                     if (indexMatchedReport == -1)
                     {
-                        SaleRevenue SaleRevenue = new SaleRevenue()
+                        SaleRevenue saleRevenue = new()
                         {
                             Quantity = foodOrder.Quantity,
                             Income = foodOrder.Quantity * foodOrder.UnitPrice,
                             Food = _dao.GetFood(foodOrder.FoodId)
                         };
-                        saleRevenues.Add(SaleRevenue);
+                        
+                        saleRevenues.Add(saleRevenue);
                     }
                     else
                     {
@@ -167,7 +168,6 @@ namespace FR.Services.Service
         }
         public int FindSaleRevenueIndexByFoodId(int foodId, List<SaleRevenue> SaleRevenues)
         {
-            int index = -1;
             for (int i = 0; i < SaleRevenues.Count; i++)
             {
                 if (SaleRevenues[i].Food.Id == foodId)
@@ -175,7 +175,7 @@ namespace FR.Services.Service
                     return i;
                 }
             }
-            return index;
+            return -1;
         }
     }
 }

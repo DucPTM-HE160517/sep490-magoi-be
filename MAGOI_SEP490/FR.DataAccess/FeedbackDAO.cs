@@ -11,7 +11,7 @@ namespace FR.DataAccess
             _context = context;
         }
 
-        public List<Feedback> GetFeedbacks() => _context.Feedbacks.ToList();
+        public IQueryable<Feedback> GetFeedbacks() => _context.Feedbacks;
         public void AddFeedback(Feedback feedback)
         {
             try

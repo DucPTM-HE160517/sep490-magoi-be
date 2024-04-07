@@ -2,6 +2,7 @@
 using FR.DataAccess;
 using FR.Services.GraphQL.Types;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.Services.Service
 {
@@ -40,11 +41,11 @@ namespace FR.Services.Service
             }
         }
 
-        public AverageFeedback GetAverageFeedback()
+        public async Task<AverageFeedback> GetAverageFeedback()
         {
             AverageFeedback averageFeedback = new AverageFeedback()
             {
-                Feedbacks = GetFeedbacks()
+                Feedbacks = GetFeedbacks().ToList()
             };
 
             averageFeedback.AverageServingScore = AverageServingScore(averageFeedback.Feedbacks);
@@ -52,7 +53,7 @@ namespace FR.Services.Service
             return averageFeedback;
         }
 
-        public AverageFeedback GetAverageFeedbackByDate(DateTime startDate, DateTime endDate)
+        public async Task<AverageFeedback> GetAverageFeedbackByDate(DateTime startDate, DateTime endDate)
         {
             AverageFeedback averageFeedbackByDate = new AverageFeedback()
             {
@@ -63,7 +64,7 @@ namespace FR.Services.Service
             return averageFeedbackByDate;
         }
 
-        public List<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
+        public IQueryable<Feedback> GetFeedbacks() => _dao.GetFeedbacks();
         public List<Feedback> GetFeedbacksByDate(DateTime startDate, DateTime endDate) => _dao.GetFeedbacksByDate(startDate, endDate);
         public float AverageServingScore(List<Feedback> feedbacks) => (float)(feedbacks.Count == 0 ? 0 : Math.Round(feedbacks.Select(f => f.ServingScore).Average(), 1));
         public float AverageFoodScore(List<Feedback> feedbacks) => (float)(feedbacks.Count == 0 ? 0 : Math.Round(feedbacks.Select(f => f.FoodScore).Average(), 1));
