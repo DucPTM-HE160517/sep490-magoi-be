@@ -17,7 +17,7 @@ namespace FR.Services.GraphQL.Types
                 .Type<StringType>()
                 .Name("name")
                 .Description("Name of the category");
-            descriptor.Field("FoodList")
+            descriptor.Field("Foods")
                 .Type<ListType<FoodType>>()
                 .Name("foods")
                 .Resolve(context =>
@@ -26,6 +26,15 @@ namespace FR.Services.GraphQL.Types
                     return context.Service<IFoodService>().GetFoodsByCategory(category.Id);
                 })
                 .Description("List of food of the category");
+            descriptor.Field("CookingFoods")
+                .Type<ListType<FoodOrderType>>()
+                .Name("cookingFoods")
+                .Resolve(context =>
+                {
+                    var category = context.Parent<FoodCategory>();
+                    return context.Service<IFoodOrderService>().GetCookingFoodsByCategory(category.Id);
+                })
+                .Description("List of cooking food of the category");
         }
     }
 }

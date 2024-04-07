@@ -42,5 +42,6 @@ namespace FR.DataAccess
         {
             return _context.FoodOrder.Where(c => c.OrderAt >= startDate && c.OrderAt <= endDate).ToList();
         }
+        public IQueryable<FoodOrder> GetFoodOrder(int statusId) => _context.FoodOrder.Where(f => f.FoodOrderStatusId == statusId);
     }
 }
