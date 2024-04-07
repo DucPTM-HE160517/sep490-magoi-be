@@ -14,9 +14,9 @@ namespace FR.Services.IService
         void UpdateOrderStatus(Guid orderId, int orderStatusId);
         void DeleteOrder(Order order);
         List<Order> GetOrdersByOrderStatusId(int? orderStatusId);
-        IQueryable<Order> GetServingOrdersByTimeRange(DateTime date);
-        IQueryable<Order> GetServedOrdersByTimeRange(DateTime date);
-        IQueryable<Order> GetOrdersByTimeRange(DateTime date);
+        IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate);
+        IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate);
+        IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
         public float GetTotalPriceOfOrders(List<Order> orders);
         public void UpdateBillIdOfOrder(Guid orderId, Guid billId);
     }

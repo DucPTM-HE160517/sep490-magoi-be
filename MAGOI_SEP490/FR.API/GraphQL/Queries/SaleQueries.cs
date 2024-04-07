@@ -8,24 +8,25 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public async Task<SaleRecord> GetSaleRecord(DateTime date,
+        public async Task<SaleRecord> GetSaleRecord(DateTime startDate, DateTime endDate,
             IOrderService orderService,
             IFoodOrderService foodOrderService,
             IBillService billService)
         {
-            List<Order> orders = orderService.GetOrdersByTimeRange(date).ToList();
-            List<Bill> bills = billService.GetBillsByTimeRange(date).ToList();
+            List<Order> orders = orderService.GetOrdersByTimeRange(startDate, endDate).ToList();
+            List<Bill> bills = billService.GetBillsByTimeRange(startDate, endDate).ToList();
 
             SaleRecord record = new SaleRecord();
-            record.Date = date;
 
             record.Revenue = billService.GetTotalAmountOfBills(bills);
-            record.ServingOrders = await orderService.GetServingOrdersByTimeRange(date).ToListAsync();
-            record.ServedOrders = await orderService.GetServedOrdersByTimeRange(date).ToListAsync();
+            record.ServingOrders = await orderService.GetServingOrdersByTimeRange(startDate, endDate).ToListAsync();
+            record.ServedOrders = await orderService.GetServedOrdersByTimeRange(startDate, endDate).ToListAsync();
             record.BillsPerHour = billService.GetBillsPerHour(bills);
             record.FoodRank = foodOrderService.GetTop5FoodOfOrders(orders);
 
             return record;
         }
+        public SaleReport GetSaleReports(IFoodOrderService foodOrderService, DateTime startDate, DateTime endDate)
+                                 => foodOrderService.GetSaleReport(startDate, endDate);
     }
 }

@@ -70,10 +70,10 @@ namespace FR.Services.Service
             return billsPerHour;
         }
 
-        public IQueryable<Bill> GetBillsByTimeRange(DateTime date)
+        public IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
         {
-            DateTime startDate = Ultilities.AbsoluteStart(date);
-            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
 
             return _dao.GetBillsByTimeRange(startDate, endDate);
         }

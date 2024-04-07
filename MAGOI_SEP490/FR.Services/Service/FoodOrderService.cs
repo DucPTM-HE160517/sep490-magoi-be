@@ -112,10 +112,10 @@ namespace FR.Services.Service
 
             return foods;
         }
-        public SaleReport GetSaleReport(DateTime date)
+        public SaleReport GetSaleReport(DateTime startDate, DateTime endDate)
         {
-            DateTime startDate = Ultilities.AbsoluteStart(date);
-            DateTime endDate = Ultilities.AbsoluteEnd(date);
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
 
             //Get SaleReportElememt List
             List<SaleRevenue> saleRevenues = new List<SaleRevenue>();
