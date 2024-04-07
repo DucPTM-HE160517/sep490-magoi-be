@@ -26,12 +26,12 @@ namespace FR.Services.Service
             return bill;
         }
 
-        public Bill GetBillById(Guid billId)
+        public async Task<Bill> GetBillById(Guid billId)
         {
-            return _dao.GetBillById(billId);
+            return await _dao.GetBillById(billId);
         }
 
-        public List<Bill> GetBillsByDate(DateTime date)
+        public IQueryable<Bill> GetBillsByDate(DateTime date)
         {
             return _dao.GetBillsByDate(date);
         }

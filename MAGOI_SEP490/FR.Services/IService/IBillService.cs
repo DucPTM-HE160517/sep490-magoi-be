@@ -5,8 +5,8 @@ namespace FR.Services.IService
     public interface IBillService
     {
         Bill CreateBill(float totalAmount);
-        List<Bill> GetBillsByDate(DateTime date);
-        Bill GetBillById(Guid billId);
+        IQueryable<Bill> GetBillsByDate(DateTime date);
+        Task<Bill> GetBillById(Guid billId);
         void UpdateBill(Bill bill);
         int[] GetBillsPerHour(List<Bill> bills);
         IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate);

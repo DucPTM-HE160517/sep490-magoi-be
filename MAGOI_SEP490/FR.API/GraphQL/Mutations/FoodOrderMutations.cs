@@ -25,7 +25,7 @@ namespace FR.API.GraphQL.Mutations
                 Table table = tableService.GetTable(order.TableId);
                 //update food status in the order
                 FoodOrder food = foodOrderService.UpdateFoodOrderStatus(orderId, foodId, statusId);
-                string foodName = foodService.GetFoodById(foodId).Name;
+                string foodName = foodService.GetFoodById(foodId).Result.Name;
                 if (sendNotification.HasValue && (bool)sendNotification)
                 {
                     //get list of waiter devices

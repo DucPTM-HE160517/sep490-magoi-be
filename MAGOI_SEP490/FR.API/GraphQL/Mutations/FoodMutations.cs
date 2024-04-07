@@ -47,11 +47,11 @@ namespace FR.API.GraphQL.Mutations
 
         public async Task<Food> AddFood(AddFoodInput food, IFoodService foodService)
         {
-            return foodService.AddFood(food);
+            return await foodService.AddFood(food);
         }
         public async Task<Food> EditFood(UpdateFoodInput food, IFoodService foodService)
         {
-            return foodService.UpdateFood(food);
+            return await foodService.UpdateFood(food);
         }
     }
 }

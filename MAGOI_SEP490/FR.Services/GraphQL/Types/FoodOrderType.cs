@@ -6,7 +6,7 @@ namespace FR.Services.GraphQL.Types
 {
     public class FoodOrderType : ObjectType<FoodOrder>
     {
-        protected override void Configure(IObjectTypeDescriptor<FoodOrder> descriptor)
+        protected override async void Configure(IObjectTypeDescriptor<FoodOrder> descriptor)
         {
             descriptor.Description("FoodOrder");
             descriptor.Field(f => f.OrderId)
@@ -23,7 +23,7 @@ namespace FR.Services.GraphQL.Types
                 .Resolve(context =>
                 {
                     var foodOrder = context.Parent<FoodOrder>();
-                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).Name;
+                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).Result.Name;
                 })
                 .Description("Name of the Food");
             descriptor.Field(f => f.Quantity)

@@ -18,7 +18,7 @@ namespace FR.API.GraphQL.Mutations
             List<FoodOrderInput> foodListInput, CancellationToken cancellationToken)
         {
             //check order: foods amount exceed food quantity
-            if (!foodService.CheckFoodOrdersQuantity(foodListInput))
+            if (!foodService.CheckFoodOrdersQuantity(foodListInput).Result)
             {
                 return new AddOrderPayload(
                     new UserError("ERROR: Please check the food quantity!", "FOOD_AMOUNT_EXCEED"));

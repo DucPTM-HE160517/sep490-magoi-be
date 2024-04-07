@@ -21,13 +21,13 @@ namespace FR.DataAccess
             _context.Entry(bill).State = EntityState.Modified;
             _context.SaveChanges();
         }
-        public Bill GetBillById(Guid billId)
+        public async Task<Bill> GetBillById(Guid billId)
         {
-            return _context.Bills.SingleOrDefault(b => b.Id == billId);
+            return await _context.Bills.SingleOrDefaultAsync(b => b.Id == billId);
         }
-        public List<Bill> GetBillsByDate(DateTime date)
+        public IQueryable<Bill> GetBillsByDate(DateTime date)
         {
-            return _context.Bills.Where(b => b.CreatedAt.Date == date.Date).ToList();
+            return _context.Bills.Where(b => b.CreatedAt.Date == date.Date);
         }
         public IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
         {
