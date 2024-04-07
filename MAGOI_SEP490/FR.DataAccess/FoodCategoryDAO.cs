@@ -11,9 +11,9 @@ namespace FR.DataAccess
             _context = context;
         }
 
-        public List<FoodCategory> GetFoodCategories()
+        public IQueryable<FoodCategory> GetFoodCategories()
         {
-            return _context.FoodCategories.ToList();
+            return _context.FoodCategories;
         }
         public FoodCategory GetFoodCategoryById(int id)
         {

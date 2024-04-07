@@ -12,7 +12,7 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
-        public List<FoodCategory> GetFoodCategories()
+        public IQueryable<FoodCategory> GetFoodCategories()
         {
             return _dao.GetFoodCategories();
         }

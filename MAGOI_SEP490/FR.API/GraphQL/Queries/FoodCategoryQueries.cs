@@ -5,6 +5,6 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public List<FoodCategory> GetCategories(IFoodCategoryService service) => service.GetFoodCategories();
+        public async List<FoodCategory> GetCategories(IFoodCategoryService service) => await service.GetFoodCategories().ToListAsync();
     }
 }
