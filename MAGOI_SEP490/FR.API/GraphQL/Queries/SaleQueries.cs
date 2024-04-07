@@ -13,8 +13,8 @@ namespace FR.API.GraphQL.Queries
             IFoodOrderService foodOrderService,
             IBillService billService)
         {
-            List<Order> orders = orderService.GetOrdersByTimeRange(startDate, endDate).ToList();
-            List<Bill> bills = billService.GetBillsByTimeRange(startDate, endDate).ToList();
+            List<Order> orders = await orderService.GetOrdersByTimeRange(startDate, endDate).ToListAsync();
+            List<Bill> bills = await billService.GetBillsByTimeRange(startDate, endDate).ToListAsync();
 
             SaleRecord record = new SaleRecord();
 

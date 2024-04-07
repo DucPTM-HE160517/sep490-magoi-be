@@ -13,7 +13,7 @@ namespace FR.Services.Service
             _foodDAO = foodDAO;
         }
 
-        public Food AddFood(AddFoodInput food)
+        public async Task<Food> AddFood(AddFoodInput food)
         {
             Food f = new Food()
             {
@@ -25,12 +25,12 @@ namespace FR.Services.Service
                 CreatedAt = food.createdAt,
                 FoodCategoryId = food.foodCategoryId
             };
-            _foodDAO.AddFood(f);
-            return f;
+
+            return await _foodDAO.AddFood(f);
         }
-        public Food UpdateFood(UpdateFoodInput food)
+        public async Task<Food> UpdateFood(UpdateFoodInput food)
         {
-            Food f = GetFoodById(food.id);
+            Food f = await GetFoodById(food.id);
 
             f.Name = food.name ?? f.Name;
             f.Description = food.description ?? f.Description;
@@ -44,11 +44,11 @@ namespace FR.Services.Service
             return f;
         }
 
-        public bool CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput)
+        public async Task<bool> CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput)
         {
             for (int i = 0; i < foodListInput.Count; i++)
             {
-                Food food = GetFoodById(foodListInput[i].foodId);
+                Food food =  await GetFoodById(foodListInput[i].foodId);
                 if(food.Quantity < foodListInput[i].quantity)
                 {
                     return false;
@@ -57,27 +57,27 @@ namespace FR.Services.Service
             return true;
         }
 
-        public Food GetFoodById(int id)
+        public async Task<Food> GetFoodById(int id)
         {
-            return _foodDAO.GetFoodByFoodId(id);
+            return await _foodDAO.GetFoodByFoodId(id);
         }
 
-        public List<Food> GetFoods()
+        public IQueryable<Food> GetFoods()
         {
             return _foodDAO.GetFoods();
         }
 
-        public List<Food> GetFoodsByCategory(int categoryId)
+        public IQueryable<Food> GetFoodsByCategory(int categoryId)
         {
             return _foodDAO.GetFoodsByCategory(categoryId);
         }
 
-        public void UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput)
+        public async Task UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput)
         {
             for (int i = 0; i < foodListInput.Count; i++)
             {
-                Food food = GetFoodById(foodListInput[i].foodId);
-                _foodDAO.UpdateFoodQuantity(foodListInput[i].foodId, food.Quantity - foodListInput[i].quantity);
+                Food food = await GetFoodById(foodListInput[i].foodId);
+                await _foodDAO.UpdateFoodQuantity(foodListInput[i].foodId, food.Quantity - foodListInput[i].quantity);
             }
         }
     }

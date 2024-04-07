@@ -1,17 +1,16 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Types.InputTypes;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace FR.Services.IService
 {
     public interface IFoodService
     {
-        List<Food> GetFoods();
-        List<Food> GetFoodsByCategory(int categoryId);
-        Food GetFoodById(int id);
-        void UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput);
-        Food AddFood(AddFoodInput food);
-        Food UpdateFood(UpdateFoodInput food);
-        bool CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput);
+        IQueryable<Food> GetFoods();
+        IQueryable<Food> GetFoodsByCategory(int categoryId);
+        Task<Food> GetFoodById(int id);
+        Task UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput);
+        Task<Food> AddFood(AddFoodInput food);
+        Task<Food> UpdateFood(UpdateFoodInput food);
+        Task<bool> CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput);
     }
 }

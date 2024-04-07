@@ -12,28 +12,30 @@ namespace FR.DataAccess
             _context = context;
         }
 
-        public List<Food> GetFoods()
+        public IQueryable<Food> GetFoods()
         {
-            return _context.Foods.ToList();
+            return _context.Foods;
         }
-        public List<Food> GetFoodsByCategory(int categoryId)
+        public IQueryable<Food> GetFoodsByCategory(int categoryId)
         {
-            return _context.Foods.Where(x => x.FoodCategoryId == categoryId).ToList();
+            return _context.Foods.Where(x => x.FoodCategoryId == categoryId);
         }
-        public Food GetFoodByFoodId(int foodId)
+        public async Task<Food> GetFoodByFoodId(int foodId)
         {
-            return _context.Foods.FirstOrDefault(x => x.Id == foodId);
+            return await _context.Foods.FirstOrDefaultAsync(x => x.Id == foodId);
         }
-        public void UpdateFoodQuantity(int foodId, int new_quantity)
+        public async Task UpdateFoodQuantity(int foodId, int new_quantity)
         {
-            var food = _context.Foods.FirstOrDefault(x => x.Id == foodId);
+            var food = await _context.Foods.FirstOrDefaultAsync(x => x.Id == foodId);
             food.Quantity = new_quantity;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void AddFood(Food food)
+        public async Task<Food> AddFood(Food food)
         {
-            _context.Foods.Add(food);
-            _context.SaveChanges();
+            await _context.Foods.AddAsync(food);
+            await _context.SaveChangesAsync();
+
+            return food;
         }
         public void UpdateFood(Food food)
         {
