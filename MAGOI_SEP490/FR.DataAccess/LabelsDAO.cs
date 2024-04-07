@@ -1,19 +1,14 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.IDAO;
 
 namespace FR.DataAccess
 {
-    public class LabelsDAO
+    public class LabelsDAO : BaseDAO<Labels>, ILabelsDAO
     {
-        private readonly DBContext _context;
-
-        public LabelsDAO(DBContext context)
+        public LabelsDAO(DBContext context) : base(context)
         {
-            _context = context;
-        }
-        public Labels GetLabelsById(int id)
-        {
-            return _context.Labels.SingleOrDefault(x => x.Id == id);
         }
     }
 }

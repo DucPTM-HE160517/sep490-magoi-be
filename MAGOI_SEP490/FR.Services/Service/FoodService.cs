@@ -25,7 +25,7 @@ namespace FR.Services.Service
                 CreatedAt = food.createdAt,
                 FoodCategoryId = food.foodCategoryId
             };
-            _foodDAO.AddFood(f);
+            _foodDAO.Add(f);
             return f;
         }
         public Food UpdateFood(UpdateFoodInput food)
