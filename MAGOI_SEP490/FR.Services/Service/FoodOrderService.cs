@@ -177,5 +177,21 @@ namespace FR.Services.Service
             }
             return index;
         }
+
+        public IQueryable<FoodOrder> GetCookingFoodsByCategory(int categoryId)
+        {
+            List<FoodOrder> cookingFoodList = _dao.GetFoodOrder((int) FoodOrderStatusId.Cooking).ToList();
+            List <FoodOrder> result = new();
+            foreach (FoodOrder foodOrder in cookingFoodList)
+            {
+                Food f = _dao.GetFood(foodOrder.FoodId);
+                if(f.FoodCategoryId == categoryId)
+                {
+                    result.Add(foodOrder);
+                }
+            }
+
+            return result.AsQueryable();
+        }
     }
 }
