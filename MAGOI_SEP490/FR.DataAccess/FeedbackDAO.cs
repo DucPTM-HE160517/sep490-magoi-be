@@ -67,5 +67,70 @@ namespace FR.DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public int UpdateFeedback(Feedback oldFeedback, Feedback newFeedback)
+        {
+            int statusCode = 1;
+            try
+            {
+                var existingFeedback = _context.Feedbacks.Find(oldFeedback.Id);
+
+                if (existingFeedback != null)
+                {
+                    //Update ServingScore
+                    if (existingFeedback.ServingScore != newFeedback.ServingScore)
+                    {
+                        existingFeedback.ServingScore = newFeedback.ServingScore;
+                    }
+
+                    //Update FoodScore
+                    if (existingFeedback.FoodScore != newFeedback.FoodScore)
+                    {
+                        existingFeedback.FoodScore = newFeedback.FoodScore;
+                    }
+
+                    //Update Comment
+                    if (!string.IsNullOrEmpty(existingFeedback.Comment) && !string.IsNullOrEmpty(newFeedback.Comment))
+                    {
+                        //Check Duplicate
+                        if (existingFeedback.Comment == newFeedback.Comment && existingFeedback.ServingScore == newFeedback.ServingScore 
+                            && existingFeedback.FoodScore == newFeedback.FoodScore)
+                        {
+                            return 0;
+                        }
+
+                        //Update Comment
+                        if (existingFeedback.Comment != newFeedback.Comment)
+                        {
+                            existingFeedback.Comment = newFeedback.Comment;
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(newFeedback.Comment) && string.IsNullOrEmpty(existingFeedback.Comment)) //Check case: new Comment
+                    {
+                        existingFeedback.Comment = newFeedback.Comment;
+                    }
+                    else if (string.IsNullOrEmpty(newFeedback.Comment) && !string.IsNullOrEmpty(existingFeedback.Comment)) //Check case: delete Comment
+                    {
+                        existingFeedback.Comment = "";
+                    }
+                    else
+                    {
+                        //Check Duplicate with no Comment
+                        if (existingFeedback.ServingScore == newFeedback.ServingScore && existingFeedback.FoodScore == newFeedback.FoodScore)
+                        {
+                            return 0;
+                        }
+                    }
+
+                    _context.SaveChanges();
+                }                
+
+                return statusCode;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

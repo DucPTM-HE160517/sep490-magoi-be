@@ -22,17 +22,33 @@ namespace FR.Services.Service
         {
             try
             {
-                Feedback feedback = new Feedback()
+                Feedback newFeedback = new Feedback()
                 {
                     Id = new Guid(),
-                    BillId = new Guid(billId),
+                    BillId = Guid.Parse(billId),
                     ServingScore = servingStar,
                     FoodScore = foodStar,
                     Comment = comment == null ? "" : comment
                 };
 
-                _dao.AddFeedback(feedback);
-                return feedback;
+                //Check if bill already has feedback
+                Feedback fb = _dao.GetFeedbacks().Where(f => f.BillId == newFeedback.BillId).FirstOrDefault();
+
+                if (fb != null)
+                {
+                    newFeedback.Id = fb.Id;
+                    int updateStatus = _dao.UpdateFeedback(fb,newFeedback);
+                    if (updateStatus == 0)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    _dao.AddFeedback(newFeedback);
+                }
+                               
+                return newFeedback;
             }
             catch (Exception e)
             {
