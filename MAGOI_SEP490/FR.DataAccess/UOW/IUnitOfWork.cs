@@ -8,9 +8,9 @@ using FR.DataAccess.Base;
 
 namespace FR.DataAccess.UOW
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        TDAO GetRepository<TDAO, TEntity>() where TDAO : BaseDAO, IBaseDAO<TEntity> where TEntity : BaseModel;
+        IBaseDAO<T> DAO<T>() where T : BaseModel;
         Task SaveAsync();
     }
 }
