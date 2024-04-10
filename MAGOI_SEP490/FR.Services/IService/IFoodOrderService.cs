@@ -12,6 +12,6 @@ namespace FR.Services.IService
         FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
         Food[] GetTop5FoodOfOrders(List<Order> orders);
         SaleReport GetSaleReport(DateTime startDate, DateTime endDate);
-        IQueryable<FoodOrder> GetCookingFoodsByCategory(int id);
+        IQueryable<Food> GetCookingFoodsByCategory(int id);
     }
 }
