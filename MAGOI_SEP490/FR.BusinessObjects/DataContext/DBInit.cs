@@ -92,7 +92,7 @@ namespace FR.BusinessObjects.DataContext
                     Id = 1,
                     Name = "BIG BEERFEST SAUSAGES",
                     Description = "Xúc xích cỡ lớn 300g với đồ muối chua",
-                    ImageUrl = "big-beerfest-bausages.jpg",
+                    ImageUrl = @"https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712752772/food/x3cmbnieirpdhnwjksx1.jpg",
                     UnitPrice = 199000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
@@ -103,7 +103,7 @@ namespace FR.BusinessObjects.DataContext
                     Id = 2,
                     Name = "GARLIC BREAD",
                     Description = "Bánh mì bơ tỏi",
-                    ImageUrl = "garlic-bread.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712752931/food/sjdjybr8ywcxymb9zs7u.jpg",
                     UnitPrice = 30000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
@@ -114,7 +114,7 @@ namespace FR.BusinessObjects.DataContext
                     Id = 3,
                     Name = "FRENCH FRIED",
                     Description = "Khoai tây chiên",
-                    ImageUrl = "french-fried.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712752944/food/et1ikezxar76ax8qwbse.jpg",
                     UnitPrice = 50000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
@@ -137,7 +137,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 5,
                     Name = "AUS RIB EYE MB7/8",
-                    ImageUrl = "aus-rib-eye-mb7-8.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754609/food/lllceyocl5alvttkrek0.jpg",
                     Description = "Thăn Flank Wagyu MB7/8 250g",
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
@@ -153,13 +153,13 @@ namespace FR.BusinessObjects.DataContext
                     FoodCategoryId = 2,
                     UnitPrice = 960000,
                     Description = "Thăn lưng bò Mỹ Prime 500g",
-                    ImageUrl = "us-prime-rib-eye.jpg"
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754663/food/uz171brtyh6nndmyi1fa.jpg"
                 },
                 new Food
                 {
                     Id = 7,
                     Name = "AUS BLACK ANGUS T-BONE",
-                    ImageUrl = "aus-black-angus-t-bone.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754649/food/dk5p48irgg1qkfu6hem6.jpg",
                     Description = "Thăn Bò Angus chữ T Úc 700g",
                     UnitPrice = 1160000,
                     FoodCategoryId = 2,
@@ -183,7 +183,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 9,
                     Name = "MASHED POTATO",
-                    ImageUrl = "mashed-potato.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754683/food/wyecqhosqih1dp5kqdoi.jpg",
                     FoodCategoryId = 3,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
@@ -194,7 +194,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 10,
                     Name = "ROASTED BABY POTATO",
-                    ImageUrl = "roasted-baby-potato.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754693/food/qwdsvgxlmkb3o5ihd6w5.jpg",
                     FoodCategoryId = 3,
                     Description = "Khoai tây bi đút lò",
                     UnitPrice = 30000,
@@ -207,7 +207,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 11,
                     Name = "COCA COLA",
-                    ImageUrl = "coca-cola.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754713/food/nikdk72dzagoq5uufpyp.jpg",
                     Description = "Coca Cola",
                     UnitPrice = 30000,
                     FoodCategoryId = 5,
@@ -218,7 +218,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 12,
                     Name = "TAPID WATER",
-                    ImageUrl = "tapid-water.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712755040/food/gzuhr5ftcbmsw56ugllf.jpg",
                     Description = "Nước suối",
                     UnitPrice = 20000,
                     FoodCategoryId = 5,
@@ -229,7 +229,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 13,
                     Name = "SINH TỐ DƯA HẤU",
-                    ImageUrl = "sinh-to-dua-hau.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712755090/food/zlcwf0ylh37t08xfqnjq.jpg",
                     Description = "Sinh tố dưa hấu",
                     UnitPrice = 50000,
                     FoodCategoryId = 5,
@@ -254,7 +254,7 @@ namespace FR.BusinessObjects.DataContext
                     Id = 15,
                     Name = "GINGER CREAM BRULEE",
                     Description = "Kem cháy gừng cùng với bánh quy giòn",
-                    ImageUrl = "ginger-cream-brulee.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712755058/food/louyddpnd8jdxfucc0jk.jpg",
                     FoodCategoryId = 4,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
@@ -269,13 +269,13 @@ namespace FR.BusinessObjects.DataContext
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 4,
-                    ImageUrl = "warm-chocolate-lava-cake.jpg"
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712752851/food/okhglhvncr0ajufxnhvy.jpg"
                 },
                 new Food
                 {
                     Id = 17,
                     Name = "ICE CREAM HAAGEN DAZS",
-                    ImageUrl = "ice-cream-haagen-dazs.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712752833/food/sddppgmwzkphvm1in0pi.jpg",
                     Description = "Kem Haagen Dazs, chocolate, vanilla, red berries, macha, Maccadmia nut",
                     FoodCategoryId = 4,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
