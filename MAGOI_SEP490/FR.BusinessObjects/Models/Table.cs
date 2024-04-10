@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FR.BusinessObjects.Models
 {
-    public partial class Table
+    public partial class Table : BaseModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column(TypeName = "uuid")]
         public Guid Id { get; set; }

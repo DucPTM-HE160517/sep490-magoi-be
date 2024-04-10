@@ -2,7 +2,7 @@
 
 namespace FR.BusinessObjects.Models
 {
-    public partial class FoodOrder
+    public partial class FoodOrder : BaseModel
     {
         [ForeignKey("Order")]
         public Guid OrderId { get; set; }

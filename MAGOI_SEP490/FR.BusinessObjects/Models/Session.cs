@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FR.BusinessObjects.Models;
 
-public class Session
+public class Session : BaseModel
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string ExpoToken { get; set; }

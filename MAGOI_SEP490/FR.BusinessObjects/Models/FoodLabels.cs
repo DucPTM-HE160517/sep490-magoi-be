@@ -2,7 +2,7 @@
 
 namespace FR.BusinessObjects.Models
 {
-    public partial class FoodLabels
+    public partial class FoodLabels : BaseModel
     {
         [ForeignKey("Food")]
         public int FoodId { get; set; }

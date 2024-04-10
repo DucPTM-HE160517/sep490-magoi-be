@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FR.BusinessObjects.Models
 {
-    public partial class FoodCategory
+    public partial class FoodCategory : BaseModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
