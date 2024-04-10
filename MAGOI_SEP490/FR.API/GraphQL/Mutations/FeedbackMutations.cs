@@ -14,7 +14,7 @@ namespace FR.API.GraphQL.Mutations
             try
             {
                 //create feedback
-                Feedback feedback = feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
+                Feedback feedback = await feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
                 return new SendFeedbackPayload(feedback);
             }
             catch(Exception ex)

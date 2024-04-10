@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
 {
@@ -10,7 +11,10 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
+        public async Task<bool> IsExist(Guid billId)
+        {
+            return await _context.Feedbacks.AnyAsync(f=>f.BillId == billId);
+        }
         public List<Feedback> GetFeedbacks() => _context.Feedbacks.ToList();
         public void AddFeedback(Feedback feedback)
         {
@@ -23,6 +27,11 @@ namespace FR.DataAccess
             {
                 throw new Exception(e.Message);
             }
+        }
+        public void UpdateFeedback(Feedback feedback)
+        {
+            _context.Entry(feedback).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         //public float AverageServingScore()
@@ -38,7 +47,10 @@ namespace FR.DataAccess
         {
             return _context.Feedbacks.SingleOrDefault(c => c.Id == id);
         }
-
+        public Feedback GetFeedbackByBillId(Guid id)
+        {
+            return _context.Feedbacks.SingleOrDefault(c => c.BillId == id);
+        }
         public List<Feedback> GetFeedbacksByDate(DateTime startDate, DateTime endDate)
 
         {
