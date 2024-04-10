@@ -9,18 +9,23 @@ namespace FR.Services.Service
     {
         private readonly FeedbackDAO _dao;
 
-        public FeedbackService()
-        {
-        }
-
         public FeedbackService(FeedbackDAO dao)
         {
             _dao = dao;
         }
 
-        public Feedback CreateFeedback(string billId, int servingStar, int foodStar, string? comment)
+        public async Task<Feedback> CreateFeedback(string billId, int servingStar, int foodStar, string? comment)
         {
-            try
+            if (await _dao.IsExist(Guid.Parse(billId)))
+            {
+                Feedback feedback = _dao.GetFeedbackByBillId(Guid.Parse(billId));
+                feedback.ServingScore = servingStar;
+                feedback.FoodScore = foodStar;
+                feedback.Comment = comment == null ? feedback.Comment : comment;
+                _dao.UpdateFeedback(feedback);
+                return feedback;
+            }
+            else
             {
                 Feedback feedback = new Feedback()
                 {
@@ -33,10 +38,6 @@ namespace FR.Services.Service
 
                 _dao.AddFeedback(feedback);
                 return feedback;
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
             }
         }
 
