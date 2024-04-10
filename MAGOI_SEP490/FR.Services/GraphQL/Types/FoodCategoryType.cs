@@ -27,7 +27,7 @@ namespace FR.Services.GraphQL.Types
                 })
                 .Description("List of food of the category");
             descriptor.Field("CookingFoods")
-                .Type<ListType<FoodOrderType>>()
+                .Type<ListType<FoodType>>()
                 .Name("cookingFoods")
                 .Resolve(context =>
                 {

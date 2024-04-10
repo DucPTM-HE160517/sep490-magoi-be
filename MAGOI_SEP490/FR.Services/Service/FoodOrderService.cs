@@ -178,17 +178,38 @@ namespace FR.Services.Service
             return index;
         }
 
-        public IQueryable<FoodOrder> GetCookingFoodsByCategory(int categoryId)
+        public IQueryable<Food> GetCookingFoodsByCategory(int categoryId)
         {
             List<FoodOrder> cookingFoodList = _dao.GetFoodOrder((int) FoodOrderStatusId.Cooking).ToList();
-            List <FoodOrder> result = new();
+            List <FoodOrder> dup_list = new();
             foreach (FoodOrder foodOrder in cookingFoodList)
             {
                 Food f = _dao.GetFood(foodOrder.FoodId);
                 if(f.FoodCategoryId == categoryId)
                 {
-                    result.Add(foodOrder);
+                    dup_list.Add(foodOrder);
                 }
+            }
+
+            Dictionary<int, int> raw_result = new Dictionary<int, int>();
+            foreach (FoodOrder foodOrder in dup_list)
+            {
+                if (raw_result.ContainsKey(foodOrder.FoodId))
+                {
+                    raw_result[foodOrder.FoodId] += foodOrder.Quantity;
+                }
+                else
+                {
+                    raw_result[foodOrder.FoodId] = foodOrder.Quantity;
+                }
+            }
+
+            List<Food> result = new List<Food>();
+            foreach(KeyValuePair<int, int> pair in raw_result)
+            {
+                Food f = _dao.GetFood(pair.Key);
+                f.Quantity = pair.Value;
+                result.Add(f);
             }
 
             return result.AsQueryable();
