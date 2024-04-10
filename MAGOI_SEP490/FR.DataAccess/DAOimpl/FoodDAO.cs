@@ -2,7 +2,7 @@
 using FR.BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FR.DataAccess
+namespace FR.DataAccess.DAOimpl
 {
     public class FoodDAO
     {

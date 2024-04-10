@@ -1,7 +1,7 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 
-namespace FR.DataAccess
+namespace FR.DataAccess.DAOimpl
 {
     public class FoodCategoryDAO
     {
@@ -15,19 +15,19 @@ namespace FR.DataAccess
         {
             List<FoodCategory> foodCategories = new();
             HashSet<int> categoriesId = new();
-            
-            foreach(var fo in _context.FoodOrder.ToList())
+
+            foreach (var fo in _context.FoodOrder.ToList())
             {
-                Food f = _context.Foods.SingleOrDefault(f=>f.Id == fo.FoodId);
+                Food f = _context.Foods.SingleOrDefault(f => f.Id == fo.FoodId);
                 if (!categoriesId.Contains(f.FoodCategoryId))
                 {
                     categoriesId.Add(f.FoodCategoryId);
                 }
             }
 
-            foreach(var id in categoriesId)
+            foreach (var id in categoriesId)
             {
-                foodCategories.Add(_context.FoodCategories.SingleOrDefault(c=>c.Id == id));
+                foodCategories.Add(_context.FoodCategories.SingleOrDefault(c => c.Id == id));
             }
 
             return foodCategories;

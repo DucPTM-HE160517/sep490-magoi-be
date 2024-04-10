@@ -1,6 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Common.Ultilities;
-using FR.DataAccess;
+using FR.DataAccess.DAOimpl;
 using FR.Services.IService;
 
 namespace FR.Services.Service

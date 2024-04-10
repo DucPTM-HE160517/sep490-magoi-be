@@ -4,7 +4,7 @@ using FR.API.GraphQL.Mutations;
 using FR.API.GraphQL.Queries;
 using FR.API.GraphQL.Subscriptions;
 using FR.BusinessObjects.DataContext;
-using FR.DataAccess;
+using FR.DataAccess.DAOimpl;
 using FR.Services.GraphQL.Types;
 using FR.Services.IService;
 using FR.Services.Service;

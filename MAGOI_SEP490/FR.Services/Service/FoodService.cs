@@ -1,7 +1,7 @@
 ﻿using FR.Services.IService;
 using FR.BusinessObjects.Models;
-using FR.DataAccess;
 using FR.Services.GraphQL.Types.InputTypes;
+using FR.DataAccess.DAOimpl;
 
 namespace FR.Services.Service
 {

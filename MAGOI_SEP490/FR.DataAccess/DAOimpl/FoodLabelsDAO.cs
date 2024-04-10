@@ -1,6 +1,6 @@
 ﻿using FR.BusinessObjects.DataContext;
 
-namespace FR.DataAccess
+namespace FR.DataAccess.DAOimpl
 {
     public class FoodLabelsDAO
     {

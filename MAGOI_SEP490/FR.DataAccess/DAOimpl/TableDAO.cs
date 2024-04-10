@@ -2,7 +2,7 @@
 using FR.BusinessObjects.Models;
 using FR.Infrastructure.Enums;
 
-namespace FR.DataAccess
+namespace FR.DataAccess.DAOimpl
 {
     public class TableDAO
     {
