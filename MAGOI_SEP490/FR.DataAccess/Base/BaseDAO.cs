@@ -15,7 +15,7 @@ namespace FR.DataAccess.Base
         {
             await _context.Set<T>().AddAsync(entity);
         }
-        public void DeleteAsync(T entity)
+        public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
         }
@@ -24,7 +24,7 @@ namespace FR.DataAccess.Base
             return await _context.Set<T>().ToListAsync();
         }
 
-        public void UpdateAsync(T entity)
+        public void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
         }

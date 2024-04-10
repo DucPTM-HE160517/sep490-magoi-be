@@ -5,9 +5,9 @@ namespace FR.Services.IService
 {
     public interface IFeedbackService
     {
-        List<Feedback> GetFeedbacks();
+        Task<IEnumerable<Feedback>> GetFeedbacks();
         Task<Feedback> CreateFeedback(string billId, int servingStar, int foodStar, string? comment);
-        AverageFeedback GetAverageFeedback();
-        AverageFeedback GetAverageFeedbackByDate(DateTime startDate, DateTime endDate);
+        Task<AverageFeedback> GetAverageFeedback();
+        Task<AverageFeedback> GetAverageFeedbackByDate(DateTime startDate, DateTime endDate);
     }
 }

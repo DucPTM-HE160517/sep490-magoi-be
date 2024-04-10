@@ -4,7 +4,9 @@ using FR.API.GraphQL.Mutations;
 using FR.API.GraphQL.Queries;
 using FR.API.GraphQL.Subscriptions;
 using FR.BusinessObjects.DataContext;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.GraphQL.Types;
 using FR.Services.IService;
 using FR.Services.Service;
@@ -64,7 +66,7 @@ builder.Services.AddScoped<FoodDAO>()
                 .AddScoped<FoodOrderDAO>()
                 .AddScoped<SessionDAO>()
                 .AddScoped<BillDAO>()
-                .AddScoped<FeedbackDAO>()
+                .AddScoped<IFeedbackDAO, FeedbackDAO>()
                 .AddScoped<PaymentMethodDAO>()
                 .AddScoped<IFoodService, FoodService>()
                 .AddScoped<IFoodCategoryService, FoodCategoryService>()
@@ -78,6 +80,8 @@ builder.Services.AddScoped<FoodDAO>()
                 .AddScoped<IBillService, BillService>()
                 .AddScoped<IFeedbackService, FeedbackService>()
                 .AddScoped<IPaymentMethodService, PaymentMethodService>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 builder.Services.AddGraphQLServer().AddInMemorySubscriptions()

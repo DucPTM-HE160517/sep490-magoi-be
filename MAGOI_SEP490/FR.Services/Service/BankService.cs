@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using FR.BusinessObjects.Models.VietQR;
-using FR.DataAccess;
+using FR.DataAccess.DAOimpl;
 using FR.Services.IService;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

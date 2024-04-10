@@ -7,19 +7,21 @@ using System.Threading.Tasks;
 using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
+using FR.DataAccess.DAOimpl;
 
 namespace FR.DataAccess.UOW
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DBContext _context;
-        private ConcurrentDictionary<Type, object> _daos;
 
-        public IBaseDAO<T> DAO<T>() where T : BaseModel
+        private IFeedbackDAO _feedbackDAO;
+        public UnitOfWork(DBContext context)
         {
-            return _daos.GetOrAdd(typeof(T), _ => new BaseDAO<T>(_context)) as IBaseDAO<T> ?? default!;
+            _context = context;
         }
-
+        public IFeedbackDAO Feedback  => _feedbackDAO ??= new FeedbackDAO(_context);
         public void Dispose() => _context.Dispose();
 
         public async Task SaveAsync()

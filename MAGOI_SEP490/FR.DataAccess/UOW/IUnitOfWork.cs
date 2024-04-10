@@ -10,7 +10,6 @@ namespace FR.DataAccess.UOW
 {
     public interface IUnitOfWork : IDisposable
     {
-        IBaseDAO<T> DAO<T>() where T : BaseModel;
         Task SaveAsync();
     }
 }
