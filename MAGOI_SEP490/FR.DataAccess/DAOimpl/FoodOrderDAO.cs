@@ -1,47 +1,68 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
 using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
-    public class FoodOrderDAO
+    public class FoodOrderDAO : BaseDAO<FoodOrder>, IFoodOrderDAO
     {
-        private readonly DBContext _context;
-        public FoodOrderDAO(DBContext context)
+        public FoodOrderDAO(DBContext context) : base(context)
         {
-            _context = context;
         }
-        public void AddFoodOrders(List<FoodOrder> foodOrders)
+
+        public Task<FoodOrder> GetFoodOrder(Guid orderId, int foodId)
         {
-            _context.FoodOrder.AddRange(foodOrders);
-            _context.SaveChanges();
+            throw new NotImplementedException();
         }
-        public void UpdateFoodOrder(FoodOrder foodOrder)
+
+        public IQueryable<FoodOrder> GetFoodOrders(Guid orderId)
         {
-            try
-            {
-                _context.Entry(foodOrder).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            throw new NotImplementedException();
         }
-        public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
+
+        public IQueryable<FoodOrder> GetFoodOrders(DateTime startDate, DateTime endDate)
         {
-            return _context.FoodOrder.Where(f => f.OrderId == orderId).ToList();
+            throw new NotImplementedException();
         }
-        public FoodOrder GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
+
+        public IQueryable<FoodOrder> GetFoodOrders(int statusId)
         {
-            return _context.FoodOrder.SingleOrDefault(f => f.OrderId == orderId && f.FoodId == foodId);
+            throw new NotImplementedException();
         }
-        public float GetFoodPrice(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId).UnitPrice;
-        public Food GetFood(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId);
-        public List<FoodOrder> GetFoodOrdersByTimeRange(DateTime startDate, DateTime endDate)
-        {
-            return _context.FoodOrder.Where(c => c.OrderAt >= startDate && c.OrderAt <= endDate).ToList();
-        }
-        public IQueryable<FoodOrder> GetFoodOrder(int statusId) => _context.FoodOrder.Where(f => f.FoodOrderStatusId == statusId);
+
+        //public void AddFoodOrders(List<FoodOrder> foodOrders)
+        //{
+        //    _context.FoodOrder.AddRange(foodOrders);
+        //    _context.SaveChanges();
+        //}
+        //public void UpdateFoodOrder(FoodOrder foodOrder)
+        //{
+        //    try
+        //    {
+        //        _context.Entry(foodOrder).State = EntityState.Modified;
+        //        _context.SaveChanges();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
+        //public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
+        //{
+        //    return _context.FoodOrder.Where(f => f.OrderId == orderId).ToList();
+        //}
+        //public FoodOrder GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
+        //{
+        //    return _context.FoodOrder.SingleOrDefault(f => f.OrderId == orderId && f.FoodId == foodId);
+        //}
+        //public float GetFoodPrice(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId).UnitPrice;
+        //public Food GetFood(int foodId) => _context.Foods.SingleOrDefault(f => f.Id == foodId);
+        //public List<FoodOrder> GetFoodOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        //{
+        //    return _context.FoodOrder.Where(c => c.OrderAt >= startDate && c.OrderAt <= endDate).ToList();
+        //}
+        //public IQueryable<FoodOrder> GetFoodOrder(int statusId) => _context.FoodOrder.Where(f => f.FoodOrderStatusId == statusId);
     }
 }

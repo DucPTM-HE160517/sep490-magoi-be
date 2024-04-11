@@ -1,140 +1,190 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
 using FR.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
-    public class OrderDAO
+    public class OrderDAO : BaseDAO<Order>, IOrderDAO
     {
-        private readonly DBContext _context;
-        public OrderDAO(DBContext context)
-        {
-            _context = context;
-        }
-        public Order GetOrderById(Guid Id)
-        {
-            return _context.Orders.SingleOrDefault(o => o.Id == Id);
-        }
-        public void AddOrder(Order order)
-        {
-            try
-            {
-                _context.Orders.Add(order);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public void DeleteOrder(Order order)
-        {
-            try
-            {
-                _context.Orders.Remove(order);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public List<Order> GetOrdersByStatusId(int? statusId)
-        {
-            try
-            {
-                if (statusId != null)
-                {
-                    return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
-                }
-                else
-                {
-                    return _context.Orders.ToList();
-                }
-            }
-            catch (Exception ex)
-            {
+        //public Order GetOrderById(Guid Id)
+        //{
+        //    return _context.Orders.SingleOrDefault(o => o.Id == Id);
+        //}
+        //public void AddOrder(Order order)
+        //{
+        //    try
+        //    {
+        //        _context.Orders.Add(order);
+        //        _context.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public void DeleteOrder(Order order)
+        //{
+        //    try
+        //    {
+        //        _context.Orders.Remove(order);
+        //        _context.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public List<Order> GetOrdersByStatusId(int? statusId)
+        //{
+        //    try
+        //    {
+        //        if (statusId != null)
+        //        {
+        //            return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
+        //        }
+        //        else
+        //        {
+        //            return _context.Orders.ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw new Exception(ex.Message);
-            }
-        }
-        public List<Order> GetOrdersByTableId(Guid tableId)
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public List<Order> GetOrdersByTableId(Guid tableId)
+        //{
+        //    try
+        //    {
+        //        return _context.Orders.Where(o => o.TableId == tableId).ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
+        //{
+        //    try
+        //    {
+        //        return _context.Orders.Where(o => o.TableId == tableId
+        //        && o.OrderStatusId == orderStatusId).ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public float GetTotalAmmountOfOrder(Guid orderId)
+        //{
+        //    try
+        //    {
+        //        var foodOrders = _context.FoodOrder.Where(od => od.OrderId == orderId).ToList();
+        //        float totalAmount = 0;
+        //        foreach (var foodOrder in foodOrders)
+        //        {
+        //            totalAmount += foodOrder.UnitPrice * foodOrder.Quantity;
+        //        }
+        //        return totalAmount;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public void UpdateOrder(Order order)
+        //{
+        //    try
+        //    {
+        //        _context.Entry(order).State = EntityState.Modified;
+        //        _context.SaveChanges();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
+        //public List<Order> GetOrdersByBillId(Guid billId)
+        //{
+        //    return _context.Orders.Where(o => o.BillId == billId).ToList();
+        //}
+        //public List<Order> GetServedOrdersByTableId(Guid tableId)
+        //{
+        //    return _context.Orders.Where(o => o.TableId == tableId
+        //                            && o.OrderStatusId == (int)OrderStatusId.Finished).ToList();
+        //}
+        //public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        //{
+        //    return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
+        //                            && c.CreatedAt >= startDate
+        //                            && c.CreatedAt <= endDate);
+        //}
+        //public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        //{
+        //    return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
+        //                            && c.CreatedAt >= startDate
+        //                            && c.CreatedAt <= endDate);
+        //}
+        //public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        //{
+        //    return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+        //}
+        public OrderDAO(DBContext context) : base(context)
         {
-            try
-            {
-                return _context.Orders.Where(o => o.TableId == tableId).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
-        public List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
+
+        public Task<Order> GetById(Guid id)
         {
-            try
-            {
-                return _context.Orders.Where(o => o.TableId == tableId
-                && o.OrderStatusId == orderStatusId).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new NotImplementedException();
         }
-        public float GetTotalAmmountOfOrder(Guid orderId)
+
+        public IQueryable<Order> GetOrders(int? statusId)
         {
-            try
-            {
-                var foodOrders = _context.FoodOrder.Where(od => od.OrderId == orderId).ToList();
-                float totalAmount = 0;
-                foreach (var foodOrder in foodOrders)
-                {
-                    totalAmount += foodOrder.UnitPrice * foodOrder.Quantity;
-                }
-                return totalAmount;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new NotImplementedException();
         }
-        public void UpdateOrder(Order order)
+
+        public IQueryable<Order> GetOrders(Guid tableId, int orderStatusId)
         {
-            try
-            {
-                _context.Entry(order).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            throw new NotImplementedException();
         }
-        public List<Order> GetOrdersByBillId(Guid billId)
+
+        public IQueryable<Order> GetOrders(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(o => o.BillId == billId).ToList();
+            throw new NotImplementedException();
         }
-        public List<Order> GetServedOrdersByTableId(Guid tableId)
+
+        public IQueryable<Order> GetOrdersByBillId(Guid billId)
         {
-            return _context.Orders.Where(o => o.TableId == tableId
-                                    && o.OrderStatusId == (int)OrderStatusId.Finished).ToList();
+            throw new NotImplementedException();
         }
-        public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
+
+        public IQueryable<Order> GetOrdersByTableId(Guid tableId)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
-                                    && c.CreatedAt >= startDate
-                                    && c.CreatedAt <= endDate);
+            throw new NotImplementedException();
         }
-        public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+
+        public IQueryable<Order> GetServedOrders(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
-                                    && c.CreatedAt >= startDate
-                                    && c.CreatedAt <= endDate);
+            throw new NotImplementedException();
         }
-        public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
+
+        public IQueryable<Order> GetServedOrders(Guid tableId)
         {
-            return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Order> GetServingOrders(DateTime startDate, DateTime endDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<float> GetTotalAmmountOfOrder(Guid orderId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,19 +1,24 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
 
 namespace FR.DataAccess.DAOimpl
 {
-    public class PaymentMethodDAO
+    public class PaymentMethodDAO : BaseDAO<PaymentMethod>, IPaymentMethodDAO
     {
-        private readonly DBContext _context;
-        public PaymentMethodDAO(DBContext context)
+        public PaymentMethodDAO(DBContext context) : base(context)
         {
-            _context = context;
         }
 
-        public PaymentMethod GetPaymentMethod(int id)
+        public Task<IPaymentMethodDAO> GetByID(int Id)
         {
-            return _context.PaymentMethods.SingleOrDefault(p => p.Id == id);
+            throw new NotImplementedException();
         }
+
+        //public PaymentMethod GetPaymentMethod(int id)
+        //{
+        //    return _context.PaymentMethods.SingleOrDefault(p => p.Id == id);
+        //}
     }
 }

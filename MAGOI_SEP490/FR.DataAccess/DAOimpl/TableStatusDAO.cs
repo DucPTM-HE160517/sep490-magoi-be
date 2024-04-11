@@ -1,22 +1,27 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
 
 namespace FR.DataAccess.DAOimpl
 {
-    public class TableStatusDAO
+    public class TableStatusDAO : BaseDAO<TableStatus>, ITableStatusDAO
     {
-        private readonly DBContext _context;
-        public TableStatusDAO(DBContext context)
+        public TableStatusDAO(DBContext context) : base(context)
         {
-            _context = context;
         }
-        public TableStatus GetTableStatusById(int id)
+
+        //public TableStatus GetTableStatusById(int id)
+        //{
+        //    return _context.TableStatus.SingleOrDefault(s => s.Id == id);
+        //}
+        //public List<TableStatus> GetAllTableStatus()
+        //{
+        //    return _context.TableStatus.ToList();
+        //}
+        public Task<TableStatus> GetById(int id)
         {
-            return _context.TableStatus.SingleOrDefault(s => s.Id == id);
-        }
-        public List<TableStatus> GetAllTableStatus()
-        {
-            return _context.TableStatus.ToList();
+            throw new NotImplementedException();
         }
     }
 }

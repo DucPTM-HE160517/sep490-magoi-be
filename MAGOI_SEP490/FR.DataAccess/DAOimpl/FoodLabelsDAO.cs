@@ -1,14 +1,14 @@
 ﻿using FR.BusinessObjects.DataContext;
+using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
 
 namespace FR.DataAccess.DAOimpl
 {
-    public class FoodLabelsDAO
+    public class FoodLabelsDAO : BaseDAO<FoodLabels>, IFoodLabelsDAO
     {
-        private readonly DBContext _context;
-
-        public FoodLabelsDAO(DBContext context)
+        public FoodLabelsDAO(DBContext context) : base(context)
         {
-            _context = context;
         }
     }
 }

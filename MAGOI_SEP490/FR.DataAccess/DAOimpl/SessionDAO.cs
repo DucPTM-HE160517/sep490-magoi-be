@@ -1,34 +1,44 @@
 using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
+using FR.DataAccess.DAO;
 
 namespace FR.DataAccess.DAOimpl;
 
-public class SessionDAO
+public class SessionDAO : BaseDAO<Session>, ISessionDAO
 {
-    private readonly DBContext _context;
+    public SessionDAO(DBContext context) : base(context)
+    {
+    }
 
-    public SessionDAO(DBContext context)
+    public IQueryable<string> GetExpoTokensByRoleId(string roleId)
     {
-        _context = context;
+        throw new NotImplementedException();
     }
-    public void RegisterSession(string expoToken, string roleId)
-    {
-        //Check if session already exists
-        var session = _context.Sessions.FirstOrDefault(s => s.ExpoToken == expoToken);
-        if (session != null)
-        {
-            return;
-        }
 
-        _context.Sessions.Add(new Session()
-        {
-            ExpoToken = expoToken,
-            Role = roleId
-        });
-        _context.SaveChanges();
-    }
-    public List<string> GetExpoTokensByRoleId(string roleId)
+    public Task RegisterSession(string expoToken, string roleId)
     {
-        return _context.Sessions.Where(s => s.Role == roleId).Select(s => s.ExpoToken).ToList();
+        throw new NotImplementedException();
     }
+
+    //public void RegisterSession(string expoToken, string roleId)
+    //{
+    //    //Check if session already exists
+    //    var session = _context.Sessions.FirstOrDefault(s => s.ExpoToken == expoToken);
+    //    if (session != null)
+    //    {
+    //        return;
+    //    }
+
+    //    _context.Sessions.Add(new Session()
+    //    {
+    //        ExpoToken = expoToken,
+    //        Role = roleId
+    //    });
+    //    _context.SaveChanges();
+    //}
+    //public List<string> GetExpoTokensByRoleId(string roleId)
+    //{
+    //    return _context.Sessions.Where(s => s.Role == roleId).Select(s => s.ExpoToken).ToList();
+    //}
 }
