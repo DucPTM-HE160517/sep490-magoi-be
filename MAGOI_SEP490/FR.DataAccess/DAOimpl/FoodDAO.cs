@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
-    public class FoodDAO : BaseDAO<Food>, IFoodDAO
+    public class FoodDAO : BaseDAO<Food>, IFoodCategoryDAO
     {
 
         //public List<Food> GetFoods()

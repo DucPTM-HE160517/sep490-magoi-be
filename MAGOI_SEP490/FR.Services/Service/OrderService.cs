@@ -16,7 +16,7 @@ namespace FR.Services.Service
             _dao = dao;
         }
 
-        public Order AddOrder(OrderInput orderInput)
+        public async Task<Order> AddOrder(OrderInput orderInput)
         {
             var order = new Order
             {
@@ -24,12 +24,12 @@ namespace FR.Services.Service
                 CreatedAt = orderInput.createdAt,
                 OrderStatusId = (int)OrderStatusId.Pending,
             };
-            _dao.AddOrder(order);
+            await _dao.AddAsync(order);
             return order;
         }
         public void DeleteOrder(Order order)
         {
-            _dao.DeleteOrder(order);
+            _dao.Delete(order);
         }
         public Order GetOrderById(Guid Id)
         {
