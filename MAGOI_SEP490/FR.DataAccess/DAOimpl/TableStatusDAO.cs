@@ -2,6 +2,7 @@
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
@@ -19,9 +20,9 @@ namespace FR.DataAccess.DAOimpl
         //{
         //    return _context.TableStatus.ToList();
         //}
-        public Task<TableStatus> GetById(int id)
+        public Task<TableStatus> GetTableStatusById(int id)
         {
-            throw new NotImplementedException();
+            return _context.TableStatus.SingleOrDefaultAsync(s => s.Id == id);
         }
     }
 }

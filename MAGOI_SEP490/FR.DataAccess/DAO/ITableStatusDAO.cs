@@ -9,6 +9,6 @@ namespace FR.DataAccess.DAO
 {
     public interface ITableStatusDAO
     {
-        Task<TableStatus> GetById(int id);
+        Task<TableStatus> GetTableStatusById(int id);
     }
 }
