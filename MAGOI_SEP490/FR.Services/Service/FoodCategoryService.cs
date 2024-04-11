@@ -17,9 +17,9 @@ namespace FR.Services.Service
             return _dao.GetCategoryOfCookingFoods();
         }
 
-        public List<FoodCategory> GetFoodCategories()
+        public IQueryable<FoodCategory> GetFoodCategories()
         {
-            return _dao.GetCategoryOfCookingFoods();
+            return _dao.GetAll();
         }
 
         public FoodCategory GetFoodCategoryById(int id)

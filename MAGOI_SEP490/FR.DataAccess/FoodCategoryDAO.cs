@@ -10,7 +10,7 @@ namespace FR.DataAccess
         {
             _context = context;
         }
-
+        public IQueryable<FoodCategory> GetAll() => _context.FoodCategories;
         public List<FoodCategory> GetCategoryOfCookingFoods()
         {
             List<FoodCategory> foodCategories = new();

@@ -5,7 +5,7 @@ namespace FR.Services.IService
     public interface IFoodCategoryService
     {
         List<FoodCategory> GetCategoryOfCookingFoods();
-        List<FoodCategory> GetFoodCategories();
+        IQueryable<FoodCategory> GetFoodCategories();
         FoodCategory GetFoodCategoryById(int id);
     }
 }
