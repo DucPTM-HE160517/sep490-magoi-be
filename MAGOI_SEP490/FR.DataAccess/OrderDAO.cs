@@ -59,6 +59,10 @@ namespace FR.DataAccess
                 throw new Exception(ex.Message);
             }
         }
+        public IQueryable<Order> GetOrdersByStatusAndDate(int statusId, DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(o => o.OrderStatusId == statusId && o.CreatedAt >= startDate && o.CreatedAt <= endDate);
+        }
         public List<Order> GetOrdersByTableId(Guid tableId)
         {
             try
