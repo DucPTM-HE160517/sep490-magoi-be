@@ -3,6 +3,7 @@ using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
 using FR.Infrastructure.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
@@ -10,6 +11,25 @@ namespace FR.DataAccess.DAOimpl
     {
         public TableDAO(DBContext context) : base(context)
         {
+        }
+        public Task<Table> GetTableDetail(Guid id)
+        {
+            return _context.Tables.SingleOrDefaultAsync(table => table.Id.Equals(id));
+        }
+
+        public Task<Table> GetTableByName(string name)
+        {
+            return _context.Tables.SingleOrDefaultAsync(table => table.Name.Equals(name));
+        }
+
+        public IQueryable<Table> GetTablesByStatusId(int tableStatusId)
+        {
+            return _context.Tables.Where(t => t.StatusId == tableStatusId);
+        }
+
+        public async Task<bool> IsExist(string name)
+        {
+            return await _context.Tables.AnyAsync(t => t.Name == name);
         }
 
         //public List<Table> GetTables()
@@ -39,24 +59,5 @@ namespace FR.DataAccess.DAOimpl
         //    Order order = _context.Orders.FirstOrDefault(o => o.BillId == billId);
         //    return _context.Tables.SingleOrDefault(t => t.Id == order.TableId);
         //}
-        public Task<Table> GetTable(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Table> GetTable(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Table> GetTables(int tableStatusId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> IsExist(string name)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
