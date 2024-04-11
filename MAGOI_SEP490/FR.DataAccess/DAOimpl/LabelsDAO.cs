@@ -2,6 +2,7 @@
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
@@ -15,9 +16,9 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public Task<Labels> GetById(int id)
+        public Task<Labels> GetLabelsById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Labels.SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 }

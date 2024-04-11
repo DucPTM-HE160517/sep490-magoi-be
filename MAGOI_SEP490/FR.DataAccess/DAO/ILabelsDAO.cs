@@ -4,6 +4,6 @@ namespace FR.DataAccess.DAO
 {
     public interface ILabelsDAO
     {
-        Task<Labels> GetById(int id);
+        Task<Labels> GetLabelsById(int id);
     }
 }
