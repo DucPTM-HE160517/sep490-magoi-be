@@ -9,6 +9,100 @@ namespace FR.DataAccess.DAOimpl
 {
     public class OrderDAO : BaseDAO<Order>, IOrderDAO
     {
+        public OrderDAO(DBContext context) : base(context)
+        {
+        }
+
+        public Task<Order> GetOrderByOrderId(Guid id)
+        {
+            return _context.Orders.SingleOrDefaultAsync(o => o.Id == id);
+        }
+
+        public IQueryable<Order> GetOrdersByStatusId(int? statusId)
+        {
+            try
+            {
+                if (statusId != null)
+                {
+                    return _context.Orders.Where(x => x.OrderStatusId == statusId);
+                }
+                else
+                {
+                    return _context.Orders;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IQueryable<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
+        {
+            try
+            {
+                return _context.Orders.Where(o => o.TableId == tableId
+                && o.OrderStatusId == orderStatusId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
+                                    && c.CreatedAt >= startDate
+                                    && c.CreatedAt <= endDate);
+        }
+
+        public IQueryable<Order> GetOrdersByBillId(Guid billId)
+        {
+            return _context.Orders.Where(o => o.BillId == billId);
+        }
+
+        public IQueryable<Order> GetOrdersByTableId(Guid tableId)
+        {
+            return _context.Orders.Where(o => o.TableId == tableId
+                            && o.OrderStatusId == (int)OrderStatusId.Finished);
+        }
+
+        public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
+                                    && c.CreatedAt >= startDate
+                                    && c.CreatedAt <= endDate);
+        }
+
+        public IQueryable<Order> GetServedOrdersByTableId(Guid tableId)
+        {
+            return _context.Orders.Where(o => o.TableId == tableId
+                                    && o.OrderStatusId == (int)OrderStatusId.Finished);
+        }
+
+        public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        {
+            return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);
+        }
+
+        public float GetTotalAmmountOfOrder(Guid orderId)
+        {
+            try
+            {
+                float totalAmount = _context.FoodOrder
+                    .Where(od => od.OrderId == orderId)
+                    .Sum(od => od.UnitPrice * od.Quantity);
+
+                return totalAmount;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         //public Order GetOrderById(Guid Id)
         //{
         //    return _context.Orders.SingleOrDefault(o => o.Id == Id);
@@ -133,58 +227,6 @@ namespace FR.DataAccess.DAOimpl
         //{
         //    return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);
         //}
-        public OrderDAO(DBContext context) : base(context)
-        {
-        }
 
-        public Task<Order> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetOrders(int? statusId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetOrders(Guid tableId, int orderStatusId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetOrders(DateTime startDate, DateTime endDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetOrdersByBillId(Guid billId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetOrdersByTableId(Guid tableId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetServedOrders(DateTime startDate, DateTime endDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetServedOrders(Guid tableId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Order> GetServingOrders(DateTime startDate, DateTime endDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<float> GetTotalAmmountOfOrder(Guid orderId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
