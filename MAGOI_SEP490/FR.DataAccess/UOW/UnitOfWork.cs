@@ -7,7 +7,6 @@ namespace FR.DataAccess.UOW
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DBContext _context;
-        
 
         private IBillDAO _billDAO;
         private IFeedbackDAO _feedbackDAO;
@@ -27,7 +26,7 @@ namespace FR.DataAccess.UOW
             _context = context;
         }
         public IBillDAO Bill => _billDAO ??= new BillDAO(_context);
-        public IFeedbackDAO Feedback  => _feedbackDAO ??= new FeedbackDAO(_context);
+        public IFeedbackDAO Feedback => _feedbackDAO ??= new FeedbackDAO(_context);
         public IFoodCategoryDAO FoodCategory => _foodCategoryDAO ??= new FoodCategoryDAO(_context);
         public IFoodDAO Food => _foodDAO ??= new FoodDAO(_context);
         public IFoodLabelsDAO FoodLabels => _foodLabelsDAO ??= new FoodLabelsDAO(_context);

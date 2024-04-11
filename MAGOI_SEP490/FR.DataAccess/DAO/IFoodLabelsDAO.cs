@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FR.DataAccess.DAO
 {
-    internal interface IFoodLabelsDAO
+    public interface IFoodLabelsDAO
     {
     }
 }
