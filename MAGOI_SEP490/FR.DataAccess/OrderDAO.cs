@@ -122,7 +122,7 @@ namespace FR.DataAccess
         public List<Order> GetServedOrdersByTableId(Guid tableId)
         {
             return _context.Orders.Where(o => o.TableId == tableId
-                                    && o.OrderStatusId == (int)OrderStatusId.Finished).ToList();
+                                    && o.OrderStatusId == (int)OrderStatusId.Serving).ToList();
         }
         public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
