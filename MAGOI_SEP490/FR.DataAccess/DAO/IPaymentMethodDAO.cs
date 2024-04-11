@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FR.BusinessObjects.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace FR.DataAccess.DAO
 {
     public interface IPaymentMethodDAO
     {
-        Task<IPaymentMethodDAO> GetByID(int Id);
+        Task<PaymentMethod> GetPaymentMethodDetail(int Id);
     }
 }

@@ -2,6 +2,7 @@
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
@@ -11,9 +12,9 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public Task<IPaymentMethodDAO> GetByID(int Id)
+        public Task<PaymentMethod> GetPaymentMethodDetail(int Id)
         {
-            throw new NotImplementedException();
+            return _context.PaymentMethods.SingleOrDefaultAsync(p => p.Id == Id);
         }
 
         //public PaymentMethod GetPaymentMethod(int id)
