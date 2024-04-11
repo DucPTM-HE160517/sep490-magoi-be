@@ -9,6 +9,7 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public IQueryable<FoodCategory> GetCategories(IFoodCategoryService service) => service.GetFoodCategories();
+        public IQueryable<FoodCategory> GetCategories(IFoodCategoryService service) 
+            => service.GetFoodCategories();
     }
 }
