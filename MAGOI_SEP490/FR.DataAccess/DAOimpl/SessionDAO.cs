@@ -27,33 +27,12 @@ public class SessionDAO : BaseDAO<Session>, ISessionDAO
         }
 
         // Add new session
-        _context.Sessions.Add(new Session()
+        await AddAsync(new Session()
         {
             ExpoToken = expoToken,
             Role = roleId
         });
 
-        _context.SaveChanges();
+        //_context.SaveChanges();
     }
-
-    //public void RegisterSession(string expoToken, string roleId)
-    //{
-    //    Check if session already exists
-    //    var session = _context.Sessions.FirstOrDefault(s => s.ExpoToken == expoToken);
-    //    if (session != null)
-    //    {
-    //        return;
-    //    }
-
-    //    _context.Sessions.Add(new Session()
-    //    {
-    //        ExpoToken = expoToken,
-    //        Role = roleId
-    //    });
-    //    _context.SaveChanges();
-    //}
-    //public List<string> GetExpoTokensByRoleId(string roleId)
-    //{
-    //    return _context.Sessions.Where(s => s.Role == roleId).Select(s => s.ExpoToken).ToList();
-    //}
 }

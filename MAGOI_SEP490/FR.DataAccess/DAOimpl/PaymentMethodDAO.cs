@@ -16,10 +16,5 @@ namespace FR.DataAccess.DAOimpl
         {
             return await _context.PaymentMethods.FindAsync(Id);
         }
-
-        //public PaymentMethod GetPaymentMethod(int id)
-        //{
-        //    return _context.PaymentMethods.SingleOrDefault(p => p.Id == id);
-        //}
     }
 }

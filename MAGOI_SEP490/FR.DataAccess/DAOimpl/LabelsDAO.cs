@@ -8,10 +8,6 @@ namespace FR.DataAccess.DAOimpl
 {
     public class LabelsDAO : BaseDAO<Labels>, ILabelsDAO
     {
-        //public Labels GetLabelsById(int id)
-        //{
-        //    return _context.Labels.SingleOrDefault(x => x.Id == id);
-        //}
         public LabelsDAO(DBContext context) : base(context)
         {
         }

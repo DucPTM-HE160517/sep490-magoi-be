@@ -11,15 +11,6 @@ namespace FR.DataAccess.DAOimpl
         public TableStatusDAO(DBContext context) : base(context)
         {
         }
-
-        //public TableStatus GetTableStatusById(int id)
-        //{
-        //    return _context.TableStatus.SingleOrDefault(s => s.Id == id);
-        //}
-        //public List<TableStatus> GetAllTableStatus()
-        //{
-        //    return _context.TableStatus.ToList();
-        //}
         public async Task<TableStatus> GetTableStatusById(int id)
         {
             return await _context.TableStatus.SingleOrDefaultAsync(s => s.Id == id);
