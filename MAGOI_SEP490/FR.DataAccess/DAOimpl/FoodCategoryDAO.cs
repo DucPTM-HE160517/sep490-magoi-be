@@ -17,15 +17,15 @@ namespace FR.DataAccess.DAOimpl
             return await _context.FoodCategories.FindAsync(id);
         }
 
-        public async Task<List<FoodCategory>> GetCategoryOfCookingFoodsAsync()
+        public Task<List<FoodCategory>> GetCategoryOfCookingFoods()
         {
             List<FoodCategory> foodCategories = new();
             HashSet<int> categoriesId = new();
 
-            foreach (var fo in await _context.FoodOrder.ToListAsync())
+            foreach (var fo in _context.FoodOrder.ToList())
             {
-                Food f = await _context.Foods.SingleOrDefaultAsync(f => f.Id == fo.FoodId);
-                if (!categoriesId.Contains(f.FoodCategoryId))
+                Food f = _context.Foods.SingleOrDefault(f => f.Id == fo.FoodId);
+                if (f != null && !categoriesId.Contains(f.FoodCategoryId))
                 {
                     categoriesId.Add(f.FoodCategoryId);
                 }
@@ -33,10 +33,14 @@ namespace FR.DataAccess.DAOimpl
 
             foreach (var id in categoriesId)
             {
-                foodCategories.Add(await _context.FoodCategories.SingleOrDefaultAsync(c => c.Id == id));
+                FoodCategory category = _context.FoodCategories.SingleOrDefault(c => c.Id == id);
+                if (category != null)
+                {
+                    foodCategories.Add(category);
+                }
             }
 
-            return foodCategories;
+            return Task.FromResult(foodCategories);
         }
 
         //public Task<List<FoodCategory>> GetCategoryOfCookingFoods()
