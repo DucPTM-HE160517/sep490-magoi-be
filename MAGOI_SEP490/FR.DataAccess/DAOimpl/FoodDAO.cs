@@ -9,6 +9,20 @@ namespace FR.DataAccess.DAOimpl
     public class FoodDAO : BaseDAO<Food>, IFoodDAO
     {
 
+        public FoodDAO(DBContext context) : base(context)
+        {
+        }
+
+        public async Task<Food> GetFoodByFoodId(int id)
+        {
+            return await _context.Foods.SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public IQueryable<Food> GetFoodsByCategory(int categoryId)
+        {
+            return _context.Foods.Where(x => x.FoodCategoryId == categoryId);
+        }
+
         //public List<Food> GetFoods()
         //{
         //    return _context.Foods.ToList();
@@ -37,18 +51,5 @@ namespace FR.DataAccess.DAOimpl
         //    _context.Entry(food).State = EntityState.Modified;
         //    _context.SaveChanges();
         //}
-        public FoodDAO(DBContext context) : base(context)
-        {
-        }
-
-        public Task<Food> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Food> GetFoodsByCategory(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
