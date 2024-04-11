@@ -12,24 +12,24 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public Task<FoodOrder> GetFoodOrder(Guid orderId, int foodId)
+        public Task<FoodOrder> GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
         {
-            throw new NotImplementedException();
+            return _context.FoodOrder.SingleOrDefaultAsync(f => f.OrderId == orderId && f.FoodId == foodId);
         }
 
-        public IQueryable<FoodOrder> GetFoodOrders(Guid orderId)
+        public IQueryable<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
         {
-            throw new NotImplementedException();
+            return _context.FoodOrder.Where(f => f.OrderId == orderId);
         }
 
-        public IQueryable<FoodOrder> GetFoodOrders(DateTime startDate, DateTime endDate)
+        public IQueryable<FoodOrder> GetFoodOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            return _context.FoodOrder.Where(c => c.OrderAt >= startDate && c.OrderAt <= endDate);
         }
 
-        public IQueryable<FoodOrder> GetFoodOrders(int statusId)
+        public IQueryable<FoodOrder> GetFoodOrdersByStatusId(int statusId)
         {
-            throw new NotImplementedException();
+            return _context.FoodOrder.Where(f => f.FoodOrderStatusId == statusId);
         }
 
         //public void AddFoodOrders(List<FoodOrder> foodOrders)

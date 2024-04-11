@@ -9,9 +9,9 @@ namespace FR.DataAccess.DAO
 {
     public interface IFoodOrderDAO
     {
-        IQueryable<FoodOrder> GetFoodOrders(Guid orderId);
-        IQueryable<FoodOrder> GetFoodOrders(DateTime startDate, DateTime endDate);
-        IQueryable<FoodOrder> GetFoodOrders(int statusId);
-        Task<FoodOrder> GetFoodOrder(Guid orderId, int foodId);
+        IQueryable<FoodOrder> GetFoodOrdersByOrderId(Guid orderId);
+        IQueryable<FoodOrder> GetFoodOrdersByTimeRange(DateTime startDate, DateTime endDate);
+        IQueryable<FoodOrder> GetFoodOrdersByStatusId(int statusId);
+        Task<FoodOrder> GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId);
     }
 }
