@@ -109,5 +109,21 @@ namespace FR.Services.Service
             endDate = Ultilities.AbsoluteEnd(endDate);
             return _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
         }
+
+        public IQueryable<Order> GetOrdersByStatusAndDate(int statusID, DateTime startDate, DateTime endDate)
+        {
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
+            if (statusID == 0)
+            {
+                return _dao.GetOrdersByStatusAndDate((int)OrderStatusId.Pending, startDate, endDate)
+                    .Concat(_dao.GetOrdersByStatusAndDate((int)OrderStatusId.Cooking, startDate, endDate))
+                    .Concat(_dao.GetOrdersByStatusAndDate((int)OrderStatusId.Serving, startDate, endDate));
+            }
+            else
+            {
+                return _dao.GetOrdersByStatusAndDate((int)OrderStatusId.Finished, startDate, endDate);
+            }
+        }
     }
 }

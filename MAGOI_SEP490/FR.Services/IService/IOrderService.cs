@@ -19,5 +19,6 @@ namespace FR.Services.IService
         List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
         public float GetTotalPriceOfOrders(List<Order> orders);
         public void UpdateBillIdOfOrder(Guid orderId, Guid billId);
+        IQueryable<Order> GetOrdersByStatusAndDate(int statusID,DateTime startDate, DateTime endDate);
     }
 }
