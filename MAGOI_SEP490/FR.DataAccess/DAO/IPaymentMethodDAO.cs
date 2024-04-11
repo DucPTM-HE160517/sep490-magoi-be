@@ -9,6 +9,6 @@ namespace FR.DataAccess.DAO
 {
     public interface IPaymentMethodDAO
     {
-        Task<PaymentMethod> GetPaymentMethodDetail(int Id);
+        Task<PaymentMethod> GetPaymentMethodById(int Id);
     }
 }

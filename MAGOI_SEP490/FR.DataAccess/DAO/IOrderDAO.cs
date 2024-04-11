@@ -13,7 +13,7 @@ namespace FR.DataAccess.DAO
         IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate);
         IQueryable<Order> GetServedOrdersByTableId(Guid tableId);
         IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
-        public float GetTotalAmmountOfOrder(Guid orderId);
+        Task<float> GetTotalAmmountOfOrder(Guid orderId);
         
 
     }

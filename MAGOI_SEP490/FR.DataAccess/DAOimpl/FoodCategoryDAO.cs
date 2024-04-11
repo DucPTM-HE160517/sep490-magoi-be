@@ -2,6 +2,7 @@
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
+using FR.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
@@ -17,14 +18,14 @@ namespace FR.DataAccess.DAOimpl
             return await _context.FoodCategories.FindAsync(id);
         }
 
-        public Task<List<FoodCategory>> GetCategoryOfCookingFoods()
+        public async Task<IEnumerable<FoodCategory>> GetCategoryOfCookingFoods()
         {
             List<FoodCategory> foodCategories = new();
             HashSet<int> categoriesId = new();
-
-            foreach (var fo in _context.FoodOrder.ToList())
+            var cookingFoods = _context.FoodOrder.Where(f => f.FoodOrderStatusId == (int)FoodOrderStatusId.Cooking);
+            foreach (var fo in cookingFoods)
             {
-                Food f = _context.Foods.SingleOrDefault(f => f.Id == fo.FoodId);
+                Food f = await _context.Foods.SingleOrDefaultAsync(f => f.Id == fo.FoodId);
                 if (f != null && !categoriesId.Contains(f.FoodCategoryId))
                 {
                     categoriesId.Add(f.FoodCategoryId);
@@ -33,14 +34,14 @@ namespace FR.DataAccess.DAOimpl
 
             foreach (var id in categoriesId)
             {
-                FoodCategory category = _context.FoodCategories.SingleOrDefault(c => c.Id == id);
+                FoodCategory category = await _context.FoodCategories.SingleOrDefaultAsync(c => c.Id == id);
                 if (category != null)
                 {
                     foodCategories.Add(category);
                 }
             }
 
-            return Task.FromResult(foodCategories);
+            return foodCategories;
         }
 
         //public Task<List<FoodCategory>> GetCategoryOfCookingFoods()

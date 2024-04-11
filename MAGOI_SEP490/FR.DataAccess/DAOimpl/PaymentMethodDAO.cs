@@ -12,9 +12,9 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public Task<PaymentMethod> GetPaymentMethodDetail(int Id)
+        public async Task<PaymentMethod> GetPaymentMethodById(int Id)
         {
-            return _context.PaymentMethods.SingleOrDefaultAsync(p => p.Id == Id);
+            return await _context.PaymentMethods.FindAsync(Id);
         }
 
         //public PaymentMethod GetPaymentMethod(int id)

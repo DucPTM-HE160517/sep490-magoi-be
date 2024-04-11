@@ -10,6 +10,6 @@ namespace FR.DataAccess.DAO
     public interface IFoodCategoryDAO
     {
         Task<FoodCategory> GetById(int id);
-        Task<List<FoodCategory>> GetCategoryOfCookingFoods();
+        Task<IEnumerable<FoodCategory>> GetCategoryOfCookingFoods();
     }
 }

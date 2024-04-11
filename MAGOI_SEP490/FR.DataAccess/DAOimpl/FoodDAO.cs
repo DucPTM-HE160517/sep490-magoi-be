@@ -15,7 +15,7 @@ namespace FR.DataAccess.DAOimpl
 
         public async Task<Food> GetFoodByFoodId(int id)
         {
-            return await _context.Foods.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Foods.FindAsync(id);
         }
 
         public IQueryable<Food> GetFoodsByCategory(int categoryId)

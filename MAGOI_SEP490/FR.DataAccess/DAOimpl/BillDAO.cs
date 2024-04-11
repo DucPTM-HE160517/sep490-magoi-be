@@ -13,7 +13,7 @@ namespace FR.DataAccess.DAOimpl
         }
         async Task<Bill> IBillDAO.GetBillById(Guid billId)
         {
-            return await _context.Bills.SingleOrDefaultAsync(b => b.Id == billId);
+            return await _context.Bills.FindAsync(billId);
         }
 
         IQueryable<Bill> IBillDAO.GetBillsByDate(DateTime date)

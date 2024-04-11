@@ -16,9 +16,9 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public Task<Labels> GetLabelsById(int id)
+        public async Task<Labels> GetLabelsById(int id)
         {
-            return _context.Labels.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Labels.FindAsync(id);
         }
     }
 }

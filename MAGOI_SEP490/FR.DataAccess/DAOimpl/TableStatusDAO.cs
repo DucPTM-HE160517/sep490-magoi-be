@@ -20,9 +20,9 @@ namespace FR.DataAccess.DAOimpl
         //{
         //    return _context.TableStatus.ToList();
         //}
-        public Task<TableStatus> GetTableStatusById(int id)
+        public async Task<TableStatus> GetTableStatusById(int id)
         {
-            return _context.TableStatus.SingleOrDefaultAsync(s => s.Id == id);
+            return await _context.TableStatus.SingleOrDefaultAsync(s => s.Id == id);
         }
     }
 }

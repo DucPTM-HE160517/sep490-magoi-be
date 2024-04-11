@@ -10,7 +10,7 @@ namespace FR.DataAccess.DAO
     public interface ITableDAO
     {
         Task<bool> IsExist(string name);
-        Task<Table> GetTableDetail(Guid id);
+        Task<Table> GetTableById(Guid id);
         Task<Table> GetTableByName(string name);
         IQueryable<Table> GetTablesByStatusId(int tableStatusId);
     }

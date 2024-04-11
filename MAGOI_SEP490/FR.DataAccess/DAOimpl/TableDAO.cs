@@ -12,14 +12,14 @@ namespace FR.DataAccess.DAOimpl
         public TableDAO(DBContext context) : base(context)
         {
         }
-        public Task<Table> GetTableDetail(Guid id)
+        public async Task<Table> GetTableById(Guid id)
         {
-            return _context.Tables.SingleOrDefaultAsync(table => table.Id.Equals(id));
+            return await _context.Tables.FindAsync(id);
         }
 
-        public Task<Table> GetTableByName(string name)
+        public async Task<Table> GetTableByName(string name)
         {
-            return _context.Tables.SingleOrDefaultAsync(table => table.Name.Equals(name));
+            return await _context.Tables.SingleOrDefaultAsync(table => table.Name.Equals(name));
         }
 
         public IQueryable<Table> GetTablesByStatusId(int tableStatusId)

@@ -29,28 +29,21 @@ namespace FR.DataAccess.DAOimpl
         {
             List<Feedback> list = new List<Feedback>();
 
-            try
+            foreach (Feedback feedback in _context.Feedbacks.ToList())
             {
-                foreach (Feedback feedback in _context.Feedbacks.ToList())
+                foreach (Bill bill in _context.Bills.ToList())
                 {
-                    foreach (Bill bill in _context.Bills.ToList())
+                    if (feedback.BillId == bill.Id)
                     {
-                        if (feedback.BillId == bill.Id)
+                        if (bill.FinishedAt != null && bill.FinishedAt >= startDate && bill.FinishedAt <= endDate)
                         {
-                            if (bill.FinishedAt != null && bill.FinishedAt >= startDate && bill.FinishedAt <= endDate)
-                            {
-                                list.Add(feedback);
-                            }
+                            list.Add(feedback);
                         }
                     }
                 }
+            }
 
-                return list.AsQueryable();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            return list.AsQueryable();
         }
     }
 }

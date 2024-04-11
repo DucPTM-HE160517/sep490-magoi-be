@@ -37,7 +37,7 @@ namespace FR.DataAccess.UOW
         public IPaymentMethodDAO PaymentMethod => _paymentMethodDAO ??= new PaymentMethodDAO(_context);
         public ISessionDAO Session => _sessionDAO ??= new SessionDAO(_context);
         public ITableDAO Table => _tableDAO ??= new TableDAO(_context);
-        public ITableStatusDAO tableStatus => _tableStatusDAO ??= new TableStatusDAO(_context);
+        public ITableStatusDAO TableStatus => _tableStatusDAO ??= new TableStatusDAO(_context);
 
         public void Dispose() => _context.Dispose();
 

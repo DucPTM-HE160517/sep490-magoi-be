@@ -12,9 +12,9 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public Task<FoodOrder> GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
+        public async Task<FoodOrder> GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId)
         {
-            return _context.FoodOrder.SingleOrDefaultAsync(f => f.OrderId == orderId && f.FoodId == foodId);
+            return await _context.FoodOrder.SingleOrDefaultAsync(f => f.OrderId == orderId && f.FoodId == foodId);
         }
 
         public IQueryable<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
