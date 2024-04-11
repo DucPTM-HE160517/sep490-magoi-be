@@ -2,6 +2,7 @@
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess.DAOimpl
 {
@@ -16,9 +17,26 @@ namespace FR.DataAccess.DAOimpl
             return await _context.FoodCategories.FindAsync(id);
         }
 
-        public Task<List<FoodCategory>> GetCategoryOfCookingFoods()
+        public async Task<List<FoodCategory>> GetCategoryOfCookingFoodsAsync()
         {
-            throw new NotImplementedException();
+            List<FoodCategory> foodCategories = new();
+            HashSet<int> categoriesId = new();
+
+            foreach (var fo in await _context.FoodOrder.ToListAsync())
+            {
+                Food f = await _context.Foods.SingleOrDefaultAsync(f => f.Id == fo.FoodId);
+                if (!categoriesId.Contains(f.FoodCategoryId))
+                {
+                    categoriesId.Add(f.FoodCategoryId);
+                }
+            }
+
+            foreach (var id in categoriesId)
+            {
+                foodCategories.Add(await _context.FoodCategories.SingleOrDefaultAsync(c => c.Id == id));
+            }
+
+            return foodCategories;
         }
 
         //public Task<List<FoodCategory>> GetCategoryOfCookingFoods()
