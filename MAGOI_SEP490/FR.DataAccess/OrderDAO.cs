@@ -126,7 +126,9 @@ namespace FR.DataAccess
         }
         public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
+            return _context.Orders.Where(c => (c.OrderStatusId == (int)OrderStatusId.Pending 
+                                            || c.OrderStatusId == (int)OrderStatusId.Cooking 
+                                            || c.OrderStatusId == (int)OrderStatusId.Serving)
                                     && c.CreatedAt >= startDate
                                     && c.CreatedAt <= endDate);
         }
