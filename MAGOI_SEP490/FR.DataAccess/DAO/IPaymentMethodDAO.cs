@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FR.DataAccess.DAO
 {
-    internal interface IPaymentMethodDAO
+    public interface IPaymentMethodDAO
     {
+        Task<IPaymentMethodDAO> GetByID(int Id);
     }
 }
