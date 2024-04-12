@@ -6,12 +6,12 @@ namespace FR.Services.IService
 {
     public interface IFoodOrderService
     {
-        List<FoodOrder> AddFoodOrders(Guid orderId, List<FoodOrderInput> foodOrders);
-        List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId);
-        void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId);
-        FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId);
-        Food[] GetTop5FoodOfOrders(List<Order> orders);
-        SaleReport GetSaleReport(DateTime startDate, DateTime endDate);
-        IQueryable<Food> GetCookingFoodsByCategory(int id);
+        Task<List<FoodOrder>> AddFoodOrdersAsync(Guid orderId, List<FoodOrderInput> foodOrders);
+        Task<List<FoodOrder>> GetFoodOrdersByOrderIdAsync(Guid orderId);
+        Task UpdateFoodOrdersStatusAsync(Guid orderId, int foodOrderStatusId);
+        Task<FoodOrder> UpdateFoodOrderStatusAsync(Guid orderId, int foodId, int foodOrderStatusId);
+        Task<Food[]> GetTop5FoodOfOrdersAsync(List<Order> orders);
+        Task<SaleReport> GetSaleReportAsync(DateTime startDate, DateTime endDate);
+        Task<List<Food>> GetCookingFoodsByCategoryAsync(int id);
     }
 }

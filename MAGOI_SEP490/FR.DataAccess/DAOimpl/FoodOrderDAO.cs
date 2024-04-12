@@ -31,5 +31,9 @@ namespace FR.DataAccess.DAOimpl
         {
             return _context.FoodOrder.Where(f => f.FoodOrderStatusId == statusId);
         }
+        public float GetFoodUnitPriceByFoodId(int foodId)
+        {
+            return _context.Foods.FirstOrDefault(f => f.Id == foodId).UnitPrice;
+        }
     }
 }

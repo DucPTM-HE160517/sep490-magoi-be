@@ -1,56 +1,66 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Common.Ultilities;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.Services.Service
 {
     public class FoodOrderService : IFoodOrderService
     {
-        private readonly FoodOrderDAO _dao;
-        public FoodOrderService(FoodOrderDAO dao)
+        private readonly IFoodOrderDAO _dao;
+        private readonly IFoodDAO _foodDao;
+        private readonly IUnitOfWork _uow;
+        public FoodOrderService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
+            _foodDao = ((UnitOfWork)uow).Food;
+            _dao = ((UnitOfWork)uow).FoodOrder;
         }
 
-        public List<FoodOrder> AddFoodOrders(Guid orderId, List<FoodOrderInput> foodListInput)
+        public async Task<List<FoodOrder>> AddFoodOrdersAsync(Guid orderId, List<FoodOrderInput> foodListInput)
         {
             List<FoodOrder> foodOrders = new List<FoodOrder>();
             for (int i = 0; i < foodListInput.Count; i++)
             {
-                FoodOrder food = new FoodOrder
+                FoodOrder foodorder = new FoodOrder
                 {
                     OrderId = orderId,
                     FoodId = foodListInput[i].foodId,
                     Quantity = foodListInput[i].quantity,
                     FoodNote = foodListInput[i].foodNote,
-                    UnitPrice = _dao.GetFoodPrice(foodListInput[i].foodId),
+                    UnitPrice = _dao.GetFoodUnitPriceByFoodId(foodListInput[i].foodId),
                     OrderAt = DateTime.Now.ToUniversalTime(),
                     FoodOrderStatusId = (int)FoodOrderStatusId.Cooking
                 };
-                foodOrders.Add(food);
+                foodOrders.Add(foodorder);
+                _dao.AddAsync(foodorder);
             }
-            _dao.AddFoodOrders(foodOrders);
+            
             return foodOrders;
         }
 
-        public List<FoodOrder> GetFoodOrdersByOrderId(Guid orderId)
+        public async Task<List<FoodOrder>> GetFoodOrdersByOrderIdAsync(Guid orderId)
         {
-            return _dao.GetFoodOrdersByOrderId(orderId);
+            return await _dao.GetFoodOrdersByOrderId(orderId).ToListAsync();
         }
 
-        public void UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId)
+        public async Task UpdateFoodOrdersStatusAsync(Guid orderId, int foodOrderStatusId)
         {
             try
             {
-                List<FoodOrder> foods = _dao.GetFoodOrdersByOrderId(orderId);
+                List<FoodOrder> foods = await _dao.GetFoodOrdersByOrderId(orderId).ToListAsync();
                 foreach (FoodOrder food in foods)
                 {
                     food.FoodOrderStatusId = foodOrderStatusId;
-                    _dao.UpdateFoodOrder(food);
+                    _dao.Update(food);
+                    await _uow.SaveAsync();
+                    _uow.Dispose();
                 }
             }
             catch (Exception e)
@@ -59,13 +69,16 @@ namespace FR.Services.Service
             }
         }
 
-        public FoodOrder UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId)
+        public async Task<FoodOrder> UpdateFoodOrderStatusAsync(Guid orderId, int foodId, int foodOrderStatusId)
+
         {
             try
             {
-                FoodOrder food = _dao.GetFoodOrderByOrderIdAndFoodId(orderId, foodId);
+                FoodOrder food = await _dao.GetFoodOrderByOrderIdAndFoodId(orderId, foodId);
                 food.FoodOrderStatusId = foodOrderStatusId;
-                _dao.UpdateFoodOrder(food);
+                _dao.Update(food);
+                await _uow.SaveAsync();
+                _uow.Dispose();
                 return food;
             }
             catch (Exception e)
@@ -73,13 +86,13 @@ namespace FR.Services.Service
                 throw new Exception(e.Message);
             }
         }
-        public Food[] GetTop5FoodOfOrders(List<Order> orders)
+        public async Task<Food[]> GetTop5FoodOfOrdersAsync(List<Order> orders)
         {
             Dictionary<int, int> foodCounts = new Dictionary<int, int>();
 
             foreach (var order in orders)
             {
-                List<FoodOrder> foodOrders = _dao.GetFoodOrdersByOrderId(order.Id);
+                List<FoodOrder> foodOrders = await _dao.GetFoodOrdersByOrderId(order.Id).ToListAsync();
                 foreach (var foodOrder in foodOrders)
                 {
                     if (foodCounts.ContainsKey(foodOrder.FoodId))
@@ -100,7 +113,7 @@ namespace FR.Services.Service
             Food food;
             for (int i =0;i<foods.Length;i++)
             {
-                food = _dao.GetFood(top5Foods.ElementAt(i).Key);
+                food = await _foodDao.GetFoodByFoodId(top5Foods.ElementAt(i).Key);
                 foods[i] = new Food()
                 {
                     Id = top5Foods.ElementAt(i).Key,
@@ -112,7 +125,8 @@ namespace FR.Services.Service
 
             return foods;
         }
-        public SaleReport GetSaleReport(DateTime startDate, DateTime endDate)
+        public async Task<SaleReport> GetSaleReportAsync(DateTime startDate, DateTime endDate)
+
         {
             startDate = Ultilities.AbsoluteStart(startDate);
             endDate = Ultilities.AbsoluteEnd(endDate);
@@ -126,7 +140,7 @@ namespace FR.Services.Service
                     SaleRevenue SaleRevenue = new SaleRevenue() {
                     Quantity = foodOrder.Quantity,
                     Income = foodOrder.Quantity * foodOrder.UnitPrice,
-                    Food = _dao.GetFood(foodOrder.FoodId)                  
+                    Food = await _foodDao.GetFoodByFoodId(foodOrder.FoodId)                  
                     };
                     saleRevenues.Add(SaleRevenue);
                 }
@@ -139,7 +153,7 @@ namespace FR.Services.Service
                         {
                             Quantity = foodOrder.Quantity,
                             Income = foodOrder.Quantity * foodOrder.UnitPrice,
-                            Food = _dao.GetFood(foodOrder.FoodId)
+                            Food = await _foodDao.GetFoodByFoodId(foodOrder.FoodId)
                         };
                         saleRevenues.Add(SaleRevenue);
                     }
@@ -178,13 +192,13 @@ namespace FR.Services.Service
             return index;
         }
 
-        public IQueryable<Food> GetCookingFoodsByCategory(int categoryId)
+        public async Task<List<Food>> GetCookingFoodsByCategoryAsync(int categoryId)
         {
-            List<FoodOrder> cookingFoodList = _dao.GetFoodOrder((int) FoodOrderStatusId.Cooking).ToList();
+            List<FoodOrder> cookingFoodList = await _dao.GetFoodOrdersByStatusId((int) FoodOrderStatusId.Cooking).ToListAsync();
             List <FoodOrder> dup_list = new();
             foreach (FoodOrder foodOrder in cookingFoodList)
             {
-                Food f = _dao.GetFood(foodOrder.FoodId);
+                Food f = await _foodDao.GetFoodByFoodId(foodOrder.FoodId);
                 if(f.FoodCategoryId == categoryId)
                 {
                     dup_list.Add(foodOrder);
@@ -207,12 +221,13 @@ namespace FR.Services.Service
             List<Food> result = new List<Food>();
             foreach(KeyValuePair<int, int> pair in raw_result)
             {
-                Food f = _dao.GetFood(pair.Key);
+                Food f = await _foodDao.GetFoodByFoodId(pair.Key);
                 f.Quantity = pair.Value;
                 result.Add(f);
             }
 
-            return result.AsQueryable();
+            return result;
         }
+
     }
 }
