@@ -1,30 +1,34 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.IService;
 
 namespace FR.Services.Service
 {
     public class FoodCategoryService : IFoodCategoryService
     {
-        private readonly FoodCategoryDAO _dao;
-        public FoodCategoryService(FoodCategoryDAO dao)
+        private readonly IFoodCategoryDAO _dao;
+        private readonly IUnitOfWork _uow;
+        public FoodCategoryService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
+            _dao = ((UnitOfWork)uow).FoodCategory;
         }
 
-        public List<FoodCategory> GetCategoryOfCookingFoods()
+        public async Task<List<FoodCategory>> GetCategoryOfCookingFoodsAsync()
         {
-            return _dao.GetCategoryOfCookingFoods();
+            return (List<FoodCategory>)await _dao.GetCategoryOfCookingFoods();
         }
 
-        public List<FoodCategory> GetFoodCategories()
+        public async Task<List<FoodCategory>> GetFoodCategoriesAsync() 
         {
-            return _dao.GetCategoryOfCookingFoods();
+            return (List<FoodCategory>)await _dao.GetAllAsync();
         }
 
-        public FoodCategory GetFoodCategoryById(int id)
+        public async Task<FoodCategory> GetFoodCategoryByIdAsync(int id)
         {
-            return _dao.GetFoodCategoryById(id);
+            return await _dao.GetById(id);
         }
     }
 }
