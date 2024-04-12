@@ -1,19 +1,26 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Common.Ultilities;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
+using static HotChocolate.ErrorCodes;
 
 namespace FR.Services.Service
 {
     public class BillService : IBillService
     {
-        private readonly BillDAO _dao;
+        private readonly IBillDAO _dao;
+        private readonly IUnitOfWork _uow;
 
-        public BillService(BillDAO dao)
+        public BillService(IUnitOfWork uow)
         {
-            _dao = dao;
-        }
-        public Bill CreateBill(float totalAmount)
+            _uow = uow;
+            _dao = ((UnitOfWork)uow).Bill;
+        }       
+
+        public async Task<Bill> CreateBillAsync(float totalAmount)
         {
             Bill bill = new Bill
             {
@@ -22,42 +29,35 @@ namespace FR.Services.Service
                 TotalAmount = totalAmount
             };
 
-            _dao.AddBill(bill);
+            _dao.AddAsync(bill);
+            await _uow.SaveAsync();
+            _uow.Dispose();
             return bill;
         }
 
-        public Bill GetBillById(Guid billId)
+        public async Task<List<Bill>> GetBillsByDateAsync(DateTime date)
         {
-            return _dao.GetBillById(billId);
+            return await _dao.GetBillsByDate(date).ToListAsync();
         }
 
-        public List<Bill> GetBillsByDate(DateTime date)
+        public async Task<Bill> GetBillByIdAsync(Guid billId)
         {
-            return _dao.GetBillsByDate(date);
+            return await _dao.GetBillById(billId);
         }
 
-        public void UpdateBill(Bill bill)
+        public async Task UpdateBillAsync(Bill bill)
         {
             try
             {
-                _dao.UpdateBill(bill);
+                _dao.Update(bill);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        public float GetTotalAmountOfBills(List<Bill> Bills)
-        {
-            float totalAmount = 0;
-            foreach (Bill bill in Bills)
-            {
-                totalAmount += bill.TotalAmount;
-            }
-            return totalAmount;
-        }
 
-        public int[] GetBillsPerHour(List<Bill> bills)
+        public async Task<int[]> GetBillsPerHourAsync(List<Bill> bills)
         {
             int[] billsPerHour = new int[24];
             foreach (var bill in bills)
@@ -70,12 +70,22 @@ namespace FR.Services.Service
             return billsPerHour;
         }
 
-        public List<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
+        public async Task<List<Bill>> GetBillsByTimeRangeAsync(DateTime startDate, DateTime endDate)
         {
             startDate = Ultilities.AbsoluteStart(startDate);
             endDate = Ultilities.AbsoluteEnd(endDate);
 
-            return _dao.GetBillsByTimeRange(startDate, endDate);
+            return await _dao.GetBillsByTimeRange(startDate, endDate).ToListAsync();
+        }
+
+        public async Task<float> GetTotalAmountOfBillsAsync(List<Bill> bills)
+        {
+            float totalAmount = 0;
+            foreach (Bill bill in bills)
+            {
+                totalAmount += bill.TotalAmount;
+            }
+            return totalAmount;
         }
     }
 }
