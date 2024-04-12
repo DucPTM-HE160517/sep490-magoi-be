@@ -142,5 +142,10 @@ namespace FR.DataAccess
         {
             return _context.Orders.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate);
         }
+        public int GetOrderStausByOrderId(Guid orderId)
+        {
+            Order order = _context.Orders.FirstOrDefault(o => o.Id == orderId);
+            return order.OrderStatusId;
+        }
     }
 }
