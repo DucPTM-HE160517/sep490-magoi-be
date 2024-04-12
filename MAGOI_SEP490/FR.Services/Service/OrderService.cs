@@ -1,22 +1,27 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Common.Ultilities;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
 using static HotChocolate.ErrorCodes;
 
 namespace FR.Services.Service
 {
     public class OrderService : IOrderService
     {
-        private readonly OrderDAO _dao;
-        public OrderService(OrderDAO dao)
+        private readonly IOrderDAO _dao;
+        private readonly IUnitOfWork _uow;
+        public OrderService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
+            _dao = ((UnitOfWork)uow).Order;
         }
 
-        public async Task<Order> AddOrder(OrderInput orderInput)
+        public async Task<Order> AddOrderAsync(OrderInput orderInput)
         {
             var order = new Order
             {
@@ -27,87 +32,87 @@ namespace FR.Services.Service
             await _dao.AddAsync(order);
             return order;
         }
-        public void DeleteOrder(Order order)
+        public void DeleteOrderAsync(Order order)
         {
-            _dao.Delete(order);
+           _dao.Delete(order);
         }
-        public Order GetOrderById(Guid Id)
+        public async Task<Order> GetOrderByIdAsync(Guid Id)
         {
-            return _dao.GetOrderById(Id);
+            return await _dao.GetOrderByOrderId(Id);
         }
-        public List<Order> GetOrdersByOrderStatusId(int? orderStatusId)
+        public async Task<List<Order>> GetOrdersByOrderStatusIdAsync(int? orderStatusId)
         {
-            return _dao.GetOrdersByStatusId(orderStatusId);
+            return await _dao.GetOrdersByStatusId(orderStatusId).ToListAsync();
         }
-        public List<Order> GetOrdersByTableId(Guid tableId)
+        public async Task<List<Order>> GetOrdersByTableIdAsync(Guid tableId)
         {
-            return _dao.GetOrdersByTableId(tableId);
+            return await _dao.GetOrdersByTableId(tableId).ToListAsync();
         }
-        public List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
+        public async Task<List<Order>> GetOrdersByTableIdAndOrderStatusIdAsync(Guid tableId, int orderStatusId)
         {
-            return _dao.GetOrdersByTableIdAndOrderStatusId(tableId, orderStatusId);
+            return await _dao.GetOrdersByTableIdAndOrderStatusId(tableId, orderStatusId).ToListAsync();
         }
-        public void UpdateOrderStatus(Guid orderId, int orderStatusId)
+        public async void UpdateOrderStatusAsync(Guid orderId, int orderStatusId)
         {
             try
             {
                 Order o = _dao.GetOrderById(orderId);
                 o.OrderStatusId = orderStatusId;
-                _dao.UpdateOrder(o);
+                _dao.Update(o);
             }
             catch(Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        public float GetTotalPriceOfOrders(List<Order> orders)
+        public async Task<float> GetTotalPriceOfOrdersAsync(List<Order> orders)
         {
             float totalPrice = 0;
 
             foreach (var order in orders)
             {
-                totalPrice += _dao.GetTotalAmmountOfOrder(order.Id);
+                totalPrice += await _dao.GetTotalAmmountOfOrder(order.Id);
             }
 
             return totalPrice;
         }
-        public void UpdateBillIdOfOrder(Guid orderId, Guid billId)
+        public async void UpdateBillIdOfOrderAsync(Guid orderId, Guid billId)
         {
             Order order = _dao.GetOrderById(orderId);
             order.BillId = billId;
-            _dao.UpdateOrder(order);
+            _dao.Update(order);
         }
 
-        public List<Order> GetOrdersByBillId(Guid billId)
+        public async Task<List<Order>> GetOrdersByBillIdAsync(Guid billId)
         {
-            return _dao.GetOrdersByBillId(billId);
+            return await _dao.GetOrdersByBillId(billId).ToListAsync();
         }
 
-        public List<Order> GetServedOrdersByTableId(Guid tableId)
+        public async Task<List<Order>> GetServedOrdersByTableIdAsync(Guid tableId)
         {
-            return _dao.GetServedOrdersByTableId(tableId);
+            return await _dao.GetServedOrdersByTableId(tableId).ToListAsync();
         }
 
-        public List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
-        {
-            startDate = Ultilities.AbsoluteStart(startDate);
-            endDate = Ultilities.AbsoluteEnd(endDate);
-
-            return _dao.GetServingOrdersByTimeRange(startDate, endDate).ToList();
-        }
-
-        public List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        public async Task<List<Order>> GetServingOrdersByTimeRangeAsync(DateTime startDate, DateTime endDate)
         {
             startDate = Ultilities.AbsoluteStart(startDate);
             endDate = Ultilities.AbsoluteEnd(endDate);
 
-            return _dao.GetServedOrdersByTimeRange(startDate, endDate).ToList();
+            return await _dao.GetServingOrdersByTimeRange(startDate, endDate).ToListAsync();
         }
-        public List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
+
+        public async Task<List<Order>> GetServedOrdersByTimeRangeAsync(DateTime startDate, DateTime endDate)
         {
             startDate = Ultilities.AbsoluteStart(startDate);
             endDate = Ultilities.AbsoluteEnd(endDate);
-            return _dao.GetOrdersByTimeRange(startDate, endDate).ToList();
+
+            return await _dao.GetServedOrdersByTimeRange(startDate, endDate).ToListAsync();
+        }
+        public async Task<List<Order>> GetOrdersByTimeRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            startDate = Ultilities.AbsoluteStart(startDate);
+            endDate = Ultilities.AbsoluteEnd(endDate);
+            return await _dao.GetOrdersByTimeRange(startDate, endDate).ToListAsync();
         }
     }
 }

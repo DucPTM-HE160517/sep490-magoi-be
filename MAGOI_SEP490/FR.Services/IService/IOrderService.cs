@@ -5,19 +5,19 @@ namespace FR.Services.IService
 {
     public interface IOrderService
     {
-        Order AddOrder(OrderInput order);
-        Order GetOrderById(Guid Id);
-        List<Order> GetServedOrdersByTableId(Guid tableId);
-        List<Order> GetOrdersByTableId(Guid tableId);
-        List<Order> GetOrdersByBillId(Guid billId);
-        List<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId);
-        void UpdateOrderStatus(Guid orderId, int orderStatusId);
-        void DeleteOrder(Order order);
-        List<Order> GetOrdersByOrderStatusId(int? orderStatusId);
-        List<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate);
-        List<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate);
-        List<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
-        public float GetTotalPriceOfOrders(List<Order> orders);
-        public void UpdateBillIdOfOrder(Guid orderId, Guid billId);
+        Task<Order> AddOrderAsync(OrderInput order);
+        Task<Order> GetOrderByIdAsync(Guid Id);
+        Task<List<Order>> GetServedOrdersByTableIdAsync(Guid tableId);
+        Task<List<Order>> GetOrdersByTableIdAsync(Guid tableId);
+        Task<List<Order>> GetOrdersByBillIdAsync(Guid billId);
+        Task<List<Order>> GetOrdersByTableIdAndOrderStatusIdAsync(Guid tableId, int orderStatusId);
+        void UpdateOrderStatusAsync(Guid orderId, int orderStatusId);
+        void DeleteOrderAsync(Order order);
+        Task<List<Order>> GetOrdersByOrderStatusIdAsync(int? orderStatusId);
+        Task<List<Order>> GetServingOrdersByTimeRangeAsync(DateTime startDate, DateTime endDate);
+        Task<List<Order>> GetServedOrdersByTimeRangeAsync(DateTime startDate, DateTime endDate);
+        Task<List<Order>> GetOrdersByTimeRangeAsync(DateTime startDate, DateTime endDate);
+        Task<float> GetTotalPriceOfOrdersAsync(List<Order> orders);
+        void UpdateBillIdOfOrderAsync(Guid orderId, Guid billId);
     }
 }

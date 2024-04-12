@@ -1,8 +1,9 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
 
 namespace FR.DataAccess.DAO
 {
-    public interface IOrderDAO
+    public interface IOrderDAO : IBaseDAO<Order>
     {
         Task<Order> GetOrderByOrderId(Guid id);
         IQueryable<Order> GetOrdersByStatusId(int? statusId);
@@ -14,7 +15,6 @@ namespace FR.DataAccess.DAO
         IQueryable<Order> GetServedOrdersByTableId(Guid tableId);
         IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate);
         Task<float> GetTotalAmmountOfOrder(Guid orderId);
-        
-
+        Order GetOrderById(Guid orderId);
     }
 }
