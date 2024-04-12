@@ -1,25 +1,28 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.IService;
 
 namespace FR.Services.Service
 {
     public class TableStatusService : ITableStatusService
     {
-        private readonly TableStatusDAO _dao;
-        public TableStatusService(TableStatusDAO dao)
+        private readonly ITableStatusDAO _dao;
+        private readonly IUnitOfWork _uow;
+        public TableStatusService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
+            _dao = ((UnitOfWork)uow).TableStatus;
+        }
+        public async Task<TableStatus> GetTableStatusByIdAsync(int Id)
+        {
+            return await _dao.GetTableStatusById(Id);
         }
 
-        public TableStatus GetTableStatusById(int Id)
+        public async Task<List<TableStatus>> GetAllTableStatusAsync()
         {
-            return _dao.GetTableStatusById(Id);
-        }
-
-        public List<TableStatus> GetAllTableStatus()
-        {
-            return _dao.GetAllTableStatus();
+            return (List<TableStatus>)await _dao.GetAllAsync();
         }
     }
 }

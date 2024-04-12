@@ -4,7 +4,7 @@ namespace FR.Services.IService
 {
     public interface ITableStatusService
     {
-        TableStatus GetTableStatusById(int Id);
-        List<TableStatus> GetAllTableStatus();
+        Task<TableStatus> GetTableStatusByIdAsync(int Id);
+        Task<List<TableStatus>> GetAllTableStatusAsync();
     }
 }
