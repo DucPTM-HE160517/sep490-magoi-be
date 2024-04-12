@@ -2,18 +2,23 @@
 using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
+using FR.DataAccess.DAO;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.Services.Service
 {
     public class FoodService : IFoodService
     {
-        private readonly FoodDAO _foodDAO;
-        public FoodService(FoodDAO foodDAO)
+        private readonly IFoodDAO _foodDAO;
+        private readonly IUnitOfWork _uow;
+        public FoodService(IUnitOfWork uow)
         {
-            _foodDAO = foodDAO;
+            _uow = uow;
+            _foodDAO = ((UnitOfWork)uow).Food;
         }
 
-        public Food AddFood(AddFoodInput food)
+        public async Task<Food> AddFoodAsync(AddFoodInput food)
         {
             Food f = new Food()
             {
@@ -25,12 +30,12 @@ namespace FR.Services.Service
                 CreatedAt = food.createdAt,
                 FoodCategoryId = food.foodCategoryId
             };
-            _foodDAO.AddFood(f);
+            _foodDAO.AddAsync(f);
             return f;
         }
-        public Food UpdateFood(UpdateFoodInput food)
+        public async Task<Food> UpdateFoodAsync(UpdateFoodInput food)
         {
-            Food f = GetFoodById(food.id);
+            Food f = await _foodDAO.GetFoodByFoodId(food.id);
 
             f.Name = food.name ?? f.Name;
             f.Description = food.description ?? f.Description;
@@ -40,15 +45,15 @@ namespace FR.Services.Service
             f.CreatedAt = food.createdAt ?? f.CreatedAt;
             f.FoodCategoryId = food.foodCategoryId ?? f.FoodCategoryId;
 
-            _foodDAO.UpdateFood(f);
+            _foodDAO.Update(f);
             return f;
         }
 
-        public bool CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput)
+        public async Task<bool> CheckFoodOrdersQuantityAsync(List<FoodOrderInput> foodListInput)
         {
             for (int i = 0; i < foodListInput.Count; i++)
             {
-                Food food = GetFoodById(foodListInput[i].foodId);
+                Food food = await _foodDAO.GetFoodByFoodId(foodListInput[i].foodId);
                 if(food.Quantity < foodListInput[i].quantity)
                 {
                     return false;
@@ -57,27 +62,30 @@ namespace FR.Services.Service
             return true;
         }
 
-        public Food GetFoodById(int id)
+        public async Task<Food> GetFoodByIdAsync(int id)
+
         {
-            return _foodDAO.GetFoodByFoodId(id);
+            return await _foodDAO.GetFoodByFoodId(id);
         }
 
-        public List<Food> GetFoods()
+        public async Task<List<Food>> GetFoodsAsync()
         {
-            return _foodDAO.GetFoods();
+            return (List<Food>)await _foodDAO.GetAllAsync();
         }
 
-        public List<Food> GetFoodsByCategory(int categoryId)
+        public async Task<List<Food>> GetFoodsByCategoryAsync(int categoryId)
+
         {
-            return _foodDAO.GetFoodsByCategory(categoryId);
+            return await _foodDAO.GetFoodsByCategory(categoryId).ToListAsync();
         }
 
-        public void UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput)
+        public async Task UpdateFoodQuantityWhenCreateOrderAsync(List<FoodOrderInput> foodListInput)
         {
             for (int i = 0; i < foodListInput.Count; i++)
             {
-                Food food = GetFoodById(foodListInput[i].foodId);
-                _foodDAO.UpdateFoodQuantity(foodListInput[i].foodId, food.Quantity - foodListInput[i].quantity);
+                Food food = await _foodDAO.GetFoodByFoodId(foodListInput[i].foodId);
+                food.Quantity = food.Quantity - foodListInput[i].quantity;
+                _foodDAO.Update(food);
             }
         }
     }
