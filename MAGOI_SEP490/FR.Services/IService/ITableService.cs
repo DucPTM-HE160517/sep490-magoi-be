@@ -5,12 +5,12 @@ namespace FR.Services.IService
 {
     public interface ITableService
     {
-        List<Table> GetTables();
-        List<Table> GetTablesByStatusId(int tableStatusId);
-        Table GetTable(Guid id);
-        Table GetTableByName(string name);
-        Table GetTableByBillId(Guid billId);
-        void UpdateTableStatus(Guid tableId, TableStatusId statusId);
-        void UpdateTableStatusWhenCreateOrder(Guid tableId);
+        Task<List<Table>> GetTablesAsync();
+        Task<List<Table>> GetTablesByStatusIdAsync(int tableStatusId);
+        Task<Table> GetTableAsync(Guid id);
+        Task<Table> GetTableByNameAsync(string name);
+        Task<Table> GetTableByBillIdAsync(Guid billId);
+        Task UpdateTableStatusAsync(Guid tableId, TableStatusId statusId);
+        Task UpdateTableStatusWhenCreateOrderAsync(Guid tableId);
     }
 }

@@ -1,55 +1,59 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Infrastructure.Enums;
 using FR.Services.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.Services.Service
 {
     public class TableService : ITableService
     {
-        private readonly TableDAO _dao;
-        public TableService(TableDAO dao)
+        private readonly ITableDAO _dao;
+        private readonly IUnitOfWork _uow;
+        public TableService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
+            _dao = ((UnitOfWork)uow).Table;
+        }
+        public async Task<List<Table>> GetTablesAsync()
+        {
+            return (List<Table>)await _dao.GetAllAsync();
         }
 
-        public List<Table> GetTables()
+        public async Task<List<Table>> GetTablesByStatusIdAsync(int tableStatusId)
         {
-            return _dao.GetTables();
+            return await _dao.GetTablesByStatusId(tableStatusId).ToListAsync();
         }
 
-        public Table GetTable(Guid id)
+        public async Task<Table> GetTableAsync(Guid id)
         {
-            return _dao.GetTable(id);
+            return await _dao.GetTableById(id);
         }
 
-        public void UpdateTableStatus(Guid tableId, TableStatusId statusId)
+        public async Task<Table> GetTableByNameAsync(string name)
         {
-            _dao.UpdateTableStatus(tableId, statusId);
+            return await _dao.GetTableByName(name);
         }
 
-        public void UpdateTableStatusWhenCreateOrder(Guid tableId)
+        public async Task<Table> GetTableByBillIdAsync(Guid billId)
         {
-            Table table = GetTable(tableId);
+            return await _dao.GetTableByBillId(billId);
+        }
+
+        public async Task UpdateTableStatusAsync(Guid tableId, TableStatusId statusId)
+        {
+           _dao.UpdateTableStatus(tableId, statusId);
+        }
+
+        public async Task UpdateTableStatusWhenCreateOrderAsync(Guid tableId)
+        {
+            Table table = await GetTableAsync(tableId);
             if (table.StatusId == (int)TableStatusId.Available)
             {
                 UpdateTableStatus(tableId, TableStatusId.Serving);
             }
-        }
-
-        public Table GetTableByName(string name)
-        {
-            return _dao.GetTableByName(name);
-        }
-
-        public List<Table> GetTablesByStatusId(int tableStatusId)
-        {
-            return _dao.GetTablesByStatusId(tableStatusId);
-        }
-
-        public Table GetTableByBillId(Guid billId)
-        {
-            return _dao.GetTableByBillId(billId);
         }
     }
 }
