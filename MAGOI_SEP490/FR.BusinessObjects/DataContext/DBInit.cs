@@ -127,8 +127,8 @@ namespace FR.BusinessObjects.DataContext
                     Id = 4,
                     Name = "AUS RIB EYE MB4/5",
                     Description = "Thăn lưng Wagyu MB4/5 250g",
-                    ImageUrl = "aus-rib-eye-mb4-5.jpg",
-                    UnitPrice = 1280000,
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712913205/food/rvzq0lp5pst3ndgbiwps.jpg",
+                    UnitPrice = 880000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 2
@@ -161,7 +161,7 @@ namespace FR.BusinessObjects.DataContext
                     Name = "AUS BLACK ANGUS T-BONE",
                     ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754649/food/dk5p48irgg1qkfu6hem6.jpg",
                     Description = "Thăn Bò Angus chữ T Úc 700g",
-                    UnitPrice = 1160000,
+                    UnitPrice = 960000,
                     FoodCategoryId = 2,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100
@@ -170,7 +170,7 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 8,
                     Name = "US RIB EYE",
-                    ImageUrl = "us-rib-eye.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712913257/food/pxlupobcs1zbfnb8pfwc.jpg",
                     Description = "Thăn lưng bò Mỹ 350g",
                     UnitPrice = 596000,
                     FoodCategoryId = 2,
@@ -240,9 +240,9 @@ namespace FR.BusinessObjects.DataContext
                 {
                     Id = 14,
                     Name = "BAROLA",
-                    ImageUrl = "barola.jpg",
+                    ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712913229/food/ihmyc6vfwv9mcrhttncg.jpg",
                     Description = "Vang đỏ Barolo",
-                    UnitPrice = 1200000,
+                    UnitPrice = 700000,
                     FoodCategoryId = 5,
                     Quantity = 20,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
