@@ -144,8 +144,9 @@ namespace FR.DataAccess
         }
         public int GetOrderStausByOrderId(Guid orderId)
         {
-            Order order = _context.Orders.FirstOrDefault(o => o.Id == orderId);
-            return order.OrderStatusId;
+            int orderStatus = 0;
+            orderStatus = _context.Orders.FirstOrDefault(o => o.Id == orderId).OrderStatusId;
+            return orderStatus;
         }
     }
 }
