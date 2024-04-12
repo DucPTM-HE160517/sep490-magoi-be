@@ -1,15 +1,18 @@
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.IService;
 
 namespace FR.Services.Service;
 
 public class SessionService : ISessionService
 {
-    private readonly SessionDAO _dao;
-
-    public SessionService(SessionDAO dao)
+    private readonly ISessionDAO _dao;
+    private readonly IUnitOfWork _uow;
+    public SessionService(IUnitOfWork uow)
     {
-        _dao = dao;
+        _uow = uow;
+        _dao = ((UnitOfWork)uow).Session;
     }
 
     public void RegisterSession(string expoToken, string roleId)
@@ -17,7 +20,7 @@ public class SessionService : ISessionService
         _dao.RegisterSession(expoToken, roleId);
     }
 
-    public List<string> GetExpoTokensByRoleId(string roleId)
+    public IQueryable<string> GetExpoTokensByRoleId(string roleId)
     {
         return _dao.GetExpoTokensByRoleId(roleId);
     }
