@@ -1,19 +1,24 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.DataAccess.DAO;
 using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.IService;
 
 namespace FR.Services.Service
 {
     public class PaymentMethodService : IPaymentMethodService
     {
-        private readonly PaymentMethodDAO _dao;
-        public PaymentMethodService(PaymentMethodDAO dao)
+        private readonly IPaymentMethodDAO _dao;
+        private readonly IUnitOfWork _uow;
+        public PaymentMethodService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
+            _dao = ((UnitOfWork)uow).PaymentMethod;
         }
-        public PaymentMethod GetPaymentMethodById(int id)
+
+        public async Task<PaymentMethod> GetPaymentMethodById(int id)
         {
-            return _dao.GetPaymentMethod(id);
+            return await _dao.GetPaymentMethodById(id);
         }
     }
 }

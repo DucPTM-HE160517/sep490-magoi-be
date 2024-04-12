@@ -1,9 +1,10 @@
 ﻿using FR.BusinessObjects.Models;
+using FR.DataAccess.Base;
 
 namespace FR.Services.IService
 {
     public interface IPaymentMethodService
     {
-        PaymentMethod GetPaymentMethodById(int id);
+        Task<PaymentMethod> GetPaymentMethodById(int id);
     }
 }
