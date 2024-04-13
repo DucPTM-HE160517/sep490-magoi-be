@@ -59,6 +59,7 @@ namespace FR.API.GraphQL.Mutations
         public async Task<UpdateOrderStatusPayload> UpdateOrderStatus(
             Guid orderId, int orderStatusId, bool? sendNotification,
             IOrderService orderService,
+            IFoodOrderService foodOrderService,
             ITableService tableService,
             ISessionService sessionService,
             IExpoNotificationService expoSdkClient)
@@ -74,6 +75,23 @@ namespace FR.API.GraphQL.Mutations
                 Table table = tableService.GetTable(order.TableId);
                 //Update order status
                 orderService.UpdateOrderStatus(orderId, orderStatusId);
+                //Update food status
+                switch (orderStatusId)
+                {
+                    //order status id -> food order status id
+                    case 1: //Pending -> uncook
+                        foodOrderService.UpdateFoodOrdersStatus(orderId, (int) FoodOrderStatusId.Uncooked);
+                        break;
+                    case 2: // Cooking -> cooking
+                        foodOrderService.UpdateFoodOrdersStatus(orderId, (int)FoodOrderStatusId.Cooking);
+                        break;
+                    case 3: // serving -> cooked
+                        foodOrderService.UpdateFoodOrdersStatus(orderId, (int)FoodOrderStatusId.Cooked);
+                        break;
+                    case 4: // finished -> cooked
+                        foodOrderService.UpdateFoodOrdersStatus(orderId, (int)FoodOrderStatusId.Cooked);
+                        break;
+                }
                 if (sendNotification.HasValue && (bool)sendNotification)
                 {
                     //get list of waiter devices
