@@ -98,14 +98,15 @@ namespace FR.API.GraphQL.Mutations
                     List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
                     //send notification
                     string msg = order.OrderStatusId == (int)OrderStatusId.Serving?
-                        "There is a done order! Please serve the food to the customer!" 
-                        : "The order status has been updated to " + Enum.GetName(typeof(OrderStatusId), (OrderStatusId)order.OrderStatusId) + "!";
+                        "Đơn hàng đã làm xong! Hãy phục vụ cho khách hàng!"
+                        : "Đơn hàng đã được cập nhật trạng thái" + Enum.GetName(typeof(OrderStatusId), (OrderStatusId)order.OrderStatusId) + "!";
 
                     await expoSdkClient.SendNotification(waiterTokens,
-                        $"{table.Name} - Order {orderId}", msg,
+                        $"{table.Name} - Đơn #FR{orderId.ToString().Substring(0, 5).ToUpper()}", msg,
                         data: JsonConvert.SerializeObject(new
                         {
-                            type = NotificationType.FoodReady
+                            type = NotificationType.FoodReady,
+                            tableId = table.Id
                         }));
                 }
                 return new UpdateOrderStatusPayload(order);
