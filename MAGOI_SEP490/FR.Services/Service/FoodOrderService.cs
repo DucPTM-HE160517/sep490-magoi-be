@@ -186,7 +186,8 @@ namespace FR.Services.Service
 
         public IQueryable<Food> GetCookingFoodsByCategory(int categoryId)
         {
-            List<FoodOrder> cookingFoodList = _dao.GetFoodOrder((int) FoodOrderStatusId.Cooking).ToList();
+            List<FoodOrder> cookingFoodList = _dao.GetFoodOrder((int) FoodOrderStatusId.Cooking)
+                                    .Concat(_dao.GetFoodOrder((int)FoodOrderStatusId.Uncooked)).ToList();
             List <FoodOrder> dup_list = new();
             foreach (FoodOrder foodOrder in cookingFoodList)
             {
