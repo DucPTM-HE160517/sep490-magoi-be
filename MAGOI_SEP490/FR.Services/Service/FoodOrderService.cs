@@ -12,10 +12,12 @@ namespace FR.Services.Service
     {
         private readonly FoodOrderDAO _dao;
         private readonly OrderDAO _orderDAO;
-        public FoodOrderService(FoodOrderDAO dao, OrderDAO orderDAO)
+        private readonly BillDAO _billDAO;
+        public FoodOrderService(FoodOrderDAO dao, OrderDAO orderDAO, BillDAO billDAO)
         {
             _dao = dao;
             _orderDAO = orderDAO;
+            _billDAO = billDAO;
         }
 
         public List<FoodOrder> AddFoodOrders(Guid orderId, List<FoodOrderInput> foodListInput)
@@ -119,11 +121,19 @@ namespace FR.Services.Service
             startDate = Ultilities.AbsoluteStart(startDate);
             endDate = Ultilities.AbsoluteEnd(endDate);
 
+            //get order list by bill
+            List<Order> orders = new List<Order>();
+            List<Bill> bills = _billDAO.GetBillsByTimeRange(startDate, endDate);
+            foreach(Bill bill in bills)
+            {
+                orders.AddRange(_orderDAO.GetOrdersByBillId(bill.Id));
+            }
+
             //Get SaleReportElememt List
             List<SaleRevenue> saleRevenues = new List<SaleRevenue>();
-            foreach (FoodOrder foodOrder in _dao.GetFoodOrdersByTimeRange(startDate, endDate))
+            foreach (Order order in orders)
             {
-                if (_orderDAO.GetOrderStausByOrderId(foodOrder.OrderId) == 4)
+                foreach (FoodOrder foodOrder in _dao.GetFoodOrdersByOrderId(order.Id))
                 {
                     if (saleRevenues.Count == 0)
                     {
@@ -156,7 +166,6 @@ namespace FR.Services.Service
                     }
                 }
             }
-
             //Get SaleReport List
             float sumIncome = 0;
             foreach (SaleRevenue SaleRevenue in saleRevenues)
