@@ -25,25 +25,41 @@ namespace FR.API.GraphQL.Mutations
                 Table table = tableService.GetTable(order.TableId);
                 //update food status in the order
                 FoodOrder food = foodOrderService.UpdateFoodOrderStatus(orderId, foodId, statusId);
-                string foodName = foodService.GetFoodById(foodId).Name;
+
+                //check if all foods in the order are cooked
+                List<FoodOrder> foodOrders = foodOrderService.GetFoodOrdersByOrderId(orderId);
+                bool allFoodsCooked = true;
+                foreach (var f in foodOrders)
+                {
+                    if (f.FoodOrderStatusId != (int)FoodOrderStatusId.Cooked)
+                    {
+                        allFoodsCooked = false;
+                        break;
+                    }
+                }
+
                 if (sendNotification.HasValue && (bool)sendNotification)
                 {
                     //get list of waiter devices
                     List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
-                    //send notification 
-                    string msg = food.FoodOrderStatusId == (int)FoodOrderStatusId.Cooked ?
-                        "Có món đã làm xong! Hãy phục vụ cho khách hàng!"
-                        : $"Món {foodName} đã được cập nhật sang trạng thái {Enum.GetName(typeof(FoodOrderStatusId), (FoodOrderStatusId)food.FoodOrderStatusId)}!";
-                    
-                    await expoSdkClient.SendNotification(waiterTokens,
-                    $"{table.Name} - Đơn #FR{orderId.ToString().Substring(0,5).ToUpper()}", msg,
-                    data: JsonConvert.SerializeObject(new
+                    //send notification
+                    string msg = "Có món đã làm xong! Hãy phục vụ cho khách hàng!";
+
+                    if (allFoodsCooked)
                     {
-                        type = NotificationType.FoodReady,
-                        tableId = table.Id,
-                    }));
+                        orderService.UpdateOrderStatus(orderId, (int)OrderStatusId.Serving);
+                        msg = "Đơn hàng đã làm xong! Hãy phục vụ cho khách hàng!";
+                    }
+
+                    await expoSdkClient.SendNotification(waiterTokens,
+                        $"{table.Name} - Đơn #FR{orderId.ToString().Substring(0,5).ToUpper()}", msg,
+                        data: JsonConvert.SerializeObject(new
+                        {
+                            type = NotificationType.FoodReady,
+                            tableId = table.Id,
+                        }));
                 }
-                    
+
                 return new UpdateFoodOrderStatusPayload(food);
             }
             catch(Exception e)
