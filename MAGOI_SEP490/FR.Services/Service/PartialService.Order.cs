@@ -187,11 +187,6 @@ namespace FR.Services.Service
                 throw;
             }
         }
-
-        public void DeleteOrderAsync(Order order)
-        {
-           _dao.Delete(order);
-        }
         public async Task<Order> GetOrderById(Guid Id)
         {
             return await _uow.OrderDAO.GetOrderById(Id);
@@ -208,19 +203,6 @@ namespace FR.Services.Service
         {
             return _uow.OrderDAO.GetOrdersByTableIdAndStatus(tableId, orderStatusId);
         }
-        //public async void UpdateOrderStatus(Guid orderId, int orderStatusId)
-        //{
-        //    try
-        //    {
-        //        Order o = _dao.GetOrderById(orderId);
-        //        o.OrderStatusId = orderStatusId;
-        //        _dao.Update(o);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        throw new Exception(e.Message);
-        //    }
-        //}
         public async Task<float> GetTotalPriceOfOrders(List<Order> orders)
         {
             float totalPrice = 0;
@@ -232,21 +214,10 @@ namespace FR.Services.Service
 
             return totalPrice;
         }
-        //public async void UpdateBillIdOfOrder(Guid orderId, Guid billId)
-        //{
-        //    Order order = _dao.GetOrderById(orderId);
-        //    order.BillId = billId;
-        //    _dao.Update(order);
-        //}
 
         public async Task<List<Order>> GetOrdersByBillId(Guid billId)
         {
-            return await _dao.GetOrdersByBillId(billId).ToListAsync();
-        }
-
-        public IQueryable<Order> GetServedOrdersByTableIdAndStatus(Guid tableId, int orderStatusId)
-        {
-            return _uow.OrderDAO.GetOrdersByTableIdAndStatus(tableId, orderStatusId);
+            return await _uow.OrderDAO.GetOrdersByBillId(billId).ToListAsync();
         }
 
         public IQueryable<Order> GetOrdersByTimeRangeAndStatus(DateTime startDate, DateTime endDate, int orderStatusId)

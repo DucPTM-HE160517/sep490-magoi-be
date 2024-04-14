@@ -37,18 +37,6 @@ namespace FR.Services.Service
             return await _uow.BillDAO.GetBillById(billId);
         }
 
-        public void UpdateBill(Bill bill)
-        {
-            try
-            {
-                _uow.BillDAO.Update(bill);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
         public int[] GetBillsPerHour(List<Bill> bills)
         {
             int[] billsPerHour = new int[24];

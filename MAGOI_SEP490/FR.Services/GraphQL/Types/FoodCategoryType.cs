@@ -20,10 +20,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Foods")
                 .Type<ListType<FoodType>>()
                 .Name("foods")
-                .Resolve(async context =>
+                .Resolve( context =>
                 {
                     var category = context.Parent<FoodCategory>();
-                    return await context.Service<IFoodService>().GetFoodsByCategory(category.Id);
+                    return context.Service<IFoodService>().GetFoodsByCategory(category.Id).ToList();
                 })
                 .Description("List of food of the category");
             descriptor.Field("CookingFoods")

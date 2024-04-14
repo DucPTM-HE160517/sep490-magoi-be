@@ -1,10 +1,5 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.Common.Ultilities;
-using FR.DataAccess.DAO;
-using FR.DataAccess.DAOimpl;
-using FR.DataAccess.UOW;
 using FR.Infrastructure.Enums;
-using FR.Services.GraphQL.Types;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 using Microsoft.EntityFrameworkCore;
@@ -148,7 +143,9 @@ namespace FR.Services.Service
 
         public async Task<List<Food>> GetCookingFoodsByCategory(int categoryId)
         {
-            List<FoodOrder> cookingFoodList = await _uow.FoodOrderDAO.GetFoodOrdersByStatusId((int) FoodOrderStatusId.Cooking).ToListAsync();
+            List<FoodOrder> cookingFoodList = await _uow.FoodOrderDAO.GetFoodOrdersByStatusId((int) FoodOrderStatusId.Uncooked)
+                                            .Concat(_uow.FoodOrderDAO.GetFoodOrdersByStatusId((int)FoodOrderStatusId.Cooking))
+                                            .ToListAsync();
             List <FoodOrder> dup_list = new();
             foreach (FoodOrder foodOrder in cookingFoodList)
             {

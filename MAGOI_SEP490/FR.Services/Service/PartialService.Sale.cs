@@ -33,24 +33,21 @@ namespace FR.Services.Service
             startDate = Ultilities.AbsoluteStart(startDate);
             endDate = Ultilities.AbsoluteEnd(endDate);
 
+            //get order list by bill
+            List<Order> orders = new List<Order>();
+            List<Bill> bills = _uow.BillDAO.GetBillsByTimeRange(startDate, endDate).ToList();
+            foreach (Bill bill in bills)
+            {
+                orders.AddRange(_uow.OrderDAO.GetOrdersByBillId(bill.Id));
+            }
+
             //Get SaleReportElememt List
             List<SaleRevenue> saleRevenues = new List<SaleRevenue>();
-            foreach (FoodOrder foodOrder in _uow.FoodOrderDAO.GetFoodOrdersByTimeRange(startDate, endDate))
+            foreach (Order order in orders)
             {
-                if (saleRevenues.Count == 0)
+                foreach (FoodOrder foodOrder in _uow.FoodOrderDAO.GetFoodOrdersByOrderId(order.Id))
                 {
-                    SaleRevenue SaleRevenue = new SaleRevenue()
-                    {
-                        Quantity = foodOrder.Quantity,
-                        Income = foodOrder.Quantity * foodOrder.UnitPrice,
-                        Food = await _uow.FoodDAO.GetFoodByFoodId(foodOrder.FoodId)
-                    };
-                    saleRevenues.Add(SaleRevenue);
-                }
-                else
-                {
-                    int indexMatchedReport = FindSaleRevenueIndexByFoodId(foodOrder.FoodId, saleRevenues);
-                    if (indexMatchedReport == -1)
+                    if (saleRevenues.Count == 0)
                     {
                         SaleRevenue SaleRevenue = new SaleRevenue()
                         {
@@ -62,12 +59,25 @@ namespace FR.Services.Service
                     }
                     else
                     {
-                        saleRevenues[indexMatchedReport].Quantity += foodOrder.Quantity;
-                        saleRevenues[indexMatchedReport].Income += foodOrder.UnitPrice * foodOrder.Quantity;
+                        int indexMatchedReport = FindSaleRevenueIndexByFoodId(foodOrder.FoodId, saleRevenues);
+                        if (indexMatchedReport == -1)
+                        {
+                            SaleRevenue SaleRevenue = new SaleRevenue()
+                            {
+                                Quantity = foodOrder.Quantity,
+                                Income = foodOrder.Quantity * foodOrder.UnitPrice,
+                                Food = await _uow.FoodDAO.GetFoodByFoodId(foodOrder.FoodId)
+                            };
+                            saleRevenues.Add(SaleRevenue);
+                        }
+                        else
+                        {
+                            saleRevenues[indexMatchedReport].Quantity += foodOrder.Quantity;
+                            saleRevenues[indexMatchedReport].Income += foodOrder.UnitPrice * foodOrder.Quantity;
+                        }
                     }
                 }
             }
-
             //Get SaleReport List
             float sumIncome = 0;
             foreach (SaleRevenue SaleRevenue in saleRevenues)

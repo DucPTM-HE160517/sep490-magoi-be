@@ -1,8 +1,4 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.DataAccess.Base;
-using FR.DataAccess.DAO;
-using FR.DataAccess.DAOimpl;
-using FR.DataAccess.UOW;
 using FR.Services.GraphQL.Types;
 using FR.Services.IService;
 using Microsoft.EntityFrameworkCore;

@@ -8,11 +8,11 @@ public partial class Service : ISessionService
 {
     public void RegisterSession(string expoToken, string roleId)
     {
-        _dao.RegisterSession(expoToken, roleId);
+        _uow.SessionDAO.RegisterSession(expoToken, roleId);
     }
 
     public IQueryable<string> GetExpoTokensByRoleId(string roleId)
     {
-        return _dao.GetExpoTokensByRoleId(roleId);
+        return _uow.SessionDAO.GetExpoTokensByRoleId(roleId);
     }
 }

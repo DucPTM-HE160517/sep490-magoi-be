@@ -67,20 +67,10 @@ namespace FR.Services.Service
             return await _uow.FoodDAO.GetAllAsync();
         }
 
-        public async Task<List<Food>> GetFoodsByCategoryAsync(int categoryId)
+        public IQueryable<Food> GetFoodsByCategory(int categoryId)
 
         {
-            return await _foodDAO.GetFoodsByCategory(categoryId).ToListAsync();
-        }
-
-        public async Task UpdateFoodQuantityWhenCreateOrderAsync(List<FoodOrderInput> foodListInput)
-        {
-            for (int i = 0; i < foodListInput.Count; i++)
-            {
-                Food food = await _foodDAO.GetFoodByFoodId(foodListInput[i].foodId);
-                food.Quantity = food.Quantity - foodListInput[i].quantity;
-                _foodDAO.Update(food);
-            }
+            return _uow.FoodDAO.GetFoodsByCategory(categoryId);
         }
     }
 }
