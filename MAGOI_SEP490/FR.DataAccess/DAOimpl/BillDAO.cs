@@ -11,17 +11,25 @@ namespace FR.DataAccess.DAOimpl
         public BillDAO(DBContext context) : base(context)
         {
         }
-        async Task<Bill> IBillDAO.GetBillById(Guid billId)
+
+        public async Task<Table> GetTableOfBill(Guid billId)
+        {
+            Bill bill = await GetBillById(billId);
+            Order order = _context.Orders.FirstOrDefault(o => o.BillId == billId);
+            return await _context.Tables.FindAsync(order.TableId);
+        }
+
+        public async Task<Bill> GetBillById(Guid billId)
         {
             return await _context.Bills.FindAsync(billId);
         }
 
-        IQueryable<Bill> IBillDAO.GetBillsByDate(DateTime date)
+        public IQueryable<Bill> GetBillsByDate(DateTime date)
         {
             return _context.Bills.Where(b => b.CreatedAt.Date == date.Date);
         }
 
-        IQueryable<Bill> IBillDAO.GetBillsByTimeRange(DateTime startDate, DateTime endDate)
+        public IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate)
         {
             return _context.Bills.Where(c => c.FinishedAt >= startDate && c.FinishedAt <= endDate);
         }

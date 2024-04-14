@@ -14,6 +14,6 @@ namespace FR.DataAccess.DAO
         IQueryable<FoodOrder> GetFoodOrdersByTimeRange(DateTime startDate, DateTime endDate);
         IQueryable<FoodOrder> GetFoodOrdersByStatusId(int statusId);
         Task<FoodOrder> GetFoodOrderByOrderIdAndFoodId(Guid orderId, int foodId);
-        float GetFoodUnitPriceByFoodId(int foodId);
+        Task AddRangeAsync(IEnumerable<FoodOrder> listFoodOrder);
     }
 }

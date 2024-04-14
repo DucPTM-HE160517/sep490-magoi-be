@@ -1,11 +1,8 @@
-using CloudinaryDotNet;
 using dotenv.net;
 using FR.API.GraphQL.Mutations;
 using FR.API.GraphQL.Queries;
 using FR.API.GraphQL.Subscriptions;
 using FR.BusinessObjects.DataContext;
-using FR.DataAccess.DAO;
-using FR.DataAccess.DAOimpl;
 using FR.DataAccess.UOW;
 using FR.Services.GraphQL.Types;
 using FR.Services.IService;
@@ -58,42 +55,42 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddScoped<FoodDAO>()
-                .AddScoped<FoodCategoryDAO>()
-                .AddScoped<TableDAO>()
-                .AddScoped<TableStatusDAO>()
-                .AddScoped<OrderDAO>()
-                .AddScoped<FoodOrderDAO>()
-                .AddScoped<SessionDAO>()
-                .AddScoped<BillDAO>()
-                //.AddScoped<IFeedbackDAO, FeedbackDAO>()
-                .AddScoped<PaymentMethodDAO>()
-                .AddScoped<IFoodService, FoodService>()
-                .AddScoped<IFoodCategoryService, FoodCategoryService>()
-                .AddScoped<ITableService, TableService>()
-                .AddScoped<ITableStatusService, TableStatusService>()
-                .AddScoped<IOrderService, OrderService>()
+//builder.Services.AddScoped<FoodDAO>()
+//                .AddScoped<FoodCategoryDAO>()
+//                .AddScoped<TableDAO>()
+//                .AddScoped<TableStatusDAO>()
+//                .AddScoped<OrderDAO>()
+//                .AddScoped<FoodOrderDAO>()
+//                .AddScoped<SessionDAO>()
+//                .AddScoped<BillDAO>()
+//                .AddScoped<IFeedbackDAO, FeedbackDAO>()
+//                .AddScoped<PaymentMethodDAO>()
+builder.Services.AddScoped<IFoodService, Service>()
+                .AddScoped<IFoodCategoryService, Service>()
+                .AddScoped<ITableService, Service>()
+                .AddScoped<ITableStatusService, Service>()
+                .AddScoped<IOrderService, Service>()
                 .AddScoped<IExpoNotificationService, ExpoNotificationService>()
-                .AddScoped<IFoodOrderService, FoodOrderService>()
+                .AddScoped<IFoodOrderService, Service>()
                 .AddScoped<IBankService, BankService>()
-                .AddScoped<ISessionService, SessionService>()
-                .AddScoped<IBillService, BillService>()
-                .AddScoped<IFeedbackService, FeedbackService>()
-                .AddScoped<IPaymentMethodService, PaymentMethodService>();
+                .AddScoped<ISessionService, Service>()
+                .AddScoped<IBillService, Service>()
+                .AddScoped<IFeedbackService, Service>()
+                .AddScoped<IPaymentMethodService, Service>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+//.RegisterDbContext<DBContext>(DbContextKind.Synchronized)
+//    .RegisterService<FoodDAO>(ServiceKind.Synchronized)
+//    .RegisterService<FoodCategoryDAO>(ServiceKind.Synchronized)
+//    .RegisterService<TableDAO>(ServiceKind.Synchronized)
+//    .RegisterService<TableStatusDAO>(ServiceKind.Synchronized)
+//    .RegisterService<OrderDAO>(ServiceKind.Synchronized)
+//    .RegisterService<FoodOrderDAO>(ServiceKind.Synchronized)
+//    .RegisterService<BillDAO>(ServiceKind.Synchronized)
+//    .RegisterService<PaymentMethodDAO>(ServiceKind.Synchronized)
 
 builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
-    .RegisterDbContext<DBContext>(DbContextKind.Synchronized)
-    .RegisterService<FoodDAO>(ServiceKind.Synchronized)
-    .RegisterService<FoodCategoryDAO>(ServiceKind.Synchronized)
-    .RegisterService<TableDAO>(ServiceKind.Synchronized)
-    .RegisterService<TableStatusDAO>(ServiceKind.Synchronized)
-    .RegisterService<OrderDAO>(ServiceKind.Synchronized)
-    .RegisterService<FoodOrderDAO>(ServiceKind.Synchronized)
-    .RegisterService<BillDAO>(ServiceKind.Synchronized)
-    .RegisterService<PaymentMethodDAO>(ServiceKind.Synchronized)
     .RegisterService<IFoodService>(ServiceKind.Synchronized)
     .RegisterService<IFoodCategoryService>(ServiceKind.Synchronized)
     .RegisterService<ITableService>(ServiceKind.Synchronized)

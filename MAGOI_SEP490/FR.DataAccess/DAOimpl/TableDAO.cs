@@ -1,4 +1,5 @@
-﻿using FR.BusinessObjects.DataContext;
+﻿using System.Xml.Linq;
+using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
 using FR.DataAccess.Base;
 using FR.DataAccess.DAO;
@@ -12,6 +13,7 @@ namespace FR.DataAccess.DAOimpl
         public TableDAO(DBContext context) : base(context)
         {
         }
+
         public async Task<Table> GetTableById(Guid id)
         {
             return await _context.Tables.FindAsync(id);

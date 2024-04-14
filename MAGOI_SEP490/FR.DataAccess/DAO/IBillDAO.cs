@@ -11,6 +11,7 @@ namespace FR.DataAccess.DAO
     public interface IBillDAO : IBaseDAO<Bill>
     {
         Task<Bill> GetBillById(Guid id);
+        Task<Table> GetTableOfBill(Guid billId);
         IQueryable<Bill> GetBillsByDate(DateTime date);
         IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate);
     }

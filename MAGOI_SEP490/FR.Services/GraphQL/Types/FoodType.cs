@@ -44,10 +44,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Category")
                 .Type<FoodCategoryType>()
                 .Name("category")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var food = context.Parent<Food>();
-                    return context.Service<IFoodCategoryService>().GetFoodCategoryById(food.FoodCategoryId);
+                    return await context.Service<IFoodCategoryService>().GetFoodCategoryById(food.FoodCategoryId);
                 })
                 .Description("The category of the food");
             //descriptor.Field(f => f.FoodCategoryId)

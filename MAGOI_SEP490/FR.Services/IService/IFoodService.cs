@@ -6,12 +6,12 @@ namespace FR.Services.IService
 {
     public interface IFoodService
     {
-        Task<List<Food>> GetFoodsAsync();
-        Task<List<Food>> GetFoodsByCategoryAsync(int categoryId);
-        Task<Food> GetFoodByIdAsync(int id);
-        Task UpdateFoodQuantityWhenCreateOrderAsync(List<FoodOrderInput> foodListInput);
-        Task<Food> AddFoodAsync(AddFoodInput food);
-        Task<Food> UpdateFoodAsync(UpdateFoodInput food);
-        Task<bool> CheckFoodOrdersQuantityAsync(List<FoodOrderInput> foodListInput);
+        Task<IEnumerable<Food>> GetFoods();
+        Task<List<Food>> GetFoodsByCategory(int categoryId);
+        Task<Food> GetFoodById(int id);
+        Task UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput);
+        Task<Food> AddFood(AddFoodInput food);
+        Task<Food> UpdateFood(UpdateFoodInput food);
+        Task<bool> CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput);
     }
 }

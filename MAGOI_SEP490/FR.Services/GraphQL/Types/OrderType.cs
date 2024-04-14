@@ -1,6 +1,7 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.IService;
 using HotChocolate.Types;
+using Microsoft.EntityFrameworkCore;
 
 namespace FR.Services.GraphQL.Types
 {
@@ -20,10 +21,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Table")
                 .Type<TableType>()
                 .Name("table")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var order = context.Parent<Order>();
-                    return context.Service<ITableService>().GetTable(order.TableId);
+                    return await context.Service<ITableService>().GetTable(order.TableId);
                 })
                 .Description("The table of the order");
             descriptor.Field(f => f.BillId)
@@ -44,7 +45,7 @@ namespace FR.Services.GraphQL.Types
                 .Resolve(context =>
                 {
                     var order = context.Parent<Order>();
-                    return context.Service<IFoodOrderService>().GetFoodOrdersByOrderId(order.Id);
+                    return context.Service<IFoodOrderService>().GetFoodOrdersByOrderId(order.Id).ToList();
                 })
                 .Description("List of foods in this order");
         }

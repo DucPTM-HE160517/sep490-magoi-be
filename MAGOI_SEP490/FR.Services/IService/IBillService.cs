@@ -4,12 +4,12 @@ namespace FR.Services.IService
 {
     public interface IBillService
     {
-        Task<Bill> CreateBillAsync(float totalAmount);
-        Task<List<Bill>> GetBillsByDateAsync(DateTime date);
-        Task<Bill> GetBillByIdAsync(Guid billId);
-        Task UpdateBillAsync(Bill bill);
-        Task<int[]> GetBillsPerHourAsync(List<Bill> bills);
-        Task<List<Bill>> GetBillsByTimeRangeAsync(DateTime startDate, DateTime endDate);
-        Task<float> GetTotalAmountOfBillsAsync(List<Bill> bills);
+        Task<Bill> CreateBill(float totalAmount);
+        IQueryable<Bill> GetBillsByDate(DateTime date);
+        Task<Bill> GetBillById(Guid billId);
+        void UpdateBill(Bill bill);
+        int[] GetBillsPerHour(List<Bill> bills);
+        IQueryable<Bill> GetBillsByTimeRange(DateTime startDate, DateTime endDate);
+        float GetTotalAmountOfBills(List<Bill> bills);
     }
 }

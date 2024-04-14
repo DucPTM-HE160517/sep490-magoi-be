@@ -31,9 +31,10 @@ namespace FR.DataAccess.DAOimpl
         {
             return _context.FoodOrder.Where(f => f.FoodOrderStatusId == statusId);
         }
-        public float GetFoodUnitPriceByFoodId(int foodId)
+
+        public async Task AddRangeAsync(IEnumerable<FoodOrder> listFoodOrder)
         {
-            return _context.Foods.FirstOrDefault(f => f.Id == foodId).UnitPrice;
+            await _context.FoodOrder.AddRangeAsync(listFoodOrder);
         }
     }
 }

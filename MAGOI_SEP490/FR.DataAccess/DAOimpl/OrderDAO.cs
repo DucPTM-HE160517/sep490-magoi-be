@@ -13,11 +13,6 @@ namespace FR.DataAccess.DAOimpl
         {
         }
 
-        public async Task<Order> GetOrderByOrderId(Guid id)
-        {
-            return await _context.Orders.FindAsync(id);
-        }
-
         public IQueryable<Order> GetOrdersByStatusId(int? statusId)
         {
             if (statusId != null)
@@ -30,20 +25,6 @@ namespace FR.DataAccess.DAOimpl
             }
         }
 
-        public IQueryable<Order> GetOrdersByTableIdAndOrderStatusId(Guid tableId, int orderStatusId)
-        {
-            return _context.Orders.Where(o => o.TableId == tableId
-                                && o.OrderStatusId == orderStatusId);
-            
-        }
-
-        public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
-        {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Serving
-                                    && c.CreatedAt >= startDate
-                                    && c.CreatedAt <= endDate);
-        }
-
         public IQueryable<Order> GetOrdersByBillId(Guid billId)
         {
             return _context.Orders.Where(o => o.BillId == billId);
@@ -54,17 +35,17 @@ namespace FR.DataAccess.DAOimpl
             return _context.Orders.Where(o => o.TableId == tableId);
         }
 
-        public IQueryable<Order> GetServedOrdersByTimeRange(DateTime startDate, DateTime endDate)
+        public IQueryable<Order> GetOrdersByTimeRangeAndStatus(DateTime startDate, DateTime endDate, int orderStatusId)
         {
-            return _context.Orders.Where(c => c.OrderStatusId == (int)OrderStatusId.Finished
+            return _context.Orders.Where(c => c.OrderStatusId == orderStatusId
                                     && c.CreatedAt >= startDate
                                     && c.CreatedAt <= endDate);
         }
 
-        public IQueryable<Order> GetServedOrdersByTableId(Guid tableId)
+        public IQueryable<Order> GetOrdersByTableIdAndStatus(Guid tableId, int orderStatusId)
         {
             return _context.Orders.Where(o => o.TableId == tableId
-                                    && o.OrderStatusId == (int)OrderStatusId.Finished);
+                                    && o.OrderStatusId == orderStatusId);
         }
 
         public IQueryable<Order> GetOrdersByTimeRange(DateTime startDate, DateTime endDate)
@@ -79,6 +60,11 @@ namespace FR.DataAccess.DAOimpl
                 .SumAsync(od => od.UnitPrice * od.Quantity);
 
             return totalAmount;
+        }
+
+        public async Task<Order> GetOrderById(Guid orderId)
+        {
+            return await _context.Orders.FindAsync(orderId);
         }
     }
 }

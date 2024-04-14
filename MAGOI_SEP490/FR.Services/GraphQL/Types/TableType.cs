@@ -25,20 +25,20 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Status")
                 .Type<TableStatusType>()
                 .Name("status")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var table = context.Parent<Table>();
-                    return context.Service<ITableStatusService>().GetTableStatusById(table.StatusId);
+                    return await context.Service<ITableStatusService>().GetTableStatusById(table.StatusId);
 
                 })
                 .Description("The status of the table");
             descriptor.Field("Orders")
                 .Type<ListType<OrderType>>()
                 .Name("orders")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var table = context.Parent<Table>();
-                    return context.Service<IOrderService>().GetOrdersByTableId(table.Id);
+                    return await context.Service<IOrderService>().GetOrdersByTableId(table.Id);
                 })
                 .Description("Order list of the table");
             //descriptor.Field("Orders")
@@ -50,23 +50,23 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("InProgressOrders")
                 .Type<ListType<OrderType>>()
                 .Name("inProgressOrders")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var table = context.Parent<Table>();
-                    List<Order> inProgressOrders = context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Pending);
+                    List<Order> inProgressOrders = await context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Pending);
                     inProgressOrders = inProgressOrders.
-                        Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Cooking)).
-                        Concat(context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Serving)).ToList();
+                        Concat(await context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Cooking)).
+                        Concat(await context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Serving)).ToList();
                     return inProgressOrders;
                 })
                 .Description("Serving order list of the table");
             descriptor.Field("FinishedOrders")
                 .Type<ListType<OrderType>>()
                 .Name("finishedOrders")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var table = context.Parent<Table>();
-                    return context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Finished);
+                    return await context.Service<IOrderService>().GetOrdersByTableIdAndOrderStatusId(table.Id, (int)OrderStatusId.Finished);
 
                 })
                 .Description("Finished order list of the table");

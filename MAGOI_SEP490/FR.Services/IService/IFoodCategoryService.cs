@@ -4,8 +4,8 @@ namespace FR.Services.IService
 {
     public interface IFoodCategoryService
     {
-        Task<List<FoodCategory>> GetCategoryOfCookingFoodsAsync();
-        Task<List<FoodCategory>> GetFoodCategoriesAsync();
-        Task<FoodCategory> GetFoodCategoryByIdAsync(int id);
+        Task<IEnumerable<FoodCategory>> GetCategoryOfCookingFoods();
+        Task<IEnumerable<FoodCategory>> GetFoodCategories();
+        Task<FoodCategory> GetFoodCategoryById(int id);
     }
 }

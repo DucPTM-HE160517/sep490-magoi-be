@@ -32,10 +32,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Bill")
                 .Type<BillType>()
                 .Name("bill")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var feedback = context.Parent<Feedback>();
-                    return context.Service<IBillService>().GetBillById(feedback.BillId);
+                    return await context.Service<IBillService>().GetBillById(feedback.BillId);
                 })
                 .Description("The bill of the feedback");
         }

@@ -6,21 +6,9 @@ namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
-        public async Task<SendFeedbackPayload> SendFeedback(
+        public async Task<Feedback> SendFeedback(
             IFeedbackService feedbackService,
-            IBillService billService,
             string billId, int servingStar, int foodStar, string? comment)
-        {
-            try
-            {
-                //create feedback
-                Feedback feedback = await feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
-                return new SendFeedbackPayload(feedback);
-            }
-            catch(Exception ex)
-            {
-                return new SendFeedbackPayload((new UserError("ERROR: " + ex.Message, "ERROR_CODE")));
-            }
-        }
+        => await feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
     }
 }

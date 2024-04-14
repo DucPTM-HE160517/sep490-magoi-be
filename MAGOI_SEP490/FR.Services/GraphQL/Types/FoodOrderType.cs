@@ -20,10 +20,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Name")
                 .Type<StringType>()
                 .Name("name")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var foodOrder = context.Parent<FoodOrder>();
-                    return context.Service<IFoodService>().GetFoodById(foodOrder.FoodId).Name;
+                    return (await context.Service<IFoodService>().GetFoodById(foodOrder.FoodId)).Name;
                 })
                 .Description("Name of the Food");
             descriptor.Field(f => f.Quantity)

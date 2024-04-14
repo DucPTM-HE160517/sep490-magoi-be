@@ -11,7 +11,7 @@ namespace FR.API.GraphQL.Subscriptions
         [Topic(nameof(Mutation.AddOrder))]
         public List<Table> OnAddOrder([EventMessage] Order order, ITableService tableService)
         {
-            return tableService.GetTablesByStatusId((int)TableStatusId.Serving);
+            return tableService.GetTablesByStatusId((int)TableStatusId.Serving).ToList();
         }
     }
 }

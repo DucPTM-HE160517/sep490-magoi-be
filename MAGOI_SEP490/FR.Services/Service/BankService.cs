@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using FR.BusinessObjects.Models.VietQR;
-using FR.DataAccess.DAOimpl;
+using FR.DataAccess.UOW;
 using FR.Services.IService;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -10,7 +10,7 @@ namespace FR.Services.Service
 {
     public class BankService : IBankService
     {
-        private readonly BillDAO _dao;
+        private readonly IUnitOfWork _uow;
         private const string Uri = "https://api.vietqr.io/";
 
 
@@ -21,9 +21,9 @@ namespace FR.Services.Service
                               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         private static readonly IConfigurationRoot config = builder.Build();
 
-        public BankService(BillDAO dao)
+        public BankService(IUnitOfWork uow)
         {
-            _dao = dao;
+            _uow = uow;
             if (HttpClient.BaseAddress == null)
             {
                 HttpClient.BaseAddress = new Uri(Uri);

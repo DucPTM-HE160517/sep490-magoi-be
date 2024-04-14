@@ -28,10 +28,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Table")
                 .Type<TableType>()
                 .Name("table")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var bill = context.Parent<Bill>();
-                    return context.Service<ITableService>().GetTableByBillId(bill.Id);
+                    return await context.Service<ITableService>().GetTableByBillId(bill.Id);
                 });
             descriptor.Field(f => f.PaymentMethodId)
                 .Type<IntType>()
@@ -40,19 +40,19 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("PaymentMethod")
                 .Type<PaymentMethodType>()
                 .Name("paymentMethod")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var bill = context.Parent<Bill>();
-                    return context.Service<IPaymentMethodService>().GetPaymentMethodById(bill.PaymentMethodId);
+                    return await context.Service<IPaymentMethodService>().GetPaymentMethodById(bill.PaymentMethodId);
                 })
                 .Description("Order list of the bill");
             descriptor.Field("Orders")
                 .Type<ListType<OrderType>>()
                 .Name("orders")
-                .Resolve(context =>
+                .Resolve(async context =>
                 {
                     var bill = context.Parent<Bill>();
-                    return context.Service<IOrderService>().GetOrdersByBillId(bill.Id);
+                    return await context.Service<IOrderService>().GetOrdersByBillId(bill.Id);
                 })
                 .Description("Order list of the bill");
         }
