@@ -32,9 +32,13 @@ namespace FR.Services.Service
             return await _uow.BillDAO.GetTableOfBill(billId);
         }
 
-        public async Task UpdateTableStatusAsync(Guid tableId, TableStatusId statusId)
+        public async Task<Table> UpdateTableStatus(Guid tableId, int tableStatusId)
         {
-            _uow.BillDAO.Update(tableId, statusId);
+            Table table = await GetTable(tableId);
+            table.StatusId = tableStatusId;
+            _uow.TableDAO.Update(table);
+
+            return table;
         }
 
         public async Task UpdateTableStatusWhenCreateOrderAsync(Guid tableId)

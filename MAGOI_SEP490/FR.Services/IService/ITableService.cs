@@ -10,7 +10,7 @@ namespace FR.Services.IService
         Task<Table> GetTable(Guid id);
         Task<Table> GetTableByName(string name);
         Task<Table> GetTableByBillId(Guid billId);
-        Task UpdateTableStatus(Guid tableId, TableStatusId statusId);
+        Task UpdateTableStatus(Guid tableId, int tableStatusId);
         Task UpdateTableStatusWhenCreateOrder(Guid tableId);
     }
 }

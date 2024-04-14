@@ -8,6 +8,7 @@ using FR.Services.GraphQL.Types;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace FR.Services.Service
 {
@@ -53,39 +54,56 @@ namespace FR.Services.Service
 
         public async Task UpdateFoodOrdersStatus(Guid orderId, int foodOrderStatusId)
         {
-            try
+            List<FoodOrder> foods = await _uow.FoodOrderDAO.GetFoodOrdersByOrderId(orderId).ToListAsync();
+            foreach (FoodOrder food in foods)
             {
-                List<FoodOrder> foods = await _uow.FoodOrderDAO.GetFoodOrdersByOrderId(orderId).ToListAsync();
-                foreach (FoodOrder food in foods)
-                {
-                    food.FoodOrderStatusId = foodOrderStatusId;
-                    _uow.FoodOrderDAO.Update(food);
-                    await _uow.SaveAsync();
-                    _uow.Dispose();
-                }
-            }
-            catch 
-            {
-                _uow.Dispose();
-                throw;
+                food.FoodOrderStatusId = foodOrderStatusId;
+                _uow.FoodOrderDAO.Update(food);
             }
         }
 
-        public async Task<FoodOrder> UpdateFoodOrderStatus(Guid orderId, int foodId, int foodOrderStatusId)
-
+        public async Task<FoodOrder> UpdateFoodOrderStatus(IExpoNotificationService expoSdkClient, 
+            Guid orderId, int foodId, int foodOrderStatusId, bool sendNotification)
         {
             try
             {
-                FoodOrder food = await _dao.GetFoodOrderByOrderIdAndFoodId(orderId, foodId);
+                //Get order and table
+                Order order = await GetOrderById(orderId);
+                Table table = await GetTable(order.TableId);
+
+                //update food status in the order
+                FoodOrder food = await _uow.FoodOrderDAO.GetFoodOrderByOrderIdAndFoodId(orderId, foodId);
                 food.FoodOrderStatusId = foodOrderStatusId;
-                _dao.Update(food);
+                _uow.FoodOrderDAO.Update(food);
+
+                //send notification
+                if (sendNotification)
+                {
+                    string foodName = (await GetFoodById(foodId)).Name;
+                    //get list of waiter devices
+                    List<string> waiterTokens = await GetExpoTokensByRoleId("waiter").ToListAsync();
+                    //send notification 
+                    string msg = food.FoodOrderStatusId == (int)FoodOrderStatusId.Cooked ?
+                        "Có món đã làm xong! Hãy phục vụ cho khách hàng!"
+                        : $"Món {foodName} đã được cập nhật sang trạng thái {Enum.GetName(typeof(FoodOrderStatusId), (FoodOrderStatusId)food.FoodOrderStatusId)}!";
+
+                    await expoSdkClient.SendNotification(waiterTokens,
+                    $"{table.Name} - Đơn #FR{orderId.ToString().Substring(0, 5).ToUpper()}", msg,
+                    data: JsonConvert.SerializeObject(new
+                    {
+                        type = NotificationType.FoodReady,
+                        tableId = table.Id,
+                    }));
+                }
+
                 await _uow.SaveAsync();
                 _uow.Dispose();
                 return food;
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                _uow.Dispose();
+                throw;
             }
         }
         public async Task<Food[]> GetTop5FoodOfOrders(List<Order> orders)
@@ -94,7 +112,7 @@ namespace FR.Services.Service
 
             foreach (var order in orders)
             {
-                List<FoodOrder> foodOrders = await _dao.GetFoodOrdersByOrderId(order.Id).ToListAsync();
+                List<FoodOrder> foodOrders = await GetFoodOrdersByOrderId(order.Id).ToListAsync();
                 foreach (var foodOrder in foodOrders)
                 {
                     if (foodCounts.ContainsKey(foodOrder.FoodId))
@@ -115,7 +133,7 @@ namespace FR.Services.Service
             Food food;
             for (int i =0;i<foods.Length;i++)
             {
-                food = await _foodDao.GetFoodByFoodId(top5Foods.ElementAt(i).Key);
+                food = await GetFoodById(top5Foods.ElementAt(i).Key);
                 foods[i] = new Food()
                 {
                     Id = top5Foods.ElementAt(i).Key,
@@ -130,11 +148,11 @@ namespace FR.Services.Service
 
         public async Task<List<Food>> GetCookingFoodsByCategory(int categoryId)
         {
-            List<FoodOrder> cookingFoodList = await _dao.GetFoodOrdersByStatusId((int) FoodOrderStatusId.Cooking).ToListAsync();
+            List<FoodOrder> cookingFoodList = await _uow.FoodOrderDAO.GetFoodOrdersByStatusId((int) FoodOrderStatusId.Cooking).ToListAsync();
             List <FoodOrder> dup_list = new();
             foreach (FoodOrder foodOrder in cookingFoodList)
             {
-                Food f = await _foodDao.GetFoodByFoodId(foodOrder.FoodId);
+                Food f = await GetFoodById(foodOrder.FoodId);
                 if(f.FoodCategoryId == categoryId)
                 {
                     dup_list.Add(foodOrder);
@@ -157,7 +175,7 @@ namespace FR.Services.Service
             List<Food> result = new List<Food>();
             foreach(KeyValuePair<int, int> pair in raw_result)
             {
-                Food f = await _foodDao.GetFoodByFoodId(pair.Key);
+                Food f = await GetFoodById(pair.Key);
                 f.Quantity = pair.Value;
                 result.Add(f);
             }

@@ -5,6 +5,7 @@ namespace FR.API.GraphQL.Queries
 {
     public partial class Queries
     {
-        public async Task< IEnumerable<TableStatus>> GetAllTableStatus(ITableStatusService service) => await service.GetAllTableStatus();
+        public async Task< IEnumerable<TableStatus>> GetAllTableStatus(ITableStatusService service) 
+            => await service.GetAllTableStatus();
     }
 }

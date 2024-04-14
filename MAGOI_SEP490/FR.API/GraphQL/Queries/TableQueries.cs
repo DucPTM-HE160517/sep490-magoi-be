@@ -9,19 +9,19 @@ namespace FR.API.GraphQL.Queries
     {
         public async Task<List<Table>> GetTables(ITableService service, int? tableStatusId = null)
         {
-            switch (tableStatusId)
+            return tableStatusId switch
             {
-                case null:
-                    return (await service.GetTables()).ToList();
-                case (int)TableStatusId.Available:
-                    return await service.GetTablesByStatusId((int)TableStatusId.Available).ToListAsync();
-                case (int)TableStatusId.Serving:
-                    return await service.GetTablesByStatusId((int)TableStatusId.Serving).ToListAsync();
-                case (int)TableStatusId.Booked:
-                    return await service.GetTablesByStatusId((int)TableStatusId.Booked).ToListAsync();
-                default:
-                    return new List<Table>();
-            }
+                null 
+                    => (await service.GetTables()).ToList(),
+                (int)TableStatusId.Available 
+                    => await service.GetTablesByStatusId((int)TableStatusId.Available).ToListAsync(),
+                (int)TableStatusId.Serving 
+                    => await service.GetTablesByStatusId((int)TableStatusId.Serving).ToListAsync(),
+                (int)TableStatusId.Booked 
+                    => await service.GetTablesByStatusId((int)TableStatusId.Booked).ToListAsync(),
+                _ 
+                    => new List<Table>(),
+            };
         }
         public async Task<Table> GetTable(ITableService service, Guid? id = null)
         {

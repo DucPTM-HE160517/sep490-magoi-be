@@ -1,5 +1,4 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.Services.GraphQL.Payload;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations

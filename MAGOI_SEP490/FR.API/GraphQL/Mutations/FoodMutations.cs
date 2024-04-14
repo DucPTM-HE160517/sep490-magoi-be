@@ -1,5 +1,4 @@
-﻿using System.Text;
-using CloudinaryDotNet;
+﻿using CloudinaryDotNet;
 using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
