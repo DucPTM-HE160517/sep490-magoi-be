@@ -3,6 +3,7 @@ using CloudinaryDotNet;
 using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
+using Newtonsoft.Json;
 
 namespace FR.API.GraphQL.Mutations
 {
@@ -49,8 +50,26 @@ namespace FR.API.GraphQL.Mutations
         {
             return foodService.AddFood(food);
         }
-        public async Task<Food> EditFood(UpdateFoodInput food, IFoodService foodService)
+
+        public async Task<Food> EditFood(UpdateFoodInput food,
+            IFoodService foodService,
+            ISessionService sessionService,
+            IExpoNotificationService expoSdkClient)
         {
+            Food f = foodService.GetFoodById(food.id);
+            //get list of waiter devices
+            List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
+            //send notification
+            string msg = food.quantity == 0 ?
+                $"{f.Name} đã hết hàng. Hãy chú ý thông báo tới khách hàng!"
+                : $"{f.Name} đã được cập nhật số lượng thành {food.quantity} phần!";
+
+            await expoSdkClient.SendNotification(waiterTokens, food.quantity == 0 ? $"Đã hết - {f.Name}" : $"Đã cập nhật - {f.Name}", msg,
+                data: JsonConvert.SerializeObject(new
+                {
+                    type = food.quantity == 0 ? NotificationType.FoodOutOfStock : NotificationType.FoodAdded,
+                }));
+
             return foodService.UpdateFood(food);
         }
     }
