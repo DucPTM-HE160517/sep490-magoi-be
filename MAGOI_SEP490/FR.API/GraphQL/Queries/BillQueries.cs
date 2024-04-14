@@ -1,4 +1,5 @@
-﻿using FR.BusinessObjects.Models;
+﻿using System.ComponentModel;
+using FR.BusinessObjects.Models;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Queries
@@ -7,7 +8,8 @@ namespace FR.API.GraphQL.Queries
     {
         public IQueryable<Bill> GetBillsByDate(IBillService billService, DateTime billDate) 
             => billService.GetBillsByDate(billDate);
-        public async Task<Bill> Bill(IBillService billService, Guid billId) 
+
+        public async Task<Bill> GetBill(IBillService billService, Guid billId) 
             => await billService.GetBillById(billId);
     }
 }

@@ -4,8 +4,6 @@ using FR.Infrastructure.Enums;
 using FR.Services.GraphQL.Types.InputTypes;
 using FR.Services.IService;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Query;
 using Newtonsoft.Json;
 using Table = FR.BusinessObjects.Models.Table;
 

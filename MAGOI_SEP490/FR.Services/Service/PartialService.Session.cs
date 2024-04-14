@@ -1,5 +1,3 @@
-using FR.DataAccess.DAO;
-using FR.DataAccess.UOW;
 using FR.Services.IService;
 
 namespace FR.Services.Service;

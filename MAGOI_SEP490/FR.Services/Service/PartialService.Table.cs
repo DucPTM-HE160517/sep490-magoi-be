@@ -1,6 +1,4 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.DataAccess.UOW;
-using FR.Infrastructure.Enums;
 using FR.Services.IService;
 
 namespace FR.Services.Service
@@ -39,15 +37,6 @@ namespace FR.Services.Service
             _uow.TableDAO.Update(table);
 
             return table;
-        }
-
-        public async Task UpdateTableStatusWhenCreateOrderAsync(Guid tableId)
-        {
-            Table table = await GetTableAsync(tableId);
-            if (table.StatusId == (int)TableStatusId.Available)
-            {
-                UpdateTableStatus(tableId, TableStatusId.Serving);
-            }
         }
     }
 }

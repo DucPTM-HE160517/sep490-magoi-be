@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FR.BusinessObjects.Models;
-using FR.DataAccess.Base;
-using FR.DataAccess.DAO;
-using FR.DataAccess.DAOimpl;
+﻿using FR.DataAccess.DAO;
 
 namespace FR.DataAccess.UOW
 {

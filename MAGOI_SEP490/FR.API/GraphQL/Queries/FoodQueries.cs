@@ -7,6 +7,7 @@ namespace FR.API.GraphQL.Queries
     {
         public async Task<IEnumerable<Food>> GetFoods(IFoodService service) 
             => await service.GetFoods();
+
         public async Task<Food> GetFood(IFoodService service, int ID) 
             => await service.GetFoodById(ID);
     }

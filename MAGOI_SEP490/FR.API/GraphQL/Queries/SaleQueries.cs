@@ -11,6 +11,7 @@ namespace FR.API.GraphQL.Queries
             DateTime startDate, DateTime endDate, 
             ISaleService saleService)
             => await saleService.GetSaleRecord(startDate, endDate);
+
         public async Task<SaleReport> GetSaleReports(
             ISaleService saleService, 
             DateTime startDate, DateTime endDate)

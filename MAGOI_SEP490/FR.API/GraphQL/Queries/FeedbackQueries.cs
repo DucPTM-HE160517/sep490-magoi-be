@@ -8,6 +8,7 @@ namespace FR.API.GraphQL.Queries
     {
         public async Task<AverageFeedback> GetFeedbacks(IFeedbackService feedbackService) 
             => await feedbackService.GetAverageFeedback();
+
         public async Task<AverageFeedback> GetFeedbacksByTime(
             IFeedbackService feedbackService, 
             DateTime startDate, DateTime endDate)

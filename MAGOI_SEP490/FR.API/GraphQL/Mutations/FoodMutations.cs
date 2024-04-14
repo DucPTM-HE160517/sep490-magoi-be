@@ -48,6 +48,7 @@ namespace FR.API.GraphQL.Mutations
         {
             return await foodService.AddFood(food);
         }
+
         public async Task<Food> EditFood(UpdateFoodInput food, IFoodService foodService)
         {
             return await foodService.UpdateFood(food);

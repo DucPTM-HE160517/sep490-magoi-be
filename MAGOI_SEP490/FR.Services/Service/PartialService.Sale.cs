@@ -14,15 +14,16 @@ namespace FR.Services.Service
             List<Order> orders = await GetOrdersByTimeRange(startDate, endDate).ToListAsync();
             List<Bill> bills = await GetBillsByTimeRange(startDate, endDate).ToListAsync();
 
-            SaleRecord record = new();
-
-            record.Revenue = GetTotalAmountOfBills(bills);
-            record.ServingOrders = (await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Pending).ToListAsync())
+            SaleRecord record = new()
+            {
+                Revenue = GetTotalAmountOfBills(bills),
+                ServingOrders = (await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Pending).ToListAsync())
                                 .Concat(await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Cooking).ToListAsync())
-                                .Concat(await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Serving).ToListAsync()).ToList();
-            record.ServedOrders = await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Finished).ToListAsync();
-            record.BillsPerHour = GetBillsPerHour(bills);
-            record.FoodRank = await GetTop5FoodOfOrders(orders);
+                                .Concat(await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Serving).ToListAsync()).ToList(),
+                ServedOrders = await GetOrdersByTimeRangeAndStatus(startDate, endDate, (int)OrderStatusId.Finished).ToListAsync(),
+                BillsPerHour = GetBillsPerHour(bills),
+                FoodRank = await GetTop5FoodOfOrders(orders)
+            };
 
             return record;
         }
@@ -42,14 +43,14 @@ namespace FR.Services.Service
             }
 
             //Get SaleReportElememt List
-            List<SaleRevenue> saleRevenues = new List<SaleRevenue>();
+            List<SaleRevenue> saleRevenues = new();
             foreach (Order order in orders)
             {
                 foreach (FoodOrder foodOrder in _uow.FoodOrderDAO.GetFoodOrdersByOrderId(order.Id))
                 {
                     if (saleRevenues.Count == 0)
                     {
-                        SaleRevenue SaleRevenue = new SaleRevenue()
+                        SaleRevenue SaleRevenue = new()
                         {
                             Quantity = foodOrder.Quantity,
                             Income = foodOrder.Quantity * foodOrder.UnitPrice,
@@ -62,7 +63,7 @@ namespace FR.Services.Service
                         int indexMatchedReport = FindSaleRevenueIndexByFoodId(foodOrder.FoodId, saleRevenues);
                         if (indexMatchedReport == -1)
                         {
-                            SaleRevenue SaleRevenue = new SaleRevenue()
+                            SaleRevenue SaleRevenue = new()
                             {
                                 Quantity = foodOrder.Quantity,
                                 Income = foodOrder.Quantity * foodOrder.UnitPrice,
@@ -85,7 +86,7 @@ namespace FR.Services.Service
                 sumIncome += SaleRevenue.Income;
             }
 
-            SaleReport saleReport = new SaleReport()
+            SaleReport saleReport = new()
             {
                 TotalIncome = sumIncome,
                 SaleRevenue = saleRevenues

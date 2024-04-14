@@ -23,6 +23,7 @@ namespace FR.API.GraphQL.Queries
                     => new List<Table>(),
             };
         }
+
         public async Task<Table> GetTable(ITableService service, Guid? id = null)
         {
             if(id.HasValue)

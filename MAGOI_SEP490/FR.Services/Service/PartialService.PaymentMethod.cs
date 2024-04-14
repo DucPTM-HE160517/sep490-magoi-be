@@ -1,5 +1,4 @@
 ﻿using FR.BusinessObjects.Models;
-using FR.DataAccess.UOW;
 using FR.Services.IService;
 
 namespace FR.Services.Service
