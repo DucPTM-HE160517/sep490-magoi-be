@@ -76,7 +76,8 @@ builder.Services.AddScoped<IFoodService, Service>()
                 .AddScoped<ISessionService, Service>()
                 .AddScoped<IBillService, Service>()
                 .AddScoped<IFeedbackService, Service>()
-                .AddScoped<IPaymentMethodService, Service>();
+                .AddScoped<IPaymentMethodService, Service>()
+                .AddScoped<ISaleService, Service>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -103,6 +104,7 @@ builder.Services.AddGraphQLServer().AddInMemorySubscriptions()
     .RegisterService<IBillService>(ServiceKind.Synchronized)
     .RegisterService<IFeedbackService>(ServiceKind.Synchronized)
     .RegisterService<IPaymentMethodService>(ServiceKind.Synchronized)
+    .RegisterService<ISaleService>(ServiceKind.Synchronized)
     .AddQueryType<Queries>()
     .AddMutationType<Mutation>()
     .AddSubscriptionType<Subscriptions>()

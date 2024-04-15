@@ -25,10 +25,10 @@ namespace FR.Services.GraphQL.Types
             descriptor.Field("Status")
                 .Type<TableStatusType>()
                 .Name("status")
-                .Resolve(async context =>
+                .Resolve( context =>
                 {
                     var table = context.Parent<Table>();
-                    return await context.Service<ITableStatusService>().GetTableStatusById(table.StatusId);
+                    return context.Service<ITableStatusService>().GetTableStatusById(table.StatusId).Result;
 
                 })
                 .Description("The status of the table");
