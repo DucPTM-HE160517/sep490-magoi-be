@@ -8,12 +8,15 @@ namespace FR.Common.Ultilities
 {
     public static partial class Ultilities
     {
+        public static readonly TimeZoneInfo LOCAL_TIME_ZONE = TimeZoneInfo.Local;
+        public static readonly TimeSpan BASE_UTC_OFFSET = LOCAL_TIME_ZONE.BaseUtcOffset;
         /// <summary>
         /// Gets the 12:00:00 instance of a DateTime
         /// </summary>
         public static DateTime AbsoluteStart(this DateTime dateTime)
         {
-            return dateTime.Date;
+            dateTime = dateTime.Add(BASE_UTC_OFFSET).Date.Subtract(BASE_UTC_OFFSET);
+            return dateTime;
         }
 
         /// <summary>
@@ -21,7 +24,8 @@ namespace FR.Common.Ultilities
         /// </summary>
         public static DateTime AbsoluteEnd(this DateTime dateTime)
         {
-            return dateTime.Date.AddDays(1).AddTicks(-1);
+            dateTime = dateTime.Add(BASE_UTC_OFFSET).Date.AddDays(1).AddTicks(-1).Subtract(BASE_UTC_OFFSET);
+            return dateTime;
         }
     }
 }
