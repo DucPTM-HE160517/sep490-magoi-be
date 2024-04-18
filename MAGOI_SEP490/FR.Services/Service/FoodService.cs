@@ -39,6 +39,7 @@ namespace FR.Services.Service
             f.Quantity = food.quantity ?? f.Quantity;
             f.CreatedAt = food.createdAt ?? f.CreatedAt;
             f.FoodCategoryId = food.foodCategoryId ?? f.FoodCategoryId;
+            f.IsActive = food.isActive ?? f.IsActive;
 
             _foodDAO.UpdateFood(f);
             return f;

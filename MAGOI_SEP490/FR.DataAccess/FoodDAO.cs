@@ -45,7 +45,8 @@ namespace FR.DataAccess
         public bool CheckFoodExistFoodOrder(int id)
         {
             List<Order> orders = new();
-            foreach (var food in _context.FoodOrder)
+            var foodOrders = _context.FoodOrder.ToList();
+            foreach (var food in foodOrders)
             {
                 if(food.FoodId == id)
                 {
