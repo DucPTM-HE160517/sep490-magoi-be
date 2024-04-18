@@ -80,5 +80,10 @@ namespace FR.Services.Service
                 _foodDAO.UpdateFoodQuantity(foodListInput[i].foodId, food.Quantity - foodListInput[i].quantity);
             }
         }
+
+        public bool CheckFoodExistFoodOrder(int id)
+        {
+            return _foodDAO.CheckFoodExistFoodOrder(id);
+        }
     }
 }

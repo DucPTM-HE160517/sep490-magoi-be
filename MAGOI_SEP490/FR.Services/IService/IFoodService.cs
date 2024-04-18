@@ -13,5 +13,6 @@ namespace FR.Services.IService
         Food AddFood(AddFoodInput food);
         Food UpdateFood(UpdateFoodInput food);
         bool CheckFoodOrdersQuantity(List<FoodOrderInput> foodListInput);
+        bool CheckFoodExistFoodOrder(int id);
     }
 }
