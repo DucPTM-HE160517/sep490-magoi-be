@@ -39,6 +39,7 @@ namespace FR.Services.Service
             f.Quantity = food.quantity ?? f.Quantity;
             f.CreatedAt = food.createdAt ?? f.CreatedAt;
             f.FoodCategoryId = food.foodCategoryId ?? f.FoodCategoryId;
+            f.IsActive = food.isActive ?? f.IsActive;
 
             _foodDAO.UpdateFood(f);
             return f;
@@ -62,9 +63,9 @@ namespace FR.Services.Service
             return _foodDAO.GetFoodByFoodId(id);
         }
 
-        public List<Food> GetFoods()
+        public List<Food> GetFoods(bool foodStatus)
         {
-            return _foodDAO.GetFoods();
+            return _foodDAO.GetFoods(foodStatus);
         }
 
         public List<Food> GetFoodsByCategory(int categoryId)
@@ -79,6 +80,11 @@ namespace FR.Services.Service
                 Food food = GetFoodById(foodListInput[i].foodId);
                 _foodDAO.UpdateFoodQuantity(foodListInput[i].foodId, food.Quantity - foodListInput[i].quantity);
             }
+        }
+
+        public bool CheckFoodExistFoodOrder(int id)
+        {
+            return _foodDAO.CheckFoodExistFoodOrder(id);
         }
     }
 }

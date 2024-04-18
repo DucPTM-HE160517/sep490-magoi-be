@@ -1,5 +1,6 @@
 ﻿using FR.BusinessObjects.DataContext;
 using FR.BusinessObjects.Models;
+using FR.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace FR.DataAccess
@@ -12,9 +13,9 @@ namespace FR.DataAccess
             _context = context;
         }
 
-        public List<Food> GetFoods()
+        public List<Food> GetFoods(bool foodStatus)
         {
-            return _context.Foods.ToList();
+            return _context.Foods.Where(f => f.IsActive == foodStatus).ToList();
         }
         public List<Food> GetFoodsByCategory(int categoryId)
         {
@@ -39,6 +40,22 @@ namespace FR.DataAccess
         {
             _context.Entry(food).State = EntityState.Modified;
             _context.SaveChanges();
+        }
+
+        public bool CheckFoodExistFoodOrder(int id)
+        {
+            List<Order> orders = new();
+            var foodOrders = _context.FoodOrder.ToList();
+            foreach (var food in foodOrders)
+            {
+                if(food.FoodId == id)
+                {
+                    orders.Add(_context.Orders.Find(food.OrderId));
+                }
+            }
+
+            return orders.Any(o => o.OrderStatusId != (int)OrderStatusId.Finished);
+            
         }
     }
 }

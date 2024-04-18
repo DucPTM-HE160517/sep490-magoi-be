@@ -57,6 +57,22 @@ namespace FR.API.GraphQL.Mutations
             IExpoNotificationService expoSdkClient)
         {
             Food f = foodService.GetFoodById(food.id);
+            await Task.Run(() =>
+            {
+                //check new status and existing food order
+                if (f is null)
+                {
+                    throw new Exception("Food not found!");
+                }
+                if (food.isActive is not null
+                    && !(bool)food.isActive
+                    && foodService.CheckFoodExistFoodOrder(food.id))
+                {
+                    throw new Exception("Can not deactivate this food because there are serving orders having it!");
+                }
+            });
+            
+
             //get list of waiter devices
             List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
             //send notification

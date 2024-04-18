@@ -96,7 +96,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 199000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
-                    FoodCategoryId = 1
+                    FoodCategoryId = 1,
+                    IsActive = true
                 },
                 new Food
                 {
@@ -107,7 +108,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 30000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
-                    FoodCategoryId = 1
+                    FoodCategoryId = 1,
+                    IsActive = true
                 },
                 new Food
                 {
@@ -118,7 +120,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 50000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
-                    FoodCategoryId = 1
+                    FoodCategoryId = 1,
+                    IsActive = true
                 },
 
                 // Món chính
@@ -131,7 +134,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 880000,
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
-                    FoodCategoryId = 2
+                    FoodCategoryId = 2,
+                    IsActive = true
                 },
                 new Food
                 {
@@ -142,7 +146,8 @@ namespace FR.BusinessObjects.DataContext
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     FoodCategoryId = 2,
-                    UnitPrice = 660000
+                    UnitPrice = 660000,
+                    IsActive = true
                 },
                 new Food
                 {
@@ -153,6 +158,7 @@ namespace FR.BusinessObjects.DataContext
                     FoodCategoryId = 2,
                     UnitPrice = 960000,
                     Description = "Thăn lưng bò Mỹ Prime 500g",
+                    IsActive = true,
                     ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712754663/food/uz171brtyh6nndmyi1fa.jpg"
                 },
                 new Food
@@ -164,7 +170,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 960000,
                     FoodCategoryId = 2,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
-                    Quantity = 100
+                    Quantity = 100,
+                    IsActive = true
                 },
                 new Food
                 {
@@ -175,7 +182,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 596000,
                     FoodCategoryId = 2,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
-                    Quantity = 100
+                    Quantity = 100,
+                    IsActive = true
                 },
 
                 // Đồ ăn kèm
@@ -188,7 +196,8 @@ namespace FR.BusinessObjects.DataContext
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 30000,
-                    Description = "Khoai tây nghiền"
+                    Description = "Khoai tây nghiền",
+                    IsActive = true
                 },
                 new Food
                 {
@@ -199,7 +208,8 @@ namespace FR.BusinessObjects.DataContext
                     Description = "Khoai tây bi đút lò",
                     UnitPrice = 30000,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
+                    IsActive = true
                 },
 
                 // Đồ uống
@@ -212,7 +222,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 30000,
                     FoodCategoryId = 5,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
+                    IsActive = true
                 },
                 new Food
                 {
@@ -223,7 +234,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 20000,
                     FoodCategoryId = 5,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
+                    IsActive = true
                 },
                 new Food
                 {
@@ -234,7 +246,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 50000,
                     FoodCategoryId = 5,
                     Quantity = 100,
-                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
+                    IsActive = true
                 },
                 new Food
                 {
@@ -245,7 +258,8 @@ namespace FR.BusinessObjects.DataContext
                     UnitPrice = 700000,
                     FoodCategoryId = 5,
                     Quantity = 20,
-                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime()
+                    CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
+                    IsActive = true
                 },
 
                 // Món tráng miệng
@@ -258,7 +272,8 @@ namespace FR.BusinessObjects.DataContext
                     FoodCategoryId = 4,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
-                    UnitPrice = 46000
+                    UnitPrice = 46000,
+                    IsActive = true
                 },
                 new Food
                 {
@@ -269,6 +284,7 @@ namespace FR.BusinessObjects.DataContext
                     Quantity = 100,
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     FoodCategoryId = 4,
+                    IsActive = true,
                     ImageUrl = "https://res.cloudinary.com/dj1jfpv7y/image/upload/v1712752851/food/okhglhvncr0ajufxnhvy.jpg"
                 },
                 new Food
@@ -281,6 +297,7 @@ namespace FR.BusinessObjects.DataContext
                     CreatedAt = new DateTime(2020, 10, 10).ToUniversalTime(),
                     Quantity = 100,
                     UnitPrice = 88000,
+                    IsActive = true
                 }
             );
 
