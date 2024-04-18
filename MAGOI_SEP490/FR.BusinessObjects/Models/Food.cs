@@ -15,5 +15,6 @@ namespace FR.BusinessObjects.Models
         public DateTime CreatedAt { get; set; }
         [ForeignKey("FoodCategory")]
         public int FoodCategoryId { get; set; }
+        public bool IsActive { get; set; }
     }
 }
