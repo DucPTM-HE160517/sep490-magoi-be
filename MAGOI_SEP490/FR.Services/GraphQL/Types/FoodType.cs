@@ -41,6 +41,10 @@ namespace FR.Services.GraphQL.Types
                 .Type<IntType>()
                 .Name("foodCategoryId")
                 .Description("The category's id of the food");
+            descriptor.Field(f => f.IsActive)
+                .Type<BooleanType>()
+                .Name("foodStatus")
+                .Description("The status of the food");
             descriptor.Field("Category")
                 .Type<FoodCategoryType>()
                 .Name("category")
@@ -50,21 +54,6 @@ namespace FR.Services.GraphQL.Types
                     return context.Service<IFoodCategoryService>().GetFoodCategoryById(food.FoodCategoryId);
                 })
                 .Description("The category of the food");
-            //descriptor.Field(f => f.FoodCategoryId)
-            //    .Type<IntType>()
-            //    .Name("FoodCategoryId")
-            //    .Description("The categoryId of the food");
-            //descriptor.Field("Category")
-            //    .Type<StringType>()
-            //    .Name("CategoryName")
-            //    .Resolve(context =>
-            //    {
-            //        var food = context.Parent<Food>();
-            //        var category = context.Service<IFoodCategoryService>()
-            //        .GetFoodCategoryById(food.FoodCategoryId);
-            //        return category?.Category;
-            //    })
-            //    .Description("The category of the food");
         }
     }
 }

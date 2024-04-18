@@ -62,9 +62,9 @@ namespace FR.Services.Service
             return _foodDAO.GetFoodByFoodId(id);
         }
 
-        public List<Food> GetFoods()
+        public List<Food> GetFoods(bool foodStatus)
         {
-            return _foodDAO.GetFoods();
+            return _foodDAO.GetFoods(foodStatus);
         }
 
         public List<Food> GetFoodsByCategory(int categoryId)
