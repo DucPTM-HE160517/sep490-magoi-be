@@ -8,6 +8,8 @@ namespace FR.Services.GraphQL.Types
         public float AverageServingScore { get; set; }
         public float AverageFoodScore { get; set; }
         public List<Feedback> Feedbacks { get; set; }
+        public int[] ServingScoreStats { get; set; }
+        public int[] FoodScoreStats { get; set; }
     }
     public class AverageFeedbackType : ObjectType<AverageFeedback>
     {
@@ -27,6 +29,16 @@ namespace FR.Services.GraphQL.Types
                 .Type<ListType<FeedbackType>>()
                 .Name("feedbacks")
                 .Description("The list of feedbacks");
+
+            descriptor.Field(f => f.ServingScoreStats)
+                .Type<ListType<IntType>>()
+                .Name("servingScoreStats")
+                .Description("Statistics of feedback's serving score");
+
+            descriptor.Field(f => f.FoodScoreStats)
+                .Type<ListType<IntType>>()
+                .Name("foodScoreStats")
+                .Description("Statistics of feedback's food score");
         }
     }
 
