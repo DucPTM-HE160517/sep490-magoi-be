@@ -13,8 +13,12 @@ namespace FR.DataAccess
             _context = context;
         }
 
-        public List<Food> GetFoods(bool foodStatus)
+        public List<Food> GetFoods(bool? foodStatus)
         {
+            if(foodStatus == null)
+            {
+                return _context.Foods.ToList();
+            }
             return _context.Foods.Where(f => f.IsActive == foodStatus).ToList();
         }
         public List<Food> GetFoodsByCategory(int categoryId)
