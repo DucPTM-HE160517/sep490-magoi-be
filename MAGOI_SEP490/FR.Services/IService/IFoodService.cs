@@ -6,7 +6,7 @@ namespace FR.Services.IService
 {
     public interface IFoodService
     {
-        List<Food> GetFoods(bool foodStatus);
+        List<Food> GetFoods(bool? foodStatus);
         List<Food> GetFoodsByCategory(int categoryId);
         Food GetFoodById(int id);
         void UpdateFoodQuantityWhenCreateOrder(List<FoodOrderInput> foodListInput);
