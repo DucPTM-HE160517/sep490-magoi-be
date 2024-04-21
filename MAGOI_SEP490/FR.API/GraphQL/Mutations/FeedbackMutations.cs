@@ -7,7 +7,7 @@ namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
-        public async Task<Payload<Feedback>> SendFeedback(
+        public async Task<Payloadd<Feedback>> SendFeedback(
             IFeedbackService feedbackService,
             string billId, int servingStar, int foodStar, string? comment)
         {
@@ -15,13 +15,13 @@ namespace FR.API.GraphQL.Mutations
                 || foodStar < 1 || foodStar > 5 
                 || !Guid.TryParse(billId, out _)) 
             {
-                return new Payload<Feedback>(Errors.Feedback.InvalidInput);
+                return new Payloadd<Feedback>(Errors.Feedback.InvalidInput);
             }
 
             //create feedback
             Feedback feedback = await feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
 
-            return new Payload<Feedback>(feedback);
+            return new Payloadd<Feedback>(feedback);
         }
     }
 }
