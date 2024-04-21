@@ -1,26 +1,27 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Payload;
+using FR.Services.GraphQL.Payload.Errors;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations
 {
     public partial class Mutation
     {
-        public async Task<SendFeedbackPayload> SendFeedback(
+        public async Task<Payload<Feedback>> SendFeedback(
             IFeedbackService feedbackService,
-            IBillService billService,
             string billId, int servingStar, int foodStar, string? comment)
         {
-            try
+            if (servingStar < 1 || servingStar > 5 
+                || foodStar < 1 || foodStar > 5 
+                || !Guid.TryParse(billId, out _)) 
             {
-                //create feedback
-                Feedback feedback = await feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
-                return new SendFeedbackPayload(feedback);
+                return new Payload<Feedback>(Errors.Feedback.InvalidInput);
             }
-            catch(Exception ex)
-            {
-                return new SendFeedbackPayload((new UserError("ERROR: " + ex.Message, "ERROR_CODE")));
-            }
+
+            //create feedback
+            Feedback feedback = await feedbackService.CreateFeedback(billId, servingStar, foodStar, comment);
+
+            return new Payload<Feedback>(feedback);
         }
     }
 }
