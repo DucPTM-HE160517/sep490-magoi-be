@@ -1,6 +1,4 @@
-using FR.BusinessObjects.Models.ExpoNotification;
 using FR.Services.IService;
-using FR.Services.Service;
 
 namespace FR.API.GraphQL.Mutations
 {

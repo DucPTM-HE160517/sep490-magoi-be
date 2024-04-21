@@ -1,5 +1,4 @@
-﻿using FR.DataAccess;
-using FR.Services.GraphQL.Types;
+﻿using FR.Services.GraphQL.Types;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Queries

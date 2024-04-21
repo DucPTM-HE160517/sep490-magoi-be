@@ -1,5 +1,4 @@
-﻿using System.Text;
-using CloudinaryDotNet;
+﻿using CloudinaryDotNet;
 using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Payload;
 using FR.Services.GraphQL.Payload.Errors;
@@ -53,7 +52,7 @@ namespace FR.API.GraphQL.Mutations
             return foodService.AddFood(food);
         }
 
-        public async Task<Payload<Food>> EditFood(UpdateFoodInput food,
+        public async Task<Payloadd<Food>> EditFood(UpdateFoodInput food,
             IFoodService foodService,
             ISessionService sessionService,
             IExpoNotificationService expoSdkClient)
@@ -65,14 +64,14 @@ namespace FR.API.GraphQL.Mutations
                 //check new status and existing food order
                 if (f is null)
                 {
-                    return new Payload<Food>(Errors.Food.NotFound);
+                    return new Payloadd<Food>(Errors.Food.NotFound);
                 }
 
                 if (food.isActive is not null
                     && !(bool)food.isActive
                     && foodService.CheckFoodExistFoodOrder(food.id))
                 {
-                    return new Payload<Food>(Errors.Food.UpdateFailed("Cannot deactivate cooking food!"));
+                    return new Payloadd<Food>(Errors.Food.UpdateFailed("Cannot deactivate cooking food!"));
                 }
 
                 return null;
@@ -95,7 +94,7 @@ namespace FR.API.GraphQL.Mutations
                 }));
 
             var result = foodService.UpdateFood(food);
-            return new Payload<Food> ( result );
+            return new Payloadd<Food> ( result );
         }
     }
 }
