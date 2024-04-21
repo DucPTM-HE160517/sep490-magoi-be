@@ -1,7 +1,6 @@
 ﻿using FR.BusinessObjects.Models;
 using FR.Services.GraphQL.Types;
 using FR.Services.IService;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace FR.API.GraphQL.Queries
 {

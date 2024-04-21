@@ -1,5 +1,4 @@
-﻿using FR.BusinessObjects.Models;
-using FR.BusinessObjects.Models.VietQR;
+﻿using FR.BusinessObjects.Models.VietQR;
 using FR.Services.IService;
 
 namespace FR.API.GraphQL.Mutations
