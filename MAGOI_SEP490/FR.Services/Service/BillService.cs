@@ -62,7 +62,7 @@ namespace FR.Services.Service
             int[] billsPerHour = new int[24];
             foreach (var bill in bills)
             {
-                int hour = bill.FinishedAt.Value.Hour;
+                int hour = bill.FinishedAt.Value.Hour + 7;
 
                 billsPerHour[hour]++;
             }
