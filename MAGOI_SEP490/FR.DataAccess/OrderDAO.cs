@@ -46,7 +46,9 @@ namespace FR.DataAccess
             {
                 if (statusId != null)
                 {
-                    return _context.Orders.Where(x => x.OrderStatusId == statusId).ToList();
+                    return _context.Orders.Where(x => x.OrderStatusId == statusId)
+                        .OrderBy(o => o.CreatedAt)
+                        .ToList();
                 }
                 else
                 {
@@ -126,8 +128,8 @@ namespace FR.DataAccess
         }
         public IQueryable<Order> GetServingOrdersByTimeRange(DateTime startDate, DateTime endDate)
         {
-            return _context.Orders.Where(c => (c.OrderStatusId == (int)OrderStatusId.Pending 
-                                            || c.OrderStatusId == (int)OrderStatusId.Cooking 
+            return _context.Orders.Where(c => (c.OrderStatusId == (int)OrderStatusId.Pending
+                                            || c.OrderStatusId == (int)OrderStatusId.Cooking
                                             || c.OrderStatusId == (int)OrderStatusId.Serving)
                                     && c.CreatedAt >= startDate
                                     && c.CreatedAt <= endDate);
