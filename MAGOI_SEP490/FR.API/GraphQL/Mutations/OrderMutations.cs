@@ -80,7 +80,7 @@ namespace FR.API.GraphQL.Mutations
                 {
                     //order status id -> food order status id
                     case 1: //Pending -> uncook
-                        foodOrderService.UpdateFoodOrdersStatus(orderId, (int) FoodOrderStatusId.Uncooked);
+                        foodOrderService.UpdateFoodOrdersStatus(orderId, (int)FoodOrderStatusId.Uncooked);
                         break;
                     case 2: // Cooking -> cooking
                         foodOrderService.UpdateFoodOrdersStatus(orderId, (int)FoodOrderStatusId.Cooking);
@@ -97,7 +97,7 @@ namespace FR.API.GraphQL.Mutations
                     //get list of waiter devices
                     List<string> waiterTokens = sessionService.GetExpoTokensByRoleId("waiter");
                     //send notification
-                    string msg = order.OrderStatusId == (int)OrderStatusId.Serving?
+                    string msg = order.OrderStatusId == (int)OrderStatusId.Serving ?
                         "Đơn hàng đã làm xong! Hãy phục vụ cho khách hàng!"
                         : "Đơn hàng đã được cập nhật trạng thái" + Enum.GetName(typeof(OrderStatusId), (OrderStatusId)order.OrderStatusId) + "!";
 
@@ -131,7 +131,7 @@ namespace FR.API.GraphQL.Mutations
 
                 // get served orders by tableId 
                 orders = orderService.GetServedOrdersByTableId(tableId);
-                if(orders ==null || orders.Count == 0)
+                if (orders == null || orders.Count == 0)
                 {
                     throw new Exception("This table has no served orders!");
                 }
@@ -156,6 +156,10 @@ namespace FR.API.GraphQL.Mutations
                 {
                     orderService.UpdateBillIdOfOrder(order.Id, bill.Id);
                 }
+
+                //update created time of the bill
+                var firstOrder = orders.OrderBy(o => o.CreatedAt).FirstOrDefault();
+                bill.CreatedAt = firstOrder is null ? bill.CreatedAt : firstOrder.CreatedAt;
 
                 // update finished time and paymentMethod of the bill
                 bill.FinishedAt = finishedAt.ToUniversalTime();
