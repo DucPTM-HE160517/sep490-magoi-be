@@ -55,6 +55,33 @@ namespace FR.Services.GraphQL.Types
                     return context.Service<IOrderService>().GetOrdersByBillId(bill.Id);
                 })
                 .Description("Order list of the bill");
+            descriptor.Field("FoodOrders")
+                .Type<ListType<FoodOrderType>>()
+                .Name("foodOrders")
+                .Resolve(context =>
+                {
+                    var bill = context.Parent<Bill>();
+                    var orders = context.Service<IOrderService>().GetOrdersByBillId(bill.Id);
+
+                    var foodOrders = new List<FoodOrder>();
+                    foreach (var order in orders)
+                    {
+                        foodOrders.AddRange(
+                            context.Service<IFoodOrderService>().GetFoodOrdersByOrderId(order.Id));
+                    }
+
+                    var result = foodOrders
+                    .GroupBy(o => o.FoodId)
+                    .Select(group => new FoodOrder
+                    {
+                        FoodId = group.Key,
+                        Quantity = group.Sum(f => f.Quantity),
+                        UnitPrice = group.First().UnitPrice,
+                    }).ToList();
+
+                    return result;
+                })
+                .Description("Food order list of the bill");
         }
     }
 }
